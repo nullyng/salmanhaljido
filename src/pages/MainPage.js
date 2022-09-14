@@ -1,7 +1,9 @@
+import Map from "components/Main/Map/Map";
+
 function MainPage() {
   return (
     <div>
-      main
+      <Map />
     </div>
   );
 }
