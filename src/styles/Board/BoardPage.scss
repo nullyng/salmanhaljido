@@ -1,0 +1,32 @@
+.logo {
+  position: fixed;
+  top: 40px;
+  left: 100px;
+  & a {
+    text-decoration: none;
+    font-size: 40px;
+  }
+  &__map {
+    color: #0f3460;
+    opacity: 0.48;
+
+    &--active {
+      color: #2c4d73;
+      font-weight: bold;
+      cursor: default;
+    }
+  }
+  &__info {
+    color: #e94560;
+    opacity: 0.7;
+
+    &--active {
+      color: #e94560;
+      font-weight: bold;
+      cursor: default;
+    }
+  }
+  & hr {
+    border-right-width: 2px;
+  }
+}

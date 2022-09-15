@@ -1,7 +1,9 @@
+import Logo from "components/common/Logo";
+
 function BoardPage() {
   return (
     <div>
-      board
+      <Logo />
     </div>
   );
 }
