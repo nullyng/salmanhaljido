@@ -1,9 +1,9 @@
-import Map from "components/Main/Map/Map";
+import CustomMap from "components/Main/Map/CustomMap";
 
 function MainPage() {
   return (
     <div>
-      <Map />
+      <CustomMap />
     </div>
   );
 }
