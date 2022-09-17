@@ -18,15 +18,17 @@ function Map() {
     // 지도 생성
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
-      style: "mapbox://styles/young315/cl7qz0k2s000914pnsrpjxpkn",
+      style: "mapbox://styles/young315/cl83zw1gh000414pbt1guz5b6/draft",
       center: [lng, lat],
-      zoom: zoom
+      zoom: zoom,
     });
 
     // 언어 설정
-    mapboxgl.setRTLTextPlugin('https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.1.0/mapbox-gl-rtl-text.js');
+    mapboxgl.setRTLTextPlugin(
+      "https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.1.0/mapbox-gl-rtl-text.js"
+    );
     const mapboxLanguage = new MapboxLanguage({
-      defaultLanguage: 'ko'
+      defaultLanguage: "ko",
     });
     map.current.addControl(mapboxLanguage);
   });
@@ -35,7 +37,7 @@ function Map() {
     <div>
       <div ref={mapContainer} className="map-container" />
     </div>
-  )
+  );
 }
 
 export default Map;
