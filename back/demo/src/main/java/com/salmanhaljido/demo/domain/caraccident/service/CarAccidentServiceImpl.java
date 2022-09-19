@@ -1,4 +1,4 @@
-package com.salmanhaljido.demo.domain.safety.service;
+package com.salmanhaljido.demo.domain.caraccident.service;
 
 
 import org.apache.spark.api.java.JavaRDD;
@@ -14,20 +14,20 @@ import java.net.URL;
 import java.util.*;
 
 @Service
-public class SafetyServiceImpl implements SafetyService {
+public class CarAccidentServiceImpl implements CarAccidentService {
 
     static int[] sidoArray = {11, 26, 27, 28, 29, 30, 31, 36, 41, 42, 43, 44, 45, 46, 47, 48, 50};
 
     @Override
-    public void getCarAccident() {
-
-        String filePath = "CarAccident.CSV";
+    public void getCarAccident() throws IOException{
+        String dataPath = "src/resources/data/";
+        String filePath = "caraccident.CSV";
         File file=null;
         BufferedWriter bw = null;
         String NEWLINE = System.lineSeparator();
 
         try{
-            file=new File(filePath);
+            file=new File(dataPath + filePath);
             bw=new BufferedWriter(new FileWriter(file));
 
         }catch(Exception e){
@@ -66,7 +66,7 @@ public class SafetyServiceImpl implements SafetyService {
             e.printStackTrace();
         }
         JavaSparkContext sc = new JavaSparkContext("local", "First Spark App");
-        JavaRDD<String> fileData = sc.textFile("CarAccident.CSV");
+        JavaRDD<String> fileData = sc.textFile(dataPath + filePath);
         JavaRDD<String[]> data = fileData.map(b -> b.split(","));
 
         Map<String, Integer> gugunCounts =
