@@ -1,3 +1,5 @@
-function CustomModal() { }
+function CustomModal() {
+  
+ }
 
 export default CustomModal;
