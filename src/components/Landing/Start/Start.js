@@ -1,6 +1,10 @@
+import StartButton from "./StartButton";
 import "styles/Landing/Landing.scss";
 
 function Start() {
+    function main(e) {
+        window.location.replace("/map")
+    }
     return (
         <div className="start">
             <div className="start__bubble">
@@ -26,6 +30,7 @@ function Start() {
                 </div>
                 <div className="start__bubble--Rtri"></div>
             </div>
+            <div className="start__btnback" onClick={main}><StartButton/></div>
         </div>
     )
 }

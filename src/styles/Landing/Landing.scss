@@ -87,4 +87,29 @@
             color: red;
         }
     }
+
+    &__button{
+        font-family: 'GongGothicMedium';
+        width: 30%;
+        background-color: red;
+        text-align: center;
+        color: white;
+        padding: 1%;
+        font-size: larger;
+        border-radius: 30px;
+        
+    }
+
+    &__btnback{
+        display: flex;
+        justify-content: center;
+        margin-top: 5%;
+        margin-bottom: 5%;
+    }
+
+    &__back{
+        width: 50%;
+        padding-top: 3%;
+        padding-bottom: 1%;
+    }
 }
