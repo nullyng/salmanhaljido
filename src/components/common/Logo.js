@@ -3,7 +3,7 @@ import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
 import { NavLink } from "react-router-dom";
 
-import "styles/Board/BoardPage.scss";
+import "styles/common/Logo.scss";
 
 function Logo() {
   return (

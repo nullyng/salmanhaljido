@@ -6,9 +6,12 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
-import ArticleCard from "./ArticleCard";
-import dummy from "../DummyData.json";
 import CategoryOne from "./CategoryOne";
+import CategoryTwo from "./CategoryTwo";
+import CategoryThree from "./CategoryThree";
+import CategoryFour from "./CategoryFour";
+import CategoryFive from "./CategoryFive";
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -72,6 +75,7 @@ function BasicTabs() {
               value={value}
               onChange={handleChange}
               aria-label="basic tabs example"
+              className="board__tabs"
             >
               <Tab label="임신/출산" {...a11yProps(0)} />
               <Tab label="육아/교육" {...a11yProps(1)} />
@@ -81,31 +85,20 @@ function BasicTabs() {
             </Tabs>
           </Box>
 
-          {/* 임심/출산 카테고리는 컴포넌트로 넣기 */}
           <TabPanel value={value} index={0}>
             <CategoryOne />
           </TabPanel>
-
-          {/* 육아/교육 카테고리는 카드로 바로 넣기 */}
           <TabPanel value={value} index={1}>
-            {dummy.map((dummy, idx) => (
-              <ArticleCard key={idx} {...dummy} />
-            ))}
+            <CategoryTwo />
           </TabPanel>
           <TabPanel value={value} index={2}>
-            {dummy.map((dummy, idx) => (
-              <ArticleCard key={idx} {...dummy} />
-            ))}
+            <CategoryThree />
           </TabPanel>
           <TabPanel value={value} index={3}>
-            {dummy.map((dummy, idx) => (
-              <ArticleCard key={idx} {...dummy} />
-            ))}
+            <CategoryFour />
           </TabPanel>
           <TabPanel value={value} index={4}>
-            {dummy.map((dummy, idx) => (
-              <ArticleCard key={idx} {...dummy} />
-            ))}
+            <CategoryFive />
           </TabPanel>
         </Box>
       </div>
