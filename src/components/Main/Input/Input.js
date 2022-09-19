@@ -4,6 +4,7 @@ import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrow
 import { useState } from "react";
 
 import "styles/Main/Input.scss";
+import UserLocation from "./UserLocation";
 
 function Input() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -33,6 +34,7 @@ function Input() {
             <KeyboardDoubleArrowLeftIcon />
           </IconButton>
         </div>
+        <UserLocation />
       </Drawer>
     </div>
   )

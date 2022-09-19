@@ -12,6 +12,7 @@
 
   &__inner {
     & .MuiDrawer-paper {
+      width: 360px;
       padding: 2rem;
       padding-top: 1rem;
     }
@@ -23,6 +24,36 @@
         width: fit-content;
         float: right;
       }
+    }
+  }
+}
+
+/* 지역 설정 */
+.user-location {
+  &__title {
+    display: flex;
+
+    &__tooltip {
+      display: flex;
+      align-items: center;
+
+      & button {
+        & svg {
+          color: #CDCDCD;
+        }
+      }
+    }
+  }
+
+  &__content {
+    display: flex;
+
+    & .MuiInputBase-root {
+      border-radius: 30px;
+    }
+
+    &__sido {
+      margin-right: 1rem !important;
     }
   }
 }
