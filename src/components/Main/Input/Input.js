@@ -1,4 +1,4 @@
-import { Drawer, IconButton } from "@mui/material";
+import { Divider, Drawer, IconButton } from "@mui/material";
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import { useState } from "react";
@@ -18,16 +18,21 @@ function Input() {
 
   return (
     <div className="left-drawer">
-      <IconButton className="left-drawer__button" onClick={handleDrawerOpen}>
-        <KeyboardDoubleArrowRightIcon />
-      </IconButton>
+      <div className="left-drawer__button">
+        <IconButton onClick={handleDrawerOpen}>
+          <KeyboardDoubleArrowRightIcon />
+        </IconButton>
+      </div>
       <Drawer
+        className="left-drawer__inner"
         variant="persistent"
         anchor="left"
         open={isDrawerOpen}>
-        <IconButton onClick={handleDrawerClose}>
-          <KeyboardDoubleArrowLeftIcon />
-        </IconButton>
+        <div className="left-drawer__inner__button" >
+          <IconButton onClick={handleDrawerClose}>
+            <KeyboardDoubleArrowLeftIcon />
+          </IconButton>
+        </div>
       </Drawer>
     </div>
   )
