@@ -1,0 +1,89 @@
+@font-face {
+    font-family: 'GongGothicMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.Landing{
+    display: flex;
+    justify-content: space-between;
+}
+
+.start{
+    background-color: pink;
+    width: 50%;
+    padding-top: 3%;
+    padding-bottom: 3%;
+    position: fixed;
+
+    &__bubble{
+        display: flex;
+        
+        &--left{
+            font-family: 'GongGothicMedium';
+            background-color: white;
+            margin: 3% auto 3% 0%;
+            padding: 1% 4%;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: fit-content;
+            font-size: xx-large;
+        }
+        
+        &--right{
+            font-family: 'GongGothicMedium';
+            background-color: white;
+            margin: 3% 0% 3% auto;
+            padding: 1% 4%;
+            border-radius: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: fit-content;
+            font-size: xx-large;
+        }
+
+        &--Ltri {
+            margin: 5% 0% 5% 5%;
+            width: 0px;
+            height: 0px;
+            border-top: 30px solid #ffffff;
+            border-left: 15px solid transparent;
+            border-right: 0px solid transparent;
+          }
+
+        &--Rtri {
+            margin: 5% 5% 5% 0%;
+            width: 0px;
+            height: 0px;
+            border-top: 30px solid #ffffff;
+            border-left: 0px solid transparent;
+            border-right: 15px solid transparent;
+          }
+        
+        &--end{
+            background-color: white;
+            margin: 2% 0% 2% auto;
+            padding: 2% 3%;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: baseline;
+            width: fit-content;
+        }
+
+        &--end1{
+            font-size: 180%;
+            font-weight: bold;
+        }
+
+        &--end2{
+            font-family: 'GongGothicMedium';
+            font-size: 400%;
+            color: red;
+        }
+    }
+}
