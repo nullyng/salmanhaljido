@@ -5,13 +5,15 @@
 
   &__button {
     margin-top: 1rem;
+    padding: 0.3rem;
     background-color: white;
     border-radius: 0px 10px 10px 0px;
   }
 
   &__inner {
     & .MuiDrawer-paper {
-      padding: 1rem;
+      padding: 2rem;
+      padding-top: 1rem;
     }
 
     &__button {

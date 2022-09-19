@@ -1,4 +1,4 @@
-import { Divider, Drawer, IconButton } from "@mui/material";
+import { Drawer, IconButton } from "@mui/material";
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import { useState } from "react";
