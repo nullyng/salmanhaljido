@@ -1,7 +1,9 @@
+import Start from "components/Landing/Start/Start";
+
 function LandingPage() {
   return (
     <div>
-      landing
+      <Start/>
     </div>
   );
 }
