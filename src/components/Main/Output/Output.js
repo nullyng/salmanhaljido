@@ -18,16 +18,21 @@ function Output() {
 
   return (
     <div className="right-drawer">
-      <IconButton className="right-drawer__button" onClick={handleDrawerOpen}>
-        <KeyboardDoubleArrowLeftIcon />
-      </IconButton>
+      <div className="right-drawer__button">
+        <IconButton onClick={handleDrawerOpen}>
+          <KeyboardDoubleArrowLeftIcon />
+        </IconButton>
+      </div>
       <Drawer
+        className="right-drawer__inner"
         variant="persistent"
         anchor="right"
         open={isDrawerOpen}>
-        <IconButton onClick={handleDrawerClose}>
-          <KeyboardDoubleArrowRightIcon />
-        </IconButton>
+        <div className="right-drawer__inner__button" >
+          <IconButton onClick={handleDrawerClose}>
+            <KeyboardDoubleArrowRightIcon />
+          </IconButton>
+        </div>
       </Drawer>
     </div>
   )
