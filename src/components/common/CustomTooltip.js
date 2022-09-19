@@ -1,3 +1,5 @@
-function CustomTooltip() { }
+function CustomTooltip() {
+  
+ }
 
 export default CustomTooltip;
