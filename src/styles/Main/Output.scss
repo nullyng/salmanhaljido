@@ -12,6 +12,7 @@
 
   &__inner {
     & .MuiDrawer-paper {
+      width: 360px;
       padding: 2rem;
       padding-top: 1rem;
     }
@@ -23,6 +24,28 @@
         width: fit-content;
         float: left;
       }
+    }
+  }
+}
+
+.region {
+  &__cntr {
+    display: flex;
+    justify-content: space-around;
+  }
+}
+
+.chip {
+  margin-bottom: 15px;
+  
+  // &	.MuiChip-colorDefault {
+  //   background-color: #c64d4d;
+  // }
+  &__content {
+    width: 155px;
+    
+    & span {
+      font-size: 16px;
     }
   }
 }
