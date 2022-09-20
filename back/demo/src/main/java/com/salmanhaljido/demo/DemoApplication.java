@@ -1,5 +1,6 @@
 package com.salmanhaljido.demo;
 
+import com.salmanhaljido.demo.domain.drugstore.service.DrugStoreServiceImpl;
 import com.salmanhaljido.demo.domain.hospital.service.HospitalServiceImpl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -12,8 +13,13 @@ public class DemoApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(DemoApplication.class, args);
-		HospitalServiceImpl s = new HospitalServiceImpl();
-		s.getHospital();
+		try{
+			DrugStoreServiceImpl s = new DrugStoreServiceImpl();
+			s.getDrugStore();
+		}catch(Exception e ){
+			e.printStackTrace();
+		}
+
 	}
 
 }
