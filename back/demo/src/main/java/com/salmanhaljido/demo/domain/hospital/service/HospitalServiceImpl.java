@@ -152,54 +152,40 @@ public class HospitalServiceImpl implements HospitalService {
 
             String token[] = str.split(" ");
             if(token.length==1) continue;
+            String sd = "";
+            String sgg = "";
+            String emdg = "";
+            if(token.length==2){
+                sd = token[0];
+                sgg = token[1];
 
-            JSONObject json = callBjdCode(str);
-            try{
-                if(!valuePut(json, value, fileOutputStream, map.get(str))) throw new Exception();
-            }catch(Exception e){
-                String match = "[0-9]";
-                str = str.replaceAll(match, "");
-                json = callBjdCode(str);
-                try{
-                    if(!valuePut(json, value, fileOutputStream, map.get(str))) throw new Exception();
-                }catch(Exception e2){
-                    if(token.length==2) continue;
 
-                    String s1 = "";
-                    for(int i=0;i<token.length-1;i++){
-                        s1+=token[i]+" ";
-                    }
-                    s1 = s1.substring(0, s1.length()-1);
-                    json = callBjdCode(s1);
-                    try{
-                        if(!valuePut(json, value, fileOutputStream, map.get(s1))) throw new Exception();
-                    }catch(Exception e3){
-                    }
+            }else if(token.length==3){
+                if(token[2].endsWith("구")){
+                    sd = token[0];
+                    sgg=token[1] + " " + token[2];
+                }else{
+                    sd = token[0];
+                    sgg = token[1];
+                    emdg=token[2];
                 }
+            }else{
+                sd = token[0];
+                sgg=token[1] + " " + token[2];
+                emdg = token[3];
             }
+            value.put("sd", sd);
+            value.put("sgg", sgg);
+            value.put("emdg", emdg);
+            if(map.get(str) ==null) value.put("count", 0);
+            else value.put("count", map.get(str));
+            fileOutputStream.write(value.toString().getBytes());
+            fileOutputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
         }
         Dataset<Row> dff = session.read().format("json").load(dataPath + "h_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
 
         System.out.println("finish");
-    }
-    private static boolean valuePut(JSONObject json, JSONObject value, FileOutputStream fileOutputStream, Long mapValue) {
-        boolean check = true;
-        try{
-            String sidoCd = json.getJSONArray("StanReginCd").getJSONObject(1).getJSONArray("row").getJSONObject(0).get("sido_cd").toString();
-            String sggCd = json.getJSONArray("StanReginCd").getJSONObject(1).getJSONArray("row").getJSONObject(0).get("sgg_cd").toString();
-            String umdCd = json.getJSONArray("StanReginCd").getJSONObject(1).getJSONArray("row").getJSONObject(0).get("umd_cd").toString();
-            if(sidoCd == null || sggCd == null || umdCd == null || mapValue == null) return false;
-            value.put("sido_cd", sidoCd);
-            value.put("sgg_cd", sggCd);
-            value.put("umd_cd", umdCd);
-            value.put("count", mapValue);
-            fileOutputStream.write(value.toString().getBytes());
-            fileOutputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
-        }catch(Exception e){
-            check=false;
-        }
-        return check;
     }
     private static String checkEMDG(String token){
         int index = token.length()-1;
@@ -215,27 +201,6 @@ public class HospitalServiceImpl implements HospitalService {
             index--;
         }
         return s;
-    }
-    private static JSONObject callBjdCode(String key) {
-        try{
-            HttpURLConnection conn;
-            do {
-                StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1741000/StanReginCd/getStanReginCdList?serviceKey=" + API_KEY + "&pageNo=1&numOfRows=100&type=json&locatadd_nm=" + (URLEncoder.encode(key, "utf-8")).toString());
-                URL bjdUrl = new URL(urlBuilder.toString());
-                conn = (HttpURLConnection) bjdUrl.openConnection();
-                conn.setRequestMethod("GET");
-                conn.setRequestProperty("Content-Type", "application/json");
-                BufferedReader rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
-                String jsonText = readAll(rd);
-                JSONObject json = new JSONObject(jsonText);
-                rd.close();
-                conn.disconnect();
-                return json;
-            }while(conn.getResponseCode() != 200);
-        }catch(Exception e){
-
-        }
-        return null;
     }
     private static String readAll(Reader rd) throws IOException {
         StringBuilder sb = new StringBuilder();
