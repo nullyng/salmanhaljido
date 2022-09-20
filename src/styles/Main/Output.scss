@@ -28,6 +28,7 @@
   }
 }
 
+// 추천 지역
 .region {
   &__cntr {
     display: flex;
@@ -35,17 +36,32 @@
   }
 }
 
+// 추천 지역 chip
 .chip {
   margin-bottom: 15px;
-  
+
   // &	.MuiChip-colorDefault {
   //   background-color: #c64d4d;
   // }
   &__content {
     width: 155px;
-    
+
     & span {
       font-size: 16px;
+    }
+  }
+}
+
+// 통계 및 부동산
+.data {
+  margin-top: 20px;
+  &__tabs {
+    & button {
+      font-size: 20px;
+
+      &.Mui-selected {
+        font-weight: 800;
+      }
     }
   }
 }

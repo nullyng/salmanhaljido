@@ -6,6 +6,7 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import "styles/Main/Output.scss";
 import RcmdList from "./Rcmd/RcmdList";
+import Data from "./Data/Data";
 
 function Output() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -22,7 +23,7 @@ function Output() {
   const theme = createTheme({
     palette: {
       primary: {
-        main: "#e94560",
+        main: "#4D88C6",
       },
       secondary: {
         main: "#0F3460",
@@ -50,6 +51,7 @@ function Output() {
             </IconButton>
           </div>
           <RcmdList />
+          <Data />
         </Drawer>
       </div>
     </ThemeProvider>
