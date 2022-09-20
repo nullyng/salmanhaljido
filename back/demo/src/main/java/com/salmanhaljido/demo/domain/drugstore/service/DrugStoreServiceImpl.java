@@ -1,45 +1,38 @@
-package com.salmanhaljido.demo.domain.hospital.service;
+package com.salmanhaljido.demo.domain.drugstore.service;
 
-
+import org.apache.commons.io.FileUtils;
+import org.apache.poi.xssf.usermodel.XSSFCell;
+import org.apache.poi.xssf.usermodel.XSSFRow;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 import org.json.JSONObject;
+import org.springframework.stereotype.Service;
 
-import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URLEncoder;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
-import org.apache.commons.io.FileUtils;
-import org.springframework.stereotype.Service;
-
-import java.net.URL;
-
-import org.apache.poi.xssf.usermodel.XSSFCell;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-
-
 @Service
-public class HospitalServiceImpl implements HospitalService {
-
+public class DrugStoreServiceImpl implements DrugStoreService{
     @Override
-    public void getHospital() throws Exception{
-
+    public void getDrugStore() throws Exception {
         String dataPath = "src/resources/data/";
-        URL url = new URL("https://www.localdata.go.kr/datafile/each/01_01_01_P.xlsx");
+        URL url = new URL("https://www.localdata.go.kr/datafile/each/01_01_06_P.xlsx");
 
-        File destination = new File(dataPath + "hospital.xlsx");
+        File destination = new File(dataPath + "drugstore.xlsx");
         FileUtils.copyURLToFile(url,destination);
 
-        FileInputStream fileInputStream = new FileInputStream(dataPath + "hospital.xlsx");
+        FileInputStream fileInputStream = new FileInputStream(dataPath + "drugstore.xlsx");
         XSSFWorkbook workbook = new XSSFWorkbook(fileInputStream);
 
-        FileOutputStream fileOutputStream = new FileOutputStream(dataPath + "h.data");
+        FileOutputStream fileOutputStream = new FileOutputStream(dataPath + "ds.data");
 
         int rowindex=0;
 
@@ -88,11 +81,11 @@ public class HospitalServiceImpl implements HospitalService {
         }
         SparkSession session = SparkSession.builder()
                 .master("local")
-                .appName("hospital")
-                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.h")
+                .appName("drugstore")
+                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.ds")
                 .getOrCreate();
 
-        Dataset<Row> df = session.read().text(dataPath + "h.data");
+        Dataset<Row> df = session.read().text(dataPath + "ds.data");
         JavaRDD<Row> rdd = df.toJavaRDD();
 
         JavaRDD<String> rdds = rdd.map(line -> {
@@ -134,10 +127,7 @@ public class HospitalServiceImpl implements HospitalService {
             }
             return null;
         });
-
-
-
-        File writeFile = new File(dataPath + "h_result.json");
+        File writeFile = new File(dataPath + "ds_result.json");
         fileOutputStream = new FileOutputStream(writeFile);
 
         Map<String, Long> map = rdds.countByValue();
@@ -178,7 +168,7 @@ public class HospitalServiceImpl implements HospitalService {
             fileOutputStream.write(value.toString().getBytes());
             fileOutputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
         }
-        Dataset<Row> dff = session.read().format("json").load(dataPath + "h_result.json");
+        Dataset<Row> dff = session.read().format("json").load(dataPath + "ds_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
 
         System.out.println("mongodb : finish");
@@ -198,5 +188,4 @@ public class HospitalServiceImpl implements HospitalService {
         }
         return s;
     }
-
 }
