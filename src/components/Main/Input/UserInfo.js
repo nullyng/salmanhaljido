@@ -52,9 +52,9 @@ function UserInfo() {
             />
           </div>
           {hasCar || hasPets || hasChildren ? (
-            <CategoryRcmd open={true} />
+            <CategoryRcmd alertOpen={true} />
           ) : (
-            <CategoryRcmd open={false} />
+            <CategoryRcmd alertOpen={false} />
           )}
         </div>
       </ThemeProvider>

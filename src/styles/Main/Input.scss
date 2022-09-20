@@ -85,7 +85,31 @@
     }
   }
 
-  & b {
-    color: #e94560;
+  & .MuiAlert-action {
+    padding-left: 0.2rem;
+  }
+
+  &__content {
+    & b {
+      color: #e94560;
+    }
+  }
+
+  &__button {
+    margin-top: 0.7rem;
+    float: right;
+
+    & button {
+      border: 1px solid #575757;
+      border-radius: 30px;
+      background-color: white;
+      color: #575757;
+
+      &:hover {
+        border: 1px solid #e94560;
+        background-color: white;
+        color: #e94560;
+      }
+    }
   }
 }
