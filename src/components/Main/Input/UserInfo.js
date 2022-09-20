@@ -1,13 +1,9 @@
-import {
-  Checkbox,
-  FormControlLabel,
-  FormGroup,
-  ThemeProvider,
-} from "@mui/material";
+import { Checkbox, FormControlLabel, ThemeProvider } from "@mui/material";
 import { useState } from "react";
 
 import CustomTooltip from "components/common/CustomTooltip";
 import theme from "components/common/theme";
+import CategoryRcmd from "./CategoryRcmd";
 
 function UserInfo() {
   const [hasCar, setHasCar] = useState(false);
@@ -37,24 +33,31 @@ function UserInfo() {
           <CustomTooltip content={tooltipMessage} />
         </div>
       </div>
-      <div className="user-info__content">
-        <ThemeProvider theme={theme}>
-          <FormControlLabel
-            control={<Checkbox checked={hasCar} onChange={handleHasCar} />}
-            label="자가용"
-          />
-          <FormControlLabel
-            control={<Checkbox checked={hasPets} onChange={handleHasPets} />}
-            label="반려동물"
-          />
-          <FormControlLabel
-            control={
-              <Checkbox checked={hasChildren} onChange={handleHasChildren} />
-            }
-            label="자녀"
-          />
-        </ThemeProvider>
-      </div>
+      <ThemeProvider theme={theme}>
+        <div className="user-info__content">
+          <div className="user-info__content__form">
+            <FormControlLabel
+              control={<Checkbox checked={hasCar} onChange={handleHasCar} />}
+              label="자가용"
+            />
+            <FormControlLabel
+              control={<Checkbox checked={hasPets} onChange={handleHasPets} />}
+              label="반려동물"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox checked={hasChildren} onChange={handleHasChildren} />
+              }
+              label="자녀"
+            />
+          </div>
+          {hasCar || hasPets || hasChildren ? (
+            <CategoryRcmd open={true} />
+          ) : (
+            <CategoryRcmd open={false} />
+          )}
+        </div>
+      </ThemeProvider>
     </div>
   );
 }

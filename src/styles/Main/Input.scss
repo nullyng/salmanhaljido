@@ -69,9 +69,23 @@
   @include input-title;
 
   &__content {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    margin-top: 0;
+    &__form {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.category-rcmd {
+  & .MuiAlert-icon {
+    & svg {
+      color: #e94560;
+    }
+  }
+
+  & b {
+    color: #e94560;
   }
 }
