@@ -5,6 +5,7 @@ import { useState } from "react";
 
 import "styles/Main/Input.scss";
 import UserLocation from "./UserLocation";
+import UserInfo from "./UserInfo";
 
 function Input() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -36,6 +37,8 @@ function Input() {
           </IconButton>
         </div>
         <UserLocation />
+        <Divider />
+        <UserInfo />
         <Divider />
       </Drawer>
     </div>

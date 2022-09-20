@@ -1,3 +1,20 @@
+@mixin input-title {
+  &__title {
+    display: flex;
+
+    &__tooltip {
+      display: flex;
+      align-items: center;
+
+      & button {
+        & svg {
+          color: #cdcdcd;
+        }
+      }
+    }
+  }
+}
+
 .left-drawer {
   position: fixed;
   left: 0;
@@ -31,21 +48,7 @@
 /* 지역 설정 */
 .user-location {
   margin-bottom: 1.5rem;
-
-  &__title {
-    display: flex;
-
-    &__tooltip {
-      display: flex;
-      align-items: center;
-
-      & button {
-        & svg {
-          color: #cdcdcd;
-        }
-      }
-    }
-  }
+  @include input-title;
 
   &__content {
     display: flex;
@@ -57,5 +60,18 @@
     &__sido {
       margin-right: 1rem !important;
     }
+  }
+}
+
+/* 사용자 정보 */
+.user-info {
+  margin-bottom: 1rem;
+  @include input-title;
+
+  &__content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin-top: 0;
   }
 }
