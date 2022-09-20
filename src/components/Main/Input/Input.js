@@ -1,6 +1,6 @@
-import { Drawer, IconButton } from "@mui/material";
-import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
-import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
+import { Divider, Drawer, IconButton } from "@mui/material";
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
+import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import { useState } from "react";
 
 import "styles/Main/Input.scss";
@@ -11,11 +11,11 @@ function Input() {
 
   const handleDrawerOpen = () => {
     setIsDrawerOpen(true);
-  }
+  };
 
   const handleDrawerClose = () => {
     setIsDrawerOpen(false);
-  }
+  };
 
   return (
     <div className="left-drawer">
@@ -28,16 +28,18 @@ function Input() {
         className="left-drawer__inner"
         variant="persistent"
         anchor="left"
-        open={isDrawerOpen}>
-        <div className="left-drawer__inner__button" >
+        open={isDrawerOpen}
+      >
+        <div className="left-drawer__inner__button">
           <IconButton onClick={handleDrawerClose}>
             <KeyboardDoubleArrowLeftIcon />
           </IconButton>
         </div>
         <UserLocation />
+        <Divider />
       </Drawer>
     </div>
-  )
+  );
 }
 
 export default Input;

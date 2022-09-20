@@ -30,6 +30,8 @@
 
 /* 지역 설정 */
 .user-location {
+  margin-bottom: 1.5rem;
+
   &__title {
     display: flex;
 
@@ -39,7 +41,7 @@
 
       & button {
         & svg {
-          color: #CDCDCD;
+          color: #cdcdcd;
         }
       }
     }

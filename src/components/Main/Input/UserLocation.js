@@ -60,7 +60,11 @@ function UserLocation() {
       </div>
       <div className="user-location__content">
         <ThemeProvider theme={theme}>
-          <FormControl className="user-location__content__sido" fullWidth>
+          <FormControl
+            className="user-location__content__sido"
+            size="small"
+            fullWidth
+          >
             <InputLabel>시/도</InputLabel>
             <Select value={sido} label="시/도" onChange={handleSidoChange}>
               {sidoList.map((item, index) => {
@@ -72,7 +76,11 @@ function UserLocation() {
               })}
             </Select>
           </FormControl>
-          <FormControl className="user-location__content__gugun" fullWidth>
+          <FormControl
+            className="user-location__content__gugun"
+            size="small"
+            fullWidth
+          >
             <InputLabel>구/군</InputLabel>
             <Select value={gugun} label="구/군" onChange={handleGugunChange}>
               {gugunList.map((item, index) => {
