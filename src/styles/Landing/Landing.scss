@@ -113,3 +113,104 @@
         padding-bottom: 1%;
     }
 }
+
+.service{
+    width: 50%;
+
+    &__bigfont{
+        font-family: 'GongGothicMedium';
+        font-size: 300%;
+    }
+    
+    &__font{
+        font-family: 'GongGothicMedium';
+        font-size: 180%;
+    }
+
+    &__introduce{
+        padding: 3%;
+
+        &--textbox{
+            display: flex;
+            align-items: baseline;
+        }
+
+        &--squarebox{
+            display: flex;
+            justify-content: space-evenly;
+        }
+
+        &--square{
+            width: 25%;
+            text-align: center;
+            font-weight: bold;
+            padding: 3%;
+            margin: 3% 0%;
+            border: 1px solid gray;
+            border-radius: 30px;
+        }
+        
+        &--image{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto;
+            margin-bottom: 5%;
+            width: 120px;
+            height: 120px;
+        }  
+    }
+
+    &__guide{
+        padding: 3%;
+
+        &--box{
+            display: flex;
+            padding: 1%;
+        }
+
+        &--text{
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: large;
+        }
+
+        &--image{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 200px;
+            height: 150px;
+            background-color: lightgray;
+            border-radius: 30px;
+        }
+    }
+
+    &__starttext{
+        padding: 5%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        font-size: large;
+
+        &--red{
+            color: red;
+        }
+    }
+
+    &__upbutton{
+        width: 3%;
+        height: 6%;    
+        font-size: xx-large;
+        text-align: center;
+        border-radius: 50%;
+        background-color: white;
+        position:fixed;
+        right:30px;
+        bottom:30px;
+    }
+}
