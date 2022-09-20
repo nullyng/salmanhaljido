@@ -17,6 +17,9 @@ function UserLocation() {
   const [gugunList, setGugunList] = useState([]);
   const [gugun, setGugun] = useState("");
 
+  const tooltipMessage =
+    "현재 살고 있거나 추천 받고 싶은 지역을 선택해 보세요. 해당 지역 위주로 추천 받을 수 있어요.";
+
   useEffect(() => {
     // 초기 한 번만 시/도 목록을 받아온다.
     axios
@@ -52,7 +55,7 @@ function UserLocation() {
       <div className="user-location__title">
         <h2 className="user-location__title__text">지역 설정</h2>
         <div className="user-location__title__tooltip">
-          <CustomTooltip content="현재 살고 있거나 추천 받고 싶은 지역을 선택해 보세요. 해당 지역 위주로 추천 받을 수 있어요." />
+          <CustomTooltip content={tooltipMessage} />
         </div>
       </div>
       <div className="user-location__content">

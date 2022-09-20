@@ -1,7 +1,7 @@
 import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
 import { styled } from "@mui/material/styles";
 import { IconButton } from "@mui/material";
-import HelpIcon from '@mui/icons-material/Help';
+import HelpIcon from "@mui/icons-material/Help";
 
 const MyTooltip = styled(({ className, ...props }) => (
   <Tooltip {...props} arrow classes={{ popper: className }} />
@@ -11,6 +11,8 @@ const MyTooltip = styled(({ className, ...props }) => (
   },
   [`& .${tooltipClasses.tooltip}`]: {
     backgroundColor: "#16213E",
+    fontSize: "0.8em",
+    margin: "1rem",
   },
 }));
 
@@ -21,7 +23,7 @@ function CustomTooltip({ content }) {
         <HelpIcon />
       </IconButton>
     </MyTooltip>
-  )
+  );
 }
 
 export default CustomTooltip;
