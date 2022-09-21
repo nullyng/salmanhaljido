@@ -7,6 +7,8 @@ import "styles/Main/Input.scss";
 import UserLocation from "components/Main/Input/UserLocation";
 import UserInfo from "components/Main/Input/UserInfo";
 import Price from "components/Main/Input/Price";
+import ResetButton from "./ResetButton";
+import SubmitButton from "./SubmitButton";
 
 function Input() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -37,11 +39,16 @@ function Input() {
             <KeyboardDoubleArrowLeftIcon />
           </IconButton>
         </div>
-        <UserLocation />
-        <Divider />
-        <UserInfo />
-        <Divider />
-        <Price />
+        <div className="left-drawer__inner__content">
+          <UserLocation />
+          <Divider />
+          <UserInfo />
+          <Divider />
+          <Price />
+        </div>
+        <div className="left-drawer__inner__bottom">
+          <ResetButton />
+        </div>
       </Drawer>
     </div>
   );

@@ -34,12 +34,65 @@
       padding-top: 1rem;
     }
 
+    // drawer 닫기 버튼
     &__button {
       width: 100%;
 
       & button {
         width: fit-content;
         float: right;
+      }
+    }
+
+    // 데이터 입력
+    &__content {
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+
+      // 스크롤바 커스텀
+      // &::-webkit-scrollbar {
+      //   position: fixed;
+      //   width: 6px;
+      // }
+
+      // &::-webkit-scrollbar-thumb {
+      //   position: fixed;
+      //   background: #4d89c6;
+      //   border-radius: 10px;
+      // }
+
+      // &::-webkit-scrollbar-track {
+      //   position: fixed;
+      //   background: white;
+      // }
+    }
+
+    // 하단 버튼 그룹
+    &__bottom {
+      position: sticky;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      padding-top: 2rem;
+      padding-bottom: 3rem;
+      justify-content: center;
+
+      & .reset-button {
+        margin-right: 0.6rem;
+        width: 100%;
+
+        & button {
+          border-radius: 30px;
+          width: 100%;
+          border: 1px solid #626262;
+          color: #626262;
+
+          &:hover {
+            background-color: #6262621a;
+          }
+        }
       }
     }
   }
@@ -120,9 +173,16 @@
 
   &__content {
     &__jeonse {
+      width: 100%;
+
       & h3 {
         margin-top: 0;
       }
     }
+  }
+
+  & .custom-slider {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
 }
