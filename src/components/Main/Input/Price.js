@@ -1,10 +1,11 @@
 import { useState } from "react";
 
 import CustomTooltip from "components/common/CustomTooltip";
+import CustomSlider from "components/Main/Input/CustomSlider";
+import valueList from "./valueList";
 
 function Price() {
   const [jeonse, setJeonse] = useState([0, 28]);
-  const [maemae, setMaemae] = useState([0, 28]);
   const minDistance = 1;
 
   const tooltipMessage = "가격대를 설정해보세요.";
@@ -21,18 +22,6 @@ function Price() {
     }
   };
 
-  const handleChangeMaemae = (event, newValue, activeThumb) => {
-    if (!Array.isArray(newValue)) {
-      return;
-    }
-
-    if (activeThumb === 0) {
-      setMaemae([Math.min(newValue[0], maemae[1] - minDistance), maemae[1]]);
-    } else {
-      setMaemae([maemae[0], Math.max(newValue[1], maemae[0] + minDistance)]);
-    }
-  };
-
   return (
     <div className="price">
       <div className="price__title">
@@ -41,7 +30,20 @@ function Price() {
           <CustomTooltip content={tooltipMessage} />
         </div>
       </div>
-      <div className="price__content"></div>
+      <div className="price__content">
+        <div className="price__content__jeonse">
+          <h3>평균 전세 가격</h3>
+          <CustomSlider
+            value={jeonse}
+            onChange={handleChangeJeonse}
+            valueLabelDisplay="on"
+            disableSwap
+            min={0}
+            max={28}
+            valueLabelFormat={(label) => valueList[label]}
+          />
+        </div>
+      </div>
     </div>
   );
 }
