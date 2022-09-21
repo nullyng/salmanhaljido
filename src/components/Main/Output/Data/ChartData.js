@@ -6,6 +6,7 @@ import {
   PolarAngleAxis,
   PolarRadiusAxis,
 } from "recharts";
+import DetailData from "./DetailData";
 
 function ChartData() {
   const data = [
@@ -52,7 +53,7 @@ function ChartData() {
   ];
 
   return (
-    <div> 
+    <div>
       <RadarChart
         cx={180}
         cy={180}
@@ -72,6 +73,7 @@ function ChartData() {
           fillOpacity={0.6}
         />
       </RadarChart>
+      <DetailData />
     </div>
   );
 }
