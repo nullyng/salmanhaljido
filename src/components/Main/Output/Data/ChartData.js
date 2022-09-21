@@ -10,54 +10,56 @@ import {
 function ChartData() {
   const data = [
     {
-      subject: "Math",
-      A: 120,
-      B: 110,
-      fullMark: 150,
+      subject: "교통",
+      A: 100,
+      fullMark: 100,
     },
     {
-      subject: "Chinese",
-      A: 98,
-      B: 130,
-      fullMark: 150,
+      subject: "재난",
+      A: 75,
+      fullMark: 100,
     },
     {
-      subject: "English",
-      A: 86,
-      B: 130,
-      fullMark: 150,
+      subject: "안전",
+      A: 80,
+      fullMark: 100,
     },
     {
-      subject: "Geography",
-      A: 99,
-      B: 100,
-      fullMark: 150,
+      subject: "의료",
+      A: 50,
+      fullMark: 100,
     },
     {
-      subject: "Physics",
-      A: 85,
-      B: 90,
-      fullMark: 150,
+      subject: "반려동물",
+      A: 25,
+      fullMark: 100,
     },
     {
-      subject: "History",
+      subject: "교육",
       A: 65,
-      B: 85,
-      fullMark: 150,
+      fullMark: 100,
+    },
+    {
+      subject: "문화",
+      A: 80,
+      fullMark: 100,
+    },
+    {
+      subject: "생활",
+      A: 20,
+      fullMark: 100,
     },
   ];
 
   return (
-    <div>
-      여기는 통계
+    <div> 
       <RadarChart
-        cx={300}
-        cy={250}
-        outerRadius={150}
-        width={500}
-        height={500}
+        cx={180}
+        cy={180}
+        outerRadius={130}
+        width={360}
+        height={360}
         data={data}
-        className="chart"
       >
         <PolarGrid />
         <PolarAngleAxis dataKey="subject" />
@@ -65,8 +67,8 @@ function ChartData() {
         <Radar
           name="Mike"
           dataKey="A"
-          stroke="#8884d8"
-          fill="#8884d8"
+          stroke="#E94560"
+          fill="#E94560"
           fillOpacity={0.6}
         />
       </RadarChart>
