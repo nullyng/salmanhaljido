@@ -30,7 +30,7 @@ public class HospitalServiceImpl implements HospitalService {
     @Override
     public void getHospital() throws Exception{
 
-        String dataPath = "src/resources/data/";
+        String dataPath = "src/main/resources/data/";
         URL url = new URL("https://www.localdata.go.kr/datafile/each/01_01_01_P.xlsx");
 
         File destination = new File(dataPath + "hospital.xlsx");
@@ -154,7 +154,6 @@ public class HospitalServiceImpl implements HospitalService {
             if(token.length==2){
                 sd = token[0];
                 sgg = token[1];
-
 
             }else if(token.length==3){
                 if(token[2].endsWith("구")){

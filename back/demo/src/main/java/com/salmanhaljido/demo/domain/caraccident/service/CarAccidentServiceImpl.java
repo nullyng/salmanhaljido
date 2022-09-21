@@ -4,6 +4,9 @@ package com.salmanhaljido.demo.domain.caraccident.service;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
 
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
+import org.apache.spark.sql.SparkSession;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 @Service
@@ -21,18 +25,8 @@ public class CarAccidentServiceImpl implements CarAccidentService {
     @Override
     public void getCarAccident() throws IOException{
         String dataPath = "src/resources/data/";
-        String filePath = "caraccident.CSV";
-        File file=null;
-        BufferedWriter bw = null;
-        String NEWLINE = System.lineSeparator();
-
-        try{
-            file=new File(dataPath + filePath);
-            bw=new BufferedWriter(new FileWriter(file));
-
-        }catch(Exception e){
-            e.printStackTrace();
-        }
+        File file = new File(dataPath+ "ca.data");
+        FileOutputStream fileOutputStream = new FileOutputStream(file);
 
         try{
             for(int sidoCnt=0;sidoCnt<sidoArray.length;sidoCnt++){
@@ -41,7 +35,6 @@ public class CarAccidentServiceImpl implements CarAccidentService {
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
                 conn.setRequestProperty("Content-Type", "application/json");
-                System.out.println("Response code: " + conn.getResponseCode());
                 BufferedReader rd;
                 if(conn.getResponseCode() >= 200 && conn.getResponseCode() <= 300) {
                     rd = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf-8"));
@@ -54,35 +47,90 @@ public class CarAccidentServiceImpl implements CarAccidentService {
                 Map<String, Integer> map = new HashMap<>();
                 for(int i=0;i<json.getJSONObject("items").getJSONArray("item").length();i++){
                     String bjd_cd = json.getJSONObject("items").getJSONArray("item").getJSONObject(i).get("bjd_cd").toString().substring(2, 5);
-                    bw.write(sidoArray[sidoCnt]+","+bjd_cd);
-                    bw.write(NEWLINE);
+                    fileOutputStream.write(json.getJSONObject("items").getJSONArray("item").getJSONObject(i).get("spot_nm").toString().getBytes(StandardCharsets.UTF_8));
+                    fileOutputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
                 }
                 rd.close();
                 conn.disconnect();
             }
-            bw.flush();
-            bw.close();
         }catch(Exception e){
             e.printStackTrace();
         }
-        JavaSparkContext sc = new JavaSparkContext("local", "First Spark App");
-        JavaRDD<String> fileData = sc.textFile(dataPath + filePath);
-        JavaRDD<String[]> data = fileData.map(b -> b.split(","));
 
-        Map<String, Integer> gugunCounts =
-                data.mapToPair(s -> new scala.Tuple2<>(s[1], 1))
-                        .reduceByKey((l1, l2) -> l1 + l2).collectAsMap();
+        SparkSession session = SparkSession.builder()
+                .master("local")
+                .appName("caraccident")
+                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.ca")
+                .getOrCreate();
 
-        Iterator<String> iter = gugunCounts.keySet().iterator();
+        Dataset<Row> df = session.read().text(dataPath + "ca.data");
+        JavaRDD<Row> rdd = df.toJavaRDD();
 
-        while(iter.hasNext()) {
-            String key = iter.next();
-            int value = gugunCounts.get(key);
+        JavaRDD<String> rdds = rdd.map(line -> {
+            String[] tokens = line.toString().split("\\(");
 
-            System.out.println(key + " : " + value);
+            return tokens[0].substring(1);
+        });
+        File writeFile = new File(dataPath + "ca_result.json");
+        fileOutputStream = new FileOutputStream(writeFile);
+
+        Map<String, Long> map = rdds.countByValue();
+        for(String str : map.keySet()){
+            JSONObject value = new JSONObject();
+            if(str == null) continue;
+
+            String token[] = str.split(" ");
+            if(token.length==1) continue;
+            String sd = "";
+            String sgg = "";
+            String emdg = "";
+            if(token.length==2){
+                sd = token[0];
+                sgg = token[1];
+
+            }else if(token.length==3){
+                if(token[2].endsWith("구")){
+                    sd = token[0];
+                    sgg=token[1] + " " + token[2];
+                }else{
+                    sd = token[0];
+                    sgg = token[1];
+                    emdg=token[2];
+                }
+            }else{
+                sd = token[0];
+                sgg=token[1] + " " + token[2];
+                emdg = token[3];
+            }
+            value.put("sd", sd);
+            value.put("sgg", sgg);
+            value.put("emdg", emdg);
+            if(map.get(str) ==null) value.put("count", 0);
+            else value.put("count", map.get(str));
+            fileOutputStream.write(value.toString().getBytes());
+            fileOutputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
+
         }
-    }
+        Dataset<Row> dff = session.read().format("json").load(dataPath + "ca_result.json");
+        dff.write().format("mongodb").mode("overwrite").save();
 
+        System.out.println("mongodb : finish");
+    }
+    private static String checkEMDG(String token){
+        int index = token.length()-1;
+        String s="";
+        while(index>=0){
+            if(token.charAt(index)=='동' || token.charAt(index)=='가' || token.charAt(index)=='면' || token.charAt(index)=='읍')
+                break;
+            index--;
+        }
+        while(index>=0){
+            if(token.charAt(index)=='(' || token.charAt(index)==',' || token.charAt(index)==' ') break;
+            s = token.charAt(index) + s;
+            index--;
+        }
+        return s;
+    }
     private static String readAll(Reader rd) throws IOException {
         StringBuilder sb = new StringBuilder();
         int cp;
