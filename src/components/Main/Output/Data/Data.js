@@ -5,7 +5,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import RealEstateList from "./RealEstateList";
-import RadarChart from "./RadarChart";
+import ChartData from "./ChartData";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -62,7 +62,7 @@ function Data() {
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          <RadarChart />
+          <ChartData />
         </TabPanel>
         <TabPanel value={value} index={1}>
           <RealEstateList />
