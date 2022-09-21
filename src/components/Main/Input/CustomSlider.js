@@ -5,6 +5,7 @@ const CustomSlider = styled(Slider)({
   color: "#4D88C6",
   height: 8,
   marginTop: "3rem",
+
   "& .MuiSlider-track": {
     border: "none",
     color: "#C4D9F0",
