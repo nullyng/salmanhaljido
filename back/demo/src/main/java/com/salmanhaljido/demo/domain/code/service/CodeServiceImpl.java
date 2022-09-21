@@ -1,6 +1,6 @@
 package com.salmanhaljido.demo.domain.code.service;
 
-import com.salmanhaljido.demo.domain.code.entity.DongCode;가
+import com.salmanhaljido.demo.domain.code.entity.DongCode;
 import com.salmanhaljido.demo.domain.code.entity.GuGunCode;
 import com.salmanhaljido.demo.domain.code.entity.SiDoCode;
 import com.salmanhaljido.demo.domain.code.repository.DongCodeRepository;
