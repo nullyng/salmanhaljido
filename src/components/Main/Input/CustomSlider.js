@@ -7,14 +7,15 @@ const CustomSlider = styled(Slider)({
   marginTop: "3rem",
   "& .MuiSlider-track": {
     border: "none",
+    color: "#C4D9F0",
   },
   "& .MuiSlider-rail": {
     color: "#C3C3C3",
   },
   "& .MuiSlider-thumb": {
-    height: 24,
-    width: 24,
-    backgroundColor: "#fff",
+    height: 20,
+    width: 20,
+    backgroundColor: "#4D88C6",
     border: "2px solid currentColor",
     "&:focus, &:hover, &.Mui-active, &.Mui-focusVisible": {
       boxShadow: "inherit",
