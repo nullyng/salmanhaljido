@@ -71,6 +71,18 @@ function Price() {
             />
           </div>
         </div>
+        <div className="price__content__maemae">
+          <h3>평균 매매 가격</h3>
+          <CustomSlider
+            value={maemae}
+            onChange={handleChangeMaemae}
+            valueLabelDisplay="on"
+            disableSwap
+            min={0}
+            max={28}
+            valueLabelFormat={(label) => valueList[label]}
+          />
+        </div>
       </div>
     </div>
   );
