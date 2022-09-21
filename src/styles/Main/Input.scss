@@ -94,6 +94,17 @@
           }
         }
       }
+
+      & .submit-button {
+        margin-left: 0.6rem;
+        width: 100%;
+
+        & button {
+          border-radius: 30px;
+          width: 100%;
+          background-color: #4d89c6;
+        }
+      }
     }
   }
 }

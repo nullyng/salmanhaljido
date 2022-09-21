@@ -48,6 +48,7 @@ function Input() {
         </div>
         <div className="left-drawer__inner__bottom">
           <ResetButton />
+          <SubmitButton />
         </div>
       </Drawer>
     </div>
