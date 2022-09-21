@@ -8,8 +8,6 @@ import org.apache.spark.sql.SparkSession;
 import org.json.JSONObject;
 
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
@@ -28,7 +26,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 public class HospitalServiceImpl implements HospitalService {
 
     @Override
-    public void getHospital() throws Exception{
+    public void getData() throws Exception{
 
         String dataPath = "src/main/resources/data/";
         URL url = new URL("https://www.localdata.go.kr/datafile/each/01_01_01_P.xlsx");

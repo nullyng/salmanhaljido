@@ -21,7 +21,7 @@ public class CrimeServiceImpl implements CrimeService {
 
 
     @Override
-    public void getCrime() throws IOException{
+    public void getData() throws IOException{
         String dataPath = "src/main/resources/data/";
         File file = new File(dataPath+ "crime.data");
         FileOutputStream fileOutputStream = new FileOutputStream(file);

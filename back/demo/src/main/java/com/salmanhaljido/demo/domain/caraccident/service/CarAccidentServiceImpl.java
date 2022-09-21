@@ -2,7 +2,6 @@ package com.salmanhaljido.demo.domain.caraccident.service;
 
 
 import org.apache.spark.api.java.JavaRDD;
-import org.apache.spark.api.java.JavaSparkContext;
 
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -23,7 +22,7 @@ public class CarAccidentServiceImpl implements CarAccidentService {
     static int[] sidoArray = {11, 26, 27, 28, 29, 30, 31, 36, 41, 42, 43, 44, 45, 46, 47, 48, 50};
 
     @Override
-    public void getCarAccident() throws Exception{
+    public void getData() throws Exception{
         String dataPath = "src/main/resources/data/";
         File file = new File(dataPath+ "caraccident.data");
         FileOutputStream fileOutputStream = new FileOutputStream(file);
