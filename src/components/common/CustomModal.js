@@ -2,9 +2,10 @@ import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
-import { Button, Grid } from "@mui/material";
+import { Button, Grid, ThemeProvider } from "@mui/material";
 
 import "styles/common/CustomModal.scss";
+import theme from "components/common/theme";
 
 function CustomModal({
   open,
@@ -60,13 +61,15 @@ function CustomModal({
               >
                 {cancelMessage}
               </Button>
-              <Button
-                className="custom-modal__button--ok"
-                variant="contained"
-                onClick={handleOK}
-              >
-                {okMessage}
-              </Button>
+              <ThemeProvider theme={theme}>
+                <Button
+                  className="custom-modal__button--ok"
+                  variant="contained"
+                  onClick={handleOK}
+                >
+                  {okMessage}
+                </Button>
+              </ThemeProvider>
             </Grid>
           </Grid>
         </Box>
