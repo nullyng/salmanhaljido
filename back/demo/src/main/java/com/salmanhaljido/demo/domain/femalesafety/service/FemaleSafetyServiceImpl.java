@@ -19,7 +19,7 @@ import java.util.Map;
 public class FemaleSafetyServiceImpl implements FemaleSafetyService {
 
     @Override
-    public void getFemaleSafety() throws Exception {
+    public void getData() throws Exception {
 
         String dataPath = "src/main/resources/data/";
         File file = new File(dataPath + "femalesafety.data");
@@ -123,6 +123,7 @@ public class FemaleSafetyServiceImpl implements FemaleSafetyService {
 
         Map<String, Long> map = rdds.countByValue();
         for(String str : map.keySet()){
+            if(str==null) continue;
             JSONObject value = new JSONObject();
             String token[] = str.substring(1).split(" ");
             if(token.length==1) continue;

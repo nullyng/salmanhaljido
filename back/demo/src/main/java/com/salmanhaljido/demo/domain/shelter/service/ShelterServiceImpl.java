@@ -22,7 +22,7 @@ import java.util.Map;
 @Service
 public class ShelterServiceImpl implements ShelterService {
     @Override
-    public void getShelter() throws Exception {
+    public void getData() throws Exception {
         String dataPath = "src/main/resources/data/";
         URL url = new URL("https://www.localdata.go.kr/datafile/each/11_46_02_P.xlsx");
 

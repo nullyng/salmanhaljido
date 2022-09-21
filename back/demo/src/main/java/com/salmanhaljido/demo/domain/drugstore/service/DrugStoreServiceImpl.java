@@ -22,7 +22,7 @@ import java.util.Map;
 @Service
 public class DrugStoreServiceImpl implements DrugStoreService{
     @Override
-    public void getDrugStore() throws Exception {
+    public void getData() throws Exception {
         String dataPath = "src/main/resources/data/";
         URL url = new URL("https://www.localdata.go.kr/datafile/each/01_01_06_P.xlsx");
 
