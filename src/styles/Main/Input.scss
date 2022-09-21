@@ -113,3 +113,8 @@
     }
   }
 }
+
+/* 가격대 설정 */
+.price {
+  @include input-title();
+}
