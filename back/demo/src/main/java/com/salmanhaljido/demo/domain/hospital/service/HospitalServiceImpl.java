@@ -39,7 +39,7 @@ public class HospitalServiceImpl implements HospitalService {
         FileInputStream fileInputStream = new FileInputStream(dataPath + "hospital.xlsx");
         XSSFWorkbook workbook = new XSSFWorkbook(fileInputStream);
 
-        FileOutputStream fileOutputStream = new FileOutputStream(dataPath + "h.data");
+        FileOutputStream fileOutputStream = new FileOutputStream(dataPath + "hospital.data");
 
         int rowindex=0;
 
@@ -89,10 +89,10 @@ public class HospitalServiceImpl implements HospitalService {
         SparkSession session = SparkSession.builder()
                 .master("local")
                 .appName("hospital")
-                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.h")
+                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.hospital")
                 .getOrCreate();
 
-        Dataset<Row> df = session.read().text(dataPath + "h.data");
+        Dataset<Row> df = session.read().text(dataPath + "hospital.data");
         JavaRDD<Row> rdd = df.toJavaRDD();
 
         JavaRDD<String> rdds = rdd.map(line -> {
@@ -137,7 +137,7 @@ public class HospitalServiceImpl implements HospitalService {
 
 
 
-        File writeFile = new File(dataPath + "h_result.json");
+        File writeFile = new File(dataPath + "hospital_result.json");
         fileOutputStream = new FileOutputStream(writeFile);
 
         Map<String, Long> map = rdds.countByValue();
@@ -177,7 +177,7 @@ public class HospitalServiceImpl implements HospitalService {
             fileOutputStream.write(value.toString().getBytes());
             fileOutputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
         }
-        Dataset<Row> dff = session.read().format("json").load(dataPath + "h_result.json");
+        Dataset<Row> dff = session.read().format("json").load(dataPath + "hospital_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
 
         System.out.println("mongodb : finish");

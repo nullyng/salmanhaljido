@@ -22,8 +22,8 @@ public class CrimeServiceImpl implements CrimeService {
 
     @Override
     public void getCrime() throws IOException{
-        String dataPath = "src/resources/data/";
-        File file = new File(dataPath+ "c.data");
+        String dataPath = "src/main/resources/data/";
+        File file = new File(dataPath+ "crime.data");
         FileOutputStream fileOutputStream = new FileOutputStream(file);
 
         Map<String, String> sidoMap = new HashMap<>();
@@ -94,16 +94,16 @@ public class CrimeServiceImpl implements CrimeService {
         SparkSession session = SparkSession.builder()
                 .master("local")
                 .appName("crime")
-                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.c")
+                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.crime")
                 .getOrCreate();
 
-        Dataset<Row> df = session.read().text(dataPath + "c.data");
+        Dataset<Row> df = session.read().text(dataPath + "crime.data");
         JavaRDD<Row> rdd = df.toJavaRDD();
 
         JavaRDD<String> rdds = rdd.map(line -> {
             return line.toString();
         });
-        File writeFile = new File(dataPath + "c_result.json");
+        File writeFile = new File(dataPath + "crime_result.json");
         fileOutputStream = new FileOutputStream(writeFile);
 
         Map<String, Long> map = rdds.countByValue();
@@ -131,7 +131,7 @@ public class CrimeServiceImpl implements CrimeService {
             fileOutputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
 
         }
-        Dataset<Row> dff = session.read().format("json").load(dataPath + "c_result.json");
+        Dataset<Row> dff = session.read().format("json").load(dataPath + "crime_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
 
         System.out.println("mongodb : finish");

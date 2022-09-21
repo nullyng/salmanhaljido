@@ -23,7 +23,7 @@ import java.util.Map;
 public class DrugStoreServiceImpl implements DrugStoreService{
     @Override
     public void getDrugStore() throws Exception {
-        String dataPath = "src/resources/data/";
+        String dataPath = "src/main/resources/data/";
         URL url = new URL("https://www.localdata.go.kr/datafile/each/01_01_06_P.xlsx");
 
         File destination = new File(dataPath + "drugstore.xlsx");
@@ -32,7 +32,7 @@ public class DrugStoreServiceImpl implements DrugStoreService{
         FileInputStream fileInputStream = new FileInputStream(dataPath + "drugstore.xlsx");
         XSSFWorkbook workbook = new XSSFWorkbook(fileInputStream);
 
-        FileOutputStream fileOutputStream = new FileOutputStream(dataPath + "ds.data");
+        FileOutputStream fileOutputStream = new FileOutputStream(dataPath + "drugstore.data");
 
         int rowindex=0;
 
@@ -82,10 +82,10 @@ public class DrugStoreServiceImpl implements DrugStoreService{
         SparkSession session = SparkSession.builder()
                 .master("local")
                 .appName("drugstore")
-                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.ds")
+                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.drugstore")
                 .getOrCreate();
 
-        Dataset<Row> df = session.read().text(dataPath + "ds.data");
+        Dataset<Row> df = session.read().text(dataPath + "drugstore.data");
         JavaRDD<Row> rdd = df.toJavaRDD();
 
         JavaRDD<String> rdds = rdd.map(line -> {
@@ -127,7 +127,7 @@ public class DrugStoreServiceImpl implements DrugStoreService{
             }
             return null;
         });
-        File writeFile = new File(dataPath + "ds_result.json");
+        File writeFile = new File(dataPath + "drugstore_result.json");
         fileOutputStream = new FileOutputStream(writeFile);
 
         Map<String, Long> map = rdds.countByValue();
@@ -168,7 +168,7 @@ public class DrugStoreServiceImpl implements DrugStoreService{
             fileOutputStream.write(value.toString().getBytes());
             fileOutputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
         }
-        Dataset<Row> dff = session.read().format("json").load(dataPath + "ds_result.json");
+        Dataset<Row> dff = session.read().format("json").load(dataPath + "drugstore_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
 
         System.out.println("mongodb : finish");

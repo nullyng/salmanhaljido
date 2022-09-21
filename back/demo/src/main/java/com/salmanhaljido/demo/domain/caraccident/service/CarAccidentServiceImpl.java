@@ -23,9 +23,9 @@ public class CarAccidentServiceImpl implements CarAccidentService {
     static int[] sidoArray = {11, 26, 27, 28, 29, 30, 31, 36, 41, 42, 43, 44, 45, 46, 47, 48, 50};
 
     @Override
-    public void getCarAccident() throws IOException{
-        String dataPath = "src/resources/data/";
-        File file = new File(dataPath+ "ca.data");
+    public void getCarAccident() throws Exception{
+        String dataPath = "src/main/resources/data/";
+        File file = new File(dataPath+ "caraccident.data");
         FileOutputStream fileOutputStream = new FileOutputStream(file);
 
         try{
@@ -44,9 +44,7 @@ public class CarAccidentServiceImpl implements CarAccidentService {
                 String jsonText = readAll(rd);
                 JSONObject json = new JSONObject(jsonText);
 
-                Map<String, Integer> map = new HashMap<>();
                 for(int i=0;i<json.getJSONObject("items").getJSONArray("item").length();i++){
-                    String bjd_cd = json.getJSONObject("items").getJSONArray("item").getJSONObject(i).get("bjd_cd").toString().substring(2, 5);
                     fileOutputStream.write(json.getJSONObject("items").getJSONArray("item").getJSONObject(i).get("spot_nm").toString().getBytes(StandardCharsets.UTF_8));
                     fileOutputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
                 }
@@ -60,10 +58,10 @@ public class CarAccidentServiceImpl implements CarAccidentService {
         SparkSession session = SparkSession.builder()
                 .master("local")
                 .appName("caraccident")
-                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.ca")
+                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.caraccident")
                 .getOrCreate();
 
-        Dataset<Row> df = session.read().text(dataPath + "ca.data");
+        Dataset<Row> df = session.read().text(dataPath + "caraccident.data");
         JavaRDD<Row> rdd = df.toJavaRDD();
 
         JavaRDD<String> rdds = rdd.map(line -> {
@@ -71,7 +69,7 @@ public class CarAccidentServiceImpl implements CarAccidentService {
 
             return tokens[0].substring(1);
         });
-        File writeFile = new File(dataPath + "ca_result.json");
+        File writeFile = new File(dataPath + "caraccident_result.json");
         fileOutputStream = new FileOutputStream(writeFile);
 
         Map<String, Long> map = rdds.countByValue();
@@ -111,7 +109,7 @@ public class CarAccidentServiceImpl implements CarAccidentService {
             fileOutputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
 
         }
-        Dataset<Row> dff = session.read().format("json").load(dataPath + "ca_result.json");
+        Dataset<Row> dff = session.read().format("json").load(dataPath + "caraccident_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
 
         System.out.println("mongodb : finish");
