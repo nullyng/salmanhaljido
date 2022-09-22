@@ -6,7 +6,8 @@ import {
   PolarAngleAxis,
   PolarRadiusAxis,
 } from "recharts";
-import DetailData from "./DetailData";
+
+import DetailData from "components/Main/Output/Data/DetailData";
 
 function ChartData() {
   const data = [

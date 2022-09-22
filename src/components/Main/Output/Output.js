@@ -5,8 +5,8 @@ import { useState } from "react";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import "styles/Main/Output.scss";
-import RcmdList from "./Rcmd/RcmdList";
-import Data from "./Data/Data";
+import RcmdList from "components/Main/Output/Rcmd/RcmdList";
+import Data from "components/Main/Output/Data/Data";
 
 function Output() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);

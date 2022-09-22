@@ -1,7 +1,11 @@
+import RealEstateCard from "components/Main/Output/Data/RealEstateCard";
+
 function RealEstateList() {
   return (
-    <div>여기는 부동산 카드 리스트</div>
-  )
+    <div>
+      <RealEstateCard />
+    </div>
+  );
 }
 
 export default RealEstateList;

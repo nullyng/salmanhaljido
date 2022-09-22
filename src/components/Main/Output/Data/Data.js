@@ -4,8 +4,9 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
-import RealEstateList from "./RealEstateList";
-import ChartData from "./ChartData";
+
+import RealEstateList from "components/Main/Output/Data/RealEstateList";
+import ChartData from "components/Main/Output/Data/ChartData";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
