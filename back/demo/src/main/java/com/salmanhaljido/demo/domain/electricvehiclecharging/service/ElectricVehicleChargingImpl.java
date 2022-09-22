@@ -1,4 +1,4 @@
-package com.salmanhaljido.demo.electricvehiclecharging.service;
+package com.salmanhaljido.demo.domain.electricvehiclecharging.service;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.http.client.config.RequestConfig;
@@ -23,12 +23,14 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.net.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 @RequiredArgsConstructor
-public class ElectricVehicleChargingImpl implements ElectricVehicleChargingService{
+public class ElectricVehicleChargingImpl implements ElectricVehicleChargingService {
     private String serviceKey = "SY0wwUOUgR+XvLXazywXmEeMbGvaGqsDrAIjvacheY12NY0tXxrGd/DONoLyIa2eV6y0SVI4zxfqZZRECk8wIw==";
     private int numOfRows = 9000;
     private String host = "apis.data.go.kr";
