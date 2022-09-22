@@ -5,6 +5,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 
 import "styles/Main/Map.scss";
 import "styles/Main/Marker.scss";
+import Logo from "components/common/Logo";
 
 function Map() {
   const mapContainer = useRef(null);
@@ -60,7 +61,8 @@ function Map() {
   });
 
   return (
-    <div>
+    <div className="custom-map">
+      <Logo />
       <div ref={mapContainer} className="map-container" />
     </div>
   );

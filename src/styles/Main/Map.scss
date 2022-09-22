@@ -1,11 +1,25 @@
-.map-container {
-  height: 100vh;
+.custom-map {
+  & .logo {
+    position: fixed;
+    top: 1%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
 
-  & .mapboxgl-ctrl-logo {
-    display: none !important;
+    & .MuiBox-root {
+      background-color: transparent;
+    }
   }
 
-  & .mapboxgl-ctrl-bottom-right {
-    display: none !important;
+  & .map-container {
+    height: 100vh;
+
+    & .mapboxgl-ctrl-logo {
+      display: none !important;
+    }
+
+    & .mapboxgl-ctrl-bottom-right {
+      display: none !important;
+    }
   }
 }
