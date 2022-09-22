@@ -30,7 +30,7 @@ function RealEstateCard() {
             color="text.secondary"
             component="div"
           >
-            Mac Miller
+            dummy
           </Typography>
         </CardContent>
       </Box>
