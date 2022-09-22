@@ -26,7 +26,7 @@ public class FacilitiesForTheDisabledServiceImpl implements FacilitiesForTheDisa
         try {
             for(int pageNum=1;pageNum<144;pageNum++){
                 if(pageNum==99) API_KEY = "cpiQE6bXa6VTTsmwRbrZ5DcSFPVwMSE89Mzlhywfd%2FarvokycGzqzhxazNsV06bS1BAfE9RcwakqRZ4nYWUPZg%3D%3D";
-                StringBuilder urlBuilder = new StringBuilder("https://www.bokjiro.go.kr/ssis-tbu/getDisConvFaclList.do?serviceKey=" + API_KEY + "&pageNo=" + pageNum + "&numOfRows=10&SG_APIM=2ug8Dm9qNBfD32JLZGPN64f3EoTlkpD8kSOHWfXpyrY");
+                StringBuilder urlBuilder = new StringBuilder("https://www.bokjiro.go.kr/ssis-tbu/getDisConvFaclList.do?serviceKey=" + API_KEY + "&pageNo=" + pageNum + "&numOfRows=1000&SG_APIM=2ug8Dm9qNBfD32JLZGPN64f3EoTlkpD8kSOHWfXpyrY");
                 URL url = new URL(urlBuilder.toString());
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
                 conn.setRequestMethod("GET");
