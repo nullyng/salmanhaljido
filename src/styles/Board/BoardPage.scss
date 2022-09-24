@@ -64,6 +64,12 @@
   width: 310px;
   height: 290px;
 
+  &__btn {
+    cursor: pointer;
+    
+    
+  }
+
   &__content {
     height: 100%;
 
@@ -80,14 +86,6 @@
     & p {
       font-size: 15px;
     }
-  }
-
-  & button {
-    &:hover {
-    }
-  }
-  &:hover {
-    cursor: pointer;
   }
 }
 

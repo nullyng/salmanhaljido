@@ -3,14 +3,13 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
 
 import defImg from "assets/images/Board/default.png";
 
 function ArticleCard(dummy) {
   return (
     <Card className="article-card">
-      <CardActionArea>
+      <div className="article-card__btn">
         <div>
           <CardMedia
             component="img"
@@ -30,7 +29,7 @@ function ArticleCard(dummy) {
             </Typography>
           </CardContent>
         </div>
-      </CardActionArea>
+      </div>
     </Card>
   );
 }
