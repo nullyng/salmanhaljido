@@ -23,10 +23,8 @@ function ArticleCard(dummy) {
         </div>
         <div>
           <CardContent className="article-card__content">
-            <Typography variant="body2" color="text.secondary">
-            {dummy.title.length < 35
-              ? dummy.title
-              : dummy.title.slice(0, 35) + "..."}
+            <Typography variant="body2" color="text.secondary" className="article-card__content--detail">
+            {dummy.title}
             </Typography>
           </CardContent>
         </div>
