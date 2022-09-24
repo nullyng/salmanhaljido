@@ -66,12 +66,10 @@
 
   &__btn {
     cursor: pointer;
-    
-    
   }
 
-  &__content {
-    height: 100%;
+  &__cntr {
+    height: 80px;
 
     &--detail {
       overflow: hidden;

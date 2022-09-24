@@ -18,12 +18,12 @@ function ArticleCard(dummy) {
             alt=""
           />
         </div>
-        <div>
-          <CardContent className="article-card__content">
+        <div className="article-card__cntr">
+          <CardContent className="article-card__cntr--content">
             <Typography
               variant="body2"
               color="text.secondary"
-              className="article-card__content--detail"
+              className="article-card__cntr--detail"
             >
               {dummy.title}
             </Typography>
