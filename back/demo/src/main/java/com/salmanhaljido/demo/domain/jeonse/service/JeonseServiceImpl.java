@@ -140,7 +140,7 @@ public class JeonseServiceImpl implements JeonseService {
         Dataset<Row> dff = session.read().format("json").load(dataPath + "jeonse_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
 
-        System.out.println("mongodb : finish");
+        System.out.println("Jeonse : Finish");
     }
     private static String checkEMDG(String token){
         int index = token.length()-1;

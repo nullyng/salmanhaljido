@@ -93,7 +93,6 @@ public class FacilitiesForTheDisabledServiceImpl implements FacilitiesForTheDisa
 
         Map<String, Long> map = rdds.countByValue();
         for(String str : map.keySet()){
-            System.out.println(str);
             if(str==null) continue;
             JSONObject value = new JSONObject();
             String token[] = str.substring(1).split(" ");
@@ -131,7 +130,7 @@ public class FacilitiesForTheDisabledServiceImpl implements FacilitiesForTheDisa
         Dataset<Row> dff = session.read().format("json").load(dataPath + "facilitiesforthedisabled_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
 
-        System.out.println("mongodb : finish");
+        System.out.println("FacilitiesForTheDisabled : Finish");
     }
     private static String checkEMDG(String token){
         int index = token.length()-1;

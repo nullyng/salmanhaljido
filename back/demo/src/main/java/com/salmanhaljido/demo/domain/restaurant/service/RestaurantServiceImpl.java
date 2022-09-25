@@ -1,4 +1,4 @@
-package com.salmanhaljido.demo.domain.drugstore.service;
+package com.salmanhaljido.demo.domain.restaurant.service;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -20,19 +20,19 @@ import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 @Service
-public class DrugStoreServiceImpl implements DrugStoreService{
+public class RestaurantServiceImpl implements RestaurantService {
     @Override
     public void getData() throws Exception {
         String dataPath = "src/main/resources/data/";
-        URL url = new URL("https://www.localdata.go.kr/datafile/each/01_01_06_P.xlsx");
+        URL url = new URL("https://www.localdata.go.kr/datafile/each/07_24_04_P.xlsx");
 
-        File destination = new File(dataPath + "drugstore.xlsx");
+        File destination = new File(dataPath + "restaurant.xlsx");
         FileUtils.copyURLToFile(url,destination);
 
-        FileInputStream fileInputStream = new FileInputStream(dataPath + "drugstore.xlsx");
+        FileInputStream fileInputStream = new FileInputStream(dataPath + "restaurant.xlsx");
         XSSFWorkbook workbook = new XSSFWorkbook(fileInputStream);
 
-        FileOutputStream fileOutputStream = new FileOutputStream(dataPath + "drugstore.data");
+        FileOutputStream fileOutputStream = new FileOutputStream(dataPath + "restaurant.data");
 
         int rowindex=0;
 
@@ -53,7 +53,7 @@ public class DrugStoreServiceImpl implements DrugStoreService{
                 cell = row.getCell(19);
                 String streetAddr = cell.getStringCellValue()+"";
 
-                if("정상".equals(state) || "영업중".equals(state)){
+                if("영업".equals(state)){
                     if (!"".equals(generalAddr)) {
                         fileOutputStream.write(generalAddr.getBytes(StandardCharsets.UTF_8));
                     }
@@ -81,11 +81,11 @@ public class DrugStoreServiceImpl implements DrugStoreService{
         }
         SparkSession session = SparkSession.builder()
                 .master("local")
-                .appName("drugstore")
-                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.drugstore")
+                .appName("restaurant")
+                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.restaurant")
                 .getOrCreate();
 
-        Dataset<Row> df = session.read().text(dataPath + "drugstore.data");
+        Dataset<Row> df = session.read().text(dataPath + "restaurant.data");
         JavaRDD<Row> rdd = df.toJavaRDD();
 
         JavaRDD<String> rdds = rdd.map(line -> {
@@ -127,7 +127,7 @@ public class DrugStoreServiceImpl implements DrugStoreService{
             }
             return null;
         });
-        File writeFile = new File(dataPath + "drugstore_result.json");
+        File writeFile = new File(dataPath + "restaurant_result.json");
         fileOutputStream = new FileOutputStream(writeFile);
 
         Map<String, Long> map = rdds.countByValue();
@@ -168,10 +168,10 @@ public class DrugStoreServiceImpl implements DrugStoreService{
             fileOutputStream.write(value.toString().getBytes());
             fileOutputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
         }
-        Dataset<Row> dff = session.read().format("json").load(dataPath + "drugstore_result.json");
+        Dataset<Row> dff = session.read().format("json").load(dataPath + "restaurant_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
 
-        System.out.println("DrugStore : Finish");
+        System.out.println("Restaurant : Finish");
     }
     private static String checkEMDG(String token){
         int index = token.length()-1;
