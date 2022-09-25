@@ -140,7 +140,7 @@ public class TradingServiceImpl implements TradingService {
         Dataset<Row> dff = session.read().format("json").load(dataPath + "trading_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
 
-        System.out.println("mongodb : finish");
+        System.out.println("Trading : Finish");
     }
     private static String checkEMDG(String token){
         int index = token.length()-1;

@@ -21,7 +21,7 @@ public class CrimeServiceImpl implements CrimeService {
 
 
     @Override
-    public void getData() throws IOException{
+    public void getData() throws Exception{
         String dataPath = "src/main/resources/data/";
         File file = new File(dataPath+ "crime.data");
         FileOutputStream fileOutputStream = new FileOutputStream(file);
@@ -134,7 +134,7 @@ public class CrimeServiceImpl implements CrimeService {
         Dataset<Row> dff = session.read().format("json").load(dataPath + "crime_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
 
-        System.out.println("mongodb : finish");
+        System.out.println("Crime : Finish");
     }
     private static String readAll(Reader rd) throws IOException {
         StringBuilder sb = new StringBuilder();

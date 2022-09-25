@@ -137,6 +137,7 @@ public class LibraryServiceImpl implements LibraryService{
 
             Dataset<Row> dff = session.read().format("json").load(dataPath + "library_result.json");
             dff.write().format("mongodb").mode("overwrite").save();
+            System.out.println("Library : Finish");
 
         }catch (Exception e){
             e.printStackTrace();

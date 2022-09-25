@@ -171,7 +171,7 @@ public class TheaterServiceImpl implements TheaterService {
         Dataset<Row> dff = session.read().format("json").load(dataPath + "theater_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
 
-        System.out.println("mongodb : finish");
+        System.out.println("Theater : Finish");
     }
     private static String checkEMDG(String token){
         int index = token.length()-1;

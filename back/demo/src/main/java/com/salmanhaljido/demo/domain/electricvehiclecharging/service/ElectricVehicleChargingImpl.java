@@ -136,5 +136,6 @@ public class ElectricVehicleChargingImpl implements ElectricVehicleChargingServi
 
         Dataset<Row> dff = session.read().format("json").load(dataPath + "evc_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
+        System.out.println("ElectricVehicleCharging : Finish");
     }
 }

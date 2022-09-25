@@ -178,7 +178,7 @@ public class HospitalServiceImpl implements HospitalService {
         Dataset<Row> dff = session.read().format("json").load(dataPath + "hospital_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
 
-        System.out.println("mongodb : finish");
+        System.out.println("Hospital : Finish");
     }
     private static String checkEMDG(String token){
         int index = token.length()-1;

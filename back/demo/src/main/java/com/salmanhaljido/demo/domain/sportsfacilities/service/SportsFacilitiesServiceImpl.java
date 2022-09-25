@@ -171,7 +171,7 @@ public class SportsFacilitiesServiceImpl implements SportsFacilitiesService {
         Dataset<Row> dff = session.read().format("json").load(dataPath + "sportsfacilities_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
 
-        System.out.println("mongodb : finish");
+        System.out.println("SportsFacilities : Finish");
     }
     private static String checkEMDG(String token){
         int index = token.length()-1;

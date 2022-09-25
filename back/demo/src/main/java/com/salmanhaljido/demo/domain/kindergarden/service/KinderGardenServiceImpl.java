@@ -79,6 +79,6 @@ public class KinderGardenServiceImpl implements KinderGardenService{
 
         Dataset<Row> dff = session.read().format("json").load(dataPath + "kindergarden_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
-        System.out.println("DONE");
+        System.out.println("KinderGarden : Finish");
     }
 }

@@ -25,7 +25,7 @@ public class ChildSafetyServiceImpl implements ChildSafetyService {
         File file = new File(dataPath + "childsafety.data");
         FileOutputStream fileOutputStream = new FileOutputStream(file);
         try {
-            for(int pageNum=1;pageNum<20;pageNum++){
+            for(int pageNum=1;pageNum<16;pageNum++){
                 StringBuilder urlBuilder = new StringBuilder("http://api.data.go.kr/openapi/tn_pubr_public_child_prtc_zn_api?serviceKey=0bIH%2Foy8BRfa%2BdR%2BGuAe6E0gn%2BBo0k5OV6GaiweFfXeZ7q7dxRea0mhVPAtK%2BoMdsRKfXH1lfsRoYQ3hSn5v8w%3D%3D&pageNo=" + pageNum + "&numOfRows=1000&type=json");
                 URL url = new URL(urlBuilder.toString());
                 HttpURLConnection conn = (HttpURLConnection) url.openConnection();
@@ -43,7 +43,7 @@ public class ChildSafetyServiceImpl implements ChildSafetyService {
                 for(int i=0;i<json.getJSONObject("response").getJSONObject("body").getJSONArray("items").length();i++){
                     if("".equals(json.getJSONObject("response").getJSONObject("body").getJSONArray("items").getJSONObject(i).get("lnmadr").toString())){
                         String streetAddr = json.getJSONObject("response").getJSONObject("body").getJSONArray("items").getJSONObject(i).get("rdnmadr").toString();
-                        int index = streetAddr.length()-1;
+                        int index = streetAddr.length()-2;
                         String s="";
                         while(index>=0){
                             if(streetAddr.charAt(index)=='동' && (streetAddr.charAt(index+1)==',' || streetAddr.charAt(index+1)=='(' || streetAddr.charAt(index+1)==' '))
@@ -159,7 +159,7 @@ public class ChildSafetyServiceImpl implements ChildSafetyService {
         Dataset<Row> dff = session.read().format("json").load(dataPath + "childsafety_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
 
-        System.out.println("mongodb : finish");
+        System.out.println("ChildSafety : Finish");
     }
     private static String checkEMDG(String token){
         int index = token.length()-1;

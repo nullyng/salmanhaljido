@@ -173,7 +173,7 @@ public class AnimalHospitalServiceImpl implements AnimalHospitalService {
         Dataset<Row> dff = session.read().format("json").load(dataPath + "animalhospital_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
 
-        System.out.println("mongodb : finish");
+        System.out.println("AnimalHospital : Finish");
     }
     private static String checkEMDG(String token){
         int index = token.length()-1;
