@@ -23,26 +23,27 @@
     &__icon {
       margin-left: 10px;
     }
-
+    
     & button {
-      border: 1px solid #e94560;
+      border: 1px solid #E94560;
       border-radius: 10px;
       font-size: 18px;
-      color: #e94560;
+      color: #E94560;
       width: 65px;
 
       &:hover {
         color: white;
-        background-color: #e94560;
+        background-color: #E94560;
       }
     }
   }
 }
 
+
 .board {
   position: fixed;
   top: 14%;
-
+  
   & button {
     font-size: 20px;
   }
