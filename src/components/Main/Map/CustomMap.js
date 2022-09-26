@@ -8,20 +8,13 @@ import "styles/Main/Marker.scss";
 import Logo from "components/common/Logo";
 import TL_SCCO_SIG from "components/Main/Map/TL_SCCO_SIG";
 
-function Map({ rcmdData }) {
+function Map({ onSetCurrMap, mapData, onSetMarkers }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
   const [lng, setLng] = useState(127.88);
   const [lat, setLat] = useState(35.9);
   const [zoom, setZoom] = useState(6.4);
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
-
-  const geoJsonData = TL_SCCO_SIG.features.filter(
-    (feature) =>
-      feature.properties.SIG_CD === "42110" ||
-      feature.properties.SIG_CD === "27260" ||
-      feature.properties.SIG_CD === "26350"
-  );
 
   useEffect(() => {
     if (map.current) return; // 지도는 처음 한 번만 초기화
@@ -42,11 +35,16 @@ function Map({ rcmdData }) {
       defaultLanguage: "ko",
     });
     map.current.addControl(mapboxLanguage);
+
+    onSetCurrMap(map.current);
   }, []);
 
   useEffect(() => {
-    rcmdData.map((data, index) => {
-      // 마커 생성
+    // 선택 초기화 시 지도에 출력되어 있는 마커들을 삭제하기 위해 마커들의 정보를 배열로 저장
+    const markerList = [];
+
+    // 마커 생성
+    mapData.map((data, index) => {
       const el = document.createElement("div");
       el.className = "marker";
 
@@ -54,11 +52,11 @@ function Map({ rcmdData }) {
       div.className = "text-wrapper";
 
       const sido = document.createElement("span");
-      sido.textContent = "대구";
+      sido.textContent = data.sido;
       sido.className = "sido";
 
       const gugun = document.createElement("span");
-      gugun.textContent = "수성구";
+      gugun.textContent = data.gugun;
       gugun.className = "gugun";
 
       div.appendChild(sido);
@@ -69,7 +67,7 @@ function Map({ rcmdData }) {
 
       // 클릭 이벤트 등록
       el.addEventListener("click", () => {
-        handleClickButton();
+        // handleClickButton();
       });
 
       // 마커를 지도에 추가
@@ -78,17 +76,21 @@ function Map({ rcmdData }) {
       })
         .setLngLat([data.longitude, data.latitude])
         .addTo(map.current);
-    })
-  }, [rcmdData]);
 
-  const handleClickButton = () => {
-    geoJsonData.map((item, index) => {
-      const data = {
+      markerList.push(marker);
+
+      // 폴리곤 출력
+      const item = TL_SCCO_SIG.features.filter(
+        (feature) =>
+          feature.properties.SIG_CD === data.SIG_CD
+      );
+
+      const geoJsonData = {
         type: "geojson",
-        data: item,
+        data: item[0],
       };
 
-      map.current.addSource(`polygon${index}`, data);
+      map.current.addSource(`polygon${index}`, geoJsonData);
 
       // 폴리곤을 출력하기 위해 새로운 레이어를 생성한다.
       map.current.addLayer({
@@ -114,7 +116,9 @@ function Map({ rcmdData }) {
         },
       });
     });
-  };
+
+    onSetMarkers(markerList);
+  }, [mapData]);
 
   return (
     <div className="custom-map">

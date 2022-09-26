@@ -1,18 +1,34 @@
-const SET_RCMD_DATA = "map/SET_RCMD_DATA";
+const SET_MAP_DATA = "map/SET_MAP_DATA";
+const SET_MARKERS = "map/SET_MARKERS";
+const SET_CURR_MAP = "map/SET_CURR_MAP";
 
-export const setRcmdData = (rcmdData) => ({ type: SET_RCMD_DATA, rcmdData });
+export const setMapData = (mapData) => ({ type: SET_MAP_DATA, mapData });
+export const setMarkers = (markers) => ({ type: SET_MARKERS, markers });
+export const setCurrMap = (currMap) => ({ type: SET_CURR_MAP, currMap });
 
 const initialState = {
-  rcmdData: []
+  mapData: [],
+  markers: [],
+  currMap: {},
 };
 
-export default function map(state = initialState, action) {
+export default function region(state = initialState, action) {
   switch (action.type) {
-    case SET_RCMD_DATA:
+    case SET_MAP_DATA:
       return {
         ...state,
-        rcmdData: action.rcmdData,
+        mapData: action.mapData,
       };
+    case SET_MARKERS:
+      return {
+        ...state,
+        markers: action.markers,
+      };
+    case SET_CURR_MAP:
+      return {
+        ...state,
+        currMap: action.currMap,
+      }
     default:
       return state;
   }
