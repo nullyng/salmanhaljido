@@ -6,4 +6,5 @@ import com.salmanhaljido.demo.domain.news.entity.Category;
 public interface NewsService {
     NewsListResponseDto getNews(Category category, int pageNo);
     void crawlingParentingAndEducation();
+    void crawlingSocialAndPolicy();
 }
