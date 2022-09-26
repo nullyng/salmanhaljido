@@ -12,7 +12,7 @@ import SubmitButton from "./SubmitButton";
 import MyCategory from "./MyCategory";
 import Category from "./Category";
 
-function Input() {
+function Input({ onSetRcmdData }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const handleDrawerOpen = () => {
@@ -53,8 +53,8 @@ function Input() {
           <Category />
         </div>
         <div className="left-drawer__inner__bottom">
-          <ResetButton />
-          <SubmitButton />
+          <ResetButton onSetRcmdData={onSetRcmdData} />
+          <SubmitButton onSetRcmdData={onSetRcmdData} />
         </div>
       </Drawer>
     </div>
