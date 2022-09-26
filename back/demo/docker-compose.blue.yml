@@ -1,0 +1,7 @@
+version: '3.0'
+services:
+  salmanhaljido_server:
+    image: salmanhaljido_server
+    ports:
+      - "9091:8080"
+    container_name: salmanhaljido_server_green
