@@ -8,6 +8,7 @@
     "@mapbox/mapbox-gl-language": "^1.0.0",
     "@mui/icons-material": "^5.10.3",
     "@mui/material": "^5.10.5",
+    "animate.css": "^4.1.1",
     "axios": "^0.27.2",
     "http-proxy-middleware": "^2.0.6",
     "mapbox-gl": "^2.10.0",

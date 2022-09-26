@@ -12,10 +12,11 @@
 
 .start{
     background: linear-gradient(360deg, rgba(242, 215, 217, 0.8) 2%, rgba(211, 206, 223, 0.8) 98%);
-    width: 60%;
+    width: 40%;
     height: 100vh;
-    display: table-cell;
-    vertical-align: middle;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 
     &__bubble{
         display: flex;
@@ -89,23 +90,27 @@
     }
 
     &__button{
-        font-family: 'GongGothicMedium';
-        width: 30%;
-        background-color: #E94560;
-        text-align: center;
-        color: white;
-        padding: 1%;
-        font-size: 36px;
-        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.35);
-        border-radius: 50px;
-        border-width: 0;
-    }
-
-    &__btnback{
         display: flex;
         justify-content: center;
-        margin-top: 5%;
-        margin-bottom: 5%;
+        margin-top: 3rem;
+
+        &--detail {
+            font-family: 'GongGothicMedium';
+            width: 30%;
+            background-color: #E94560;
+            text-align: center;
+            color: white;
+            padding: 1%;
+            font-size: 36px;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.35);
+            border-radius: 50px;
+            border-width: 0;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+
+            
+        }
     }
 
     &__back{
@@ -114,3 +119,23 @@
         padding-bottom: 1%;
     }
 }
+
+.start div {
+	animation-name: fade-in;
+	animation-fill-mode: both;
+	animation-duration: .5s;
+}
+
+$animationDelay: 1;
+@for $i from 1 through 15 {
+	.start > div:nth-of-type(#{$i}) {
+		animation-delay: #{0.3+($i)}s;
+  }
+}
+
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+

@@ -1,4 +1,5 @@
-import StartButton from "components/Landing/Start/StartButton";
+import { NavLink } from "react-router-dom";
+
 import "styles/Landing/Landing.scss";
 
 function Start() {
@@ -30,7 +31,9 @@ function Start() {
                 </div>
                 <div className="start__bubble--Rtri"></div>
             </div>
-            <div className="start__btnback" onClick={main}><StartButton/></div>
+            <div className="start__button">
+                <NavLink to="/map" className="start__button--detail">시작하기</NavLink>
+            </div>
         </div>
     )
 }
