@@ -1,8 +1,18 @@
 .marker {
-  background-color: black;
-  background-size: cover;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
+  background-image: url('../../assets/images/Main/Map/pin.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 70px;
+  height: 93px;
   cursor: pointer;
+
+  & .text-wrapper {
+    text-align: center;
+    padding-top: 13px;
+    font-weight: 700;
+  }
+
+  &:hover {
+    opacity: 0.7;
+  }
 }

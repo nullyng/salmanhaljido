@@ -9,8 +9,10 @@ import UserInfo from "components/Main/Input/UserInfo";
 import Price from "components/Main/Input/Price";
 import ResetButton from "./ResetButton";
 import SubmitButton from "./SubmitButton";
+import MyCategory from "./MyCategory";
+import Category from "./Category";
 
-function Input() {
+function Input({ onSetRcmdData }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const handleDrawerOpen = () => {
@@ -44,11 +46,15 @@ function Input() {
           <Divider />
           <UserInfo />
           <Divider />
+          <MyCategory />
+          <Divider />
+          <Category />
+          <Divider />
           <Price />
         </div>
         <div className="left-drawer__inner__bottom">
-          <ResetButton />
-          <SubmitButton />
+          <ResetButton onSetRcmdData={onSetRcmdData} />
+          <SubmitButton onSetRcmdData={onSetRcmdData} />
         </div>
       </Drawer>
     </div>

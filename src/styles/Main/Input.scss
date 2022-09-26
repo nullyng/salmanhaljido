@@ -197,3 +197,42 @@
     padding-right: 1.5rem;
   }
 }
+
+@font-face {
+  font-family: 'GongGothicMedium';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.category {
+  margin-bottom: 1rem;
+  @include input-title();
+  font-family: 'GongGothicMedium';
+  
+  &__tabs{
+    flex-wrap: wrap;
+  }
+
+  &__box{
+    border-radius: 0.5rem;
+    background-color: #F5F5F5;
+    padding: 1rem;
+
+    &--row{
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 0.2rem 0;
+    }
+
+    &--top{
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: xx-small;
+    }
+  }
+}
