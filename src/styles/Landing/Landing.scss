@@ -11,11 +11,11 @@
 }
 
 .start{
-    background-color: pink;
-    width: 50%;
-    padding-top: 3%;
-    padding-bottom: 3%;
-    position: fixed;
+    background: linear-gradient(360deg, rgba(242, 215, 217, 0.8) 2%, rgba(211, 206, 223, 0.8) 98%);
+    width: 60%;
+    height: 100vh;
+    display: table-cell;
+    vertical-align: middle;
 
     &__bubble{
         display: flex;
@@ -84,20 +84,21 @@
         &--end2{
             font-family: 'GongGothicMedium';
             font-size: 400%;
-            color: red;
+            color: #E94560;
         }
     }
 
     &__button{
         font-family: 'GongGothicMedium';
         width: 30%;
-        background-color: red;
+        background-color: #E94560;
         text-align: center;
         color: white;
         padding: 1%;
-        font-size: larger;
-        border-radius: 30px;
-        
+        font-size: 36px;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.35);
+        border-radius: 50px;
+        border-width: 0;
     }
 
     &__btnback{

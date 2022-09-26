@@ -1,4 +1,4 @@
-import StartButton from "./StartButton";
+import StartButton from "components/Landing/Start/StartButton";
 import "styles/Landing/Landing.scss";
 
 function Start() {
