@@ -1,10 +1,9 @@
 import Pagination from "@mui/material/Pagination";
 
-import ArticleCard from "./ArticleCard";
+import ArticleCard from "components/Board/Article/ArticleCard";
 import dummy from "../DummyData.json";
 
 function CategoryTwo() {
-  
   return (
     <div>
       <div className="article-list">
@@ -12,7 +11,7 @@ function CategoryTwo() {
           <ArticleCard key={idx} {...dummy} />
         ))}
       </div>
-      <Pagination count={10} color="secondary" className="pagenation"/>
+      <Pagination count={10} color="secondary" className="pagenation" />
     </div>
   );
 }

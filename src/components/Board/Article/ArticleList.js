@@ -6,12 +6,11 @@ import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
-import CategoryOne from "./CategoryOne";
-import CategoryTwo from "./CategoryTwo";
-import CategoryThree from "./CategoryThree";
-import CategoryFour from "./CategoryFour";
-import CategoryFive from "./CategoryFive";
-
+import CategoryOne from "components/Board/Article/CategoryOne";
+import CategoryTwo from "components/Board/Article/CategoryTwo";
+import CategoryThree from "components/Board/Article/CategoryThree";
+import CategoryFour from "components/Board/Article/CategoryFour";
+import CategoryFive from "components/Board/Article/CategoryFive";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -61,8 +60,8 @@ function BasicTabs() {
         main: "#e94560",
       },
       secondary: {
-        main: "#0F3460"
-      }
+        main: "#0F3460",
+      },
     },
   });
 
