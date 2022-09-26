@@ -57,6 +57,8 @@ dependencies {
 	runtimeOnly 'com.h2database:h2'
 
 	implementation 'org.jsoup:jsoup:1.11.3'
+
+	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 }
 
 tasks.named('test') {
