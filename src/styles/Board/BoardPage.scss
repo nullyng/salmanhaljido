@@ -23,7 +23,7 @@
     &__icon {
       margin-left: 10px;
     }
-    
+
     & button {
       border: 1px solid #E94560;
       border-radius: 10px;
@@ -43,7 +43,7 @@
 .board {
   position: fixed;
   top: 14%;
-  
+
   & button {
     font-size: 20px;
   }
@@ -82,22 +82,33 @@
       word-break: keep-all;
     }
 
-    & p {
-      font-size: 15px;
+    &__content {
+      height: 100%;
+
+      & p {
+        font-size: 15px;
+      }
+    }
+
+    & button {
+      &:hover {}
+    }
+
+    &:hover {
+      cursor: pointer;
     }
   }
-}
 
-.article-list {
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
+  .article-list {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 
-.pagenation {
-  position: fixed;
-  left: 50%;
-  bottom: 3%;
-  transform: translate(-50%, -50%);
-}
+  .pagenation {
+    position: fixed;
+    left: 50%;
+    bottom: 3%;
+    transform: translate(-50%, -50%);
+  }

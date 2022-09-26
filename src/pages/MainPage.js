@@ -5,7 +5,6 @@ import Output from "components/Main/Output/Output";
 function MainPage() {
   return (
     <div>
-      <Output />
       <Input />
       <Output />
       <CustomMap />

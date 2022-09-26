@@ -5,6 +5,9 @@ import "mapbox-gl/dist/mapbox-gl.css";
 
 import "styles/Main/Map.scss";
 import "styles/Main/Marker.scss";
+import Logo from "components/common/Logo";
+import TL_SCCO_SIG from "./TL_SCCO_SIG";
+import { Button } from "@mui/material";
 
 function Map() {
   const mapContainer = useRef(null);
@@ -13,6 +16,13 @@ function Map() {
   const [lat, setLat] = useState(35.9);
   const [zoom, setZoom] = useState(6.4);
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
+
+  const geoJsonData = TL_SCCO_SIG.features.filter(
+    (feature) =>
+      feature.properties.SIG_CD === "42110" ||
+      feature.properties.SIG_CD === "27260" ||
+      feature.properties.SIG_CD === "26350"
+  );
 
   const [markers, setMarkers] = useState([
     { title: "대구", longitude: 128.583052, latitude: 35.798838 },
@@ -40,7 +50,7 @@ function Map() {
 
       // 클릭 이벤트
       el.addEventListener("click", () => {
-        alert(marker.title);
+        handleClickButton();
       });
 
       // 마커를 지도에 추가
@@ -59,8 +69,46 @@ function Map() {
     map.current.addControl(mapboxLanguage);
   });
 
+  const handleClickButton = () => {
+    console.log(geoJsonData);
+
+    geoJsonData.map((item, index) => {
+      const data = {
+        type: "geojson",
+        data: item,
+      };
+
+      map.current.addSource(`polygon${index}`, data);
+
+      // 폴리곤을 출력하기 위해 새로운 레이어를 생성한다.
+      map.current.addLayer({
+        id: `polygon${index}`,
+        type: "fill",
+        source: `polygon${index}`, // 데이터 소스 레퍼런스
+        layout: {},
+        paint: {
+          "fill-color": "#0080ff", // 해당 컬러로 채운다.
+          "fill-opacity": 0.5,
+        },
+      });
+
+      // 폴리곤 주변에 윤곽선 추가
+      map.current.addLayer({
+        id: `polygon${index}-outlined`,
+        type: "line",
+        source: `polygon${index}`,
+        layout: {},
+        paint: {
+          "line-color": "#000",
+          "line-width": 3,
+        },
+      });
+    });
+  };
+
   return (
-    <div>
+    <div className="custom-map">
+      <Logo />
       <div ref={mapContainer} className="map-container" />
     </div>
   );
