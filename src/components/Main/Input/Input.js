@@ -46,11 +46,11 @@ function Input() {
           <Divider />
           <UserInfo />
           <Divider />
-          <Price />
-          <Divider />
           <MyCategory />
           <Divider />
           <Category />
+          <Divider />
+          <Price />
         </div>
         <div className="left-drawer__inner__bottom">
           <ResetButton />
