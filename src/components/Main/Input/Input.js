@@ -10,6 +10,7 @@ import Price from "components/Main/Input/Price";
 import ResetButton from "./ResetButton";
 import SubmitButton from "./SubmitButton";
 import MyCategory from "./MyCategory";
+import Category from "./Category";
 
 function Input() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -48,6 +49,8 @@ function Input() {
           <Price />
           <Divider />
           <MyCategory />
+          <Divider />
+          <Category />
         </div>
         <div className="left-drawer__inner__bottom">
           <ResetButton />
