@@ -6,10 +6,9 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import "styles/Main/Map.scss";
 import "styles/Main/Marker.scss";
 import Logo from "components/common/Logo";
-import TL_SCCO_SIG from "./TL_SCCO_SIG";
-import { Button } from "@mui/material";
+import TL_SCCO_SIG from "components/Main/Map/TL_SCCO_SIG";
 
-function Map() {
+function Map({ rcmdData }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
   const [lng, setLng] = useState(127.88);
@@ -24,14 +23,6 @@ function Map() {
       feature.properties.SIG_CD === "26350"
   );
 
-  const [markers, setMarkers] = useState([
-    { title: "대구", longitude: 128.583052, latitude: 35.798838 },
-    { title: "서울", longitude: 126.956764, latitude: 37.540705 },
-    { title: "울산", longitude: 129.239078, latitude: 35.519301 },
-    { title: "대전", longitude: 127.378953, latitude: 36.321655 },
-    { title: "제주", longitude: 126.542671, latitude: 33.364805 },
-  ]);
-
   useEffect(() => {
     if (map.current) return; // 지도는 처음 한 번만 초기화
 
@@ -43,22 +34,6 @@ function Map() {
       zoom: zoom,
     });
 
-    markers.map((marker, index) => {
-      // 마커 커스텀
-      const el = document.createElement("div");
-      el.className = "marker";
-
-      // 클릭 이벤트
-      el.addEventListener("click", () => {
-        handleClickButton();
-      });
-
-      // 마커를 지도에 추가
-      new mapboxgl.Marker(el)
-        .setLngLat([marker.longitude, marker.latitude])
-        .addTo(map.current);
-    });
-
     // 언어 설정
     mapboxgl.setRTLTextPlugin(
       "https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.1.0/mapbox-gl-rtl-text.js"
@@ -67,11 +42,46 @@ function Map() {
       defaultLanguage: "ko",
     });
     map.current.addControl(mapboxLanguage);
-  });
+  }, []);
+
+  useEffect(() => {
+    rcmdData.map((data, index) => {
+      // 마커 생성
+      const el = document.createElement("div");
+      el.className = "marker";
+
+      const div = document.createElement("div");
+      div.className = "text-wrapper";
+
+      const sido = document.createElement("span");
+      sido.textContent = "대구";
+      sido.className = "sido";
+
+      const gugun = document.createElement("span");
+      gugun.textContent = "수성구";
+      gugun.className = "gugun";
+
+      div.appendChild(sido);
+      div.appendChild(document.createElement("br"));
+      div.appendChild(gugun);
+
+      el.appendChild(div);
+
+      // 클릭 이벤트 등록
+      el.addEventListener("click", () => {
+        handleClickButton();
+      });
+
+      // 마커를 지도에 추가
+      const marker = new mapboxgl.Marker(el, {
+        anchor: "bottom"
+      })
+        .setLngLat([data.longitude, data.latitude])
+        .addTo(map.current);
+    })
+  }, [rcmdData]);
 
   const handleClickButton = () => {
-    console.log(geoJsonData);
-
     geoJsonData.map((item, index) => {
       const data = {
         type: "geojson",
@@ -87,8 +97,8 @@ function Map() {
         source: `polygon${index}`, // 데이터 소스 레퍼런스
         layout: {},
         paint: {
-          "fill-color": "#0080ff", // 해당 컬러로 채운다.
-          "fill-opacity": 0.5,
+          "fill-color": "#E94560", // 해당 컬러로 채운다.
+          "fill-opacity": 0.25,
         },
       });
 
@@ -99,7 +109,7 @@ function Map() {
         source: `polygon${index}`,
         layout: {},
         paint: {
-          "line-color": "#000",
+          "line-color": "#E94560",
           "line-width": 3,
         },
       });
