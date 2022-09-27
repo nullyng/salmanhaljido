@@ -9,5 +9,4 @@ public interface NewsService {
     void crawlingSocialAndPolicy();
     void crawlingPregnantAndDelivery();
     void crawlingLifeAndHealth();
-    void crawlingPregnantAndDelivery();
 }
