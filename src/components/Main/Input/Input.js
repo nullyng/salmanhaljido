@@ -7,10 +7,12 @@ import "styles/Main/Input.scss";
 import UserLocation from "components/Main/Input/UserLocation";
 import UserInfo from "components/Main/Input/UserInfo";
 import Price from "components/Main/Input/Price";
-import ResetButton from "./ResetButton";
-import SubmitButton from "./SubmitButton";
+import ResetButton from "components/Main/Input/ResetButton";
+import SubmitButton from "components/Main/Input/SubmitButton";
+import MyCategory from "components/Main/Input/MyCategory";
+import Category from "components/Main/Input/Category";
 
-function Input() {
+function Input({ currMap, onSetMapData, markers, onSetMarkers }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const handleDrawerOpen = () => {
@@ -44,11 +46,20 @@ function Input() {
           <Divider />
           <UserInfo />
           <Divider />
+          <MyCategory />
+          <Divider />
+          <Category />
+          <Divider />
           <Price />
         </div>
         <div className="left-drawer__inner__bottom">
           <ResetButton />
-          <SubmitButton />
+          <SubmitButton
+            currMap={currMap}
+            markers={markers}
+            onSetMarkers={onSetMarkers}
+            onSetMapData={onSetMapData}
+          />
         </div>
       </Drawer>
     </div>
