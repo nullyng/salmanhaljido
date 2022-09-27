@@ -53,8 +53,13 @@ function Input({ currMap, onSetMapData, markers, onSetMarkers }) {
           <Price />
         </div>
         <div className="left-drawer__inner__bottom">
-          <ResetButton currMap={currMap} markers={markers} onSetMarkers={onSetMarkers} />
-          <SubmitButton onSetMapData={onSetMapData} />
+          <ResetButton />
+          <SubmitButton
+            currMap={currMap}
+            markers={markers}
+            onSetMarkers={onSetMarkers}
+            onSetMapData={onSetMapData}
+          />
         </div>
       </Drawer>
     </div>

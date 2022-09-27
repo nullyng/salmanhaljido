@@ -6,20 +6,7 @@ import CustomModal from "components/common/CustomModal";
 function ResetButton({ currMap, markers, onSetMarkers }) {
   const [open, setOpen] = useState(false);
 
-  const handleClickButton = () => {
-    markers.map((marker, index) => {
-      // 마커 삭제
-      marker.remove();
-
-      // 폴리곤 삭제
-      currMap.removeLayer(`polygon${index}`);
-      currMap.removeLayer(`polygon${index}-outlined`);
-      currMap.removeSource(`polygon${index}`);
-    });
-
-
-    onSetMarkers([]);
-  }
+  const handleClickButton = () => {};
 
   return (
     <div className="reset-button">
