@@ -22,7 +22,7 @@ function CustomModal({
 
   const handleOK = () => {
     setOpen(false);
-    // handleClickButton();
+    handleClickButton();
   };
 
   return (
@@ -49,8 +49,8 @@ function CustomModal({
               <h2>{title}</h2>
             </Grid>
             <Grid className="custom-modal__content" item>
-              {content.split("\\n").map((item) => (
-                <p>{item}</p>
+              {content.split("\\n").map((item, index) => (
+                <p key={`modal-text_${index}`}>{item}</p>
               ))}
             </Grid>
             <Grid className="custom-modal__button" item>
