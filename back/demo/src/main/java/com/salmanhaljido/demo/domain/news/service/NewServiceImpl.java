@@ -28,6 +28,8 @@ public class NewServiceImpl implements NewsService{
 
     private final String PARENTING_AND_EDUCATION_URL = "https://www.ibabynews.com/news/articleList.html?sc_section_code=S1N4&view_type=sm";
     private final String SOCIAL_AND_POLICY_URL = "https://www.ibabynews.com/news/articleList.html?sc_section_code=S1N1&view_type=sm";
+    private final String PREGNANT_AND_DELIVERY_URL = "https://www.ibabynews.com/news/articleList.html?sc_section_code=S1N2&view_type=sm";
+    private final String LIFE_AND_HEALTH_URL = "https://www.ibabynews.com/news/articleList.html?sc_section_code=S1N3&view_type=sm";
 
     @Override
     public NewsListResponseDto getNews(Category category, int pageNo) {
@@ -109,6 +111,92 @@ public class NewServiceImpl implements NewsService{
                             .title(title)
                             .summary(summary)
                             .category(Category.SOCIAL_AND_POLICY)
+                            .url(url)
+                            .createdAt(createdAt)
+                            .imagePath(imagePath)
+                            .build();
+                    newsRepository.save(news);
+                }
+                pageNo++;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    @Transactional
+    @Scheduled(cron = "0 0 * * * ?")
+    public void crawlingPregnantAndDelivery() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.HOUR, -1);
+        Date time = calendar.getTime();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:SS");
+        int pageNo = 1;
+        while(true) {
+            Connection connection = Jsoup.connect(PREGNANT_AND_DELIVERY_URL + "&page=" + pageNo);
+            try {
+                Document document = connection.get();
+                Elements listBlock = document.getElementsByClass("list-block");
+                for (Element e : listBlock) {
+                    String title = e.select(".list-titles").text();
+                    String summary = e.select(".list-summary").text();
+                    String url = e.select(".list-titles > a").attr("abs:href");
+                    Date createdAt = simpleDateFormat.parse(e.select(".list-dated").text().split("\\|")[2].trim());
+
+                    Connection imagePathConnection = Jsoup.connect(url);
+                    Document imagePathDocument = imagePathConnection.get();
+                    String imagePath = imagePathDocument.head().select("meta[property=og:image]").attr("abs:content");
+                    if(createdAt.before(time)){
+                        return;
+                    }
+                    News news = News.builder()
+                            .title(title)
+                            .summary(summary)
+                            .category(Category.PREGNANT_AND_DELIVERY)
+                            .url(url)
+                            .createdAt(createdAt)
+                            .imagePath(imagePath)
+                            .build();
+                    newsRepository.save(news);
+                }
+                pageNo++;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+        @Override
+    @Transactional
+    @Scheduled(cron = "0 0 * * * ?")
+    public void crawlingLifeAndHealth() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.MONTH, -1);
+        Date time = calendar.getTime();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:SS");
+        int pageNo = 1;
+        while(true) {
+            Connection connection = Jsoup.connect(LIFE_AND_HEALTH_URL + "&page=" + pageNo);
+            try {
+                Document document = connection.get();
+                Elements listBlock = document.getElementsByClass("list-block");
+                for (Element e : listBlock) {
+                    String title = e.select(".list-titles").text();
+                    String summary = e.select(".list-summary").text();
+                    String url = e.select(".list-titles > a").attr("abs:href");
+                    Date createdAt = simpleDateFormat.parse(e.select(".list-dated").text().split("\\|")[2].trim());
+
+                    Connection imagePathConnection = Jsoup.connect(url);
+                    Document imagePathDocument = imagePathConnection.get();
+                    String imagePath = imagePathDocument.head().select("meta[property=og:image]").attr("abs:content");
+                    if(createdAt.before(time)){
+                        return;
+                    }
+                    News news = News.builder()
+                            .title(title)
+                            .summary(summary)
+                            .category(Category.LIFE_AND_HEALTH)
                             .url(url)
                             .createdAt(createdAt)
                             .imagePath(imagePath)

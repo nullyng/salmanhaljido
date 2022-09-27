@@ -7,4 +7,6 @@ public interface NewsService {
     NewsListResponseDto getNews(Category category, int pageNo);
     void crawlingParentingAndEducation();
     void crawlingSocialAndPolicy();
+    void crawlingPregnantAndDelivery();
+    void crawlingLifeAndHealth();
 }
