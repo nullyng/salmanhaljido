@@ -9,5 +9,6 @@ RUN ./gradlew bootJAR
 
 FROM openjdk:11-jdk
 COPY --from=builder build/libs/*.jar app.jar
+COPY --from=builder ./src ./src
 EXPOSE 8080
 ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=deploy","/app.jar"]
