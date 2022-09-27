@@ -11,9 +11,9 @@ import TL_SCCO_SIG from "components/Main/Map/TL_SCCO_SIG";
 function Map({ onSetCurrMap, mapData, onSetMarkers }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
-  const [lng, setLng] = useState(127.88);
+  const [lng, setLng] = useState(127.75);
   const [lat, setLat] = useState(35.9);
-  const [zoom, setZoom] = useState(6.4);
+  const [zoom, setZoom] = useState(6.2);
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
   useEffect(() => {
@@ -27,17 +27,8 @@ function Map({ onSetCurrMap, mapData, onSetMarkers }) {
       zoom: zoom,
     });
 
-    // 언어 설정
-    mapboxgl.setRTLTextPlugin(
-      "https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.1.0/mapbox-gl-rtl-text.js"
-    );
-    const mapboxLanguage = new MapboxLanguage({
-      defaultLanguage: "ko",
-    });
-    map.current.addControl(mapboxLanguage);
-
     onSetCurrMap(map.current);
-  }, []);
+  });
 
   useEffect(() => {
     // 선택 초기화 시 지도에 출력되어 있는 마커들을 삭제하기 위해 마커들의 정보를 배열로 저장
@@ -65,24 +56,28 @@ function Map({ onSetCurrMap, mapData, onSetMarkers }) {
 
       el.appendChild(div);
 
-      // 클릭 이벤트 등록
-      el.addEventListener("click", () => {
-        // handleClickButton();
-      });
-
       // 마커를 지도에 추가
       const marker = new mapboxgl.Marker(el, {
-        anchor: "bottom"
+        anchor: "bottom",
       })
         .setLngLat([data.longitude, data.latitude])
         .addTo(map.current);
+
+      // 클릭 이벤트 등록
+      marker.getElement().addEventListener("click", () => {
+        map.current.flyTo({
+          center: [data.longitude, data.latitude],
+          duration: 600,
+          essential: true,
+          zoom: 10,
+        });
+      });
 
       markerList.push(marker);
 
       // 폴리곤 출력
       const item = TL_SCCO_SIG.features.filter(
-        (feature) =>
-          feature.properties.SIG_CD === data.SIG_CD
+        (feature) => feature.properties.SIG_CD === data.SIG_CD
       );
 
       const geoJsonData = {
