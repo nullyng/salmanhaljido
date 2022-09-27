@@ -87,7 +87,7 @@ public class NewServiceImpl implements NewsService{
     @Scheduled(cron = "0 0 * * * ?")
     public void crawlingSocialAndPolicy() {
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MONTH, -1);
+        calendar.add(Calendar.HOUR, -1);
         Date time = calendar.getTime();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:SS");
         int pageNo = 1;
@@ -173,7 +173,7 @@ public class NewServiceImpl implements NewsService{
     @Scheduled(cron = "0 0 * * * ?")
     public void crawlingLifeAndHealth() {
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MONTH, -1);
+        calendar.add(Calendar.HOUR, -1);
         Date time = calendar.getTime();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:SS");
         int pageNo = 1;
