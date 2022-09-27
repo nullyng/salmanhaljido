@@ -12,8 +12,6 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
-
-	all*.exclude module : 'spring-boot-starter-logging'
 }
 
 repositories {
@@ -29,7 +27,9 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
 	// https://mvnrepository.com/artifact/org.apache.spark/spark-sql
-	compileOnly 'org.apache.spark:spark-sql_2.12:3.1.2'
+	compileOnly ('org.apache.spark:spark-sql_2.12:3.1.2') {
+		exclude group: "org.slf4j", module: "slf4j-log4j12"
+	}
 
 	// https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple
 	implementation 'com.googlecode.json-simple:json-simple:1.1.1'

@@ -8,4 +8,6 @@ public interface NewsService {
     void crawlingParentingAndEducation();
     void crawlingSocialAndPolicy();
     void crawlingPregnantAndDelivery();
+    void crawlingLifeAndHealth();
+    void crawlingPregnantAndDelivery();
 }
