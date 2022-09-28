@@ -15,15 +15,6 @@ public class DongCode {
 
     private String addr;
 
-    @ManyToOne
-    @JoinColumn(name = "gugun_code")
-    private GuGunCode guGunCode;
-
-    public void setGuGunCode(GuGunCode guGunCode){
-        guGunCode.getDongCodes().add(this);
-        this.guGunCode = guGunCode;
-    }
-
     @Builder
     public DongCode(String code, String addr){
         this.code = code;

@@ -17,7 +17,7 @@ public class SiDoCode {
 
     private String addr;
 
-    @OneToMany(mappedBy = "siDoCode", orphanRemoval = true, cascade = CascadeType.DETACH)
+    @OneToMany(mappedBy = "siDoCode", orphanRemoval = true, cascade = CascadeType.DETACH, fetch = FetchType.EAGER)
     private List<GuGunCode> guGunCodes = new ArrayList<>();
 
     private Double lat;
