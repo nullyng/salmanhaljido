@@ -1,4 +1,5 @@
 import "styles/Landing/Landing.scss";
+import top from "assets/images/Landing/top.png";
 
 const { default: Guide } = require("./Guide");
 const { default: Service } = require("./Service");
@@ -19,7 +20,7 @@ function Detail() {
                 <div className="service__starttext--red">지금 바로 시작&nbsp;</div>
                 해보세요!
             </div>
-            <button className="service__upbutton" onClick={scrollToTop}>↑</button>
+            <img src={top} alt="top" className="service__upbutton" onClick={scrollToTop}/>
         </div>
     )
 }
