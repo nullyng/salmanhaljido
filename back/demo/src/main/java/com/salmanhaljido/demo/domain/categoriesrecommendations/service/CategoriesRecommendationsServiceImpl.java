@@ -24,6 +24,10 @@ import java.util.*;
 @RequiredArgsConstructor
 public class CategoriesRecommendationsServiceImpl implements CategoriesRecommendationsService{
 
+    //서버
+    static String dataPath = "/data/";
+    //로컬
+    //static String dataPath = "C:\\Users\\multicampus\\S07P22D110\\back\\demo\\src\\main\\resources\\data\\";
     @Override
     public CategoriesRecommendationsViewResponseDto CategoriesRecommendationsView(CategoriesRecommendationsViewRequestDto dto){
         char[] charArr = new char[4];
@@ -79,7 +83,9 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
                 .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.categories")
                 .getOrCreate();
         try {
-            String dataPath = "C:\\Users\\multicampus\\S07P22D110\\back\\demo\\src\\main\\resources\\data\\";
+            //서버
+            //String dataPath = "/data/";
+            //로컬
             File writeFile = new File(dataPath + "categories.json");
             FileOutputStream fileOutputStream = new FileOutputStream(writeFile);
             JSONObject valueJSON = new JSONObject();
@@ -140,7 +146,6 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
         //서버
         //String dataPath = "/data/";
         //로컬
-        String dataPath = "C:\\Users\\multicampus\\S07P22D110\\back\\demo\\src\\main\\resources\\data\\";
         List<CategoriesDto> returnRatingList = new ArrayList<>();
         try {
             File ratingFile = new File(dataPath + "rating.data");
@@ -218,7 +223,6 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
         //서버
         //String dataPath = "/data/";
         //로컬
-        String dataPath = "C:\\Users\\multicampus\\S07P22D110\\back\\demo\\src\\main\\resources\\data\\";
         List<CategoriesDto> returnCountingList = new ArrayList<>();
         try {
             File countingFile = new File(dataPath + "counting.data");
