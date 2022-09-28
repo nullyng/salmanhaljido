@@ -1,3 +1,5 @@
+@use "../common/utils" as *;
+
 .right-drawer {
   position: fixed;
   right: 0;
@@ -30,6 +32,8 @@
 
 // 추천 지역
 .region {
+  @include input-title;
+
   &__cntr {
     display: flex;
     justify-content: space-around;
@@ -55,7 +59,6 @@
 // 통계 및 부동산
 .data {
   margin-top: 20px;
-
   &__tabs {
     & button {
       font-size: 20px;
@@ -69,5 +72,5 @@
 
 .detail-data {
   width: 100%;
-  background-color: #F5F5F5;
+  background-color: #f5f5f5;
 }

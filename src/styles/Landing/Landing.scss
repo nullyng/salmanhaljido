@@ -1,216 +1,307 @@
 @font-face {
-    font-family: 'GongGothicMedium';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+  font-family: "GongGothicMedium";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
 }
 
-.Landing{
+.Landing {
+  display: flex;
+  justify-content: space-between;
+}
+
+.start {
+  background: linear-gradient(
+    360deg,
+    rgba(242, 215, 217, 0.8) 2%,
+    rgba(211, 206, 223, 0.8) 98%
+  );
+  width: 40%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  &__bubble {
     display: flex;
-    justify-content: space-between;
+
+    &--left {
+      font-family: "GongGothicMedium";
+      background-color: white;
+      margin: 3% auto 3% 0%;
+      padding: 1% 4%;
+      border-radius: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: fit-content;
+      font-size: xx-large;
+    }
+
+    &--right {
+      font-family: "GongGothicMedium";
+      background-color: white;
+      margin: 3% 0% 3% auto;
+      padding: 1% 4%;
+      border-radius: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: fit-content;
+      font-size: xx-large;
+    }
+
+    &--Ltri {
+      margin: 5% 0% 5% 5%;
+      width: 0px;
+      height: 0px;
+      border-top: 30px solid #ffffff;
+      border-left: 15px solid transparent;
+      border-right: 0px solid transparent;
+    }
+
+    &--Rtri {
+      margin: 5% 5% 5% 0%;
+      width: 0px;
+      height: 0px;
+      border-top: 30px solid #ffffff;
+      border-left: 0px solid transparent;
+      border-right: 15px solid transparent;
+    }
+
+    &--end {
+      background-color: white;
+      margin: 2% 0% 2% auto;
+      padding: 2% 3%;
+      border-radius: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+      width: fit-content;
+    }
+
+    &--end1 {
+      font-family: "GongGothicMedium";
+      font-size: 180%;
+      font-weight: bold;
+    }
+
+    &--end2 {
+      font-family: "GongGothicMedium";
+      font-size: 400%;
+      color: #e94560;
+    }
+  }
+
+  // &__button{
+  //     display: flex;
+  //     justify-content: center;
+  //     margin-top: 3rem;
+
+  //     &--detail {
+  //         font-family: 'GongGothicMedium';
+  //         width: 30%;
+  //         background-color: #E94560;
+  //         text-align: center;
+  //         color: white;
+  //         padding: 1%;
+  //         font-size: 36px;
+  //         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.35);
+  //         border-radius: 50px;
+  //         border-width: 0;
+  //         text-decoration: none;
+  //         display: flex;
+  //         justify-content: center;
+
+  //     }
+
+  // }
+
+  &__button {
+    display: flex;
+    justify-content: center;
+    margin-top: 3rem;
+  }
+  & button {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    vertical-align: middle;
+    text-decoration: none;
+    font-size: inherit;
+
+    padding: 0.5em 1.25em;
+    border: 2px solid #b18597;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 25px;
+    background: #fff0f0;
+    transform-style: preserve-3d;
+    transition: 0.15s cubic-bezier(0, 0, -6, 1);
+  }
+  & button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background-color: #f9c4d2;
+    box-shadow: 0 0 0 2px #b18597, 0 0.625em 0 0 #ffe3e2;
+    transform: translate3d(0, 0.4em, -1em);
+    transition: 0.15s cubic-bezier(0, 0, -6, 1);
+  }
+  & button:hover {
+    background: #ffe9e9;
+    transform: translate(0, 0.25em);
+  }
+  & button:hover::before {
+    box-shadow: 0 0 0 2px #b18597, 0 0.5em 0 0 #ffe3e2;
+    transform: translate3d(0, 0.2em, -1em);
+  }
+  &button:active {
+    background: #ffe9e9;
+    transform: translate(0, 0.75em);
+  }
+  &button:active::before {
+    box-shadow: 0 0 0 2px #b18597, 0 0.5em 0 0 #ffe3e2;
+    transform: translate3d(0, 0, -1em);
+  }
+
+  // &__back{
+  //     width: 50%;
+  //     padding-top: 3%;
+  //     padding-bottom: 1%;
+  // }
 }
 
-.start{
-    background-color: pink;
-    width: 50%;
-    padding-top: 3%;
-    padding-bottom: 3%;
+.service {
+  width: 60%;
+  padding: 2em;
+
+  &__bigfont {
+    font-family: "GongGothicMedium";
+    font-size: 300%;
+  }
+
+  &__font {
+    font-family: "GongGothicMedium";
+    font-size: 180%;
+  }
+
+  &__introduce {
+    padding-top: 1.5em;
+
+    &--textbox {
+      display: flex;
+      align-items: baseline;
+    }
+
+    &--squarebox {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &--square {
+      width: 25%;
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 3em 1em;
+      margin: 3% 0%;
+      border: 1px solid rgba(0, 0, 0, 0.109);
+      border-radius: 30px;
+    }
+
+    &--image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+      margin-bottom: 1.5em;
+      width: 110px;
+      height: 110px;
+    }
+  }
+
+  &__guide {
+    padding-top: 2em;
+    &--box {
+      display: flex;
+      padding: 1%;
+    }
+
+    &--text {
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    &--image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 240px;
+      height: 180px;
+      background-color: lightgray;
+      border-radius: 30px;
+    }
+  }
+
+  &__starttext {
+    padding: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: large;
+
+    &--red {
+      color: #e94560;
+    }
+  }
+
+  &__upbutton {
+    width: 3%;
+    height: 6%;
+    font-size: xx-large;
+    text-align: center;
+    border-radius: 50%;
+    background-color: white;
     position: fixed;
-
-    &__bubble{
-        display: flex;
-        
-        &--left{
-            font-family: 'GongGothicMedium';
-            background-color: white;
-            margin: 3% auto 3% 0%;
-            padding: 1% 4%;
-            border-radius: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: fit-content;
-            font-size: xx-large;
-        }
-        
-        &--right{
-            font-family: 'GongGothicMedium';
-            background-color: white;
-            margin: 3% 0% 3% auto;
-            padding: 1% 4%;
-            border-radius: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: fit-content;
-            font-size: xx-large;
-        }
-
-        &--Ltri {
-            margin: 5% 0% 5% 5%;
-            width: 0px;
-            height: 0px;
-            border-top: 30px solid #ffffff;
-            border-left: 15px solid transparent;
-            border-right: 0px solid transparent;
-          }
-
-        &--Rtri {
-            margin: 5% 5% 5% 0%;
-            width: 0px;
-            height: 0px;
-            border-top: 30px solid #ffffff;
-            border-left: 0px solid transparent;
-            border-right: 15px solid transparent;
-          }
-        
-        &--end{
-            background-color: white;
-            margin: 2% 0% 2% auto;
-            padding: 2% 3%;
-            border-radius: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: baseline;
-            width: fit-content;
-        }
-
-        &--end1{
-            font-family: 'GongGothicMedium';
-            font-size: 180%;
-            font-weight: bold;
-        }
-
-        &--end2{
-            font-family: 'GongGothicMedium';
-            font-size: 400%;
-            color: red;
-        }
-    }
-
-    &__button{
-        font-family: 'GongGothicMedium';
-        width: 30%;
-        background-color: red;
-        text-align: center;
-        color: white;
-        padding: 1%;
-        font-size: larger;
-        border-radius: 30px;
-        
-    }
-
-    &__btnback{
-        display: flex;
-        justify-content: center;
-        margin-top: 5%;
-        margin-bottom: 5%;
-    }
-
-    &__back{
-        width: 50%;
-        padding-top: 3%;
-        padding-bottom: 1%;
-    }
+    right: 30px;
+    bottom: 30px;
+  }
 }
 
-.service{
-    width: 50%;
+// 랜딩페이지 시작 버튼
+.start div {
+  animation-name: fade-in;
+  animation-fill-mode: both;
+  animation-duration: 0.5s;
+}
 
-    &__bigfont{
-        font-family: 'GongGothicMedium';
-        font-size: 300%;
-    }
-    
-    &__font{
-        font-family: 'GongGothicMedium';
-        font-size: 180%;
-    }
+$animationDelay: 1;
+@for $i from 1 through 15 {
+  .start > div:nth-of-type(#{$i}) {
+    animation-delay: #{0.3+ ($i)}s;
+  }
+}
 
-    &__introduce{
-        padding: 3%;
-
-        &--textbox{
-            display: flex;
-            align-items: baseline;
-        }
-
-        &--squarebox{
-            display: flex;
-            justify-content: space-evenly;
-        }
-
-        &--square{
-            width: 25%;
-            text-align: center;
-            font-weight: bold;
-            padding: 3%;
-            margin: 3% 0%;
-            border: 1px solid gray;
-            border-radius: 30px;
-        }
-        
-        &--image{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin: auto;
-            margin-bottom: 5%;
-            width: 120px;
-            height: 120px;
-        }  
-    }
-
-    &__guide{
-        padding: 3%;
-
-        &--box{
-            display: flex;
-            padding: 1%;
-        }
-
-        &--text{
-            margin: auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-            font-size: large;
-        }
-
-        &--image{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 200px;
-            height: 150px;
-            background-color: lightgray;
-            border-radius: 30px;
-        }
-    }
-
-    &__starttext{
-        padding: 5%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-weight: bold;
-        font-size: large;
-
-        &--red{
-            color: red;
-        }
-    }
-
-    &__upbutton{
-        width: 3%;
-        height: 6%;    
-        font-size: xx-large;
-        text-align: center;
-        border-radius: 50%;
-        background-color: white;
-        position:fixed;
-        right:30px;
-        bottom:30px;
-    }
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }

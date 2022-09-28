@@ -1,5 +1,5 @@
 import "styles/Landing/Landing.scss";
-import ServiceBox from "./ServiceBox";
+import ServiceBox from "components/Landing/Detail/ServiceBox";
 
 function Service() {
     return(
