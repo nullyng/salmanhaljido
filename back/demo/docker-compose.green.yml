@@ -5,7 +5,7 @@ services:
     ports:
       - "9091:8080"
     container_name: salmanhaljido_server_blue
-  mongo:4.2:
+  mongo:
     image: mongo:4.2
     container_name: mongo-db
     ports:
