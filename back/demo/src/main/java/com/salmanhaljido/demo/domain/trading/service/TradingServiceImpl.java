@@ -80,7 +80,12 @@ public class TradingServiceImpl implements TradingService {
                 }else{
                     s+=sidoMap.get(tokens[0]) + " " + tokens[1] + " " + tokens[2];
                 }
-                s = s + " " + json.getJSONArray("data").getJSONObject(i).get("2022-04").toString();
+                s = s + " " + json.getJSONArray("data").getJSONObject(i).get("2021-11").toString();
+                s+="," + json.getJSONArray("data").getJSONObject(i).get("2021-12").toString();
+                s+="," + json.getJSONArray("data").getJSONObject(i).get("2022-01").toString();
+                s+="," + json.getJSONArray("data").getJSONObject(i).get("2022-02").toString();
+                s+="," + json.getJSONArray("data").getJSONObject(i).get("2022-03").toString();
+                s+="," + json.getJSONArray("data").getJSONObject(i).get("2022-04").toString();
                 fileOutputStream.write(s.getBytes(StandardCharsets.UTF_8));
                 fileOutputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
 
@@ -116,7 +121,6 @@ public class TradingServiceImpl implements TradingService {
             if(token.length==1) continue;
             String sd = "";
             String sgg = "";
-            String emdg = "";
             String price="";
             if(token.length==2){
                 sd = token[0];
@@ -130,16 +134,19 @@ public class TradingServiceImpl implements TradingService {
                 sgg=token[1] + " " + token[2];
                 price = token[3];
             }
+            price = price.substring(0, price.length()-1);
+            String date = "2021-11,2021-12,2022-01,2022-02,2022-03,2022-04";
+            value.put("date", date);
             value.put("sd", sd);
             value.put("sgg", sgg);
-            value.put("emdg", emdg);
-            value.put("price", price.substring(0, price.length()-1));
+            value.put("price", price);
             fileOutputStream.write(value.toString().getBytes());
             fileOutputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
         }
         Dataset<Row> dff = session.read().format("json").load(dataPath + "trading_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
 
+        session.close();
         System.out.println("Trading : Finish");
     }
     private static String checkEMDG(String token){

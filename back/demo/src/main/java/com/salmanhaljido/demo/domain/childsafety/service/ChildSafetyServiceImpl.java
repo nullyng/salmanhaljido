@@ -128,7 +128,6 @@ public class ChildSafetyServiceImpl implements ChildSafetyService {
             if(token.length==1) continue;
             String sd = "";
             String sgg = "";
-            String emdg = "";
             if(token.length==2){
                 sd = token[0];
                 sgg = token[1];
@@ -141,16 +140,13 @@ public class ChildSafetyServiceImpl implements ChildSafetyService {
                 }else{
                     sd = token[0];
                     sgg = token[1];
-                    emdg=token[2];
                 }
             }else{
                 sd = token[0];
                 sgg=token[1] + " " + token[2];
-                emdg = token[3];
             }
             value.put("sd", sd);
             value.put("sgg", sgg);
-            value.put("emdg", emdg);
             if(map.get(str) ==null) value.put("count", 0);
             else value.put("count", map.get(str));
             fileOutputStream.write(value.toString().getBytes());

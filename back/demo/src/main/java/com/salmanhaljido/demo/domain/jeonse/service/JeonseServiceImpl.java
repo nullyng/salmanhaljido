@@ -14,6 +14,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 
 @Service
@@ -80,7 +81,12 @@ public class JeonseServiceImpl implements JeonseService {
                 }else{
                     s+=sidoMap.get(tokens[0]) + " " + tokens[1] + " " + tokens[2];
                 }
-                s = s + " " + json.getJSONArray("data").getJSONObject(i).get("2021-07").toString();
+                s = s + " " + json.getJSONArray("data").getJSONObject(i).get("2021-02").toString();
+                s+="," + json.getJSONArray("data").getJSONObject(i).get("2021-03").toString();
+                s+="," + json.getJSONArray("data").getJSONObject(i).get("2021-04").toString();
+                s+="," + json.getJSONArray("data").getJSONObject(i).get("2021-05").toString();
+                s+="," + json.getJSONArray("data").getJSONObject(i).get("2021-06").toString();
+                s+="," + json.getJSONArray("data").getJSONObject(i).get("2021-07").toString();
                 fileOutputStream.write(s.getBytes(StandardCharsets.UTF_8));
                 fileOutputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
 
@@ -116,7 +122,6 @@ public class JeonseServiceImpl implements JeonseService {
             if(token.length==1) continue;
             String sd = "";
             String sgg = "";
-            String emdg = "";
             String price="";
             if(token.length==2){
                 sd = token[0];
@@ -130,16 +135,18 @@ public class JeonseServiceImpl implements JeonseService {
                 sgg=token[1] + " " + token[2];
                 price = token[3];
             }
+            price = price.substring(0, price.length()-1);
+            String date = "2021-02,2021-03,2021-04,2021-05,2021-06,2021-07";
+            value.put("date", date);
             value.put("sd", sd);
             value.put("sgg", sgg);
-            value.put("emdg", emdg);
-            value.put("price", price.substring(0, price.length()-1));
+            value.put("price", price);
             fileOutputStream.write(value.toString().getBytes());
             fileOutputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
         }
         Dataset<Row> dff = session.read().format("json").load(dataPath + "jeonse_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
-
+        session.close();
         System.out.println("Jeonse : Finish");
     }
     private static String checkEMDG(String token){
