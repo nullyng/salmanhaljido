@@ -8,6 +8,7 @@ services:
   mongo:
     image: mongo:4.2
     container_name: mongo-db
+    restart: always
     ports:
       - "27017:27017"
     volumes:
