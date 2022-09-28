@@ -82,7 +82,7 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
         SparkSession session = SparkSession.builder()
                 .master("local")
                 .appName("categories")
-                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.categories")
+                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1:27017/openapi.categories")
                 .getOrCreate();
         try {
             //서버
@@ -158,7 +158,7 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
             SparkSession session = SparkSession.builder()
                     .master("local")
                     .appName("categories")
-                    .config("spark.mongodb.read.connection.uri", "mongodb://127.0.0.1/openapi.categories")
+                    .config("spark.mongodb.read.connection.uri", "mongodb://127.0.0.1:27017/openapi.categories")
                     .getOrCreate();
             try {
 
@@ -235,7 +235,7 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
             SparkSession session = SparkSession.builder()
                     .master("local")
                     .appName("categories")
-                    .config("spark.mongodb.read.connection.uri", "mongodb://127.0.0.1/openapi.categories")
+                    .config("spark.mongodb.read.connection.uri", "mongodb://127.0.0.1:27017/openapi.categories")
                     .getOrCreate();
             try {
 
