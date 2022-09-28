@@ -6,7 +6,8 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import Category0 from "./Category0";
+import CategoryPanel from "./CategoryPanel";
+import { useSelector } from "react-redux";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -52,7 +53,7 @@ function Category() {
     const tooltipMessage =
     "8개의 카테고리에서 필요한 세부카테고리를 골라보세요. 중요도는 상, 중, 하로 나뉘어져 있고 필요없을 시 선택안함 또는 내 카테고리에서 X를 클릭하면 삭제할 수 있어요.";
       
-
+    const { CategoryList } = useSelector((state) => state.CategorySet);
     return(
         <div className="category">
             <div className="category__title">
@@ -75,28 +76,28 @@ function Category() {
                 </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-                <Category0/>
+                <CategoryPanel arr={CategoryList.교통}/>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                재난탭
+                <CategoryPanel arr={CategoryList.재난}/>
             </TabPanel>
             <TabPanel value={value} index={2}>
-                안전탭
+                <CategoryPanel arr={CategoryList.안전}/>
             </TabPanel>
             <TabPanel value={value} index={3}>
-                의료탭
+                <CategoryPanel arr={CategoryList.의료}/>
             </TabPanel>
             <TabPanel value={value} index={4}>
-                반려동물탭
+                <CategoryPanel arr={CategoryList.반려동물}/>
             </TabPanel>
             <TabPanel value={value} index={5}>
-                문화탭
+                <CategoryPanel arr={CategoryList.교육}/>
             </TabPanel>
             <TabPanel value={value} index={6}>
-                교육탭
+                <CategoryPanel arr={CategoryList.문화}/>
             </TabPanel>
             <TabPanel value={value} index={7}>
-                생활탭
+                <CategoryPanel arr={CategoryList.생활}/>
             </TabPanel>
             </Box>
         </div>

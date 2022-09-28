@@ -21,7 +21,7 @@ const marks = [
 ];
 
 function valueLabelFormat(value) {
-  return marks.findIndex((mark) => mark.value === value) + 1;
+  return marks.findIndex((mark) => mark.value === value) + 0;
 }
 
 function CategorySlider() {
