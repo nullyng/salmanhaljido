@@ -23,9 +23,6 @@ public class GuGunCode {
     @JoinColumn(name = "sido_code")
     private SiDoCode siDoCode;
 
-    @OneToMany(mappedBy = "guGunCode", orphanRemoval = true, cascade = CascadeType.REMOVE)
-    private List<DongCode> dongCodes = new ArrayList<>();
-
     public void setSiDoCode(SiDoCode siDoCode) {
         siDoCode.getGuGunCodes().add(this);
         this.siDoCode = siDoCode;
