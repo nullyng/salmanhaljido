@@ -17,11 +17,12 @@
     rgba(242, 215, 217, 0.8) 2%,
     rgba(211, 206, 223, 0.8) 98%
   );
-  width: 40%;
+  width: 45%;
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  position: fixed;
 
   &__bubble {
     display: flex;
@@ -153,7 +154,7 @@
     height: 100%;
     border-radius: inherit;
     background-color: #f9c4d2;
-    box-shadow: 0 0 0 2px #b18597, 0 0.625em 0 0 #ffe3e2;
+    box-shadow: 0 0 0 2px #b18597;
     transform: translate3d(0, 0.4em, -1em);
     transition: 0.15s cubic-bezier(0, 0, -6, 1);
   }
@@ -162,7 +163,7 @@
     transform: translate(0, 0.25em);
   }
   & button:hover::before {
-    box-shadow: 0 0 0 2px #b18597, 0 0.5em 0 0 #ffe3e2;
+    box-shadow: 0 0 0 2px #b18597;
     transform: translate3d(0, 0.2em, -1em);
   }
   &button:active {
@@ -170,19 +171,19 @@
     transform: translate(0, 0.75em);
   }
   &button:active::before {
-    box-shadow: 0 0 0 2px #b18597, 0 0.5em 0 0 #ffe3e2;
+    box-shadow: 0 0 0 2px #b18597;
     transform: translate3d(0, 0, -1em);
   }
 
-  // &__back{
-  //     width: 50%;
-  //     padding-top: 3%;
-  //     padding-bottom: 1%;
-  // }
+  &__back {
+    width: 49%;
+    padding-top: 3%;
+    padding-bottom: 1%;
+  }
 }
 
 .service {
-  width: 60%;
+  width: 55%;
   padding: 2em;
 
   &__bigfont {
@@ -271,15 +272,12 @@
   }
 
   &__upbutton {
-    width: 3%;
-    height: 6%;
-    font-size: xx-large;
-    text-align: center;
-    border-radius: 50%;
-    background-color: white;
+    width: 60px;
+    height: 60px;
     position: fixed;
     right: 30px;
     bottom: 30px;
+    cursor: pointer;
   }
 }
 
