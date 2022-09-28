@@ -4,7 +4,7 @@ import CategoryChip from "./CategoryChip";
 
 function MakeChip(dic) {
     if (Object.keys(dic).length === 0) {
-        return (<p>아직 선택된 카테고리가 없어요</p>)
+        return ("아직 선택된 카테고리가 없어요")
     }
     else {
         const result = []
@@ -20,7 +20,6 @@ function MyCategory() {
     "내가 현재 선택한 카테고리를 볼 수 있어요.";
     
     const { MyCategoryList } = useSelector((state) => state.CategorySet);
-    console.log(MyCategoryList)
     return(
         <div className="category">
             <div className="user-location__title">
