@@ -1,0 +1,238 @@
+@mixin input-title {
+  &__title {
+    display: flex;
+
+    &__tooltip {
+      display: flex;
+      align-items: center;
+
+      & button {
+        & svg {
+          color: #cdcdcd;
+        }
+      }
+    }
+  }
+}
+
+.left-drawer {
+  position: fixed;
+  left: 0;
+  z-index: 1;
+
+  &__button {
+    margin-top: 1rem;
+    padding: 0.3rem;
+    background-color: white;
+    border-radius: 0px 10px 10px 0px;
+  }
+
+  &__inner {
+    & .MuiDrawer-paper {
+      width: 360px;
+      padding: 2rem;
+      padding-top: 1rem;
+    }
+
+    // drawer 닫기 버튼
+    &__button {
+      width: 100%;
+
+      & button {
+        width: fit-content;
+        float: right;
+      }
+    }
+
+    // 데이터 입력
+    &__content {
+      width: 100%;
+      height: 100%;
+      overflow-y: auto;
+      overflow-x: hidden;
+
+      // 스크롤바 커스텀
+      // &::-webkit-scrollbar {
+      //   position: fixed;
+      //   width: 6px;
+      // }
+
+      // &::-webkit-scrollbar-thumb {
+      //   position: fixed;
+      //   background: #4d89c6;
+      //   border-radius: 10px;
+      // }
+
+      // &::-webkit-scrollbar-track {
+      //   position: fixed;
+      //   background: white;
+      // }
+    }
+
+    // 하단 버튼 그룹
+    &__bottom {
+      position: sticky;
+      background-color: white;
+      display: flex;
+      align-items: center;
+      padding-top: 2rem;
+      padding-bottom: 3rem;
+      justify-content: center;
+
+      & .reset-button {
+        margin-right: 0.6rem;
+        width: 100%;
+
+        & button {
+          border-radius: 30px;
+          width: 100%;
+          border: 1px solid #626262;
+          color: #626262;
+
+          &:hover {
+            background-color: #6262621a;
+          }
+        }
+      }
+
+      & .submit-button {
+        margin-left: 0.6rem;
+        width: 100%;
+
+        & button {
+          border-radius: 30px;
+          width: 100%;
+          background-color: #4d89c6;
+        }
+      }
+    }
+  }
+}
+
+/* 지역 설정 */
+.user-location {
+  margin-bottom: 1.5rem;
+  @include input-title;
+
+  &__content {
+    display: flex;
+
+    & .MuiInputBase-root {
+      border-radius: 30px;
+    }
+
+    &__sido {
+      margin-right: 1rem !important;
+    }
+  }
+}
+
+/* 사용자 정보 */
+.user-info {
+  margin-bottom: 1rem;
+  @include input-title;
+
+  &__content {
+    &__form {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
+      margin-bottom: 1rem;
+    }
+  }
+}
+
+.category-rcmd {
+  & .MuiAlert-icon {
+    & svg {
+      color: #e94560;
+    }
+  }
+
+  & .MuiAlert-action {
+    padding-left: 0.2rem;
+  }
+
+  &__content {
+    & b {
+      color: #e94560;
+    }
+  }
+
+  &__button {
+    margin-top: 0.7rem;
+    float: right;
+
+    & button {
+      border: 1px solid #575757;
+      border-radius: 30px;
+      background-color: white;
+      color: #575757;
+
+      &:hover {
+        border: 1px solid #e94560;
+        background-color: white;
+        color: #e94560;
+      }
+    }
+  }
+}
+
+/* 가격대 설정 */
+.price {
+  @include input-title();
+
+  &__content {
+    &__jeonse {
+      width: 100%;
+
+      & h3 {
+        margin-top: 0;
+      }
+    }
+  }
+
+  & .custom-slider {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@font-face {
+  font-family: 'GongGothicMedium';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.category {
+  margin-bottom: 1rem;
+  @include input-title();
+  font-family: 'GongGothicMedium';
+  
+  &__tabs{
+    flex-wrap: wrap;
+  }
+
+  &__box{
+    border-radius: 0.5rem;
+    background-color: #F5F5F5;
+    padding: 1rem;
+
+    &--row{
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 0.2rem 0;
+    }
+
+    &--top{
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: xx-small;
+    }
+  }
+}

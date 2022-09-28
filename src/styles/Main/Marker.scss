@@ -1,0 +1,21 @@
+.marker {
+  background-image: url("../../assets/images/Main/Map/pin-fullcolor.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 70px;
+  height: 93px;
+  cursor: pointer;
+
+  & .text-wrapper {
+    text-align: center;
+    padding-top: 15px;
+    font-size: 0.9rem;
+    font-weight: 800;
+    color: white;
+  }
+
+  &:hover {
+    background-image: url("../../assets/images/Main/Map/pin-white.png");
+    opacity: 0.8 !important;
+  }
+}
