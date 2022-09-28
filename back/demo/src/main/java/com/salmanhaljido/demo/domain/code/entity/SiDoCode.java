@@ -20,9 +20,18 @@ public class SiDoCode {
     @OneToMany(mappedBy = "siDoCode", orphanRemoval = true, cascade = CascadeType.DETACH)
     private List<GuGunCode> guGunCodes = new ArrayList<>();
 
+    private Double lat;
+
+    private Double lng;
+
     @Builder
     public SiDoCode(String code, String addr){
         this.code = code;
         this.addr = addr;
+    }
+
+    public void updateLocation(Double lat, Double lng){
+        this.lat = lat;
+        this.lng = lng;
     }
 }
