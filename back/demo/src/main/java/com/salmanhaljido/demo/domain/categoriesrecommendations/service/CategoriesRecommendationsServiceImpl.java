@@ -13,6 +13,7 @@ import org.apache.spark.mllib.recommendation.MatrixFactorizationModel;
 import org.apache.spark.mllib.recommendation.Rating;
 
 import org.json.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -25,7 +26,8 @@ import java.util.*;
 public class CategoriesRecommendationsServiceImpl implements CategoriesRecommendationsService{
 
     //서버
-    static String dataPath = "/data/";
+    @Value("${filepath:0}")
+    String dataPath;
     //로컬
     //static String dataPath = "C:\\Users\\multicampus\\S07P22D110\\back\\demo\\src\\main\\resources\\data\\";
     @Override

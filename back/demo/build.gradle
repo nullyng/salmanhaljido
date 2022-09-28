@@ -12,8 +12,8 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
+	all*.exclude module : 'spring-boot-starter-logging'
 }
-
 repositories {
 	mavenCentral()
 }
@@ -66,7 +66,6 @@ dependencies {
 
 	// https://mvnrepository.com/artifact/org.jblas/jblas
 	implementation group: 'org.jblas', name: 'jblas', version: '1.2.3'
-
 
 }
 
