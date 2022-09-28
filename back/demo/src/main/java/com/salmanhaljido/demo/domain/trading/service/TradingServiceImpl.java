@@ -135,7 +135,8 @@ public class TradingServiceImpl implements TradingService {
                 price = token[3];
             }
             price = price.substring(0, price.length()-1);
-
+            String date = "2021-11,2021-12,2022-01,2022-02,2022-03,2022-04";
+            value.put("date", date);
             value.put("sd", sd);
             value.put("sgg", sgg);
             value.put("price", price);

@@ -136,7 +136,8 @@ public class JeonseServiceImpl implements JeonseService {
                 price = token[3];
             }
             price = price.substring(0, price.length()-1);
-
+            String date = "2021-02,2021-03,2021-04,2021-05,2021-06,2021-07";
+            value.put("date", date);
             value.put("sd", sd);
             value.put("sgg", sgg);
             value.put("price", price);
