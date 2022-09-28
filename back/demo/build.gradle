@@ -56,9 +56,13 @@ dependencies {
 
 	runtimeOnly 'com.h2database:h2'
 
-	implementation 'org.jsoup:jsoup:1.11.3'
+	// https://mvnrepository.com/artifact/org.apache.spark/spark-mllib
+	implementation group: 'org.apache.spark', name: 'spark-mllib_2.12', version: '3.1.2'
 
-	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+	// https://mvnrepository.com/artifact/org.jblas/jblas
+	implementation group: 'org.jblas', name: 'jblas', version: '1.2.3'
+
+
 }
 
 tasks.named('test') {
