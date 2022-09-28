@@ -1,12 +1,8 @@
-import { useDispatch } from "react-redux";
-import { addCategory } from "modules/CategorySet"
 import CategorySlider from "./CategorySlider";
 
-function CategoryItem ({CategoryName}) {
-    const dispatch = useDispatch();
-    const add = () => {dispatch(addCategory(CategoryName, "상"))};
+function CategoryItem ({CategoryName}) {    
     return (
-        <div className="category__box--row" onClick={add}>{CategoryName}<CategorySlider/></div>
+        <div className="category__box--row">{CategoryName}<CategorySlider CategoryName={CategoryName} /></div>
     )
 }
 export default CategoryItem;
