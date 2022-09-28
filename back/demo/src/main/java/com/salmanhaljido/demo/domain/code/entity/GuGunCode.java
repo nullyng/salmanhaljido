@@ -1,9 +1,6 @@
 package com.salmanhaljido.demo.domain.code.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -17,6 +14,10 @@ public class GuGunCode {
     private String code;
 
     private String addr;
+
+    private Double lat;
+
+    private Double lng;
 
     @ManyToOne
     @JoinColumn(name = "sido_code")
@@ -34,5 +35,10 @@ public class GuGunCode {
     public GuGunCode(String code, String addr){
         this.code = code;
         this.addr = addr;
+    }
+
+    public void updateLocation(Double lat, Double lng){
+        this.lat = lat;
+        this.lng = lng;
     }
 }
