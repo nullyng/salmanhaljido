@@ -124,5 +124,6 @@ public class AcademyServiceImpl implements AcademyService {
         Dataset<Row> dff = session.read().format("json").load(dataPath + "academy_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
         System.out.println("Academy : Finish");
+
     }
 }
