@@ -11,6 +11,7 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -21,7 +22,8 @@ import java.io.*;
 @RequiredArgsConstructor
 public class CodeServiceImpl implements CodeService{
 
-    private String dataPath = "src/main/resources/data/";
+    @Value("${filepath:0}")
+    String dataPath;
     private final SiDoCodeRepository siDoCodeRepository;
     private final DongCodeRepository dongCodeRepository;
     private final GuGunCodeRepository guGunCodeRepository;
