@@ -1,9 +1,15 @@
-import { Checkbox, FormControlLabel, ThemeProvider } from "@mui/material";
+import {
+  Checkbox,
+  Collapse,
+  FormControlLabel,
+  ThemeProvider,
+} from "@mui/material";
 import { useState } from "react";
 
 import CustomTooltip from "components/common/CustomTooltip";
 import theme from "components/common/theme";
-import CategoryRcmd from "./CategoryRcmd";
+import CategoryRcmd from "components/Main/Input/CategoryRcmd";
+import CategoryRcmdButton from "components/Main/Input/CategoryRcmdButton";
 
 function UserInfo() {
   const [hasCar, setHasCar] = useState(false);
@@ -52,9 +58,14 @@ function UserInfo() {
             />
           </div>
           {hasCar || hasPets || hasChildren ? (
-            <CategoryRcmd alertOpen={true} />
+            <CategoryRcmdButton
+              hasCar={hasCar}
+              hasPets={hasPets}
+              hasChildren={hasChildren}
+              open={true}
+            />
           ) : (
-            <CategoryRcmd alertOpen={false} />
+            <CategoryRcmdButton open={false} />
           )}
         </div>
       </ThemeProvider>
