@@ -9,7 +9,7 @@ import {
 
 import DetailData from "components/Main/Output/Data/DetailData";
 
-function ChartData() {
+function ChartData({ statistics }) {
   const data = [
     {
       subject: "교통",
@@ -54,27 +54,35 @@ function ChartData() {
   ];
 
   return (
-    <div>
-      <RadarChart
-        cx={180}
-        cy={180}
-        outerRadius={130}
-        width={360}
-        height={360}
-        data={data}
-      >
-        <PolarGrid />
-        <PolarAngleAxis dataKey="subject" />
-        <PolarRadiusAxis />
-        <Radar
-          name="Mike"
-          dataKey="A"
-          stroke="#E94560"
-          fill="#E94560"
-          fillOpacity={0.6}
-        />
-      </RadarChart>
-      <DetailData />
+    <div className="chart-data">
+      {statistics.length === 0 ? (
+        <div className="chart-data--no-data">
+          <p>추천 지역을 선택해주세요.</p>
+        </div>
+      ) : (
+        <div className="char-data--data">
+          <RadarChart
+            cx={180}
+            cy={180}
+            outerRadius={130}
+            width={360}
+            height={360}
+            data={data}
+          >
+            <PolarGrid />
+            <PolarAngleAxis dataKey="subject" />
+            <PolarRadiusAxis />
+            <Radar
+              name="Mike"
+              dataKey="A"
+              stroke="#E94560"
+              fill="#E94560"
+              fillOpacity={0.6}
+            />
+          </RadarChart>
+          <DetailData />
+        </div>
+      )}
     </div>
   );
 }
