@@ -24,21 +24,13 @@ import com.salmanhaljido.demo.domain.school.service.SchoolService;
 import com.salmanhaljido.demo.domain.sportsfacilities.service.SportsFacilitiesService;
 import com.salmanhaljido.demo.domain.theater.service.TheaterService;
 import com.salmanhaljido.demo.domain.trading.service.TradingService;
-import javax.annotation.PostConstruct;
-import com.salmanhaljido.demo.global.scheduler.DataSaveScheduler;
 import lombok.RequiredArgsConstructor;
-import org.quartz.*;
-import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
 public class DataServiceImpl implements DataService {
-    private SchedulerFactory schedulerFactory;
-    private Scheduler scheduler;
 
     private final AcademyService academyService;
     private final AnimalHospitalService animalHospitalService;
@@ -92,30 +84,6 @@ public class DataServiceImpl implements DataService {
             tradingService.getData();
         } catch (Exception e) {
             e.printStackTrace();
-        }
-
-        //지우지마 스케줄러 미리 구현한거
-        //createScheduler();
-    }
-
-    public void createScheduler() {
-        try{
-            schedulerFactory = new StdSchedulerFactory();
-            scheduler = schedulerFactory.getScheduler();
-
-            JobDetail jobDetail = JobBuilder.newJob(DataSaveScheduler.class)
-                    .withIdentity("job", "job_group")
-                    .build();
-            CronScheduleBuilder cronSch = CronScheduleBuilder.cronSchedule(new CronExpression("0 0 0 1/1 * ? *"));
-            CronTrigger trigger = (CronTrigger) TriggerBuilder.newTrigger()
-                            .withIdentity("cron_trigger", "crong_trigger_group")
-                                    .withSchedule(cronSch)
-                                            .build();
-
-            scheduler.scheduleJob(jobDetail, trigger);
-            scheduler.start();
-
-        }catch(Exception e){
         }
     }
 }
