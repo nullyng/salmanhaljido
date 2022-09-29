@@ -3,13 +3,13 @@ import { combineReducers } from "redux";
 import map from "modules/map";
 import region from "modules/region";
 import input from "modules/input";
-import CategorySet from "modules/CategorySet";
+import category from "modules/category";
 
 const rootReducer = combineReducers({
   map,
   region,
   input,
-  CategorySet,
+  category,
 });
 
 export default rootReducer;
