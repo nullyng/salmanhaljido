@@ -21,7 +21,7 @@ function TabPanel(props) {
     >
       {value === index && (
         <Box sx={{ paddingY: 3 }}>
-          <Typography>{children}</Typography>
+          {children}
         </Box>
       )}
     </div>
@@ -41,7 +41,7 @@ function a11yProps(index) {
   };
 }
 
-function Data() {
+function Data({ statistics, realEstate }) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
@@ -63,10 +63,10 @@ function Data() {
           </Tabs>
         </Box>
         <TabPanel value={value} index={0}>
-          <ChartData />
+          <ChartData statistics={statistics} />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          <RealEstateList />
+          <RealEstateList realEstate={realEstate} />
         </TabPanel>
       </Box>
     </div>
