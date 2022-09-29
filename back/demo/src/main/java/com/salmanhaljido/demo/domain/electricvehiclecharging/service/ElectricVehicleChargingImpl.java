@@ -17,6 +17,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.util.UriComponents;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -29,6 +30,7 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
+@Service
 @RequiredArgsConstructor
 public class ElectricVehicleChargingImpl implements ElectricVehicleChargingService {
     private String serviceKey = "SY0wwUOUgR+XvLXazywXmEeMbGvaGqsDrAIjvacheY12NY0tXxrGd/DONoLyIa2eV6y0SVI4zxfqZZRECk8wIw==";
@@ -57,9 +59,9 @@ public class ElectricVehicleChargingImpl implements ElectricVehicleChargingServi
         manager.setDefaultMaxPerRoute(5);
 
         RequestConfig requestConfig = RequestConfig.custom()
-                .setConnectionRequestTimeout(10000)
-                .setConnectTimeout(10000)
-                .setSocketTimeout(10000)
+                .setConnectionRequestTimeout(15000)
+                .setConnectTimeout(15000)
+                .setSocketTimeout(15000)
                 .build();
 
         CloseableHttpClient httpClient = HttpClientBuilder
@@ -129,13 +131,40 @@ public class ElectricVehicleChargingImpl implements ElectricVehicleChargingServi
         Map<String, Long> map = rdds.countByValue();
         for(String str : map.keySet()){
             JSONObject value = new JSONObject();
-            value.put(str, map.get(str));
+            if(str == null) continue;
+            String[] token = str.split(" ");
+            if(token.length==1) continue;
+            String sd = "";
+            String sgg = "";
+            if(token.length==2){
+                sd = token[0];
+                sgg = token[1];
+
+
+            }else if(token.length==3){
+                if(token[2].endsWith("구")){
+                    sd = token[0];
+                    sgg=token[1] + " " + token[2];
+                }else{
+                    sd = token[0];
+                    sgg = token[1];
+                }
+            }else{
+                sd = token[0];
+                sgg=token[1] + " " + token[2];
+            }
+            value.put("sd", sd);
+            value.put("sgg", sgg);
+            if(map.get(str) ==null) value.put("count", 0);
+            else value.put("count", map.get(str));
+
             fileOutputStream.write(value.toString().getBytes());
             fileOutputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
         }
 
         Dataset<Row> dff = session.read().format("json").load(dataPath + "evc_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
+        session.close();
         System.out.println("ElectricVehicleCharging : Finish");
     }
 }

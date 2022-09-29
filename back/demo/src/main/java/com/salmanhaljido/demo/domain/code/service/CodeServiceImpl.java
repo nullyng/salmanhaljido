@@ -39,14 +39,15 @@ public class CodeServiceImpl implements CodeService{
             while((line = br.readLine())!=null){
                 String[] tokens = line.split("\t");
                 if(tokens[tokens.length - 1].equals("존재")){
-                    if(tokens[1].endsWith("시") || tokens[1].endsWith("도")){
+                    if(tokens[1].endsWith("특별시") || tokens[1].endsWith("도") || tokens[1].endsWith("광역시") || tokens[1].endsWith("특별자치시")){
                         SiDoCode siDoCode = SiDoCode.builder()
                                 .code(tokens[0])
                                 .addr(tokens[1])
                                 .build();
                         siDoCodeRepository.save(siDoCode);
                     }else if(tokens[1].endsWith("군") || tokens[1].endsWith("구") || tokens[1].endsWith("시")){
-                        SiDoCode siDoCode = siDoCodeRepository.findSiDoCodeByAddr(tokens[1].split(" ")[0]);
+                        String siDoCodeId = tokens[0].substring(0, 2) + "00000000";
+                        SiDoCode siDoCode = siDoCodeRepository.findById(siDoCodeId).get();
                         GuGunCode guGunCode = GuGunCode.builder()
                                 .code(tokens[0])
                                 .addr(tokens[1])
@@ -104,7 +105,7 @@ public class CodeServiceImpl implements CodeService{
                         if(cellNum == 4) lng = value;
                     }
                     code = code.split("\\.")[0] + "00000";
-                    if(addr.endsWith("시")){
+                    if(addr.endsWith("특별자치시")){
                         SiDoCode siDoCode = siDoCodeRepository.findById(code).get();
                         siDoCode.updateLocation(Double.parseDouble(lat), Double.parseDouble(lng));
                         siDoCodeRepository.save(siDoCode);

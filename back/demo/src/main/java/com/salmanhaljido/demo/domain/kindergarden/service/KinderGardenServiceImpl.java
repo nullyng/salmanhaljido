@@ -66,7 +66,32 @@ public class KinderGardenServiceImpl implements KinderGardenService{
             JSONArray kinderInfo = (JSONArray) jsonParser.parse(jsonObject.get("kinderInfo").toString());
 
             JSONObject result = new JSONObject();
-            result.put(guGunCode.getAddr(), kinderInfo.size());
+
+            String[] token = guGunCode.getAddr().split(" ");
+            if(token.length==1) continue;
+            String sd = "";
+            String sgg = "";
+            if(token.length==2){
+                sd = token[0];
+                sgg = token[1];
+
+
+            }else if(token.length==3){
+                if(token[2].endsWith("구")){
+                    sd = token[0];
+                    sgg=token[1] + " " + token[2];
+                }else{
+                    sd = token[0];
+                    sgg = token[1];
+                }
+            }else{
+                sd = token[0];
+                sgg=token[1] + " " + token[2];
+            }
+            result.put("sd", sd);
+            result.put("sgg", sgg);
+            result.put("count", kinderInfo.size());
+
             fileOutputStream.write(result.toString().getBytes(StandardCharsets.UTF_8));
             fileOutputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
         }
@@ -79,6 +104,7 @@ public class KinderGardenServiceImpl implements KinderGardenService{
 
         Dataset<Row> dff = session.read().format("json").load(dataPath + "kindergarden_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
+        session.close();
         System.out.println("KinderGarden : Finish");
     }
 }
