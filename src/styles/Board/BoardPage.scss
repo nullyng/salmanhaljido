@@ -8,7 +8,7 @@
     height: 43px;
     margin: auto 0;
 
-    &__bar{
+    &__bar {
       margin: 0 1rem 0 3rem;
       border: 1px solid #000000;
       opacity: 0.3;
@@ -48,7 +48,7 @@
     font-size: 20px;
   }
 
-  &__tabs{
+  &__tabs {
     position: relative;
     left: 7%;
 
@@ -65,20 +65,26 @@
   width: 310px;
   height: 290px;
 
-  &__content {
-    height: 100%;
+  &__btn {
+    cursor: pointer;
+  }
+
+  &__cntr {
+    height: 80px;
+
+    &--detail {
+      overflow: hidden;
+      white-space: normal;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      word-break: keep-all;
+    }
 
     & p {
       font-size: 15px;
     }
-  }
-
-  & button {
-    &:hover {
-    }
-  }
-  &:hover {
-    cursor: pointer;
   }
 }
 
@@ -93,5 +99,5 @@
   position: fixed;
   left: 50%;
   bottom: 3%;
-  transform: translate(-50%, -50%)
+  transform: translate(-50%, -50%);
 }
