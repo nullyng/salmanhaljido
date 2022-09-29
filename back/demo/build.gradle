@@ -12,7 +12,6 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
-	all*.exclude module : 'spring-boot-starter-logging'
 }
 repositories {
 	mavenCentral()
@@ -61,14 +60,15 @@ dependencies {
 
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 
-	// https://mvnrepository.com/artifact/org.apache.spark/spark-mllib
-	implementation group: 'org.apache.spark', name: 'spark-mllib_2.12', version: '3.1.2'
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
 
-	// https://mvnrepository.com/artifact/org.jblas/jblas
+	 // https://mvnrepository.com/artifact/org.apache.spark/spark-mllib
+	implementation ('org.apache.spark:spark-mllib_2.12:3.1.2'){
+		 exclude group: "org.slf4j", module: "slf4j-log4j12"
+	 }
+
+	 // https://mvnrepository.com/artifact/org.jblas/jblas
 	implementation group: 'org.jblas', name: 'jblas', version: '1.2.3'
-
-	// https://mvnrepository.com/artifact/org.quartz-scheduler/quartz
-	implementation group: 'org.quartz-scheduler', name: 'quartz', version: '2.3.2'
 
 }
 

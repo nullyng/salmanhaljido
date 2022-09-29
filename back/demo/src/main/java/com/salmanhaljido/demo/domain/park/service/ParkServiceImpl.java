@@ -157,7 +157,7 @@ public class ParkServiceImpl implements ParkService {
         }
         Dataset<Row> dff = session.read().format("json").load(dataPath + "park_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
-
+        session.close();
         System.out.println("Park : Finish");
     }
     private static String checkEMDG(String token){

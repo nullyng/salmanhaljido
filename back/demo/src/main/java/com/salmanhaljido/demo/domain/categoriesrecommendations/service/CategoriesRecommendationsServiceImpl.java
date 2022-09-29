@@ -13,7 +13,6 @@ import org.apache.spark.mllib.recommendation.MatrixFactorizationModel;
 import org.apache.spark.mllib.recommendation.Rating;
 
 import org.json.JSONObject;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -25,8 +24,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class CategoriesRecommendationsServiceImpl implements CategoriesRecommendationsService{
 
-    @Value("${filepath:0}")
-    String dataPath;
+    String dataPath = "src/main/resources/data/";
     @Override
     public CategoriesRecommendationsViewResponseDto CategoriesRecommendationsView(CategoriesRecommendationsViewRequestDto dto){
         char[] charArr = new char[4];
@@ -85,9 +83,6 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
                 .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.categories")
                 .getOrCreate();
         try {
-            //서버
-            //String dataPath = "/data/";
-            //로컬
             File writeFile = new File(dataPath + "categories.json");
             FileOutputStream fileOutputStream = new FileOutputStream(writeFile);
             JSONObject valueJSON = new JSONObject();
@@ -145,14 +140,12 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
     }
 
     public List<CategoriesDto> getRating(String mainCategory){
-        //서버
-        //String dataPath = "/data/";
-        //로컬
+
         List<CategoriesDto> returnRatingList = new ArrayList<>();
         try {
             File ratingFile = new File(dataPath + "rating.data");
-            if (!ratingFile.exists()) { // 파일이 존재하지 않으면
-                ratingFile.createNewFile(); // 신규생성
+            if (!ratingFile.exists()) {
+                ratingFile.createNewFile();
             }
 
             SparkSession session = SparkSession.builder()
@@ -223,14 +216,12 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
         return returnRatingList;
     }
     public List<CategoriesDto> getCounting(String mainCategory){
-        //서버
-        //String dataPath = "/data/";
-        //로컬
+
         List<CategoriesDto> returnCountingList = new ArrayList<>();
         try {
             File countingFile = new File(dataPath + "counting.data");
-            if (!countingFile.exists()) { // 파일이 존재하지 않으면
-                countingFile.createNewFile(); // 신규생성
+            if (!countingFile.exists()) {
+                countingFile.createNewFile();
             }
 
             SparkSession session = SparkSession.builder()
