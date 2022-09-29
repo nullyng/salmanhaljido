@@ -7,7 +7,6 @@ function CategoryRcmdButton({ hasCar, hasPets, hasChildren, open }) {
   const [ratingOpen, setRatingOpen] = useState(false);
 
   useEffect(() => {
-    console.log(hasCar + " " + hasPets + " " + hasChildren);
     setCountOpen(false);
     setRatingOpen(false);
   }, [hasCar, hasPets, hasChildren]);
