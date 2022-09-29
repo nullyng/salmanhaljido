@@ -25,8 +25,6 @@ import com.salmanhaljido.demo.domain.sportsfacilities.service.SportsFacilitiesSe
 import com.salmanhaljido.demo.domain.theater.service.TheaterService;
 import com.salmanhaljido.demo.domain.trading.service.TradingService;
 import lombok.RequiredArgsConstructor;
-import org.quartz.*;
-import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.stereotype.Service;
 
 
@@ -34,8 +32,6 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class DataServiceImpl implements DataService {
-    private SchedulerFactory schedulerFactory;
-    private Scheduler scheduler;
 
     private final AcademyService academyService;
     private final AnimalHospitalService animalHospitalService;
