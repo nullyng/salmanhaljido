@@ -12,7 +12,7 @@ const initialState = {
   currMap: {},
 };
 
-export default function region(state = initialState, action) {
+export default function map(state = initialState, action) {
   switch (action.type) {
     case SET_MAP_DATA:
       return {
@@ -28,7 +28,7 @@ export default function region(state = initialState, action) {
       return {
         ...state,
         currMap: action.currMap,
-      }
+      };
     default:
       return state;
   }
