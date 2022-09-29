@@ -211,6 +211,7 @@
   font-family: 'GongGothicMedium';
   
   &__tabs{
+    display: flex;
     flex-wrap: wrap;
   }
 
@@ -220,7 +221,7 @@
     padding: 1rem;
 
     &--row{
-      font-weight: bold;
+      font-family: 'GongGothicMedium';
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -228,11 +229,28 @@
     }
 
     &--top{
-      font-weight: bold;
+      font-family: 'GongGothicMedium';
       display: flex;
       align-items: center;
       justify-content: space-between;
       font-size: xx-small;
     }
   }
+}
+
+.mycategory {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.categorybox {
+
+
+    & button {
+      padding: 0;
+      font-size: large;
+      font-family: 'GongGothicMedium';
+      min-width: 25%;
+    }
+
 }
