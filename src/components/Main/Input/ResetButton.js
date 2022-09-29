@@ -1,12 +1,32 @@
 import { Button } from "@mui/material";
 import RefreshIcon from "@mui/icons-material/Refresh";
 import { useState } from "react";
-import CustomModal from "components/common/CustomModal";
+import { useDispatch } from "react-redux";
 
-function ResetButton({ currMap, markers, onSetMarkers }) {
+import CustomModal from "components/common/CustomModal";
+import { setPrice, setRegion, setUserInfo } from "modules/input";
+import { initCategory } from "modules/category";
+
+function ResetButton() {
   const [open, setOpen] = useState(false);
 
-  const handleClickButton = () => {};
+  const dispatch = useDispatch();
+  const onSetRegion = (region) => dispatch(setRegion(region));
+  const onSetUserInfo = (userInfo) => dispatch(setUserInfo(userInfo));
+  const onSetPrice = (price) => dispatch(setPrice(price));
+  const onInitCategory = () => dispatch(initCategory());
+
+  const handleClickButton = () => {
+    onSetRegion("");
+    onSetUserInfo({
+      isMarried: false,
+      hasCar: false,
+      hasPets: false,
+      hasChildren: false,
+    });
+    onSetPrice({ jeonse: [0, 28], maemae: [0, 28] });
+    onInitCategory();
+  };
 
   return (
     <div className="reset-button">

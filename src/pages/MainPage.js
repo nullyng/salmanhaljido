@@ -4,7 +4,6 @@ import Input from "components/Main/Input/Input";
 import CustomMap from "components/Main/Map/CustomMap";
 import Output from "components/Main/Output/Output";
 import { setCurrMap, setMapData, setMarkers } from "modules/map";
-import { setCategories, setPrice, setRegion, setUserInfo } from "modules/input";
 import { setCurrRegion, setRealEstate, setStatistics } from "modules/region";
 
 function MainPage() {
