@@ -139,6 +139,7 @@ public class SchoolServiceImpl implements SchoolService{
 
             Dataset<Row> dff = session.read().format("json").load(dataPath + "school_result.json");
             dff.write().format("mongodb").mode("overwrite").save();
+            session.close();
             System.out.println("School : Finish");
 
         }catch (Exception e){

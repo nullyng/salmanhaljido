@@ -125,7 +125,7 @@ public class FacilitiesForTheDisabledServiceImpl implements FacilitiesForTheDisa
         }
         Dataset<Row> dff = session.read().format("json").load(dataPath + "facilitiesforthedisabled_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
-
+        session.close();
         System.out.println("FacilitiesForTheDisabled : Finish");
     }
     private static String checkEMDG(String token){

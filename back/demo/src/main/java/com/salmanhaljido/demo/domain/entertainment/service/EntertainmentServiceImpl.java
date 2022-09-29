@@ -161,7 +161,7 @@ public class EntertainmentServiceImpl implements EntertainmentService {
         }
         Dataset<Row> dff = session.read().format("json").load(dataPath + "entertainment_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
-
+        session.close();
         System.out.println("Entertainment : Finish");
     }
     private static String checkEMDG(String token){

@@ -169,7 +169,7 @@ public class AnimalSalonServiceImpl implements AnimalSalonService {
         }
         Dataset<Row> dff = session.read().format("json").load(dataPath + "animalsalon_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
-
+        session.close();
         System.out.println("AnimalSalon : Finish");
     }
     private static String checkEMDG(String token){
