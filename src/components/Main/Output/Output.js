@@ -8,7 +8,7 @@ import "styles/Main/Output.scss";
 import RcmdList from "components/Main/Output/Rcmd/RcmdList";
 import Data from "components/Main/Output/Data/Data";
 
-function Output() {
+function Output({ rcmdData, currRegion, statistics, realEstate, onSetCurrRegion, onSetStatistics, onSetRealEstate }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const handleDrawerOpen = () => {
@@ -50,8 +50,8 @@ function Output() {
               <KeyboardDoubleArrowRightIcon />
             </IconButton>
           </div>
-          <RcmdList />
-          <Data />
+          <RcmdList rcmdData={rcmdData} currRegion={currRegion} onSetCurrRegion={onSetCurrRegion} onSetStatistics={onSetStatistics} onSetRealEstate={onSetRealEstate} />
+          <Data currRegion={currRegion} statistics={statistics} realEstate={realEstate} />
         </Drawer>
       </div>
     </ThemeProvider>
