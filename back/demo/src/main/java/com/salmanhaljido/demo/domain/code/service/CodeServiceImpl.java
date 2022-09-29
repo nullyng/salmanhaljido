@@ -22,8 +22,7 @@ import java.io.*;
 @RequiredArgsConstructor
 public class CodeServiceImpl implements CodeService{
 
-    @Value("${filepath:0}")
-    String dataPath;
+    String dataPath = "src/main/resources/data/";
     private final SiDoCodeRepository siDoCodeRepository;
     private final DongCodeRepository dongCodeRepository;
     private final GuGunCodeRepository guGunCodeRepository;
