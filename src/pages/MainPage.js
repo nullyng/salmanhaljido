@@ -13,9 +13,6 @@ function MainPage() {
   const mapData = useSelector((state) => state.map.mapData);
   const markers = useSelector((state) => state.map.markers);
 
-  // 입력 관련 state
-  const region = useSelector((state) => state.input.region);
-
   // 출력 관련 state
   const rcmdData = useSelector((state) => state.region.rcmdData);
   const currRegion = useSelector((state) => state.region.currRegion);
@@ -28,12 +25,6 @@ function MainPage() {
   const onSetMapData = (mapData) => dispatch(setMapData(mapData));
   const onSetMarkers = (markers) => dispatch(setMarkers(markers));
 
-  // 입력 관련 함수
-  const onSetRegion = (region) => dispatch(setRegion(region));
-  const onSetUserInfo = (userInfo) => dispatch(setUserInfo(userInfo));
-  const onSetCategories = (categories) => dispatch(setCategories(categories));
-  const onSetPrice = (price) => dispatch(setPrice(price));
-
   // 출력 관련 함수
   const onSetCurrRegion = (currRegion) => dispatch(setCurrRegion(currRegion));
   const onSetStatistics = (statistics) => dispatch(setStatistics(statistics));
@@ -45,12 +36,7 @@ function MainPage() {
         currMap={currMap}
         onSetMapData={onSetMapData}
         markers={markers}
-        region={region}
         onSetMarkers={onSetMarkers}
-        onSetRegion={onSetRegion}
-        onSetUserInfo={onSetUserInfo}
-        onSetCategories={onSetCategories}
-        onSetPrice={onSetPrice}
       />
 
       <Output

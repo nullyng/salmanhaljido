@@ -114,7 +114,6 @@
 
 /* 사용자 정보 */
 .user-info {
-  margin-bottom: 1rem;
   @include input-title;
 
   &__content {
@@ -128,8 +127,21 @@
 }
 
 .category-rcmd-btn {
+  & h3 {
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+    margin-bottom: 0;
+
+    & span {
+      font-size: 2rem;
+      margin-right: 0.5rem;
+    }
+  }
+
   & p {
     font-size: 0.8rem;
+    margin-top: 0;
     margin-left: 0.5rem;
     margin-right: 0.5rem;
   }

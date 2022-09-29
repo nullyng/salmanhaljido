@@ -5,7 +5,7 @@ import { useState } from "react";
 
 import "styles/Main/Input.scss";
 import UserLocation from "components/Main/Input/UserLocation";
-import UserInfo from "components/Main/Input/UserInfo";
+import UserInfo from "components/Main/Input/UserInfo/UserInfo";
 import Price from "components/Main/Input/Price";
 import ResetButton from "components/Main/Input/ResetButton";
 import SubmitButton from "components/Main/Input/SubmitButton";
@@ -13,17 +13,7 @@ import MyCategory from "components/Main/Input/MyCategory";
 import Category from "components/Main/Input/Category";
 import { useSelector } from "react-redux";
 
-function Input({
-  currMap,
-  onSetMapData,
-  markers,
-  region,
-  onSetMarkers,
-  onSetRegion,
-  onSetUserInfo,
-  onSetCategories,
-  onSetPrice,
-}) {
+function Input({ currMap, onSetMapData, markers, onSetMarkers }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const myCategoryList = useSelector((state) => state.category.myCategoryList);
@@ -55,15 +45,15 @@ function Input({
           </IconButton>
         </div>
         <div className="left-drawer__inner__content">
-          <UserLocation region={region} onSetRegion={onSetRegion} />
+          <UserLocation />
           <Divider />
-          <UserInfo onSetUserInfo={onSetUserInfo} />
+          <UserInfo />
           <Divider />
           <MyCategory myCategoryList={myCategoryList} />
           <Divider />
           <Category />
           <Divider />
-          <Price onSetPrice={onSetPrice} />
+          <Price />
         </div>
         <div className="left-drawer__inner__bottom">
           <ResetButton />
