@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -36,7 +36,7 @@ function a11yProps(index) {
   };
 }
 
-const CategoryList = {
+const categoryList = {
   교통: [
     "대중교통 이용률",
     "대중교통 정류장",
@@ -53,7 +53,7 @@ const CategoryList = {
 };
 
 function Category() {
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -91,30 +91,16 @@ function Category() {
             <Tab label="생활" {...a11yProps(7)} />
           </Tabs>
         </Box>
-        <TabPanel value={value} index={0}>
-          <CategoryPanel arr={CategoryList.교통} />
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <CategoryPanel arr={CategoryList.재난} />
-        </TabPanel>
-        <TabPanel value={value} index={2}>
-          <CategoryPanel arr={CategoryList.안전} />
-        </TabPanel>
-        <TabPanel value={value} index={3}>
-          <CategoryPanel arr={CategoryList.의료} />
-        </TabPanel>
-        <TabPanel value={value} index={4}>
-          <CategoryPanel arr={CategoryList.반려동물} />
-        </TabPanel>
-        <TabPanel value={value} index={5}>
-          <CategoryPanel arr={CategoryList.교육} />
-        </TabPanel>
-        <TabPanel value={value} index={6}>
-          <CategoryPanel arr={CategoryList.문화} />
-        </TabPanel>
-        <TabPanel value={value} index={7}>
-          <CategoryPanel arr={CategoryList.생활} />
-        </TabPanel>
+        {
+          <div>
+            {" "}
+            {Object.keys(categoryList).map((category, index) => (
+              <TabPanel key={index} value={value} index={index}>
+                <CategoryPanel arr={categoryList[category]} />
+              </TabPanel>
+            ))}
+          </div>
+        }
       </Box>
     </div>
   );

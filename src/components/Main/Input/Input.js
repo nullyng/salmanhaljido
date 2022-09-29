@@ -2,6 +2,7 @@ import { Divider, Drawer, IconButton } from "@mui/material";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 import "styles/Main/Input.scss";
 import UserLocation from "components/Main/Input/UserLocation";
@@ -24,6 +25,8 @@ function Input({
   onSetPrice,
 }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+
+  const myCategoryList = useSelector((state) => state.category.myCategoryList);
 
   const handleDrawerOpen = () => {
     setIsDrawerOpen(true);
@@ -56,7 +59,7 @@ function Input({
           <Divider />
           <UserInfo onSetUserInfo={onSetUserInfo} />
           <Divider />
-          <MyCategory />
+          <MyCategory myCategoryList={myCategoryList} />
           <Divider />
           <Category />
           <Divider />
