@@ -1,186 +1,95 @@
 package com.salmanhaljido.demo.domain.data.service;
 
 
-import com.salmanhaljido.demo.domain.academy.service.AcademyServiceImpl;
-import com.salmanhaljido.demo.domain.animalhospital.service.AnimalHospitalServiceImpl;
-import com.salmanhaljido.demo.domain.animalsalon.service.AnimalSalonServiceImpl;
-import com.salmanhaljido.demo.domain.caraccident.service.CarAccidentServiceImpl;
-import com.salmanhaljido.demo.domain.childsafety.service.ChildSafetyServiceImpl;
-import com.salmanhaljido.demo.domain.concerthall.service.ConcertHallServiceImpl;
-import com.salmanhaljido.demo.domain.crime.service.CrimeServiceImpl;
-import com.salmanhaljido.demo.domain.data.exception.*;
-import com.salmanhaljido.demo.domain.drugstore.service.DrugStoreServiceImpl;
-import com.salmanhaljido.demo.domain.electricvehiclecharging.service.ElectricVehicleChargingImpl;
-import com.salmanhaljido.demo.domain.entertainment.service.EntertainmentServiceImpl;
-import com.salmanhaljido.demo.domain.facilitiesforthedisabled.service.FacilitiesForTheDisabledServiceImpl;
-import com.salmanhaljido.demo.domain.femalesafety.service.FemaleSafetyServiceImpl;
-import com.salmanhaljido.demo.domain.hospital.service.HospitalServiceImpl;
-import com.salmanhaljido.demo.domain.jeonse.service.JeonseServiceImpl;
-import com.salmanhaljido.demo.domain.kindergarden.service.KinderGardenServiceImpl;
-import com.salmanhaljido.demo.domain.library.service.LibraryServiceImpl;
-import com.salmanhaljido.demo.domain.mart.service.MartServiceImpl;
-import com.salmanhaljido.demo.domain.park.service.ParkServiceImpl;
-import com.salmanhaljido.demo.domain.restaurant.service.RestaurantServiceImpl;
-import com.salmanhaljido.demo.domain.school.service.SchoolServiceImpl;
-import com.salmanhaljido.demo.domain.shelter.service.ShelterServiceImpl;
-import com.salmanhaljido.demo.domain.sportsfacilities.service.SportsFacilitiesServiceImpl;
-import com.salmanhaljido.demo.domain.theater.service.TheaterServiceImpl;
-import com.salmanhaljido.demo.domain.trading.service.TradingServiceImpl;
+import com.salmanhaljido.demo.domain.academy.service.AcademyService;
+import com.salmanhaljido.demo.domain.animalhospital.service.AnimalHospitalService;
+import com.salmanhaljido.demo.domain.animalsalon.service.AnimalSalonService;
+import com.salmanhaljido.demo.domain.caraccident.service.CarAccidentService;
+import com.salmanhaljido.demo.domain.childsafety.service.ChildSafetyService;
+import com.salmanhaljido.demo.domain.concerthall.service.ConcertHallService;
+import com.salmanhaljido.demo.domain.crime.service.CrimeService;
+import com.salmanhaljido.demo.domain.drugstore.service.DrugStoreService;
+import com.salmanhaljido.demo.domain.electricvehiclecharging.service.ElectricVehicleChargingService;
+import com.salmanhaljido.demo.domain.entertainment.service.EntertainmentService;
+import com.salmanhaljido.demo.domain.facilitiesforthedisabled.service.FacilitiesForTheDisabledService;
+import com.salmanhaljido.demo.domain.femalesafety.service.FemaleSafetyService;
+import com.salmanhaljido.demo.domain.hospital.service.HospitalService;
+import com.salmanhaljido.demo.domain.jeonse.service.JeonseService;
+import com.salmanhaljido.demo.domain.kindergarden.service.KinderGardenService;
+import com.salmanhaljido.demo.domain.library.service.LibraryService;
+import com.salmanhaljido.demo.domain.mart.service.MartService;
+import com.salmanhaljido.demo.domain.park.service.ParkService;
+import com.salmanhaljido.demo.domain.restaurant.service.RestaurantService;
+import com.salmanhaljido.demo.domain.school.service.SchoolService;
+import com.salmanhaljido.demo.domain.sportsfacilities.service.SportsFacilitiesService;
+import com.salmanhaljido.demo.domain.theater.service.TheaterService;
+import com.salmanhaljido.demo.domain.trading.service.TradingService;
+import lombok.RequiredArgsConstructor;
+import org.quartz.*;
+import org.quartz.impl.StdSchedulerFactory;
 import org.springframework.stereotype.Service;
 
 
-@Service
-public class DataServiceImpl implements DataService {
 
+@Service
+@RequiredArgsConstructor
+public class DataServiceImpl implements DataService {
+    private SchedulerFactory schedulerFactory;
+    private Scheduler scheduler;
+
+    private final AcademyService academyService;
+    private final AnimalHospitalService animalHospitalService;
+    private final AnimalSalonService animalSalonService;
+    private final CarAccidentService carAccidentService;
+    private final ChildSafetyService childSafetyService;
+    private final ConcertHallService concertHallService;
+    private final CrimeService crimeService;
+    private final DrugStoreService drugStoreService;
+    private final ElectricVehicleChargingService electricVehicleChargingService;
+    private final EntertainmentService entertainmentService;
+    private final FacilitiesForTheDisabledService facilitiesForTheDisabledService;
+    private final HospitalService hospitalService;
+    private final FemaleSafetyService femaleSafetyService;
+    private final JeonseService jeonseService;
+    private final KinderGardenService kinderGardenService;
+    private final LibraryService libraryService;
+    private final MartService martService;
+    private final ParkService parkService;
+    private final RestaurantService restaurantService;
+    private final SchoolService schoolService;
+    private final SportsFacilitiesService sportsFacilitiesService;
+    private final TheaterService theaterService;
+    private final TradingService tradingService;
 
     @Override
-    public void saveData() throws Exception{
-        try{
-            AcademyServiceImpl data = new AcademyServiceImpl();
-            data.getData();
-        }catch(Exception e){
-            throw new AcademySaveException();
+    public void saveData(){
+        try {
+            academyService.getData();
+            animalHospitalService.getData();
+            animalSalonService.getData();
+            carAccidentService.getData();
+            childSafetyService.getData();
+            concertHallService.getData();
+            crimeService.getData();
+            drugStoreService.getData();
+            electricVehicleChargingService.getData();
+            entertainmentService.getData();
+            facilitiesForTheDisabledService.getData();
+            hospitalService.getData();
+            femaleSafetyService.getData();
+            jeonseService.getData();
+            kinderGardenService.getData();
+            libraryService.getData();
+            martService.getData();
+            parkService.getData();
+//            restaurantService.getData();
+            schoolService.getData();
+            sportsFacilitiesService.getData();
+            theaterService.getData();
+            tradingService.getData();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        try{
-            AnimalHospitalServiceImpl data = new AnimalHospitalServiceImpl();
-            data.getData();
-        }catch(Exception e){
-            throw new AnimalHospitalSaveException();
-        }
-
-        try{
-            AnimalSalonServiceImpl data = new AnimalSalonServiceImpl();
-            data.getData();
-        }catch(Exception e){
-            throw new AnimalSalonSaveException();
-        }
-        try{
-            CarAccidentServiceImpl data = new CarAccidentServiceImpl();
-            data.getData();
-        }catch(Exception e){
-            throw new CarAccidentSaveException();
-        }
-        try{
-            ChildSafetyServiceImpl data = new ChildSafetyServiceImpl();
-            data.getData();
-        }catch(Exception e){
-            throw new ChildSafetySaveException();
-        }
-        try{
-            ConcertHallServiceImpl data = new ConcertHallServiceImpl();
-            data.getData();
-        }catch(Exception e){
-            throw new ConcertHallSaveException();
-        }
-        try{
-            CrimeServiceImpl data = new CrimeServiceImpl();
-            data.getData();
-        }catch(Exception e){
-            throw new CrimeSaveException();
-        }
-        try{
-            DrugStoreServiceImpl data = new DrugStoreServiceImpl();
-            data.getData();
-        }catch(Exception e){
-            throw new DrugStoreSaveException();
-        }
-        try{
-            ElectricVehicleChargingImpl data = new ElectricVehicleChargingImpl();
-            data.getData();
-        }catch(Exception e){
-            throw new ElectricVehicleChargingSaveException();
-        }
-        try{
-            EntertainmentServiceImpl data = new EntertainmentServiceImpl();
-            data.getData();
-        }catch(Exception e){
-            throw new EntertainmentSaveException();
-        }
-        try{
-            FacilitiesForTheDisabledServiceImpl data = new FacilitiesForTheDisabledServiceImpl();
-            data.getData();
-        }catch(Exception e){
-            throw new FacilitiesForTheDisabledSaveException();
-        }
-        try{
-            FemaleSafetyServiceImpl data = new FemaleSafetyServiceImpl();
-            data.getData();
-        }catch(Exception e){
-            throw new FemaleSafetySaveException();
-        }
-        try{
-            HospitalServiceImpl data = new HospitalServiceImpl();
-            data.getData();
-        }catch(Exception e){
-            throw new HospitalSaveException();
-        }
-        try{
-            JeonseServiceImpl data = new JeonseServiceImpl();
-            data.getData();
-        }catch(Exception e){
-            throw new JeonseSaveException();
-        }
-        try{
-//            KinderGardenServiceImpl data = new KinderGardenServiceImpl();
-//            data.getData();
-        }catch(Exception e){
-            throw new KinderGardenSaveException();
-        }
-        try{
-            LibraryServiceImpl data = new LibraryServiceImpl();
-            data.getData();
-        }catch(Exception e){
-            throw new LibrarySaveException();
-        }
-        try{
-            MartServiceImpl data = new MartServiceImpl();
-            data.getData();
-        }catch(Exception e){
-            throw new MartSaveException();
-        }
-        try{
-            ParkServiceImpl data = new ParkServiceImpl();
-            data.getData();
-        }catch(Exception e){
-            throw new ParkSaveException();
-        }
-        try{
-            //RestaurantServiceImpl data = new RestaurantServiceImpl();
-            //data.getData();
-        }catch(Exception e){
-            throw new RestaurantSaveException();
-        }
-        try{
-            SchoolServiceImpl data = new SchoolServiceImpl();
-            data.getData();
-        }catch(Exception e){
-            throw new SchoolSaveException();
-        }
-        try{
-            ShelterServiceImpl data = new ShelterServiceImpl();
-            data.getData();
-        }catch(Exception e){
-            throw new ShelterSaveException();
-        }
-        try{
-            SportsFacilitiesServiceImpl data = new SportsFacilitiesServiceImpl();
-            data.getData();
-        }catch(Exception e){
-            throw new SportsFacilitiesSaveException();
-        }
-        try{
-            TheaterServiceImpl data = new TheaterServiceImpl();
-            data.getData();
-        }catch(Exception e){
-            throw new TheaterSaveException();
-        }
-        try{
-            TradingServiceImpl data = new TradingServiceImpl();
-            data.getData();
-        }catch(Exception e){
-            throw new TradingSaveException();
-        }
-        System.out.println("Data Save Finish");
 
     }
 }
