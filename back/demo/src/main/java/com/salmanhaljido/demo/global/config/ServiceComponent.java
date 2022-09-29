@@ -1,5 +1,4 @@
-package com.salmanhaljido.demo.domain.data.service;
-
+package com.salmanhaljido.demo.global.config;
 
 import com.salmanhaljido.demo.domain.academy.service.AcademyService;
 import com.salmanhaljido.demo.domain.animalhospital.service.AnimalHospitalService;
@@ -19,27 +18,21 @@ import com.salmanhaljido.demo.domain.kindergarden.service.KinderGardenService;
 import com.salmanhaljido.demo.domain.library.service.LibraryService;
 import com.salmanhaljido.demo.domain.mart.service.MartService;
 import com.salmanhaljido.demo.domain.park.service.ParkService;
-import com.salmanhaljido.demo.domain.restaurant.service.RestaurantService;
 import com.salmanhaljido.demo.domain.school.service.SchoolService;
+import com.salmanhaljido.demo.domain.shelter.service.ShelterService;
 import com.salmanhaljido.demo.domain.sportsfacilities.service.SportsFacilitiesService;
 import com.salmanhaljido.demo.domain.theater.service.TheaterService;
 import com.salmanhaljido.demo.domain.trading.service.TradingService;
-import javax.annotation.PostConstruct;
-import com.salmanhaljido.demo.global.scheduler.DataSaveScheduler;
 import lombok.RequiredArgsConstructor;
-import org.quartz.*;
-import org.quartz.impl.StdSchedulerFactory;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-import java.util.HashSet;
-import java.util.Set;
+import javax.annotation.PostConstruct;
+import java.util.HashMap;
+import java.util.Map;
 
-@Service
+@Component
 @RequiredArgsConstructor
-public class DataServiceImpl implements DataService {
-    private SchedulerFactory schedulerFactory;
-    private Scheduler scheduler;
-
+public class ServiceComponent {
     private final AcademyService academyService;
     private final AnimalHospitalService animalHospitalService;
     private final AnimalSalonService animalSalonService;
@@ -58,64 +51,42 @@ public class DataServiceImpl implements DataService {
     private final LibraryService libraryService;
     private final MartService martService;
     private final ParkService parkService;
-    private final RestaurantService restaurantService;
     private final SchoolService schoolService;
+    private final ShelterService shelterService;
     private final SportsFacilitiesService sportsFacilitiesService;
     private final TheaterService theaterService;
     private final TradingService tradingService;
 
-    @Override
-    public void saveData(){
-        try {
-            academyService.getData();
-            animalHospitalService.getData();
-            animalSalonService.getData();
-            carAccidentService.getData();
-            childSafetyService.getData();
-            concertHallService.getData();
-            crimeService.getData();
-            drugStoreService.getData();
-            electricVehicleChargingService.getData();
-            entertainmentService.getData();
-            facilitiesForTheDisabledService.getData();
-            hospitalService.getData();
-            femaleSafetyService.getData();
-            jeonseService.getData();
-            kinderGardenService.getData();
-            libraryService.getData();
-            martService.getData();
-            parkService.getData();
-//            restaurantService.getData();
-            schoolService.getData();
-            sportsFacilitiesService.getData();
-            theaterService.getData();
-            tradingService.getData();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    private Map<String, Object> map = new HashMap<>();
 
-        //지우지마 스케줄러 미리 구현한거
-        //createScheduler();
+    @PostConstruct
+    public void init(){
+        map.put("academy", academyService);
+        map.put("animalHospital", animalHospitalService);
+        map.put("animalBeauty", animalSalonService);
+        map.put("carAccident", carAccidentService);
+        map.put("childSafety",childSafetyService);
+        map.put("concertHall", concertHallService);
+        map.put("crime", crimeService);
+        map.put("drugStore", drugStoreService);
+        map.put("electricVehicleCharging", electricVehicleChargingService);
+        map.put("entertainment", entertainmentService);
+        map.put("facilitiesForTheDisabled", facilitiesForTheDisabledService);
+        map.put("femaleSafety", femaleSafetyService);
+        map.put("hospital", hospitalService);
+        map.put("jeonse", jeonseService);
+        map.put("kindergarden", kinderGardenService);
+        map.put("library", libraryService);
+        map.put("mart", martService);
+        map.put("park", parkService);
+        map.put("school", schoolService);
+        map.put("shelter", shelterService);
+        map.put("sportsFacilities", sportsFacilitiesService);
+        map.put("theater", theaterService);
+        map.put("trading", tradingService);
     }
 
-    public void createScheduler() {
-        try{
-            schedulerFactory = new StdSchedulerFactory();
-            scheduler = schedulerFactory.getScheduler();
-
-            JobDetail jobDetail = JobBuilder.newJob(DataSaveScheduler.class)
-                    .withIdentity("job", "job_group")
-                    .build();
-            CronScheduleBuilder cronSch = CronScheduleBuilder.cronSchedule(new CronExpression("0 0 0 1/1 * ? *"));
-            CronTrigger trigger = (CronTrigger) TriggerBuilder.newTrigger()
-                            .withIdentity("cron_trigger", "crong_trigger_group")
-                                    .withSchedule(cronSch)
-                                            .build();
-
-            scheduler.scheduleJob(jobDetail, trigger);
-            scheduler.start();
-
-        }catch(Exception e){
-        }
+    public Object getService(String key){
+        return this.map.get(key);
     }
 }

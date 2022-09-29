@@ -155,7 +155,7 @@ public class FemaleSafetyServiceImpl implements FemaleSafetyService {
         }
         Dataset<Row> dff = session.read().format("json").load(dataPath + "femalesafety_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
-
+        session.close();
         System.out.println("FemaleSafety : Finish");
     }
     private static String checkEMDG(String token){
