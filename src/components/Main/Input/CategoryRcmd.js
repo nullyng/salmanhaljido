@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Alert, AlertTitle, Button, Fade } from "@mui/material";
+import { Alert, AlertTitle, Button, Grow } from "@mui/material";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 
 import CustomModal from "components/common/CustomModal";
@@ -11,7 +11,7 @@ function CategoryRcmd({ title, alertOpen, setAlertOpen }) {
 
   return (
     <div className="category-rcmd">
-      <Fade in={alertOpen}>
+      <Grow in={alertOpen}>
         <Alert
           color="primary"
           icon={<ThumbUpOffAltIcon fontSize="inherit" />}
@@ -46,7 +46,7 @@ function CategoryRcmd({ title, alertOpen, setAlertOpen }) {
             />
           </div>
         </Alert>
-      </Fade>
+      </Grow>
     </div>
   );
 }
