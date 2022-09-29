@@ -1,6 +1,7 @@
 /* 액션 타입 */
 const ADD_CATEGORY = "category/ADD_CATEGORY";
 const DEL_CATEGORY = "category/DEL_CATEGORY";
+const INIT_CATEGORY = "category/INIT_CATEGORY";
 
 /* 액션 생성 함수 */
 export const addCategory = (name, level) => ({
@@ -12,6 +13,9 @@ export const delCategory = (name, level) => ({
   type: DEL_CATEGORY,
   name,
   level,
+});
+export const initCategory = () => ({
+  type: INIT_CATEGORY,
 });
 
 /* 초기 상태. 카테고리 리스트 비어있음.*/
@@ -40,6 +44,11 @@ function category(state = initialState, action) {
       return {
         ...state,
         myCategoryList: clone2,
+      };
+    case INIT_CATEGORY:
+      return {
+        ...state,
+        myCategoryList: {},
       };
     default:
       return state;

@@ -36,22 +36,16 @@
       overflow-y: auto;
       overflow-x: hidden;
 
-      // 스크롤바 커스텀
-      // &::-webkit-scrollbar {
-      //   position: fixed;
-      //   width: 6px;
-      // }
+      &::-webkit-scrollbar {
+        width: 15px;
+      }
 
-      // &::-webkit-scrollbar-thumb {
-      //   position: fixed;
-      //   background: $my-blue;
-      //   border-radius: 10px;
-      // }
-
-      // &::-webkit-scrollbar-track {
-      //   position: fixed;
-      //   background: white;
-      // }
+      &::-webkit-scrollbar-thumb {
+        background: rgba(77, 137, 198, 0.205);
+        border-radius: 10px;
+        border: 4px solid transparent;
+        background-clip: padding-box;
+      }
     }
 
     // 하단 버튼 그룹
@@ -114,7 +108,6 @@
 
 /* 사용자 정보 */
 .user-info {
-  margin-bottom: 1rem;
   @include input-title;
 
   &__content {
@@ -128,8 +121,21 @@
 }
 
 .category-rcmd-btn {
-  & p {
+  & h3 {
+    display: flex;
+    align-items: center;
+    margin-top: 0;
+    margin-bottom: 0;
+
+    & span {
+      font-size: 2rem;
+      margin-right: 0.5rem;
+    }
+  }
+
+  &__desc {
     font-size: 0.8rem;
+    margin-top: 0;
     margin-left: 0.5rem;
     margin-right: 0.5rem;
   }
@@ -142,9 +148,15 @@
     & button {
       width: 100%;
       border-radius: 30px;
+      display: flex;
+      flex-direction: column;
 
       &:first-child {
         margin-right: 0.5rem;
+      }
+
+      & p {
+        margin: 0;
       }
     }
   }
@@ -194,6 +206,12 @@
   margin-bottom: 1rem !important;
 
   &__chips {
+    &--no-data {
+      & p {
+        margin-top: 0;
+        color: #909090;
+      }
+    }
     &--data {
       display: flex;
       flex-wrap: wrap;
@@ -230,6 +248,71 @@
   }
 }
 
+/* 카테고리 설정 */
+.category {
+  @include input-title();
+
+  margin-bottom: 1rem;
+  font-family: "GongGothicMedium";
+
+  &__box {
+    & button {
+      padding: 0;
+      font-size: large;
+      font-family: "GongGothicMedium";
+      min-width: 25%;
+    }
+  }
+}
+
+.category-panel {
+  border-radius: 0.5rem;
+  background-color: #f5f5f5;
+  padding: 1rem;
+
+  &__top {
+    display: flex;
+
+    &--empty {
+      width: 100%;
+      height: 100%;
+    }
+
+    &--right {
+      margin-left: 4.7rem;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: small;
+    }
+  }
+
+  &__categories {
+    padding-right: 0.3rem;
+  }
+}
+
+.category-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+
+  &__name {
+    width: 90%;
+  }
+
+  & .category-slider {
+    width: 100%;
+
+    &--no-select {
+      &.MuiSlider-root {
+        color: #8b8b8b;
+      }
+    }
+  }
+}
+
 /* 가격대 설정 */
 .price {
   @include input-title();
@@ -247,55 +330,5 @@
   & .custom-slider {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
-  }
-}
-
-@font-face {
-  font-family: "GongGothicMedium";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff")
-    format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
-
-.category {
-  margin-bottom: 1rem;
-  @include input-title();
-  font-family: "GongGothicMedium";
-
-  &__tabs {
-    display: flex;
-    flex-wrap: wrap;
-  }
-
-  &__box {
-    border-radius: 0.5rem;
-    background-color: #f5f5f5;
-    padding: 1rem;
-
-    &--row {
-      font-family: "GongGothicMedium";
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 0.2rem 0;
-    }
-
-    &--top {
-      font-family: "GongGothicMedium";
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      font-size: xx-small;
-    }
-  }
-}
-
-.categorybox {
-  & button {
-    padding: 0;
-    font-size: large;
-    font-family: "GongGothicMedium";
-    min-width: 25%;
   }
 }

@@ -4,7 +4,6 @@ import Input from "components/Main/Input/Input";
 import CustomMap from "components/Main/Map/CustomMap";
 import Output from "components/Main/Output/Output";
 import { setCurrMap, setMapData, setMarkers } from "modules/map";
-import { setCategories, setPrice, setRegion, setUserInfo } from "modules/input";
 import { setCurrRegion, setRealEstate, setStatistics } from "modules/region";
 
 function MainPage() {
@@ -12,9 +11,6 @@ function MainPage() {
   const currMap = useSelector((state) => state.map.currMap);
   const mapData = useSelector((state) => state.map.mapData);
   const markers = useSelector((state) => state.map.markers);
-
-  // 입력 관련 state
-  const region = useSelector((state) => state.input.region);
 
   // 출력 관련 state
   const rcmdData = useSelector((state) => state.region.rcmdData);
@@ -28,12 +24,6 @@ function MainPage() {
   const onSetMapData = (mapData) => dispatch(setMapData(mapData));
   const onSetMarkers = (markers) => dispatch(setMarkers(markers));
 
-  // 입력 관련 함수
-  const onSetRegion = (region) => dispatch(setRegion(region));
-  const onSetUserInfo = (userInfo) => dispatch(setUserInfo(userInfo));
-  const onSetCategories = (categories) => dispatch(setCategories(categories));
-  const onSetPrice = (price) => dispatch(setPrice(price));
-
   // 출력 관련 함수
   const onSetCurrRegion = (currRegion) => dispatch(setCurrRegion(currRegion));
   const onSetStatistics = (statistics) => dispatch(setStatistics(statistics));
@@ -45,12 +35,7 @@ function MainPage() {
         currMap={currMap}
         onSetMapData={onSetMapData}
         markers={markers}
-        region={region}
         onSetMarkers={onSetMarkers}
-        onSetRegion={onSetRegion}
-        onSetUserInfo={onSetUserInfo}
-        onSetCategories={onSetCategories}
-        onSetPrice={onSetPrice}
       />
 
       <Output
