@@ -166,7 +166,7 @@ public class MartServiceImpl implements MartService {
         }
         Dataset<Row> dff = session.read().format("json").load(dataPath + "mart_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
-
+        session.close();
         System.out.println("Mart : Finish");
     }
     private static String checkEMDG(String token){

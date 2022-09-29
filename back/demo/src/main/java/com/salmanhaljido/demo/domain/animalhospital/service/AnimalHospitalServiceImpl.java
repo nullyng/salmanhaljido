@@ -170,6 +170,7 @@ public class AnimalHospitalServiceImpl implements AnimalHospitalService {
         dff.write().format("mongodb").mode("overwrite").save();
 
         System.out.println("AnimalHospital : Finish");
+        session.close();
     }
     private static String checkEMDG(String token){
         int index = token.length()-1;

@@ -106,7 +106,7 @@ public class CarAccidentServiceImpl implements CarAccidentService {
         }
         Dataset<Row> dff = session.read().format("json").load(dataPath + "caraccident_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
-
+        session.close();
         System.out.println("CarAccident : Finish");
     }
     private static String checkEMDG(String token){

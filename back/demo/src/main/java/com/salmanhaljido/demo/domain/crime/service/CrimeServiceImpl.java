@@ -133,7 +133,7 @@ public class CrimeServiceImpl implements CrimeService {
         }
         Dataset<Row> dff = session.read().format("json").load(dataPath + "crime_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
-
+        session.close();
         System.out.println("Crime : Finish");
     }
     private static String readAll(Reader rd) throws IOException {

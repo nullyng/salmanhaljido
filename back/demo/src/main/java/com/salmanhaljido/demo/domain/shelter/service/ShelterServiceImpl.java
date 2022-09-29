@@ -166,7 +166,7 @@ public class ShelterServiceImpl implements ShelterService {
         }
         Dataset<Row> dff = session.read().format("json").load(dataPath + "shelter_result.json");
         dff.write().format("mongodb").mode("overwrite").save();
-
+        session.close();
         System.out.println("Shelter : Finish");
     }
     private static String checkEMDG(String token){

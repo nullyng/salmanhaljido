@@ -61,6 +61,9 @@ dependencies {
 
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 
+
+	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+
 	// https://mvnrepository.com/artifact/org.apache.spark/spark-mllib
 	implementation group: 'org.apache.spark', name: 'spark-mllib_2.12', version: '3.1.2'
 
@@ -69,7 +72,6 @@ dependencies {
 
 	// https://mvnrepository.com/artifact/org.quartz-scheduler/quartz
 	implementation group: 'org.quartz-scheduler', name: 'quartz', version: '2.3.2'
-
 }
 
 tasks.named('test') {
