@@ -12,6 +12,7 @@ configurations {
 	compileOnly {
 		extendsFrom annotationProcessor
 	}
+	all*.exclude module : 'spring-boot-starter-logging'
 }
 repositories {
 	mavenCentral()
@@ -63,9 +64,10 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
 
 	 // https://mvnrepository.com/artifact/org.apache.spark/spark-mllib
-	 compileOnly ('org.apache.spark:spark-mllib_2.12:3.1.2'){
-		 exclude group: "org.slf4j", module: "slf4j-log4j12"
-	 }
+	 compileOnly ('org.apache.spark:spark-mllib_2.12:3.1.2')
+//	 {
+//		 exclude group: "org.slf4j", module: "slf4j-log4j12"
+//	 }
 
 	 // https://mvnrepository.com/artifact/org.jblas/jblas
 	implementation group: 'org.jblas', name: 'jblas', version: '1.2.3'
