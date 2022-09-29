@@ -25,8 +25,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class CategoriesRecommendationsServiceImpl implements CategoriesRecommendationsService{
 
-    @Value("${filepath:0}")
-    String dataPath;
+    String dataPath = "src/main/resources/data/";
     @Override
     public CategoriesRecommendationsViewResponseDto CategoriesRecommendationsView(CategoriesRecommendationsViewRequestDto dto){
         char[] charArr = new char[4];
