@@ -1,19 +1,4 @@
-@mixin input-title {
-  &__title {
-    display: flex;
-
-    &__tooltip {
-      display: flex;
-      align-items: center;
-
-      & button {
-        & svg {
-          color: #cdcdcd;
-        }
-      }
-    }
-  }
-}
+@use "../common/utils" as *;
 
 .left-drawer {
   position: fixed;
@@ -59,7 +44,7 @@
 
       // &::-webkit-scrollbar-thumb {
       //   position: fixed;
-      //   background: #4d89c6;
+      //   background: $my-blue;
       //   border-radius: 10px;
       // }
 
@@ -102,7 +87,7 @@
         & button {
           border-radius: 30px;
           width: 100%;
-          background-color: #4d89c6;
+          background-color: $my-blue;
         }
       }
     }
@@ -202,6 +187,49 @@
   }
 }
 
+/* 내 카테고리 */
+.my-category {
+  @include input-title();
+
+  margin-bottom: 1rem !important;
+
+  &__chips {
+    &--data {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+}
+
+/* 카테고리 칩 */
+.category-chip {
+  margin-right: 0.3rem;
+  margin-bottom: 0.5rem;
+
+  &__avatar {
+    &--1 {
+      &.MuiAvatar-root {
+        background-color: #e9456056;
+        color: white !important;
+      }
+    }
+
+    &--2 {
+      &.MuiAvatar-root {
+        background-color: #e94560a4;
+        color: white !important;
+      }
+    }
+
+    &--3 {
+      &.MuiAvatar-root {
+        background-color: #e94560;
+        color: white !important;
+      }
+    }
+  }
+}
+
 /* 가격대 설정 */
 .price {
   @include input-title();
@@ -261,11 +289,6 @@
       font-size: xx-small;
     }
   }
-}
-
-.mycategory {
-  display: flex;
-  flex-wrap: wrap;
 }
 
 .categorybox {
