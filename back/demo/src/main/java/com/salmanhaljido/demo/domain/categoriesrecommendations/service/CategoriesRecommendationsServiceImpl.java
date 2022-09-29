@@ -25,11 +25,8 @@ import java.util.*;
 @RequiredArgsConstructor
 public class CategoriesRecommendationsServiceImpl implements CategoriesRecommendationsService{
 
-    //서버
     @Value("${filepath:0}")
     String dataPath;
-    //로컬
-    //static String dataPath = "C:\\Users\\multicampus\\S07P22D110\\back\\demo\\src\\main\\resources\\data\\";
     @Override
     public CategoriesRecommendationsViewResponseDto CategoriesRecommendationsView(CategoriesRecommendationsViewRequestDto dto){
         char[] charArr = new char[4];
@@ -41,7 +38,10 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
         else charArr[2]='0';
         if(dto.isHasChildren()) charArr[3]='1';
         else charArr[3]='0';
-        String mainCategory = charArr.toString();
+        String mainCategory = "";
+        for(char c : charArr){
+            mainCategory+=c;
+        }
         if(dto.isStandard()){
             return CategoriesRecommendationsViewResponseDto.of(getRating(mainCategory));
         }else{
@@ -82,7 +82,7 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
         SparkSession session = SparkSession.builder()
                 .master("local")
                 .appName("categories")
-                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1:27017/openapi.categories")
+                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.categories")
                 .getOrCreate();
         try {
             //서버
@@ -158,7 +158,7 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
             SparkSession session = SparkSession.builder()
                     .master("local")
                     .appName("categories")
-                    .config("spark.mongodb.read.connection.uri", "mongodb://127.0.0.1:27017/openapi.categories")
+                    .config("spark.mongodb.read.connection.uri", "mongodb://127.0.0.1/openapi.categories")
                     .getOrCreate();
             try {
 
@@ -178,21 +178,22 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
                     else if (col.equals("mainCategory")) continue;
 
                     FileOutputStream ratingFileOutputStream = new FileOutputStream(ratingFile);
+                    int cnt=0;
                     int zeroCnt = 0;
                     List<Row> rowList = ds.select(col).collectAsList();
                     for (int i = 0; i < rowList.size(); i++) {
                         String s = rowList.get(i).get(0).toString();
 
-                        if (s.equals("0")) zeroCnt++;
-
                         if (!categoryList.get(i).equals(mainCategory)) continue;
-                        else if (rowList.get(i).get(0).toString().equals("0")) continue;
+                        cnt++;
+                        if (s.equals("0")) zeroCnt++;
+                        if (rowList.get(i).get(0).toString().equals("0")) continue;
 
                         String rowString = categoryList.get(i) + " " + rowList.get(i).get(0).toString() + " " + ratingList.get(i);
                         ratingFileOutputStream.write(rowString.getBytes(StandardCharsets.UTF_8));
                         ratingFileOutputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
                     }
-                    if (zeroCnt == rowList.size()) continue;
+                    if (zeroCnt == cnt) continue;
 
                     JavaSparkContext sc = new JavaSparkContext(session.sparkContext());
                     JavaRDD<String> rawData = sc.textFile(dataPath + "rating.data");
@@ -235,7 +236,7 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
             SparkSession session = SparkSession.builder()
                     .master("local")
                     .appName("categories")
-                    .config("spark.mongodb.read.connection.uri", "mongodb://127.0.0.1:27017/openapi.categories")
+                    .config("spark.mongodb.read.connection.uri", "mongodb://127.0.0.1/openapi.categories")
                     .getOrCreate();
             try {
 
@@ -255,6 +256,7 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
                     else if (col.equals("mainCategory")) continue;
 
                     FileOutputStream countFileOutputStream = new FileOutputStream(countingFile);
+                    int cnt=0;
                     int zeroCnt = 0;
                     int oneCnt = 0;
                     int twoCnt = 0;
@@ -262,14 +264,15 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
                     List<Row> rowList = ds.select(col).collectAsList();
                     for (int i = 0; i < rowList.size(); i++) {
                         String s = rowList.get(i).get(0).toString();
-
+                        if (!categoryList.get(i).equals(mainCategory)) continue;
+                        cnt++;
                         if (s.equals("0")) zeroCnt++;
                         else if (s.equals("1")) oneCnt++;
                         else if (s.equals("2")) twoCnt++;
                         else if (s.equals("3")) threeCnt++;
 
                     }
-                    if (zeroCnt == rowList.size()) continue;
+                    if (zeroCnt == cnt) continue;
                     countFileOutputStream.write(("1 " + "0 " + zeroCnt).getBytes(StandardCharsets.UTF_8));
                     countFileOutputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
                     countFileOutputStream.write(("1 " + "1 " + oneCnt).getBytes(StandardCharsets.UTF_8));
