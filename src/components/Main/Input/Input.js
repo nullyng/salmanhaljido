@@ -5,7 +5,7 @@ import { useState } from "react";
 
 import "styles/Main/Input.scss";
 import UserLocation from "components/Main/Input/UserLocation";
-import UserInfo from "components/Main/Input/UserInfo";
+import UserInfo from "components/Main/Input/UserInfo/UserInfo";
 import Price from "components/Main/Input/Price";
 import ResetButton from "components/Main/Input/ResetButton";
 import SubmitButton from "components/Main/Input/SubmitButton";

@@ -1,21 +1,23 @@
 const SET_REGION = "input/SET_REGION";
 const SET_USER_INFO = "input/SET_USER_INFO";
-const SET_CATEGORIES = "input/SET_CATEGORIES";
 const SET_PRICE = "input/SET_PRICE";
 
 export const setRegion = (region) => ({ type: SET_REGION, region });
 export const setUserInfo = (userInfo) => ({ type: SET_USER_INFO, userInfo });
-export const setCategories = (categories) => ({
-  type: SET_CATEGORIES,
-  categories,
-});
 export const setPrice = (price) => ({ type: SET_PRICE, price });
 
 const initialState = {
   region: "",
-  userInfo: [],
-  categories: [],
-  price: [],
+  userInfo: {
+    isMarried: false,
+    hasCar: false,
+    hasPets: false,
+    hasChildren: false,
+  },
+  price: {
+    jeonse: [0, 28],
+    maemae: [0, 28],
+  },
 };
 
 export default function input(state = initialState, action) {
@@ -29,11 +31,6 @@ export default function input(state = initialState, action) {
       return {
         ...state,
         userInfo: action.userInfo,
-      };
-    case SET_CATEGORIES:
-      return {
-        ...state,
-        categories: action.categories,
       };
     case SET_PRICE:
       return {
