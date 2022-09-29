@@ -142,7 +142,31 @@
   }
 }
 
+.category-rcmd-btn {
+  & p {
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+  }
+
+  &__wrapper {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+
+    & button {
+      width: 100%;
+      border-radius: 30px;
+
+      &:first-child {
+        margin-right: 0.5rem;
+      }
+    }
+  }
+}
+
 .category-rcmd {
+  margin-bottom: 1rem;
   & .MuiAlert-icon {
     & svg {
       color: #e94560;
@@ -199,8 +223,9 @@
 }
 
 @font-face {
-  font-family: 'GongGothicMedium';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
+  font-family: "GongGothicMedium";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff")
+    format("woff");
   font-weight: normal;
   font-style: normal;
 }
@@ -208,31 +233,46 @@
 .category {
   margin-bottom: 1rem;
   @include input-title();
-  font-family: 'GongGothicMedium';
-  
-  &__tabs{
+  font-family: "GongGothicMedium";
+
+  &__tabs {
+    display: flex;
     flex-wrap: wrap;
   }
 
-  &__box{
+  &__box {
     border-radius: 0.5rem;
-    background-color: #F5F5F5;
+    background-color: #f5f5f5;
     padding: 1rem;
 
-    &--row{
-      font-weight: bold;
+    &--row {
+      font-family: "GongGothicMedium";
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 0 0.2rem 0;
     }
 
-    &--top{
-      font-weight: bold;
+    &--top {
+      font-family: "GongGothicMedium";
       display: flex;
       align-items: center;
       justify-content: space-between;
       font-size: xx-small;
     }
+  }
+}
+
+.mycategory {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.categorybox {
+  & button {
+    padding: 0;
+    font-size: large;
+    font-family: "GongGothicMedium";
+    min-width: 25%;
   }
 }

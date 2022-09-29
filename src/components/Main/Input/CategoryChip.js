@@ -1,14 +1,24 @@
-import Chip from '@mui/material/Chip';
-import Stack from '@mui/material/Stack';
+import { useDispatch } from "react-redux";
+import { delCategory } from "modules/CategorySet";
 
-function CategoryChip() { 
+import Avatar from "@mui/material/Avatar";
+import Chip from "@mui/material/Chip";
+import Stack from "@mui/material/Stack";
+
+function CategoryChip({ CategoryName, CategoryLevel }) {
+  const dispatch = useDispatch();
   const handleDelete = () => {
-    console.info('You clicked the delete icon.');
+    dispatch(delCategory(CategoryName));
   };
 
   return (
     <Stack direction="row" spacing={1}>
-      <Chip label="임시 칩" variant="outlined" onDelete={handleDelete} />
+      <Chip
+        avatar={<Avatar>{CategoryLevel}</Avatar>}
+        label={CategoryName}
+        variant="outlined"
+        onDelete={handleDelete}
+      />
     </Stack>
   );
 }

@@ -1,24 +1,25 @@
 import { useState } from "react";
-import { Alert, Button, Collapse } from "@mui/material";
+import { Alert, AlertTitle, Button, Grow } from "@mui/material";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 
 import CustomModal from "components/common/CustomModal";
 
-function CategoryRcmd({ alertOpen }) {
+function CategoryRcmd({ title, alertOpen, setAlertOpen }) {
   const [modalOpen, setModalOpen] = useState(false);
 
   const rcmdList = ["대중교통 정류장", "전기차 충전소", "공용, 민영 주차장"];
 
   return (
     <div className="category-rcmd">
-      <Collapse in={alertOpen}>
+      <Grow in={alertOpen}>
         <Alert
           color="primary"
           icon={<ThumbUpOffAltIcon fontSize="inherit" />}
-          onClose={() => {}}
+          onClose={() => setAlertOpen(false)}
         >
+          <AlertTitle>{title}</AlertTitle>
           <div className="category-rcmd__content">
-            {`비슷한 환경의 사용자들은 `}
+            {"비슷한 환경의 사용자들은 "}
             <b>
               {`${rcmdList
                 .map((item, index) => {
@@ -29,7 +30,7 @@ function CategoryRcmd({ alertOpen }) {
                 })
                 .join("")}`}
             </b>
-            {`을 선택했어요!`}
+            {"을(를) 카테고리로 골랐어요."}
           </div>
           <div className="category-rcmd__button">
             <Button variant="outlined" onClick={() => setModalOpen(true)}>
@@ -45,7 +46,7 @@ function CategoryRcmd({ alertOpen }) {
             />
           </div>
         </Alert>
-      </Collapse>
+      </Grow>
     </div>
   );
 }
