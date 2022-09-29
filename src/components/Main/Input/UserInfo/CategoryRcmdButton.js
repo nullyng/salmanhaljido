@@ -21,7 +21,6 @@ function CategoryRcmdButton({ isMarried, hasCar, hasPets, hasChildren, open }) {
 
   const handleClickCount = () => {
     apiData = { ...apiData, standard: false };
-    console.log(apiData);
 
     getCategoryRcmd(apiData, (res) => {
       console.log(res.data);
@@ -33,7 +32,6 @@ function CategoryRcmdButton({ isMarried, hasCar, hasPets, hasChildren, open }) {
 
   const handleClickRating = () => {
     apiData = { ...apiData, standard: true };
-    console.log(apiData);
 
     getCategoryRcmd(apiData, (res) => {
       console.log(res.data);
@@ -49,13 +47,17 @@ function CategoryRcmdButton({ isMarried, hasCar, hasPets, hasChildren, open }) {
         <h3>
           <span>&#x1F4A1;</span>카테고리 추천 받기
         </h3>
-        <p>비슷한 환경의 사람들이 선택한 카테고리를 추천 받아보세요.</p>
+        <p className="category-rcmd-btn__desc">
+          비슷한 환경의 사람들이 선택한 카테고리를 추천 받아보세요.
+        </p>
         <div className="category-rcmd-btn__wrapper">
-          <Button variant="outlined" size="small" onClick={handleClickCount}>
-            검색 횟수 기준으로 추천 받기
+          <Button variant="outlined" onClick={handleClickCount}>
+            <p>검색 횟수 기준으로</p>
+            <p>추천 받기</p>
           </Button>
-          <Button variant="outlined" size="small" onClick={handleClickRating}>
-            평점 기준으로 추천 받기
+          <Button variant="outlined" onClick={handleClickRating}>
+            <p>평점 기준으로</p>
+            <p>추천 받기</p>
           </Button>
         </div>
         {countOpen && (
