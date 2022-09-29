@@ -16,9 +16,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.sql.Array;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 
 @Service
 @RequiredArgsConstructor
@@ -39,7 +39,35 @@ public class NewServiceImpl implements NewsService{
         if(search==null)
             newsPage = newsRepository.findAllByCategory(category, pageRequest);
         else{
-            newsPage = newsRepository.findAllByCategoryOrTitleOrSummaryWithPagination(category, search, pageRequest);
+            String tokens[] =search.split(" ");
+            List<String> list = new ArrayList<>();
+            list.add("서울");
+            list.add("부산");
+            list.add("대구");
+            list.add("인천");
+            list.add("광주");
+            list.add("대전");
+            list.add("울산");
+            list.add("세종");
+            list.add("경기");
+            list.add("강원");
+            list.add("충북");
+            list.add("충남");
+            list.add("전북");
+            list.add("전남");
+            list.add("경북");
+            list.add("경남");
+            list.add("제주");
+
+            String str = "";
+            for(String s : list){
+                if(tokens[0].contains(s)) str = s;
+            }
+            if(tokens.length==1){
+                newsPage = newsRepository.findAllByCategoryOrTitleOrSummaryWithPagination(category, "%" + str + "%", "%" + str + "%", pageRequest);
+            }else{
+                newsPage = newsRepository.findAllByCategoryOrTitleOrSummaryWithPagination(category, "%" + str + "%", "%" + tokens[1] + "%", pageRequest);
+            }
         }
         return NewsListResponseDto.of(newsPage);
     }
