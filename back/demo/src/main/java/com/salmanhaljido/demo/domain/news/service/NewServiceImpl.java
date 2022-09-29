@@ -33,9 +33,14 @@ public class NewServiceImpl implements NewsService{
     private final String REAL_ESTATE_URL = "https://news.naver.com/main/list.naver?mode=LS2D&sid2=260&sid1=101&mid=shm&";
 
     @Override
-    public NewsListResponseDto getNews(Category category, int pageNo) {
+    public NewsListResponseDto getNews(Category category, int pageNo, String search) {
         PageRequest pageRequest = PageRequest.of(pageNo, 10);
-        Page<News> newsPage = newsRepository.findAllByCategory(category, pageRequest);
+        Page<News> newsPage;
+        if(search==null)
+            newsPage = newsRepository.findAllByCategory(category, pageRequest);
+        else{
+            newsPage = newsRepository.findAllByCategoryOrTitleOrSummaryWithPagination(category, search, pageRequest);
+        }
         return NewsListResponseDto.of(newsPage);
     }
 

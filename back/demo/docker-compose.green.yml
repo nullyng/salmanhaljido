@@ -4,13 +4,4 @@ services:
     image: salmanhaljido_server
     ports:
       - "9091:8080"
-    container_name: salmanhaljido_server_blue
-  mongo:4.2:
-    image: mongo:4.2
-    container_name: mongo-db
-    ports:
-      - "27017:27017"
-    volumes:
-      - ./mongodb:/data/db
-    environment:
-      - MONGO_INITDB_DATABASE=openapi
+    container_name: salmanhaljido_server_green

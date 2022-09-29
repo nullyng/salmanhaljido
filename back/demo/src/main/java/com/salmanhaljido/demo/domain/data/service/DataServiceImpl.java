@@ -116,7 +116,6 @@ public class DataServiceImpl implements DataService {
             scheduler.start();
 
         }catch(Exception e){
-
         }
     }
 }
