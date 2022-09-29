@@ -63,7 +63,7 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
 
 	 // https://mvnrepository.com/artifact/org.apache.spark/spark-mllib
-	 compileOnly ('org.apache.spark:spark-mllib_2.12:3.1.2'){
+	implementation ('org.apache.spark:spark-mllib_2.12:3.1.2'){
 		 exclude group: "org.slf4j", module: "slf4j-log4j12"
 	 }
 
