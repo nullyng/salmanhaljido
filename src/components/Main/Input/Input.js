@@ -9,8 +9,8 @@ import UserInfo from "components/Main/Input/UserInfo";
 import Price from "components/Main/Input/Price";
 import ResetButton from "components/Main/Input/ResetButton";
 import SubmitButton from "components/Main/Input/SubmitButton";
-import MyCategory from "components/Main/Input/MyCategory";
-import Category from "components/Main/Input/Category";
+import MyCategory from "components/Main/Input/Category/MyCategory";
+import Category from "components/Main/Input/Category/Category";
 import { useSelector } from "react-redux";
 
 function Input({
@@ -25,8 +25,6 @@ function Input({
   onSetPrice,
 }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
-  const myCategoryList = useSelector((state) => state.category.myCategoryList);
 
   const handleDrawerOpen = () => {
     setIsDrawerOpen(true);
@@ -59,7 +57,7 @@ function Input({
           <Divider />
           <UserInfo onSetUserInfo={onSetUserInfo} />
           <Divider />
-          <MyCategory myCategoryList={myCategoryList} />
+          <MyCategory />
           <Divider />
           <Category />
           <Divider />

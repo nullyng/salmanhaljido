@@ -5,7 +5,7 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 
 import CustomTooltip from "components/common/CustomTooltip";
-import CategoryPanel from "components/Main/Input/CategoryPanel";
+import CategoryPanel from "components/Main/Input/Category/CategoryPanel";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -63,20 +63,21 @@ function Category() {
   };
 
   const tooltipMessage =
-    "8개의 카테고리에서 필요한 세부카테고리를 골라보세요. 중요도는 상, 중, 하로 나뉘어져 있고 필요없을 시 선택안함 또는 내 카테고리에서 X를 클릭하면 삭제할 수 있어요.";
+    "8개의 카테고리에서 중요하게 생각하는 세부 카테고리를 고르고, 각 카테고리의 중요도를 설정해 보세요. " +
+    "상, 중, 하의 세 단계로 나눠져 있어서 더욱 정밀한 지역 추천을 받을 수 있어요.";
 
   return (
     <div className="category">
       <div className="category__title">
         <h2 className="category__title__text">카테고리 설정</h2>
-        <div className="user-location__title__tooltip">
+        <div className="category__title__tooltip">
           <CustomTooltip content={tooltipMessage} />
         </div>
       </div>
       <Box sx={{ width: "100%" }}>
         <Box
           sx={{ borderBottom: 1, borderColor: "divider" }}
-          className="categorybox"
+          className="category__box"
         >
           <Tabs value={value} onChange={handleChange}>
             <Tab label="교통" {...a11yProps(0)} />
@@ -91,13 +92,12 @@ function Category() {
             <Tab label="생활" {...a11yProps(7)} />
           </Tabs>
         </Box>
-
         {
           <div>
             {" "}
             {Object.keys(categoryList).map((category, index) => (
               <TabPanel key={index} value={value} index={index}>
-                <CategoryPanel arr={categoryList[category]} />
+                <CategoryPanel categoryList={categoryList[category]} />
               </TabPanel>
             ))}
           </div>
