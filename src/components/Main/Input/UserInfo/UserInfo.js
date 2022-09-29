@@ -19,6 +19,11 @@ function UserInfo() {
   const userInfo = useSelector((state) => state.input.userInfo);
   const onSetUserInfo = (userInfo) => dispatch(setUserInfo(userInfo));
 
+  const handleIsMarried = () => {
+    const obj = { ...userInfo, isMarried: !userInfo["isMarried"] };
+    onSetUserInfo(obj);
+  };
+
   const handleHasCar = () => {
     const obj = { ...userInfo, hasCar: !userInfo["hasCar"] };
     onSetUserInfo(obj);
@@ -48,6 +53,15 @@ function UserInfo() {
             <FormControlLabel
               control={
                 <Checkbox
+                  checked={userInfo["isMarried"]}
+                  onChange={handleIsMarried}
+                />
+              }
+              label="기혼"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
                   checked={userInfo["hasCar"]}
                   onChange={handleHasCar}
                 />
@@ -73,10 +87,12 @@ function UserInfo() {
               label="자녀"
             />
           </div>
-          {userInfo["hasCar"] ||
+          {userInfo["isMarried"] ||
+          userInfo["hasCar"] ||
           userInfo["hasPets"] ||
           userInfo["hasChildren"] ? (
             <CategoryRcmdButton
+              isMarried={userInfo["isMarried"]}
               hasCar={userInfo["hasCar"]}
               hasPets={userInfo["hasPets"]}
               hasChildren={userInfo["hasChildren"]}

@@ -9,6 +9,7 @@ export const setPrice = (price) => ({ type: SET_PRICE, price });
 const initialState = {
   region: "",
   userInfo: {
+    isMarried: false,
     hasCar: false,
     hasPets: false,
     hasChildren: false,
