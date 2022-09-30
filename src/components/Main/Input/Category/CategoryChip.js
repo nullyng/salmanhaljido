@@ -5,11 +5,12 @@ import Stack from "@mui/material/Stack";
 import { Zoom } from "@mui/material";
 
 import { delCategory } from "modules/category";
+import { categoryDetail } from "components/Main/Input/Category/categoryList";
 
-function CategoryChip({ categoryName, categoryLevel }) {
+function CategoryChip({ categoryValue, categoryLevel }) {
   const dispatch = useDispatch();
   const handleDelete = () => {
-    dispatch(delCategory(categoryName));
+    dispatch(delCategory(categoryValue));
   };
 
   const level = {
@@ -23,11 +24,11 @@ function CategoryChip({ categoryName, categoryLevel }) {
       <Stack className="category-chip" direction="row" spacing={1}>
         <Chip
           avatar={
-            categoryLevel === 1 ? (
+            categoryLevel === "low" ? (
               <Avatar className="category-chip__avatar--1">
                 {level[categoryLevel]}
               </Avatar>
-            ) : categoryLevel === 2 ? (
+            ) : categoryLevel === "middle" ? (
               <Avatar className="category-chip__avatar--2">
                 {level[categoryLevel]}
               </Avatar>
@@ -37,7 +38,7 @@ function CategoryChip({ categoryName, categoryLevel }) {
               </Avatar>
             )
           }
-          label={categoryName}
+          label={categoryDetail[categoryValue]}
           variant="outlined"
           onDelete={handleDelete}
         />

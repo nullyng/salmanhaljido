@@ -1,10 +1,10 @@
 import CategorySlider from "components/Main/Input/Category/CategorySlider";
 
-function CategoryItem({ categoryName }) {
+function CategoryItem({ categoryName, categoryValue }) {
   return (
     <div className="category-item">
       <p className="category-item__name">{categoryName}</p>
-      <CategorySlider categoryName={categoryName} />
+      <CategorySlider categoryValue={categoryValue} />
     </div>
   );
 }
