@@ -13,7 +13,11 @@ function CategoryPanel({ categoryList }) {
       </div>
       <div className="category-panel__categories">
         {categoryList.map((item, index) => (
-          <CategoryItem key={index} categoryName={item} />
+          <CategoryItem
+            key={index}
+            categoryName={Object.values(item)[0]}
+            categoryValue={Object.keys(item)[0]}
+          />
         ))}
       </div>
     </div>

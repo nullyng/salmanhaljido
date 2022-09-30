@@ -2,7 +2,7 @@ import axios from "axios";
 
 function apiInstance() {
   const instance = axios.create({
-    baseURL: "http://localhost:3000/api",
+    baseURL: "https://j7d110.p.ssafy.io/api",
     headers: {
       "Content-type": "application/json",
     },

@@ -5,6 +5,7 @@ import CustomMap from "components/Main/Map/CustomMap";
 import Output from "components/Main/Output/Output";
 import { setCurrMap, setMapData, setMarkers } from "modules/map";
 import { setCurrRegion, setRealEstate, setStatistics } from "modules/region";
+import Loading from "components/common/Loading";
 
 function MainPage() {
   // 지도 관련 state
@@ -29,8 +30,11 @@ function MainPage() {
   const onSetStatistics = (statistics) => dispatch(setStatistics(statistics));
   const onSetRealEstate = (realEstate) => dispatch(setRealEstate(realEstate));
 
+  const loading = useSelector((state) => state.loading.loading);
+
   return (
     <div>
+      {loading && <Loading />}
       <Input
         currMap={currMap}
         onSetMapData={onSetMapData}
