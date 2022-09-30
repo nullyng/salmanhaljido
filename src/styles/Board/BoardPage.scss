@@ -64,9 +64,41 @@
   margin: 10px;
   width: 260px;
   height: 230px;
+  perspective: 300px;
+  
 
   &__btn {
     cursor: pointer;
+    height: 100%;
+    width: 100%;
+    backface-visibility: hidden;
+    transition: 1s;
+  }
+
+  &__front {
+    position: absolute;
+    transform: rotateY(0deg);
+  }
+
+  &__front:hover {
+    transform: rotateY(180deg);
+  }
+
+  &__back {
+    & p {
+      overflow: hidden;
+      white-space: normal;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 8;
+      -webkit-box-orient: vertical;
+      word-break: keep-all;
+    }
+    transform: rotateY(-180deg);
+  }
+
+  &__back:hover {
+    transform: rotateY(0deg);
   }
 
   &__cntr {
@@ -93,6 +125,9 @@
   justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;
+
+  grid-template-columns: 250px 250px 250px 250px;
+  grid-template-rows: 200px 200px 200px 200px;
 }
 
 .pagenation {

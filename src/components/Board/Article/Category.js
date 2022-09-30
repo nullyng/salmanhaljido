@@ -4,13 +4,11 @@ function Category({news}) {
 
   console.log(news);
   return (
-    <div>
       <div className="article-list">
         {news.map((value, idx) => (
           <ArticleCard key={idx} {...value} />
         ))}
       </div>
-    </div>
   );
 }
 

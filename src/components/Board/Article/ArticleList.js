@@ -59,25 +59,33 @@ function BasicTabs() {
     },
   });
 
+  // 페이지네이션
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const onPageChange = (e, page) => {
+    setCurrentPage(page);
+  };
+
   // 뉴스 데이터
   const [news, setNews] = useState([]);
 
   const [value, setValue] = useState(0);
 
-  const handleChange = (event, newValue) => {
+  const handleChange = (e, newValue) => {
     setValue(newValue);
   };
 
   // 뉴스 api 요청
   const fetchBoard = useCallback(() => {
-    getBoard(newscategory[value], 0, (res) => {
+    console.log(currentPage);
+    getBoard(newscategory[value], currentPage-1, (res) => {
       setNews(res.data.newsList);
     });
-  }, [value]);
+  }, [value, currentPage]);
 
   useEffect(() => {
     fetchBoard();
-  }, [value, fetchBoard]);
+  }, [value, currentPage, fetchBoard]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -113,7 +121,13 @@ function BasicTabs() {
           <TabPanel value={value} index={4}>
             <Category news={news} />
           </TabPanel>
-          <Pagination count={10} color="secondary" className="pagenation" />
+          <Pagination
+            count={10}
+            page={currentPage}
+            onChange={onPageChange}
+            color="secondary"
+            className="pagenation"
+          />
         </Box>
       </div>
     </ThemeProvider>

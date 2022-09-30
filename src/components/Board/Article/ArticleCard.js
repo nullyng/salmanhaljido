@@ -4,18 +4,20 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 
-import defImg from 'assets/images/Board/default.png'
+import defImg from "assets/images/Board/default.png";
 
-
-function ArticleCard({title, imageURL, url}) {
+function ArticleCard({ title, imageURL, url, summary }) {
   return (
-    <Card className="article-card">
-      <div className="article-card__btn" onClick={() => window.open(`${url}`, '_blank')} >
+    <Card
+      className="article-card"
+      onClick={() => window.open(`${url}`, "_blank")}
+    >
+      <div className="article-card__btn article-card__front">
         <div>
           <CardMedia
             component="img"
             height="160"
-            image={imageURL ||defImg}
+            image={imageURL || defImg}
             alt=""
           />
         </div>
@@ -30,6 +32,11 @@ function ArticleCard({title, imageURL, url}) {
             </Typography>
           </CardContent>
         </div>
+      </div>
+      <div className="article-card__btn article-card__back">
+        <CardContent>
+          <Typography>{summary}</Typography>
+        </CardContent>
       </div>
     </Card>
   );
