@@ -34,7 +34,7 @@ public class NewServiceImpl implements NewsService{
 
     @Override
     public NewsListResponseDto getNews(Category category, int pageNo, String search) {
-        PageRequest pageRequest = PageRequest.of(pageNo, 10);
+        PageRequest pageRequest = PageRequest.of(pageNo, 8);
         Page<News> newsPage;
         if(search==null)
             newsPage = newsRepository.findAllByCategory(category, pageRequest);
