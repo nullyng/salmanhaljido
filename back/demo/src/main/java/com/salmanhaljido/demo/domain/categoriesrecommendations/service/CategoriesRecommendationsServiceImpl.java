@@ -80,7 +80,7 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
         SparkSession session = SparkSession.builder()
                 .master("local")
                 .appName("categories")
-                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.categories")
+                .config("spark.mongodb.write.connection.uri", "mongodb://j7d110.p.ssafy.io/openapi.categories")
                 .getOrCreate();
         try {
             File writeFile = new File(dataPath + "categories.json");
@@ -151,7 +151,7 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
             SparkSession session = SparkSession.builder()
                     .master("local")
                     .appName("categories")
-                    .config("spark.mongodb.read.connection.uri", "mongodb://127.0.0.1/openapi.categories")
+                    .config("spark.mongodb.read.connection.uri", "mongodb://j7d110.p.ssafy.io/openapi.categories")
                     .getOrCreate();
             try {
 
@@ -193,7 +193,7 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
                     JavaRDD<String[]> rawRatings = rawData.map(str -> str.split(" "));
                     JavaRDD<Rating> ratings = rawRatings.map(arr -> new Rating(Integer.parseInt(arr[0]), Integer.parseInt(arr[1]), Double.parseDouble(arr[2])));
                     ratings.cache();
-                    MatrixFactorizationModel model = ALS.train(JavaRDD.toRDD(ratings), 10, 2, 0.01);
+                    MatrixFactorizationModel model = ALS.train(JavaRDD.toRDD(ratings), 3, 1, 0.01);
                     int K = 3;
                     Rating[] topKRecs = model.recommendProducts(Integer.parseInt(mainCategory), K);
                     String s = "";
@@ -227,7 +227,7 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
             SparkSession session = SparkSession.builder()
                     .master("local")
                     .appName("categories")
-                    .config("spark.mongodb.read.connection.uri", "mongodb://127.0.0.1/openapi.categories")
+                    .config("spark.mongodb.read.connection.uri", "mongodb://j7d110.p.ssafy.io/openapi.categories")
                     .getOrCreate();
             try {
 
@@ -278,7 +278,7 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
                     JavaRDD<String[]> rawRatings = rawData.map(str -> str.split(" "));
                     JavaRDD<Rating> ratings = rawRatings.map(arr -> new Rating(Integer.parseInt(arr[0]), Integer.parseInt(arr[1]), Double.parseDouble(arr[2])));
                     ratings.cache();
-                    MatrixFactorizationModel model = ALS.train(JavaRDD.toRDD(ratings), 50, 2, 0.01);
+                    MatrixFactorizationModel model = ALS.train(JavaRDD.toRDD(ratings), 3, 1, 0.01);
 
                     int K = 3;
                     Rating[] topKRecs = model.recommendProducts(1, K);
