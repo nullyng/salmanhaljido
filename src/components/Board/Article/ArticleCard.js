@@ -7,14 +7,15 @@ import Typography from "@mui/material/Typography";
 import defImg from 'assets/images/Board/default.png'
 
 
-function ArticleCard({title, imageURL}) {
+function ArticleCard({title, imageURL, url}) {
+  console.log(url);
   return (
     <Card className="article-card">
-      <div className="article-card__btn">
+      <div className="article-card__btn" onClick={() => window.open(`${url}`, '_blank')} >
         <div>
           <CardMedia
             component="img"
-            height="210"
+            height="150"
             image={imageURL ||defImg}
             alt=""
           />
