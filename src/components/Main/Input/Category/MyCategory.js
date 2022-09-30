@@ -26,7 +26,7 @@ function MyCategory() {
             {Object.keys(myCategoryList).map((category, index) => (
               <CategoryChip
                 key={index}
-                categoryName={category}
+                categoryValue={category}
                 categoryLevel={myCategoryList[category]}
               />
             ))}

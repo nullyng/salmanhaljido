@@ -6,6 +6,7 @@ import Box from "@mui/material/Box";
 
 import CustomTooltip from "components/common/CustomTooltip";
 import CategoryPanel from "components/Main/Input/Category/CategoryPanel";
+import { categoryList } from "components/Main/Input/Category/categoryList";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -35,22 +36,6 @@ function a11yProps(index) {
     "aria-controls": `simple-tabpanel-${index}`,
   };
 }
-
-const categoryList = {
-  교통: [
-    "대중교통 이용률",
-    "대중교통 정류장",
-    "전기차 충전소",
-    "공용, 민영주차장",
-  ],
-  재난: ["민방위 대피소"],
-  안전: ["교통사고", "화재", "범죄", "어린이 보호구역", "여성안심"],
-  의료: ["의료기관", "약국"],
-  반려동물: ["동물병원", "동물미용"],
-  교육: ["유치원", "초, 중, 고등학교", "학원 및 교습소"],
-  문화: ["미술관, 박물관", "영화관", "도서관", "공연장", "스포츠시설"],
-  생활: ["음식점", "공원", "마트, 시장", "장애인 편의시설"],
-};
 
 function Category() {
   const [value, setValue] = useState(0);
@@ -87,14 +72,13 @@ function Category() {
           </Tabs>
           <Tabs value={value - 4} onChange={handleChange2}>
             <Tab label="반려동물" {...a11yProps(4)} />
-            <Tab label="문화" {...a11yProps(5)} />
-            <Tab label="교육" {...a11yProps(6)} />
+            <Tab label="교육" {...a11yProps(5)} />
+            <Tab label="문화" {...a11yProps(6)} />
             <Tab label="생활" {...a11yProps(7)} />
           </Tabs>
         </Box>
         {
           <div>
-            {" "}
             {Object.keys(categoryList).map((category, index) => (
               <TabPanel key={index} value={value} index={index}>
                 <CategoryPanel categoryList={categoryList[category]} />
