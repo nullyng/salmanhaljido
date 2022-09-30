@@ -2,6 +2,7 @@ package com.salmanhaljido.demo.domain.categoriesrecommendations.service;
 
 
 import com.salmanhaljido.demo.domain.categoriesrecommendations.dto.*;
+import com.salmanhaljido.demo.global.config.MongoDBConfig;
 import lombok.RequiredArgsConstructor;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -18,7 +19,8 @@ import java.util.*;
 @Service
 @RequiredArgsConstructor
 public class CategoriesRecommendationsServiceImpl implements CategoriesRecommendationsService{
-
+    MongoDBConfig mongoDBConfig = new MongoDBConfig();
+    SparkSession session = mongoDBConfig.getSession();
     String dataPath = "src/main/resources/data/";
     @Override
     public CategoriesRecommendationsViewResponseDto CategoriesRecommendationsView(CategoriesRecommendationsViewRequestDto dto){
@@ -72,11 +74,6 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
         for(char c : charArr){
             mainCategory+=c;
         }
-        SparkSession session = SparkSession.builder()
-                .master("local")
-                .appName("categories")
-                .config("spark.mongodb.write.connection.uri", "mongodb://j7d110.p.ssafy.io/openapi.categories")
-                .getOrCreate();
         try {
             File writeFile = new File(dataPath + "categories.json");
             FileOutputStream fileOutputStream = new FileOutputStream(writeFile);
@@ -139,11 +136,6 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
         List<CategoriesDto> returnRatingList = new ArrayList<>();
         try {
 
-            SparkSession session = SparkSession.builder()
-                    .master("local")
-                    .appName("categories")
-                    .config("spark.mongodb.read.connection.uri", "mongodb://j7d110.p.ssafy.io/openapi.categories")
-                    .getOrCreate();
             try {
 
 
@@ -243,11 +235,6 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
         List<CategoriesDto> returnCountingList = new ArrayList<>();
         try {
 
-            SparkSession session = SparkSession.builder()
-                    .master("local")
-                    .appName("categories")
-                    .config("spark.mongodb.read.connection.uri", "mongodb://j7d110.p.ssafy.io/openapi.categories")
-                    .getOrCreate();
             try {
 
                 Dataset<Row> ds = session.read().format("mongodb").load();
