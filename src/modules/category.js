@@ -30,7 +30,6 @@ function category(state = initialState, action) {
         clone1[key] = state.myCategoryList[key];
       }
       clone1[action.value] = action.level;
-      console.log(clone1);
       return {
         ...state,
         myCategoryList: clone1,
@@ -41,7 +40,6 @@ function category(state = initialState, action) {
         clone2[key] = state.myCategoryList[key];
       }
       delete clone2[action.value];
-      console.log(clone2);
       return {
         ...state,
         myCategoryList: clone2,

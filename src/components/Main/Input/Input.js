@@ -2,6 +2,7 @@ import { Divider, Drawer, IconButton } from "@mui/material";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 import "styles/Main/Input.scss";
 import UserLocation from "components/Main/Input/UserLocation";
@@ -11,7 +12,6 @@ import ResetButton from "components/Main/Input/ResetButton";
 import SubmitButton from "components/Main/Input/SubmitButton";
 import MyCategory from "components/Main/Input/Category/MyCategory";
 import Category from "components/Main/Input/Category/Category";
-import { useSelector } from "react-redux";
 
 function Input({
   currMap,
@@ -21,7 +21,6 @@ function Input({
   onSetMarkers,
   onSetRegion,
   onSetUserInfo,
-  onSetCategories,
   onSetPrice,
 }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);

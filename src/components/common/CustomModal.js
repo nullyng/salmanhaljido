@@ -2,10 +2,17 @@ import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
-import { Button, Grid, ThemeProvider } from "@mui/material";
+import { Button, createTheme, Grid, ThemeProvider } from "@mui/material";
 
 import "styles/common/CustomModal.scss";
-import theme from "components/common/theme";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#e94560",
+    },
+  },
+});
 
 function CustomModal({
   open,
