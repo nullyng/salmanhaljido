@@ -3,7 +3,7 @@ const { createProxyMiddleware } = require("http-proxy-middleware");
 module.exports = function (app) {
   app.use(
     createProxyMiddleware("/api", {
-      target: "http://localhost:8080",
+      target: "https://j7d110.p.ssafy.io/",
       changeOrigin: true,
       pathRewrite: {
         "^/api": "/",

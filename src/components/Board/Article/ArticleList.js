@@ -5,12 +5,12 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { useState, useEffect, useCallback } from "react";
+import Pagination from "@mui/material/Pagination";
 
-import CategoryOne from "components/Board/Article/CategoryOne";
-import CategoryTwo from "components/Board/Article/CategoryTwo";
-import CategoryThree from "components/Board/Article/CategoryThree";
-import CategoryFour from "components/Board/Article/CategoryFour";
-import CategoryFive from "components/Board/Article/CategoryFive";
+import Category from "components/Board/Article/Category";
+import { getBoard } from "api/board";
+import { newscategory } from "components/Board/Article/NewsCategory";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -46,7 +46,12 @@ function a11yProps(index) {
 }
 
 function BasicTabs() {
-  const [value, setValue] = React.useState(0);
+  // 뉴스 데이터
+  const [news, setNews] = useState([]);
+
+  const [value, setValue] = useState(0);
+  // console.log(value);
+  // console.log(newscategory[1])
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -64,6 +69,17 @@ function BasicTabs() {
       },
     },
   });
+
+  const fetchBoard = useCallback(() => {
+    getBoard(newscategory[value], 0, (res) => {
+      setNews(res.data.newsList);
+    });
+  }, [value]);
+
+
+  useEffect(() => {
+    fetchBoard();
+  }, [value, fetchBoard]);
 
   return (
     <ThemeProvider theme={theme}>
@@ -85,20 +101,21 @@ function BasicTabs() {
           </Box>
 
           <TabPanel value={value} index={0}>
-            <CategoryOne />
+            <Category news={news} />
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <CategoryTwo />
+            <Category news={news} />
           </TabPanel>
           <TabPanel value={value} index={2}>
-            <CategoryThree />
+            <Category news={news} />
           </TabPanel>
           <TabPanel value={value} index={3}>
-            <CategoryFour />
+            <Category news={news} />
           </TabPanel>
           <TabPanel value={value} index={4}>
-            <CategoryFive />
+            <Category news={news} />
           </TabPanel>
+          <Pagination count={10} color="secondary" className="pagenation" />
         </Box>
       </div>
     </ThemeProvider>

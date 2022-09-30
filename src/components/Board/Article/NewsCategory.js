@@ -1,0 +1,7 @@
+export const newscategory = {
+  0: 'PREGNANT_AND_DELIVERY',
+  1: 'PARENTING_AND_EDUCATION',
+  2: 'LIFE_AND_HEALTH',
+  3: 'SOCIAL_AND_POLICY',
+  4: 'REAL_ESTATE',
+}

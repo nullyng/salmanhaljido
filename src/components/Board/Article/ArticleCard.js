@@ -3,11 +3,11 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
+
 import defImg from 'assets/images/Board/default.png'
 
 
-function ArticleCard(dummy) {
+function ArticleCard({title, imageURL}) {
   return (
     <Card className="article-card">
       <div className="article-card__btn">
@@ -15,7 +15,7 @@ function ArticleCard(dummy) {
           <CardMedia
             component="img"
             height="210"
-            image={dummy.img || defImg}
+            image={imageURL ||defImg}
             alt=""
           />
         </div>
@@ -26,7 +26,7 @@ function ArticleCard(dummy) {
               color="text.secondary"
               className="article-card__cntr--detail"
             >
-              {dummy.title}
+              {title}
             </Typography>
           </CardContent>
         </div>
