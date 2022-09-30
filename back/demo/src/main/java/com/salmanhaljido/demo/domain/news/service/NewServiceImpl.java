@@ -39,7 +39,7 @@ public class NewServiceImpl implements NewsService{
         if(search==null)
             newsPage = newsRepository.findAllByCategory(category, pageRequest);
         else{
-            String tokens[] =search.split(" ");
+
             List<String> list = new ArrayList<>();
             list.add("서울");
             list.add("부산");
@@ -58,15 +58,17 @@ public class NewServiceImpl implements NewsService{
             list.add("경북");
             list.add("경남");
             list.add("제주");
-
+            String tokens[] =search.split(" ");
             String str = "";
             for(String s : list){
-                if(tokens[0].contains(s)) str = s;
+                if(tokens[0].contains(s)) {
+                    str = s;
+                }
             }
             if(tokens.length==1){
-                newsPage = newsRepository.findAllByCategoryOrTitleOrSummaryWithPagination(category, "%" + str + "%", "%" + str + "%", pageRequest);
+                newsPage = newsRepository.findAllByCategoryOrTitleOrSummaryWithPagination(category.name(), "%" + str + "%", "%" + str + "%", pageRequest);
             }else{
-                newsPage = newsRepository.findAllByCategoryOrTitleOrSummaryWithPagination(category, "%" + str + "%", "%" + tokens[1] + "%", pageRequest);
+                newsPage = newsRepository.findAllByCategoryOrTitleOrSummaryWithPagination(category.name(), "%" + str + "%", "%" + tokens[1] + "%", pageRequest);
             }
         }
         return NewsListResponseDto.of(newsPage);

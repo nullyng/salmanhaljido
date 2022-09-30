@@ -13,5 +13,5 @@ public interface NewsRepository extends JpaRepository<News, Long> {
     @Query(value = "SELECT * FROM news n WHERE n.category = :category And (n.title LIKE :sido OR n.summary LIKE :sido OR n.title LIKE :sigungu OR n.summary LIKE :sigungu) ORDER BY n.id"
             ,countQuery = "SELECT COUNT(*) FROM news",
             nativeQuery = true)
-    Page<News> findAllByCategoryOrTitleOrSummaryWithPagination(@Param("category") Category category,@Param("sido") String sido,@Param("sigungu") String sigungu, Pageable pageable);
+    Page<News> findAllByCategoryOrTitleOrSummaryWithPagination(@Param("category") String category,@Param("sido") String sido,@Param("sigungu") String sigungu, Pageable pageable);
 }
