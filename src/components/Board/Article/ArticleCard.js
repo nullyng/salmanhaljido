@@ -8,14 +8,13 @@ import defImg from 'assets/images/Board/default.png'
 
 
 function ArticleCard({title, imageURL, url}) {
-  console.log(url);
   return (
     <Card className="article-card">
       <div className="article-card__btn" onClick={() => window.open(`${url}`, '_blank')} >
         <div>
           <CardMedia
             component="img"
-            height="150"
+            height="160"
             image={imageURL ||defImg}
             alt=""
           />

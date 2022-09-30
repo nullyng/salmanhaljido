@@ -46,17 +46,6 @@ function a11yProps(index) {
 }
 
 function BasicTabs() {
-  // 뉴스 데이터
-  const [news, setNews] = useState([]);
-
-  const [value, setValue] = useState(0);
-  // console.log(value);
-  // console.log(newscategory[1])
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
   // mui tabs 커스텀
   // 클릭된 버튼 색, ##########폰트 두께##########
   const theme = createTheme({
@@ -70,12 +59,21 @@ function BasicTabs() {
     },
   });
 
+  // 뉴스 데이터
+  const [news, setNews] = useState([]);
+
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  // 뉴스 api 요청
   const fetchBoard = useCallback(() => {
     getBoard(newscategory[value], 0, (res) => {
       setNews(res.data.newsList);
     });
   }, [value]);
-
 
   useEffect(() => {
     fetchBoard();

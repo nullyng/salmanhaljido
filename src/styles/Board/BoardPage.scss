@@ -62,8 +62,8 @@
 
 .article-card {
   margin: 10px;
-  width: 250px;
-  height: 220px;
+  width: 260px;
+  height: 230px;
 
   &__btn {
     cursor: pointer;
@@ -96,8 +96,10 @@
 }
 
 .pagenation {
-  position: fixed;
-  left: 50%;
-  bottom: 3%;
-  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  // position: fixed;
+  // left: 50%;
+  // bottom: 3%;
+  // transform: translate(-50%, -50%);
 }
