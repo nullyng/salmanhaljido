@@ -25,17 +25,11 @@ function CategoryChip({ categoryValue, categoryLevel }) {
         <Chip
           avatar={
             categoryLevel === "low" ? (
-              <Avatar className="category-chip__avatar--1">
-                {level[categoryLevel]}
-              </Avatar>
+              <Avatar className="category-chip__avatar--1">{level[1]}</Avatar>
             ) : categoryLevel === "middle" ? (
-              <Avatar className="category-chip__avatar--2">
-                {level[categoryLevel]}
-              </Avatar>
+              <Avatar className="category-chip__avatar--2">{level[2]}</Avatar>
             ) : (
-              <Avatar className="category-chip__avatar--3">
-                {level[categoryLevel]}
-              </Avatar>
+              <Avatar className="category-chip__avatar--3">{level[3]}</Avatar>
             )
           }
           label={categoryDetail[categoryValue]}
