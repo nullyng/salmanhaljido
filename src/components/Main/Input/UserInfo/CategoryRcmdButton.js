@@ -1,11 +1,18 @@
-import { Button, Collapse, Divider } from "@mui/material";
-import { getCategoryRcmd } from "api/category";
+import { Button, Collapse } from "@mui/material";
 import { useEffect, useState } from "react";
-import CategoryRcmd from "./CategoryRcmd";
+import { useDispatch } from "react-redux";
+
+import CategoryRcmd from "components/Main/Input/UserInfo/CategoryRcmd";
+import { getCategoryRcmd } from "api/category";
+import { setLoading } from "modules/loading";
 
 function CategoryRcmdButton({ isMarried, hasCar, hasPets, hasChildren, open }) {
   const [countOpen, setCountOpen] = useState(false);
   const [ratingOpen, setRatingOpen] = useState(false);
+
+  const dispatch = useDispatch();
+  const onSetLoading = (loading) => dispatch(setLoading(loading));
+
   let apiData = {
     married: isMarried,
     hasPets: hasPets,
@@ -22,12 +29,15 @@ function CategoryRcmdButton({ isMarried, hasCar, hasPets, hasChildren, open }) {
   const handleClickCount = () => {
     apiData = { ...apiData, standard: false };
 
-    getCategoryRcmd(apiData, (res) => {
-      console.log(res.data);
-    });
+    onSetLoading(true);
 
-    setCountOpen(true);
-    setRatingOpen(false);
+    getCategoryRcmd(apiData, (res) => {
+      onSetLoading(false);
+      console.log(res.data);
+
+      setCountOpen(true);
+      setRatingOpen(false);
+    });
   };
 
   const handleClickRating = () => {
