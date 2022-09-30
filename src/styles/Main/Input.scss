@@ -224,11 +224,16 @@
   margin-right: 0.3rem;
   margin-bottom: 0.5rem;
 
+  & .MuiChip-label {
+    font-family: "EsamanruLight";
+  }
+
   &__avatar {
     &--1 {
       &.MuiAvatar-root {
         background-color: #e9456056;
         color: white !important;
+        font-family: "EsamanruLight";
       }
     }
 
@@ -236,6 +241,7 @@
       &.MuiAvatar-root {
         background-color: #e94560a4;
         color: white !important;
+        font-family: "EsamanruLight";
       }
     }
 
@@ -243,6 +249,7 @@
       &.MuiAvatar-root {
         background-color: #e94560;
         color: white !important;
+        font-family: "EsamanruLight";
       }
     }
   }
@@ -253,13 +260,13 @@
   @include input-title();
 
   margin-bottom: 1rem;
-  font-family: "GongGothicMedium";
+  font-family: "EsamanruLight";
 
   &__box {
     & button {
       padding: 0;
       font-size: large;
-      font-family: "GongGothicMedium";
+      font-family: "EsamanruLight";
       min-width: 25%;
     }
   }
