@@ -16,7 +16,7 @@ function ArticleCard({ title, imageURL, url, summary }) {
         <div>
           <CardMedia
             component="img"
-            height="160"
+            height="170"
             image={imageURL || defImg}
             alt=""
           />

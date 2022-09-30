@@ -24,7 +24,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -78,7 +78,7 @@ function BasicTabs() {
   // 뉴스 api 요청
   const fetchBoard = useCallback(() => {
     console.log(currentPage);
-    getBoard(newscategory[value], currentPage-1, (res) => {
+    getBoard(newscategory[value], currentPage - 1, (res) => {
       setNews(res.data.newsList);
     });
   }, [value, currentPage]);
@@ -90,7 +90,7 @@ function BasicTabs() {
   return (
     <ThemeProvider theme={theme}>
       <div className="board">
-        <Box sx={{ width: "100%" }}>
+        <Box sx={{ width: "100%", height: "100%" }}>
           <Box>
             <Tabs
               value={value}

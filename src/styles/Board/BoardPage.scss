@@ -23,35 +23,35 @@
     &__icon {
       margin-left: 10px;
     }
-    
+
     & button {
-      border: 1px solid #E94560;
+      border: 1px solid #e94560;
       border-radius: 10px;
       font-size: 18px;
-      color: #E94560;
+      color: #e94560;
       width: 65px;
 
       &:hover {
         color: white;
-        background-color: #E94560;
+        background-color: #e94560;
       }
     }
   }
 }
 
-
 .board {
   position: fixed;
   top: 14%;
-  
+  width: 85vw;
+  height: 80vh;
+  left: 50%;
+  transform: translateX(-50%);
+
   & button {
     font-size: 20px;
   }
 
   &__tabs {
-    position: relative;
-    left: 7%;
-
     & button {
       &.Mui-selected {
         font-weight: 800;
@@ -61,11 +61,10 @@
 }
 
 .article-card {
-  margin: 10px;
-  width: 260px;
-  height: 230px;
+  margin: 10px 0;
+  width: 93%;
+  height: 90%;
   perspective: 300px;
-  
 
   &__btn {
     cursor: pointer;
@@ -121,20 +120,18 @@
 }
 
 .article-list {
-  display: flex;
+  // display: flex;
+  // justify-content: center;
+  // flex-direction: row;
+  // flex-wrap: wrap;
+  display: grid;
   justify-content: center;
-  flex-direction: row;
-  flex-wrap: wrap;
-
-  grid-template-columns: 250px 250px 250px 250px;
-  grid-template-rows: 200px 200px 200px 200px;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: 270px 270px;
 }
 
 .pagenation {
   display: flex;
   justify-content: center;
-  // position: fixed;
-  // left: 50%;
-  // bottom: 3%;
-  // transform: translate(-50%, -50%);
+  margin-top: 0.5em;
 }
