@@ -1,9 +1,16 @@
-import { useDispatch, useSelector } from "react-redux";
+import { createTheme, ThemeProvider } from "@mui/material";
 
 import CustomTooltip from "components/common/CustomTooltip";
 import CustomSlider from "components/Main/Input/CustomSlider";
-import valueList from "components/Main/Input/valueList";
+import valueList from "./valueList";
+import { useDispatch, useSelector } from "react-redux";
 import { setPrice } from "modules/input";
+
+const theme = createTheme({
+  typography: {
+    fontFamily: "EsamanruLight",
+  },
+});
 
 function Price() {
   const minDistance = 1;
@@ -56,30 +63,33 @@ function Price() {
         <div className="price__content__jeonse">
           <h3>평균 전세 가격</h3>
           <div className="custom-slider">
-            <CustomSlider
-              value={price["jeonse"]}
-              onChange={handleChangeJeonse}
-              valueLabelDisplay="on"
-              disableSwap
-              min={0}
-              max={28}
-              valueLabelFormat={(label) => valueList[label]}
-            />
+            <ThemeProvider theme={theme}>
+              <CustomSlider
+                value={price["jeonse"]}
+                onChange={handleChangeJeonse}
+                valueLabelDisplay="on"
+                disableSwap
+                min={0}
+                max={28}
+                valueLabelFormat={(label) => valueList[label]}
+              />
+            </ThemeProvider>
           </div>
         </div>
         <div className="price__content__maemae">
           <h3>평균 매매 가격</h3>
-
           <div className="custom-slider">
-            <CustomSlider
-              value={price["maemae"]}
-              onChange={handleChangeMaemae}
-              valueLabelDisplay="on"
-              disableSwap
-              min={0}
-              max={28}
-              valueLabelFormat={(label) => valueList[label]}
-            />
+            <ThemeProvider theme={theme}>
+              <CustomSlider
+                value={price["maemae"]}
+                onChange={handleChangeMaemae}
+                valueLabelDisplay="on"
+                disableSwap
+                min={0}
+                max={28}
+                valueLabelFormat={(label) => valueList[label]}
+              />
+            </ThemeProvider>
           </div>
         </div>
       </div>

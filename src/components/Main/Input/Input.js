@@ -21,7 +21,6 @@ function Input({
   onSetMarkers,
   onSetRegion,
   onSetUserInfo,
-  onSetCategories,
   onSetPrice,
 }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);

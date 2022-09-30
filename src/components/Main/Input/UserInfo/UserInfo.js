@@ -1,19 +1,26 @@
 import {
   Checkbox,
-  Collapse,
+  createTheme,
   FormControlLabel,
   ThemeProvider,
 } from "@mui/material";
 
 import CustomTooltip from "components/common/CustomTooltip";
-import theme from "components/common/theme";
 import CategoryRcmdButton from "components/Main/Input/UserInfo/CategoryRcmdButton";
 import { useDispatch, useSelector } from "react-redux";
 import { setUserInfo } from "modules/input";
 
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#4d89c6",
+    },
+  },
+});
+
 function UserInfo() {
   const tooltipMessage =
-    "나에게 해당하는 환경을 선택해보세요. 나와 비슷한 환경의 사람들이 어떤 카테고리를 선택했는지 알 수 있어요.";
+    "나에게 해당하는 환경을 선택해 보세요. 나와 비슷한 환경의 사람들이 어떤 카테고리를 선택했는지 추천받을 수 있어요.";
 
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.input.userInfo);
@@ -47,9 +54,9 @@ function UserInfo() {
           <CustomTooltip content={tooltipMessage} />
         </div>
       </div>
-      <ThemeProvider theme={theme}>
-        <div className="user-info__content">
-          <div className="user-info__content__form">
+      <div className="user-info__content">
+        <div className="user-info__content__form">
+          <ThemeProvider theme={theme}>
             <FormControlLabel
               control={
                 <Checkbox
@@ -86,23 +93,23 @@ function UserInfo() {
               }
               label="자녀"
             />
-          </div>
-          {userInfo["isMarried"] ||
-          userInfo["hasCar"] ||
-          userInfo["hasPets"] ||
-          userInfo["hasChildren"] ? (
-            <CategoryRcmdButton
-              isMarried={userInfo["isMarried"]}
-              hasCar={userInfo["hasCar"]}
-              hasPets={userInfo["hasPets"]}
-              hasChildren={userInfo["hasChildren"]}
-              open={true}
-            />
-          ) : (
-            <CategoryRcmdButton open={false} />
-          )}
+          </ThemeProvider>
         </div>
-      </ThemeProvider>
+        {userInfo["isMarried"] ||
+        userInfo["hasCar"] ||
+        userInfo["hasPets"] ||
+        userInfo["hasChildren"] ? (
+          <CategoryRcmdButton
+            isMarried={userInfo["isMarried"]}
+            hasCar={userInfo["hasCar"]}
+            hasPets={userInfo["hasPets"]}
+            hasChildren={userInfo["hasChildren"]}
+            open={true}
+          />
+        ) : (
+          <CategoryRcmdButton open={false} />
+        )}
+      </div>
     </div>
   );
 }

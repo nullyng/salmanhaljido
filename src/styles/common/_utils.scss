@@ -5,6 +5,7 @@ $my-blue: #4d89c6;
 @mixin input-title {
   &__title {
     display: flex;
+    font-family: "EsamanruLight";
 
     &__tooltip {
       display: flex;
@@ -20,9 +21,22 @@ $my-blue: #4d89c6;
 }
 
 @font-face {
-  font-family: "GongGothicMedium";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff")
-    format("woff");
+  font-family: "EsamanruMedium";
+  src: url("../../assets/fonts/esamanru-Medium.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "EsamanruLight";
+  src: url("../../assets/fonts/esamanru-Light.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "EsamanruBold";
+  src: url("../../assets/fonts/esamanru-Bold.ttf");
   font-weight: normal;
   font-style: normal;
 }
