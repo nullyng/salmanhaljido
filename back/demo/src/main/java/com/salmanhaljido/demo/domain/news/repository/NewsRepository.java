@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface NewsRepository extends JpaRepository<News, Long> {
     Page<News> findAllByCategory(Category category, Pageable pageable);
-    @Query(value = "SELECT * FROM news n WHERE n.category = ?1 And (n.title LIKE ?2 OR n.summary LIKE ?2 OR n.title LIKE ?3 OR n.summary LIKE ?3) ORDER BY id"
+    @Query(value = "SELECT * FROM news n WHERE n.category = 'LIFE_AND_HEALTH' And (n.title LIKE '%시험%' OR n.summary LIKE '%시험%' OR n.title LIKE '%시험%' OR n.summary LIKE '%시험%') ORDER BY n.id"
             ,countQuery = "SELECT COUNT(*) FROM news",
             nativeQuery = true)
     Page<News> findAllByCategoryOrTitleOrSummaryWithPagination(Category category, String sido, String sigungu, Pageable pageable);
