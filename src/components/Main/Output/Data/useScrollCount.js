@@ -1,11 +1,11 @@
 const { useEffect, useRef, useCallback } = require("react");
 
-function useScrollCount(dom, end, start = 0, duration = 1000) {
-  const el = useRef();
+function useScrollCount(end, start = 0, duration = 1000) {
+  const dom = useRef();
   const stepTime = Math.abs(Math.floor(duration / (end - start)));
 
   const handleScroll = useCallback(([entry]) => {
-    const { current } = el;
+    const { current } = dom;
 
     if (entry.isIntersecting) {
       let currentNumber = start;
@@ -33,7 +33,7 @@ function useScrollCount(dom, end, start = 0, duration = 1000) {
   }, [handleScroll]);
 
   return {
-    ref: el,
+    ref: dom,
   };
 }
 

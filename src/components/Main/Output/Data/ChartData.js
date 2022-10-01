@@ -73,7 +73,7 @@ function ChartData() {
 
   return (
     <div className="chart-data">
-      {currRegion === "" || currRegion === undefined ? (
+      {Object.keys(currRegion).length === 0 ? (
         <div className="chart-data--no-data">
           <p>추천 지역을 선택해주세요.</p>
         </div>
