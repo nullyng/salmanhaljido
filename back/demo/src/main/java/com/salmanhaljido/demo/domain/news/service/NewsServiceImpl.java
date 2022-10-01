@@ -57,10 +57,11 @@ public class NewsServiceImpl implements NewsService{
             list.add("경남");
             list.add("제주");
             String tokens[] =search.split(" ");
-            String str = "";
+            String str = search;
             for(String s : list){
                 if(tokens[0].contains(s)) {
                     str = s;
+                    break;
                 }
             }
             if(tokens.length==1){
