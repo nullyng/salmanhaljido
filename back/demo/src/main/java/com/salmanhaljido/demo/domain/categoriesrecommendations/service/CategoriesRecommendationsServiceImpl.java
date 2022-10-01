@@ -125,7 +125,6 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
 
             Dataset<Row> dff = session.read().format("json").load(dataPath + "categories.json");
             dff.write().format("mongodb").mode("append").save();
-            System.out.println("mongodb : finish");
         } catch (Exception e) {
 
         } finally {
@@ -150,7 +149,6 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
 
                 List<String> categoryList = new ArrayList<>();
                 for (Row row : ds.select("mainCategory").collectAsList()) {
-                    System.out.println(row.toString().substring(1, 5));
                     categoryList.add(row.toString().substring(1, 5));
                 }
                 List<String> ratingList = new ArrayList<>();
@@ -193,10 +191,7 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
                     int count=0;
                     int temp=rowDataSetList.get(0).product;
                     for(int i=0;i<rowDataSetList.size();i++){
-                        System.out.println(rowDataSetList.get(i).rating + ", " + rowDataSetList.get(i).product);
                         if(temp != rowDataSetList.get(i).product){
-                            if(col.equals("carAccident"))
-                                System.out.println("test : " +temp + ", " + sum/count);
                             rowDataList.add(new Rating(temp, sum/count));
                             temp=rowDataSetList.get(i).product;
                             count=1;

@@ -38,7 +38,6 @@ public class NewsServiceImpl implements NewsService{
         if(search==null)
             newsPage = newsRepository.findAllByCategory(category, pageRequest);
         else{
-
             List<String> list = new ArrayList<>();
             list.add("서울");
             list.add("부산");

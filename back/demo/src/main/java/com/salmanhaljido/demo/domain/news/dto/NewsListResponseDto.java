@@ -12,6 +12,7 @@ import java.util.List;
 @Getter
 public class NewsListResponseDto {
     List<NewsResponseDto> newsList;
+    int totalCount;
 
     public static NewsListResponseDto of(Page<News> newsPage){
         List<NewsResponseDto> newsResponseDtoList = new ArrayList<>();
@@ -20,6 +21,6 @@ public class NewsListResponseDto {
             newsResponseDtoList.add(NewsResponseDto.of(news));
         });
 
-        return NewsListResponseDto.builder().newsList(newsResponseDtoList).build();
+        return NewsListResponseDto.builder().newsList(newsResponseDtoList).totalCount(newsPage.getTotalPages()*8).build();
     }
 }
