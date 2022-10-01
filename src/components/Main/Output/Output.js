@@ -34,15 +34,7 @@ const MyTooltip = styled(({ className, ...props }) => (
   },
 }));
 
-function Output({
-  rcmdData,
-  currRegion,
-  statistics,
-  realEstate,
-  onSetCurrRegion,
-  onSetStatistics,
-  onSetRealEstate,
-}) {
+function Output() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [rcmdOpen, setRcmdOpen] = useState(false);
 

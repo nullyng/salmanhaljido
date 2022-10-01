@@ -66,10 +66,11 @@ function ChartData() {
     for (let i = 0; i < categories.length; i++) {
       // 각 카테고리를 클릭하면 currCategory를 현재 카테고리 인덱스로 설정
       categories[i].addEventListener("click", () => {
+        console.log(i);
         setCurrCategory(i);
       });
     }
-  }, [currCategory]);
+  }, [currCategory, currRegion]);
 
   return (
     <div className="chart-data">
