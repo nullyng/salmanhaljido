@@ -5,6 +5,7 @@ import region from "modules/region";
 import input from "modules/input";
 import category from "modules/category";
 import loading from "modules/loading";
+import survey from "modules/survey";
 
 const rootReducer = combineReducers({
   map,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   input,
   category,
   loading,
+  survey,
 });
 
 export default rootReducer;
