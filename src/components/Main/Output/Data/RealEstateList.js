@@ -1,6 +1,10 @@
+import { useSelector } from "react-redux";
+
 import RealEstateCard from "components/Main/Output/Data/RealEstateCard";
 
-function RealEstateList({ realEstate }) {
+function RealEstateList() {
+  const realEstate = useSelector((state) => state.region.realEstate);
+
   return (
     <div className="real-estate-list">
       {realEstate.length === 0 ? (

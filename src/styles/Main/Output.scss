@@ -140,11 +140,58 @@
     padding-bottom: 20%;
     color: #b6b6b6;
   }
+
+  & .recharts-polar-angle-axis-tick {
+    cursor: pointer;
+  }
 }
 
 .detail-data {
-  width: 100%;
-  padding: 0 1rem;
+  padding: 1rem;
+  width: 90%;
+}
+
+.category-data {
+  &__title {
+    font-family: "EsamanruMedium";
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+
+  &__content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.category-data-card {
+  margin: 0.5rem;
+  margin-bottom: 2rem;
+
+  &__title {
+    margin-bottom: 1rem;
+  }
+
+  &__content {
+    display: flex;
+
+    & div {
+      background-color: #4d89c682;
+      width: 10px;
+      height: auto;
+      margin-right: 1rem;
+    }
+    & p {
+      margin: 0;
+      font-family: "EsamanruBold";
+      font-size: 2rem;
+    }
+
+    & span {
+      margin-top: 0.5rem;
+      margin-left: 0.5rem;
+    }
+  }
 }
 
 .real-estate-list {

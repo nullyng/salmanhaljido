@@ -1,18 +1,22 @@
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import CustomTooltip from "components/common/CustomTooltip";
 import RcmdChip from "components/Main/Output/Rcmd/RcmdChip.js";
 import "styles/Main/Output.scss";
+import { setCurrRegion, setRealEstate, setStatistics } from "modules/region";
 
-function RcmdList({
-  rcmdData,
-  currRegion,
-  onSetCurrRegion,
-  onSetStatistics,
-  onSetRealEstate,
-}) {
+function RcmdList({}) {
   const tooltipMessage =
     "추천 지역 검색을 통해 추천 지역을 확인할 수 있어요.\n추천 지역은 순위가 높은 순으로 표시됩니다.\n해당 지역의 자세한 정보를 보고 싶다면, 원하는 지역을 클릭해 보세요!";
+
+  const rcmdData = useSelector((state) => state.region.rcmdData);
+  const currRegion = useSelector((state) => state.region.currRegion);
+
+  const dispatch = useDispatch();
+  const onSetCurrRegion = (currRegion) => dispatch(setCurrRegion(currRegion));
+  const onSetStatistics = (statistics) => dispatch(setStatistics(statistics));
+  const onSetRealEstate = (realEstate) => dispatch(setRealEstate(realEstate));
 
   useEffect(() => {
     let el;
