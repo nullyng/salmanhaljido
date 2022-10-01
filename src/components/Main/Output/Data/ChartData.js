@@ -1,3 +1,4 @@
+import { Divider } from "@mui/material";
 import * as React from "react";
 import {
   Radar,
@@ -82,7 +83,8 @@ function ChartData({ statistics }) {
                 fillOpacity={0.6}
               />
             </RadarChart>
-            <DetailData />
+            <Divider />
+            <DetailData statistics={statistics} />
           </div>
       }
     </div>
