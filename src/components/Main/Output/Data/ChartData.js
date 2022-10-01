@@ -81,7 +81,6 @@ function ChartData({ statistics }) {
               fillOpacity={0.6}
             />
           </RadarChart>
-          <Divider />
           <DetailData statistics={statistics} />
         </div>
       )}

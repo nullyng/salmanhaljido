@@ -45,28 +45,40 @@ function RcmdList({
         </div>
       </div>
       <div className="region__cntr">
-        <div>
-          <h3>선택한 지역 내</h3>
-        </div>
-        <div>
-          <h3>선택한 지역 외</h3>
-        </div>
         {rcmdData.length === 0 ? (
           <p className="region__cntr--no-data">추천 지역을 검색해주세요.</p>
         ) : (
           <div className="region__cntr--data">
-            {rcmdData.map((data, index) => {
-              return (
-                <RcmdChip
-                  key={index}
-                  index={index}
-                  name={data.name}
-                  code={data.code}
-                  score={data.score}
-                  handleClick={() => handleClick(data)}
-                />
-              );
-            })}
+            <div>
+              <h3>선택한 지역 내</h3>
+              {rcmdData.map((data, index) => {
+                return (
+                  <RcmdChip
+                    key={index}
+                    index={index}
+                    name={data.name}
+                    code={data.code}
+                    score={data.score}
+                    handleClick={() => handleClick(data)}
+                  />
+                );
+              })}
+            </div>
+            <div>
+              <h3>선택한 지역 외</h3>
+              {rcmdData.map((data, index) => {
+                return (
+                  <RcmdChip
+                    key={index}
+                    index={index}
+                    name={data.name}
+                    code={data.code}
+                    score={data.score}
+                    handleClick={() => handleClick(data)}
+                  />
+                );
+              })}
+            </div>
           </div>
         )}
       </div>

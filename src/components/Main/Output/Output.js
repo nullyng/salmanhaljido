@@ -1,4 +1,4 @@
-import { Drawer, IconButton } from "@mui/material";
+import { Divider, Drawer, IconButton } from "@mui/material";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import { useState } from "react";
@@ -58,18 +58,21 @@ function Output({
               <KeyboardDoubleArrowRightIcon />
             </IconButton>
           </div>
-          <RcmdList
-            rcmdData={rcmdData}
-            currRegion={currRegion}
-            onSetCurrRegion={onSetCurrRegion}
-            onSetStatistics={onSetStatistics}
-            onSetRealEstate={onSetRealEstate}
-          />
-          <Data
-            currRegion={currRegion}
-            statistics={statistics}
-            realEstate={realEstate}
-          />
+          <div className="right-drawer__inner__content">
+            <RcmdList
+              rcmdData={rcmdData}
+              currRegion={currRegion}
+              onSetCurrRegion={onSetCurrRegion}
+              onSetStatistics={onSetStatistics}
+              onSetRealEstate={onSetRealEstate}
+            />
+            <Divider />
+            <Data
+              currRegion={currRegion}
+              statistics={statistics}
+              realEstate={realEstate}
+            />
+          </div>
         </Drawer>
       </div>
     </ThemeProvider>

@@ -1,12 +1,9 @@
 import * as React from "react";
 import { Button, Rating, ThemeProvider } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
-import styled from "@emotion/styled";
 
 import "styles/Main/Output.scss";
 import theme from "components/common/theme";
-
-const StyledRating = styled(Rating)({});
 
 function RcmdChip({ index, name, code, score, handleClick }) {
   return (
