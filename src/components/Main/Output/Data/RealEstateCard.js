@@ -5,12 +5,12 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 
-import defImg from 'assets/images/Main/default.png'
+import defImg from "assets/images/Main/default.png";
 
 function RealEstateCard({ title, url }) {
   const handleClick = () => {
     window.open(url);
-  }
+  };
 
   return (
     <Card sx={{ display: "flex" }} onClick={handleClick}>

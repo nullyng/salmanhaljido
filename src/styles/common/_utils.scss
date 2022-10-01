@@ -1,9 +1,11 @@
 $primary-color: #e94560;
 $secondary-color: #0f3460;
+$my-blue: #4d89c6;
 
 @mixin input-title {
   &__title {
     display: flex;
+    font-family: "EsamanruLight";
 
     &__tooltip {
       display: flex;
@@ -16,4 +18,25 @@ $secondary-color: #0f3460;
       }
     }
   }
+}
+
+@font-face {
+  font-family: "EsamanruMedium";
+  src: url("../../assets/fonts/esamanru-Medium.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "EsamanruLight";
+  src: url("../../assets/fonts/esamanru-Light.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "EsamanruBold";
+  src: url("../../assets/fonts/esamanru-Bold.ttf");
+  font-weight: normal;
+  font-style: normal;
 }

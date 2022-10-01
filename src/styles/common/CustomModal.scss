@@ -1,4 +1,8 @@
+@use "../common/utils" as *;
+
 .custom-modal {
+  font-family: "EsamanruLight";
+
   & .MuiBox-root {
     position: absolute;
     top: 50%;
@@ -30,6 +34,7 @@
     display: flex;
 
     & button {
+      font-family: "EsamanruLight";
       width: 100%;
       border-radius: 20px;
       margin-left: 0.5rem;
