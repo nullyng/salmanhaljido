@@ -29,7 +29,6 @@ function MainPage() {
         markers={markers}
         onSetMarkers={onSetMarkers}
       />
-
       <Output />
       <CustomMap
         onSetCurrMap={onSetCurrMap}

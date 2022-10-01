@@ -3,7 +3,6 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { useState } from "react";
-import { useSelector } from "react-redux";
 
 import RealEstateList from "components/Main/Output/Data/RealEstateList";
 import ChartData from "components/Main/Output/Data/ChartData";
@@ -42,8 +41,6 @@ function Data() {
   const [value, setValue] = useState(0);
 
   const tooltipMessage = "선택한 지역의 카테고리별 정보를 확인해보세요.";
-
-  const realEstate = useSelector((state) => state.region.realEstate);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
