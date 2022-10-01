@@ -74,13 +74,13 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
         SparkSession session = SparkSession.builder()
                 .master("local")
                 .appName("categories")
-                .config("spark.mongodb.write.connection.uri", "mongodb://j7d110.p.ssafy.io/openapi.categories")
+                .config("spark.mongodb.read.connection.uri", "mongodb://admin:salmand110@j7d110.p.ssafy.io/openapi.categories?authSource=admin")
                 .getOrCreate();
         try {
             File writeFile = new File(dataPath + "categories.json");
             FileOutputStream fileOutputStream = new FileOutputStream(writeFile);
             JSONObject valueJSON = new JSONObject();
-            valueJSON.put("mainCategory", mainCategory+"");
+            valueJSON.put("mainCategory", mainCategory);
             valueJSON.put("academy", 0);
             valueJSON.put("animalHospital", 0);
             valueJSON.put("animalBeauty", 0);
@@ -141,7 +141,7 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
             SparkSession session = SparkSession.builder()
                     .master("local")
                     .appName("categories")
-                    .config("spark.mongodb.read.connection.uri", "mongodb://j7d110.p.ssafy.io/openapi.categories")
+                    .config("spark.mongodb.read.connection.uri", "mongodb://admin:salmand110@j7d110.p.ssafy.io/openapi.categories?authSource=admin")
                     .getOrCreate();
             try {
 
@@ -150,6 +150,7 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
 
                 List<String> categoryList = new ArrayList<>();
                 for (Row row : ds.select("mainCategory").collectAsList()) {
+                    System.out.println(row.toString().substring(1, 5));
                     categoryList.add(row.toString().substring(1, 5));
                 }
                 List<String> ratingList = new ArrayList<>();
@@ -245,7 +246,7 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
             SparkSession session = SparkSession.builder()
                     .master("local")
                     .appName("categories")
-                    .config("spark.mongodb.read.connection.uri", "mongodb://j7d110.p.ssafy.io/openapi.categories")
+                    .config("spark.mongodb.read.connection.uri", "mongodb://admin:salmand110@j7d110.p.ssafy.io/openapi.categories?authSource=admin")
                     .getOrCreate();
             try {
 

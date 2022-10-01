@@ -16,13 +16,12 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.sql.Array;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
 @Service
 @RequiredArgsConstructor
-public class NewServiceImpl implements NewsService{
+public class NewsServiceImpl implements NewsService{
 
     private final NewsRepository newsRepository;
 
