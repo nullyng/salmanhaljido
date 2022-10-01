@@ -20,6 +20,24 @@ $my-blue: #4d89c6;
   }
 }
 
+@mixin custom-scroll {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 15px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(77, 137, 198, 0.205);
+    border-radius: 10px;
+    border: 4px solid transparent;
+    background-clip: padding-box;
+  }
+}
+
 @font-face {
   font-family: "EsamanruMedium";
   src: url("../../assets/fonts/esamanru-Medium.ttf");

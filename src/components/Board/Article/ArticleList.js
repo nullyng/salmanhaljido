@@ -5,12 +5,12 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { useState, useEffect, useCallback } from "react";
+import Pagination from "@mui/material/Pagination";
 
-import CategoryOne from "components/Board/Article/CategoryOne";
-import CategoryTwo from "components/Board/Article/CategoryTwo";
-import CategoryThree from "components/Board/Article/CategoryThree";
-import CategoryFour from "components/Board/Article/CategoryFour";
-import CategoryFive from "components/Board/Article/CategoryFive";
+import Category from "components/Board/Article/Category";
+import { getBoard } from "api/board";
+import { newscategory } from "components/Board/Article/NewsCategory";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -24,7 +24,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box sx={{ p: 3 }}>
+        <Box>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -46,12 +46,6 @@ function a11yProps(index) {
 }
 
 function BasicTabs() {
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
   // mui tabs 커스텀
   // 클릭된 버튼 색, ##########폰트 두께##########
   const theme = createTheme({
@@ -65,10 +59,38 @@ function BasicTabs() {
     },
   });
 
+  // 페이지네이션
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const onPageChange = (e, page) => {
+    setCurrentPage(page);
+  };
+
+  // 뉴스 데이터
+  const [news, setNews] = useState([]);
+
+  const [value, setValue] = useState(0);
+
+  const handleChange = (e, newValue) => {
+    setValue(newValue);
+  };
+
+  // 뉴스 api 요청
+  const fetchBoard = useCallback(() => {
+    console.log(currentPage);
+    getBoard(newscategory[value], currentPage - 1, (res) => {
+      setNews(res.data.newsList);
+    });
+  }, [value, currentPage]);
+
+  useEffect(() => {
+    fetchBoard();
+  }, [value, currentPage, fetchBoard]);
+
   return (
     <ThemeProvider theme={theme}>
       <div className="board">
-        <Box sx={{ width: "100%" }}>
+        <Box sx={{ width: "100%", height: "100%" }}>
           <Box>
             <Tabs
               value={value}
@@ -85,20 +107,27 @@ function BasicTabs() {
           </Box>
 
           <TabPanel value={value} index={0}>
-            <CategoryOne />
+            <Category news={news} />
           </TabPanel>
           <TabPanel value={value} index={1}>
-            <CategoryTwo />
+            <Category news={news} />
           </TabPanel>
           <TabPanel value={value} index={2}>
-            <CategoryThree />
+            <Category news={news} />
           </TabPanel>
           <TabPanel value={value} index={3}>
-            <CategoryFour />
+            <Category news={news} />
           </TabPanel>
           <TabPanel value={value} index={4}>
-            <CategoryFive />
+            <Category news={news} />
           </TabPanel>
+          <Pagination
+            count={10}
+            page={currentPage}
+            onChange={onPageChange}
+            color="secondary"
+            className="pagenation"
+          />
         </Box>
       </div>
     </ThemeProvider>

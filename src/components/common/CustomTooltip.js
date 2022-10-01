@@ -11,7 +11,7 @@ const MyTooltip = styled(({ className, ...props }) => (
   },
   [`& .${tooltipClasses.tooltip}`]: {
     backgroundColor: "#16213E",
-    fontSize: "0.8em",
+    fontSize: "0.9em",
     margin: "1rem",
   },
 }));

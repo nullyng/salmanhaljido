@@ -1,12 +1,38 @@
-import { Drawer, IconButton } from "@mui/material";
+import { useState } from "react";
+import { useSelector } from "react-redux";
+import { ThemeProvider, createTheme } from "@mui/material/styles";
+import {
+  Divider,
+  Drawer,
+  IconButton,
+  Tooltip,
+  tooltipClasses,
+} from "@mui/material";
+import styled from "@emotion/styled";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
-import { useState } from "react";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
+import "animate.css";
 
 import "styles/Main/Output.scss";
 import RcmdList from "components/Main/Output/Rcmd/RcmdList";
 import Data from "components/Main/Output/Data/Data";
+import RcmdModal from "components/Main/Output/RcmdModal";
+
+const MyTooltip = styled(({ className, ...props }) => (
+  <Tooltip {...props} arrow classes={{ popper: className }} />
+))(({ theme }) => ({
+  [`& .${tooltipClasses.arrow}`]: {
+    color: "#16213E",
+  },
+  [`& .${tooltipClasses.tooltip}`]: {
+    backgroundColor: "#16213E",
+    fontSize: "1.5rem",
+    margin: "1rem",
+    padding: "0.5rem",
+    fontFamily: "EsamanruLight",
+  },
+}));
 
 function Output({
   rcmdData,
@@ -18,6 +44,9 @@ function Output({
   onSetRealEstate,
 }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [rcmdOpen, setRcmdOpen] = useState(false);
+
+  const survey = useSelector((state) => state.survey.survey);
 
   const handleDrawerOpen = () => {
     setIsDrawerOpen(true);
@@ -57,19 +86,23 @@ function Output({
             <IconButton onClick={handleDrawerClose}>
               <KeyboardDoubleArrowRightIcon />
             </IconButton>
+            {survey === false && (
+              <MyTooltip title="추천하기" arrow>
+                <IconButton
+                  className="right-drawer__inner__button--rcmd"
+                  onClick={() => setRcmdOpen(true)}
+                >
+                  <ThumbUpAltIcon className="animate__animated animate__heartBeat animate__infinite" />
+                </IconButton>
+              </MyTooltip>
+            )}
           </div>
-          <RcmdList
-            rcmdData={rcmdData}
-            currRegion={currRegion}
-            onSetCurrRegion={onSetCurrRegion}
-            onSetStatistics={onSetStatistics}
-            onSetRealEstate={onSetRealEstate}
-          />
-          <Data
-            currRegion={currRegion}
-            statistics={statistics}
-            realEstate={realEstate}
-          />
+          <RcmdModal open={rcmdOpen} setOpen={setRcmdOpen} />
+          <div className="right-drawer__inner__content">
+            <RcmdList />
+            <Divider />
+            <Data />
+          </div>
         </Drawer>
       </div>
     </ThemeProvider>
