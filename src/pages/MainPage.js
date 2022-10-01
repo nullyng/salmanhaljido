@@ -4,7 +4,6 @@ import Input from "components/Main/Input/Input";
 import CustomMap from "components/Main/Map/CustomMap";
 import Output from "components/Main/Output/Output";
 import { setCurrMap, setMapData, setMarkers } from "modules/map";
-import { setCurrRegion, setRealEstate, setStatistics } from "modules/region";
 import Loading from "components/common/Loading";
 
 function MainPage() {
@@ -13,22 +12,11 @@ function MainPage() {
   const mapData = useSelector((state) => state.map.mapData);
   const markers = useSelector((state) => state.map.markers);
 
-  // 출력 관련 state
-  const rcmdData = useSelector((state) => state.region.rcmdData);
-  const currRegion = useSelector((state) => state.region.currRegion);
-  const statistics = useSelector((state) => state.region.statistics);
-  const realEstate = useSelector((state) => state.region.realEstate);
-
   const dispatch = useDispatch();
   // 지도 관련 함수
   const onSetCurrMap = (currMap) => dispatch(setCurrMap(currMap));
   const onSetMapData = (mapData) => dispatch(setMapData(mapData));
   const onSetMarkers = (markers) => dispatch(setMarkers(markers));
-
-  // 출력 관련 함수
-  const onSetCurrRegion = (currRegion) => dispatch(setCurrRegion(currRegion));
-  const onSetStatistics = (statistics) => dispatch(setStatistics(statistics));
-  const onSetRealEstate = (realEstate) => dispatch(setRealEstate(realEstate));
 
   const loading = useSelector((state) => state.loading.loading);
 
@@ -42,15 +30,7 @@ function MainPage() {
         onSetMarkers={onSetMarkers}
       />
 
-      <Output
-        rcmdData={rcmdData}
-        currRegion={currRegion}
-        statistics={statistics}
-        realEstate={realEstate}
-        onSetCurrRegion={onSetCurrRegion}
-        onSetStatistics={onSetStatistics}
-        onSetRealEstate={onSetRealEstate}
-      />
+      <Output />
       <CustomMap
         onSetCurrMap={onSetCurrMap}
         mapData={mapData}

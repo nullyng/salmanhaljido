@@ -79,17 +79,17 @@ function CategoryRcmdButton({ isMarried, hasCar, hasPets, hasChildren, open }) {
           비슷한 환경의 사람들이 선택한 카테고리를 추천받아 보세요.
         </p>
         <div className="category-rcmd-btn__wrapper">
-          <Button class="rcmd-btn" onClick={handleClickCount}>
-            <span class="circle" aria-hidden="true">
-              <span class="icon arrow"></span>
+          <Button className="rcmd-btn" onClick={handleClickCount}>
+            <span className="circle" aria-hidden="true">
+              <span className="icon arrow"></span>
             </span>
-            <span class="button-text">검색 횟수 기준</span>
+            <span className="button-text">검색 횟수 기준</span>
           </Button>
-          <Button class="rcmd-btn" onClick={handleClickRating}>
-            <span class="circle" aria-hidden="true">
-              <span class="icon arrow"></span>
+          <Button className="rcmd-btn" onClick={handleClickRating}>
+            <span className="circle" aria-hidden="true">
+              <span className="icon arrow"></span>
             </span>
-            <span class="button-text">평점 기준</span>
+            <span className="button-text">평점 기준</span>
           </Button>
         </div>
         {countOpen && (

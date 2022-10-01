@@ -1,4 +1,3 @@
-import * as React from "react";
 import {
   Radar,
   RadarChart,
@@ -6,10 +5,12 @@ import {
   PolarAngleAxis,
   PolarRadiusAxis,
 } from "recharts";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 import DetailData from "components/Main/Output/Data/DetailData";
 
-function ChartData({ statistics }) {
+function ChartData() {
   const data = [
     {
       subject: "교통",
@@ -53,9 +54,26 @@ function ChartData({ statistics }) {
     },
   ];
 
+  const [currCategory, setCurrCategory] = useState(0); // 초기에 보여주는 데이터는 교통으로 고정
+
+  const currRegion = useSelector((state) => state.region.currRegion);
+
+  useEffect(() => {
+    const categories = document.getElementsByClassName(
+      "recharts-polar-angle-axis-tick"
+    );
+
+    for (let i = 0; i < categories.length; i++) {
+      // 각 카테고리를 클릭하면 currCategory를 현재 카테고리 인덱스로 설정
+      categories[i].addEventListener("click", () => {
+        setCurrCategory(i);
+      });
+    }
+  }, [currCategory]);
+
   return (
     <div className="chart-data">
-      {statistics.length === 0 ? (
+      {Object.keys(currRegion).length === 0 ? (
         <div className="chart-data--no-data">
           <p>추천 지역을 선택해주세요.</p>
         </div>
@@ -73,14 +91,14 @@ function ChartData({ statistics }) {
             <PolarAngleAxis dataKey="subject" />
             <PolarRadiusAxis />
             <Radar
-              name="Mike"
+              name="data"
               dataKey="A"
               stroke="#E94560"
               fill="#E94560"
               fillOpacity={0.6}
             />
           </RadarChart>
-          <DetailData />
+          <DetailData category={currCategory} />
         </div>
       )}
     </div>
