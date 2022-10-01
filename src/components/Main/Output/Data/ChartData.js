@@ -71,7 +71,7 @@ function ChartData() {
         setCurrCategory(i);
       });
     }
-  }, [currCategory]);
+  }, [currCategory, currRegion]);
 
   return (
     <div className="chart-data">
