@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Button, Rating, ThemeProvider } from "@mui/material";
 import StarIcon from "@mui/icons-material/Star";
 

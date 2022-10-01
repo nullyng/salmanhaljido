@@ -5,7 +5,7 @@ import {
   PolarAngleAxis,
   PolarRadiusAxis,
 } from "recharts";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 import DetailData from "components/Main/Output/Data/DetailData";

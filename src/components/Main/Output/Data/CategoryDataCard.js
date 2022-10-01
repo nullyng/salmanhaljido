@@ -1,6 +1,6 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 
-import useScrollCount from "./useScrollCount";
+import useScrollCount from "hooks/useScrollCount";
 
 function CategoryDataCard({ item, index }) {
   // 컴포넌트에 스크롤이
