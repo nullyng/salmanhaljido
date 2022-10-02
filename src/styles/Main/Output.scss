@@ -35,6 +35,10 @@
       @include custom-scroll();
     }
   }
+
+  hr {
+    margin-right: 0.5rem;
+  }
 }
 
 // 추천 지역
@@ -121,6 +125,7 @@
 
   margin-top: 1rem;
   margin-bottom: 2rem;
+  margin-right: 0.5rem;
   font-family: "EsamanruLight";
 
   &__tabs {
@@ -138,9 +143,9 @@
 .chart-data {
   display: flex;
   justify-content: center;
-  margin-right: 0.5rem;
 
   &--no-data {
+    text-align: center;
     padding-top: 18%;
     padding-bottom: 20%;
     color: #b6b6b6;
@@ -204,6 +209,7 @@
   justify-content: center;
 
   &--no-data {
+    text-align: center;
     padding-top: 18%;
     padding-bottom: 20%;
     color: #b6b6b6;
