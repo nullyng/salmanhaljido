@@ -6,6 +6,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.List;
 
 public interface AcademyDocRepository extends MongoRepository<AcademyDoc, String> {
-    List<AcademyDoc> findAllBySd(String sd);
-    List<AcademyDoc> findAllBySgg(String sgg);
+    List<AcademyDoc> findAllBySdOrderByCount(String sd);
+    List<AcademyDoc> findAllBySggOrderByCount(String sgg);
 }
