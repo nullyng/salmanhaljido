@@ -16,6 +16,8 @@ import Category from "components/Main/Input/Category/Category";
 function Input() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
+  const myCategoryList = useSelector((state) => state.category.myCategoryList);
+
   const handleDrawerOpen = () => {
     setIsDrawerOpen(true);
   };
