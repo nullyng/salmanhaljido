@@ -74,7 +74,7 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
         SparkSession session = SparkSession.builder()
                 .master("local")
                 .appName("categories")
-                .config("spark.mongodb.read.connection.uri", "mongodb://admin:salmand110@j7d110.p.ssafy.io/openapi.categories?authSource=admin")
+                .config("spark.mongodb.write.connection.uri", "mongodb://admin:salmand110@j7d110.p.ssafy.io/openapi.categories_like?authSource=admin")
                 .getOrCreate();
         try {
             File writeFile = new File(dataPath + "categories.json");
@@ -140,7 +140,7 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
             SparkSession session = SparkSession.builder()
                     .master("local")
                     .appName("categories")
-                    .config("spark.mongodb.read.connection.uri", "mongodb://admin:salmand110@j7d110.p.ssafy.io/openapi.categories?authSource=admin")
+                    .config("spark.mongodb.read.connection.uri", "mongodb://admin:salmand110@j7d110.p.ssafy.io/openapi.categories_like?authSource=admin")
                     .getOrCreate();
             try {
 
@@ -241,7 +241,7 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
             SparkSession session = SparkSession.builder()
                     .master("local")
                     .appName("categories")
-                    .config("spark.mongodb.read.connection.uri", "mongodb://admin:salmand110@j7d110.p.ssafy.io/openapi.categories?authSource=admin")
+                    .config("spark.mongodb.read.connection.uri", "mongodb://admin:salmand110@j7d110.p.ssafy.io/openapi.categories_search?authSource=admin")
                     .getOrCreate();
             try {
 
@@ -251,15 +251,10 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
                 for (Row row : ds.select("mainCategory").collectAsList()) {
                     categoryList.add(row.toString().substring(1, 5));
                 }
-                List<String> ratingList = new ArrayList<>();
-                for (Row row : ds.select("rating").collectAsList()) {
-                    ratingList.add(row.get(0).toString());
-                }
                 for (String col : ds.columns()) {
 
                     if (col.equals("_id")) continue;
                     else if (col.equals("mainCategory")) continue;
-                    else if (col.equals("rating")) continue;
 
                     int cnt=0;
                     int zeroCnt = 0;
