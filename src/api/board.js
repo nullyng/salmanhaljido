@@ -6,4 +6,10 @@ function getBoard(category, pageNumber, success) {
   api.get(`boards/${category}?pageNo=${pageNumber}`).then(success);
 }
 
-export { getBoard };
+function getSearchBoard(category, pageNumber, search, success) {
+  api
+    .get(`boards/${category}?pageNo=${pageNumber}&search=${search}`)
+    .then(success);
+}
+
+export { getBoard, getSearchBoard };

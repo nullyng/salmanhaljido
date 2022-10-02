@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import CategoryRcmd from "components/Main/Input/UserInfo/CategoryRcmd";
 import { getCategoryRcmd } from "api/category";
 import { setLoading } from "modules/loading";
-import { addCategory } from "modules/category";
 
 function CategoryRcmdButton({ isMarried, hasCar, hasPets, hasChildren, open }) {
   const [countOpen, setCountOpen] = useState(false);
@@ -14,7 +13,6 @@ function CategoryRcmdButton({ isMarried, hasCar, hasPets, hasChildren, open }) {
 
   const dispatch = useDispatch();
   const onSetLoading = (loading) => dispatch(setLoading(loading));
-  const onAddCategory = (value, level) => dispatch(addCategory(value, value));
 
   let apiData = {
     married: isMarried,
@@ -22,8 +20,6 @@ function CategoryRcmdButton({ isMarried, hasCar, hasPets, hasChildren, open }) {
     hasCar: hasCar,
     hasChildren: hasChildren,
   };
-
-  const priorityToValue = { low: 1, middle: 2, high: 3 };
 
   useEffect(() => {
     // 사용자 정보가 달라지면 추천 컴포넌트 삭제

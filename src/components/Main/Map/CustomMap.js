@@ -2,13 +2,13 @@ import mapboxgl from "mapbox-gl";
 import { useEffect, useRef, useState } from "react";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setCurrMap, setMarkers } from "modules/map";
-import { setCurrRegion } from "modules/region";
 
 import "styles/Main/Map.scss";
 import "styles/Main/Marker.scss";
 import Logo from "components/common/Logo";
 import TL_SCCO_SIG from "components/Main/Map/TL_SCCO_SIG";
+import { setCurrMap, setMarkers } from "modules/map";
+import { setCurrRegion } from "modules/region";
 
 function CustomMap() {
   const mapContainer = useRef(null);
@@ -19,7 +19,6 @@ function CustomMap() {
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
   const mapData = useSelector((state) => state.map.mapData);
-
   const dispatch = useDispatch();
   const onSetCurrMap = (currMap) => dispatch(setCurrMap(currMap));
   const onSetMarkers = (markers) => dispatch(setMarkers(markers));
