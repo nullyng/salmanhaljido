@@ -2,7 +2,6 @@ import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
 
 import defImg from "assets/images/Board/default.png";
 
@@ -12,8 +11,8 @@ function ArticleCard({ title, imageURL, url, summary }) {
       className="article-card"
       onClick={() => window.open(`${url}`, "_blank")}
     >
-      <div className="article-card__btn article-card__front">
-        <div>
+      <div className="article-card__content">
+        <div className="article-card__content__img">
           <CardMedia
             component="img"
             height="170"
@@ -21,22 +20,14 @@ function ArticleCard({ title, imageURL, url, summary }) {
             alt=""
           />
         </div>
-        <div className="article-card__cntr">
-          <CardContent className="article-card__cntr--content">
-            <Typography
-              variant="body2"
-              color="text.secondary"
-              className="article-card__cntr--detail"
-            >
-              {title}
-            </Typography>
+        <div className="article-card__content__header">
+          <CardContent>
+            <div className="article-card__content__header--title">{title}</div>
+          </CardContent>
+          <CardContent>
+            <div className="article-card__content__header--desc">{summary}</div>
           </CardContent>
         </div>
-      </div>
-      <div className="article-card__btn article-card__back">
-        <CardContent>
-          <Typography>{summary}</Typography>
-        </CardContent>
       </div>
     </Card>
   );
