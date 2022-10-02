@@ -1,8 +1,8 @@
-import "styles/Landing/Landing.scss";
-import top from "assets/images/Landing/top.png";
+import { Fab } from "@mui/material";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 
-const { default: Guide } = require("./Guide");
-const { default: Service } = require("./Service");
+import Guide from "components/Landing/Detail/Guide";
+import Service from "components/Landing/Detail/Service";
 
 function Detail() {
   const scrollToTop = () => {
@@ -11,21 +11,19 @@ function Detail() {
       behavior: "smooth",
     });
   };
+
   return (
-    <div className="service">
+    <div className="detail">
       <Service />
       <Guide />
-      <div className="service__starttext">
+      <div className="detail__starttext">
         시작하기 버튼을 통해&nbsp;
-        <div className="service__starttext--red">지금 바로 시작&nbsp;</div>
+        <div className="detail__starttext--red">지금 바로 시작&nbsp;</div>
         해보세요!
       </div>
-      <img
-        src={top}
-        alt="top"
-        className="service__upbutton"
-        onClick={scrollToTop}
-      />
+      <Fab color="primary" aria-label="add" onClick={scrollToTop}>
+        <ArrowUpwardIcon />
+      </Fab>
     </div>
   );
 }

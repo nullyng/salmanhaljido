@@ -1,12 +1,6 @@
-@font-face {
-  font-family: "GongGothicMedium";
-  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff")
-    format("woff");
-  font-weight: normal;
-  font-style: normal;
-}
+@use "../common/utils" as *;
 
-.Landing {
+.landing {
   display: flex;
   justify-content: space-between;
 }
@@ -28,7 +22,7 @@
     display: flex;
 
     &--left {
-      font-family: "GongGothicMedium";
+      font-family: "EsamanruMedium";
       background-color: white;
       margin: 3% auto 3% 0%;
       padding: 1% 4%;
@@ -41,7 +35,7 @@
     }
 
     &--right {
-      font-family: "GongGothicMedium";
+      font-family: "EsamanruMedium";
       background-color: white;
       margin: 3% 0% 3% auto;
       padding: 1% 4%;
@@ -83,41 +77,17 @@
     }
 
     &--end1 {
-      font-family: "GongGothicMedium";
+      font-family: "EsamanruMedium";
       font-size: 180%;
       font-weight: bold;
     }
 
     &--end2 {
-      font-family: "GongGothicMedium";
+      font-family: "EsamanruMedium";
       font-size: 400%;
       color: #e94560;
     }
   }
-
-  // &__button{
-  //     display: flex;
-  //     justify-content: center;
-  //     margin-top: 3rem;
-
-  //     &--detail {
-  //         font-family: 'GongGothicMedium';
-  //         width: 30%;
-  //         background-color: #E94560;
-  //         text-align: center;
-  //         color: white;
-  //         padding: 1%;
-  //         font-size: 36px;
-  //         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.35);
-  //         border-radius: 50px;
-  //         border-width: 0;
-  //         text-decoration: none;
-  //         display: flex;
-  //         justify-content: center;
-
-  //     }
-
-  // }
 
   &__button {
     display: flex;
@@ -182,45 +152,74 @@
   }
 }
 
-.service {
+.detail {
   width: 55%;
   padding: 2em;
 
-  &__bigfont {
-    font-family: "GongGothicMedium";
-    font-size: 300%;
+  &__starttext {
+    padding: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: large;
+    font-family: "EsamanruLight";
+    margin: 3rem 0;
+
+    &--red {
+      color: #e94560;
+    }
   }
 
-  &__font {
-    font-family: "GongGothicMedium";
+  & .MuiFab-root {
+    position: fixed;
+    bottom: 2.5rem;
+    right: 2.5rem;
+    color: $primary-color;
+    background: white;
+
+    &:hover {
+      background-color: $primary-color;
+      color: white;
+    }
+  }
+}
+
+.service {
+  font-family: "EsamanruLight";
+
+  &__top {
+    & span:first-child {
+      font-size: 300%;
+    }
+
+    & span:last-child {
+      font-size: 180%;
+    }
+  }
+
+  &__bottom {
     font-size: 180%;
   }
+}
 
-  &__introduce {
-    padding-top: 1.5em;
+.service-box {
+  padding-top: 1.5em;
+  display: flex;
+  justify-content: space-between;
+  font-family: "EsamanruLight";
 
-    &--textbox {
-      display: flex;
-      align-items: baseline;
-    }
+  &__item {
+    width: 25%;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 3em 1em;
+    margin: 3% 0%;
+    border-radius: 30px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 
-    &--squarebox {
-      display: flex;
-      justify-content: space-between;
-    }
-
-    &--square {
-      width: 25%;
-      text-align: center;
-      font-size: 18px;
-      font-weight: bold;
-      padding: 3em 1em;
-      margin: 3% 0%;
-      border: 1px solid rgba(0, 0, 0, 0.109);
-      border-radius: 30px;
-    }
-
-    &--image {
+    & img {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -230,15 +229,23 @@
       height: 110px;
     }
   }
+}
 
-  &__guide {
-    padding-top: 2em;
-    &--box {
-      display: flex;
-      padding: 1%;
-    }
+.guide {
+  padding-top: 2em;
+  margin-top: 1rem;
+  font-family: "EsamanruLight";
 
-    &--text {
+  &__top {
+    font-family: "EsamanruMedium";
+    font-size: 180%;
+  }
+
+  &__box {
+    display: flex;
+    padding: 1%;
+
+    &__text {
       margin: auto;
       display: flex;
       justify-content: center;
@@ -247,7 +254,7 @@
       font-size: 18px;
     }
 
-    &--image {
+    &__image {
       display: flex;
       justify-content: center;
       align-items: center;
@@ -256,28 +263,6 @@
       background-color: lightgray;
       border-radius: 30px;
     }
-  }
-
-  &__starttext {
-    padding: 5%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-weight: bold;
-    font-size: large;
-
-    &--red {
-      color: #e94560;
-    }
-  }
-
-  &__upbutton {
-    width: 60px;
-    height: 60px;
-    position: fixed;
-    right: 30px;
-    bottom: 30px;
-    cursor: pointer;
   }
 }
 
