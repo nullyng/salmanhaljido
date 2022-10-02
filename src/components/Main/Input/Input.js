@@ -16,6 +16,8 @@ import { useSelector } from "react-redux";
 function Input() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
+  const myCategoryList = useSelector((state) => state.category.myCategoryList);
+
   const handleDrawerOpen = () => {
     setIsDrawerOpen(true);
   };
