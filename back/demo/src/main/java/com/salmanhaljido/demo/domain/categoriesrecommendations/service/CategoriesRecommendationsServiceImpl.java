@@ -6,11 +6,6 @@ import lombok.RequiredArgsConstructor;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
-import org.apache.spark.api.java.JavaRDD;
-import org.apache.spark.api.java.JavaSparkContext;
-import org.apache.spark.mllib.recommendation.ALS;
-import org.apache.spark.mllib.recommendation.MatrixFactorizationModel;
-import org.apache.spark.mllib.recommendation.Rating;
 
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -23,7 +18,6 @@ import java.util.*;
 @Service
 @RequiredArgsConstructor
 public class CategoriesRecommendationsServiceImpl implements CategoriesRecommendationsService{
-
     String dataPath = "src/main/resources/data/";
     @Override
     public CategoriesRecommendationsViewResponseDto CategoriesRecommendationsView(CategoriesRecommendationsViewRequestDto dto){
@@ -80,7 +74,7 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
         SparkSession session = SparkSession.builder()
                 .master("local")
                 .appName("categories")
-                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.categories")
+                .config("spark.mongodb.write.connection.uri", "mongodb://admin:salmand110@j7d110.p.ssafy.io/openapi.categories?authSource=admin")
                 .getOrCreate();
         try {
             File writeFile = new File(dataPath + "categories.json");
@@ -131,7 +125,6 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
 
             Dataset<Row> dff = session.read().format("json").load(dataPath + "categories.json");
             dff.write().format("mongodb").mode("append").save();
-            System.out.println("mongodb : finish");
         } catch (Exception e) {
 
         } finally {
@@ -143,15 +136,11 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
 
         List<CategoriesDto> returnRatingList = new ArrayList<>();
         try {
-            File ratingFile = new File(dataPath + "rating.data");
-            if (!ratingFile.exists()) {
-                ratingFile.createNewFile();
-            }
 
             SparkSession session = SparkSession.builder()
                     .master("local")
                     .appName("categories")
-                    .config("spark.mongodb.read.connection.uri", "mongodb://127.0.0.1/openapi.categories")
+                    .config("spark.mongodb.read.connection.uri", "mongodb://admin:salmand110@j7d110.p.ssafy.io/openapi.categories?authSource=admin")
                     .getOrCreate();
             try {
 
@@ -160,7 +149,7 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
 
                 List<String> categoryList = new ArrayList<>();
                 for (Row row : ds.select("mainCategory").collectAsList()) {
-                    categoryList.add(row.get(0).toString());
+                    categoryList.add(row.toString().substring(1, 5));
                 }
                 List<String> ratingList = new ArrayList<>();
                 for (Row row : ds.select("rating").collectAsList()) {
@@ -169,38 +158,67 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
                 for (String col : ds.columns()) {
                     if (col.equals("_id")) continue;
                     else if (col.equals("mainCategory")) continue;
+                    else if (col.equals("rating")) continue;
 
-                    FileOutputStream ratingFileOutputStream = new FileOutputStream(ratingFile);
                     int cnt=0;
                     int zeroCnt = 0;
                     List<Row> rowList = ds.select(col).collectAsList();
+                    List<Rating> rowDataSetList = new ArrayList<>();
+
                     for (int i = 0; i < rowList.size(); i++) {
                         String s = rowList.get(i).get(0).toString();
-
                         if (!categoryList.get(i).equals(mainCategory)) continue;
                         cnt++;
-                        if (s.equals("0")) zeroCnt++;
-                        if (rowList.get(i).get(0).toString().equals("0")) continue;
-
-                        String rowString = categoryList.get(i) + " " + rowList.get(i).get(0).toString() + " " + ratingList.get(i);
-                        ratingFileOutputStream.write(rowString.getBytes(StandardCharsets.UTF_8));
-                        ratingFileOutputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
+                        if (s.equals("0")) {
+                            zeroCnt++;
+                        }
+                        double d = Double.parseDouble(ratingList.get(i));
+                        int key = (int)Math.round(Double.parseDouble(s));
+                        rowDataSetList.add(new Rating(key, d));
                     }
                     if (zeroCnt == cnt) continue;
 
-                    JavaSparkContext sc = new JavaSparkContext(session.sparkContext());
-                    JavaRDD<String> rawData = sc.textFile(dataPath + "rating.data");
-                    JavaRDD<String[]> rawRatings = rawData.map(str -> str.split(" "));
-                    JavaRDD<Rating> ratings = rawRatings.map(arr -> new Rating(Integer.parseInt(arr[0]), Integer.parseInt(arr[1]), Double.parseDouble(arr[2])));
-                    ratings.cache();
-                    MatrixFactorizationModel model = ALS.train(JavaRDD.toRDD(ratings), 10, 2, 0.01);
-                    int K = 3;
-                    Rating[] topKRecs = model.recommendProducts(Integer.parseInt(mainCategory), K);
+                    Collections.sort(rowDataSetList, new Comparator<Rating>() {
+                        @Override
+                        public int compare(Rating o1, Rating o2) {
+                            return o2.product - o1.product;
+                        }
+                    });
+
+                    List<Rating> rowDataList =new ArrayList<>();
+
+                    double sum=0;
+                    int count=0;
+                    int temp=rowDataSetList.get(0).product;
+                    for(int i=0;i<rowDataSetList.size();i++){
+                        if(temp != rowDataSetList.get(i).product){
+                            rowDataList.add(new Rating(temp, sum/count));
+                            temp=rowDataSetList.get(i).product;
+                            count=1;
+                            sum=rowDataSetList.get(i).rating;
+                        }else{
+                            sum+=rowDataSetList.get(i).rating;
+                            count++;
+                            if(i==rowDataSetList.size()-1){
+                                rowDataList.add(new Rating(temp, sum/count));
+                            }
+                        }
+                    }
+                    Collections.sort(rowDataList, new Comparator<Rating>() {
+                        @Override
+                        public int compare(Rating o1, Rating o2) {
+                            if(Double.compare(o1.rating, o2.rating) == 0) return o2.product - o1.product;
+                            else return Double.compare(o2.rating, o1.rating);
+                        }
+                    });
+
+
                     String s = "";
-                    int num = topKRecs[0].product();
-                    if (num == 1) s = "low";
+                    int num = rowDataList.get(0).product;
+                    if( num==0) continue;
+                    else if (num == 1) s = "low";
                     else if (num == 2) s = "middle";
-                    else s = "high";
+                    else if(num==3)s = "high";
                     returnRatingList.add(CategoriesDto.of(col, s));
                 }
 
@@ -219,15 +237,11 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
 
         List<CategoriesDto> returnCountingList = new ArrayList<>();
         try {
-            File countingFile = new File(dataPath + "counting.data");
-            if (!countingFile.exists()) {
-                countingFile.createNewFile();
-            }
 
             SparkSession session = SparkSession.builder()
                     .master("local")
                     .appName("categories")
-                    .config("spark.mongodb.read.connection.uri", "mongodb://127.0.0.1/openapi.categories")
+                    .config("spark.mongodb.read.connection.uri", "mongodb://admin:salmand110@j7d110.p.ssafy.io/openapi.categories?authSource=admin")
                     .getOrCreate();
             try {
 
@@ -235,7 +249,7 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
 
                 List<String> categoryList = new ArrayList<>();
                 for (Row row : ds.select("mainCategory").collectAsList()) {
-                    categoryList.add(row.get(0).toString());
+                    categoryList.add(row.toString().substring(1, 5));
                 }
                 List<String> ratingList = new ArrayList<>();
                 for (Row row : ds.select("rating").collectAsList()) {
@@ -245,8 +259,8 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
 
                     if (col.equals("_id")) continue;
                     else if (col.equals("mainCategory")) continue;
+                    else if (col.equals("rating")) continue;
 
-                    FileOutputStream countFileOutputStream = new FileOutputStream(countingFile);
                     int cnt=0;
                     int zeroCnt = 0;
                     int oneCnt = 0;
@@ -254,7 +268,7 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
                     int threeCnt = 0;
                     List<Row> rowList = ds.select(col).collectAsList();
                     for (int i = 0; i < rowList.size(); i++) {
-                        String s = rowList.get(i).get(0).toString();
+                        String s = rowList.get(i).get(0).toString().substring(0, 1);
                         if (!categoryList.get(i).equals(mainCategory)) continue;
                         cnt++;
                         if (s.equals("0")) zeroCnt++;
@@ -264,29 +278,29 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
 
                     }
                     if (zeroCnt == cnt) continue;
-                    countFileOutputStream.write(("1 " + "0 " + zeroCnt).getBytes(StandardCharsets.UTF_8));
-                    countFileOutputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
-                    countFileOutputStream.write(("1 " + "1 " + oneCnt).getBytes(StandardCharsets.UTF_8));
-                    countFileOutputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
-                    countFileOutputStream.write(("1 " + "2 " + twoCnt).getBytes(StandardCharsets.UTF_8));
-                    countFileOutputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
-                    countFileOutputStream.write(("1 " + "3 " + threeCnt).getBytes(StandardCharsets.UTF_8));
-                    countFileOutputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
 
-                    JavaSparkContext sc = new JavaSparkContext(session.sparkContext());
-                    JavaRDD<String> rawData = sc.textFile(dataPath + "counting.data");
-                    JavaRDD<String[]> rawRatings = rawData.map(str -> str.split(" "));
-                    JavaRDD<Rating> ratings = rawRatings.map(arr -> new Rating(Integer.parseInt(arr[0]), Integer.parseInt(arr[1]), Double.parseDouble(arr[2])));
-                    ratings.cache();
-                    MatrixFactorizationModel model = ALS.train(JavaRDD.toRDD(ratings), 50, 2, 0.01);
 
-                    int K = 3;
-                    Rating[] topKRecs = model.recommendProducts(1, K);
+
+                    List<Rating> rowDataList =new ArrayList<>();
+                    rowDataList.add(new Rating(0, zeroCnt));
+                    rowDataList.add(new Rating(1, oneCnt));
+                    rowDataList.add(new Rating(2, twoCnt));
+                    rowDataList.add(new Rating(3, threeCnt));
+
+                    Collections.sort(rowDataList, new Comparator<Rating>() {
+                        @Override
+                        public int compare(Rating o1, Rating o2) {
+                            if(Double.compare(o1.rating, o2.rating) == 0) return o2.product - o1.product;
+                            else return Double.compare(o2.rating, o1.rating);
+                        }
+                    });
+
                     String s = "";
-                    int num = topKRecs[0].product();
-                    if (num == 1) s = "low";
+                    int num = rowDataList.get(0).product;
+                    if( num==0) continue;
+                    else if (num == 1) s = "low";
                     else if (num == 2) s = "middle";
-                    else s = "high";
+                    else if(num==3)s = "high";
                     returnCountingList.add(CategoriesDto.of(col, s));
 
                 }
@@ -302,5 +316,14 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
 
         }
         return returnCountingList;
+    }
+    public class Rating{
+        int product;
+        double rating;
+
+        public Rating(int product, double rating) {
+            this.product = product;
+            this.rating = rating;
+        }
     }
 }
