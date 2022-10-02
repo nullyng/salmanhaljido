@@ -2,7 +2,6 @@ import * as React from "react";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
 import Box from "@mui/material/Box";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import { useState, useEffect, useCallback } from "react";
@@ -76,7 +75,6 @@ function BasicTabs() {
     getBoard(newscategory[value], currentPage - 1, (res) => {
       setNews(res.data.newsList);
       setTotalCount(res.data.totalCount);
-      console.log(res.data);
     });
   }, [value, currentPage]);
 
