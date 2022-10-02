@@ -14,7 +14,6 @@ function CategoryRcmdButton({ isMarried, hasCar, hasPets, hasChildren, open }) {
 
   const dispatch = useDispatch();
   const onSetLoading = (loading) => dispatch(setLoading(loading));
-  const onAddCategory = (value, level) => dispatch(addCategory(value, value));
 
   let apiData = {
     married: isMarried,
@@ -22,8 +21,6 @@ function CategoryRcmdButton({ isMarried, hasCar, hasPets, hasChildren, open }) {
     hasCar: hasCar,
     hasChildren: hasChildren,
   };
-
-  const priorityToValue = { low: 1, middle: 2, high: 3 };
 
   useEffect(() => {
     // 사용자 정보가 달라지면 추천 컴포넌트 삭제
