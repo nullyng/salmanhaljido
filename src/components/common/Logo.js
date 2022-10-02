@@ -1,11 +1,25 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
+import { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
-import "styles/Board/BoardPage.scss";
+import "styles/common/Logo.scss";
 
 function Logo() {
+  useEffect(() => {
+    if (document.querySelector(".logo__map--active") !== null) {
+      const mapLogo = document.querySelector(".logo__map--active");
+      mapLogo.addEventListener("click", () => {
+        window.location.reload();
+      });
+    } else if (document.querySelector(".logo__info--active") !== null) {
+      const infoLogo = document.querySelector(".logo__info--active");
+      infoLogo.addEventListener("click", () => {
+        window.location.reload();
+      });
+    }
+  });
+
   return (
     <div className="logo">
       <Box

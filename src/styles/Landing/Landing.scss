@@ -1,199 +1,350 @@
-@font-face {
-    font-family: 'GongGothicMedium';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10@1.0/GongGothicMedium.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+@use "../common/utils" as *;
+
+.landing {
+  display: flex;
+  justify-content: space-between;
 }
 
-.Landing{
-    display: flex;
-    justify-content: space-between;
-}
+.start {
+  background: linear-gradient(
+    360deg,
+    rgba(242, 215, 217, 0.8) 2%,
+    rgba(211, 206, 223, 0.8) 98%
+  );
+  width: 45%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: fixed;
 
-.start{
-    background: linear-gradient(360deg, rgba(242, 215, 217, 0.8) 2%, rgba(211, 206, 223, 0.8) 98%);
-    width: 40%;
-    height: 100vh;
+  &__bubble {
     display: flex;
-    flex-direction: column;
+
+    &--left {
+      font-family: "EsamanruMedium";
+      background-color: white;
+      margin: 3% auto 3% 0%;
+      padding: 1% 4%;
+      border-radius: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: fit-content;
+      font-size: xx-large;
+    }
+
+    &--right {
+      font-family: "EsamanruMedium";
+      background-color: white;
+      margin: 3% 0% 3% auto;
+      padding: 1% 4%;
+      border-radius: 15px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: fit-content;
+      font-size: xx-large;
+    }
+
+    &--Ltri {
+      margin: 5% 0% 5% 5%;
+      width: 0px;
+      height: 0px;
+      border-top: 30px solid #ffffff;
+      border-left: 15px solid transparent;
+      border-right: 0px solid transparent;
+    }
+
+    &--Rtri {
+      margin: 5% 5% 5% 0%;
+      width: 0px;
+      height: 0px;
+      border-top: 30px solid #ffffff;
+      border-left: 0px solid transparent;
+      border-right: 15px solid transparent;
+    }
+
+    &--end {
+      background-color: white;
+      margin: 2% 0% 2% auto;
+      padding: 2% 3%;
+      border-radius: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: baseline;
+      width: fit-content;
+    }
+
+    &--end1 {
+      font-family: "EsamanruMedium";
+      font-size: 180%;
+      font-weight: bold;
+    }
+
+    &--end2 {
+      font-family: "EsamanruMedium";
+      font-size: 400%;
+      color: #e94560;
+    }
+  }
+
+  &__button {
+    display: flex;
     justify-content: center;
+    margin-top: 3rem;
+  }
+  & button {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    border: 0;
+    vertical-align: middle;
+    text-decoration: none;
+    font-size: inherit;
 
-    &__bubble{
-        display: flex;
-        
-        &--left{
-            font-family: 'GongGothicMedium';
-            background-color: white;
-            margin: 3% auto 3% 0%;
-            padding: 1% 4%;
-            border-radius: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: fit-content;
-            font-size: xx-large;
-        }
-        
-        &--right{
-            font-family: 'GongGothicMedium';
-            background-color: white;
-            margin: 3% 0% 3% auto;
-            padding: 1% 4%;
-            border-radius: 15px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: fit-content;
-            font-size: xx-large;
-        }
+    padding: 0.5em 1.25em;
+    border: 2px solid #b18597;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 25px;
+    background: #fff0f0;
+    transform-style: preserve-3d;
+    transition: 0.15s cubic-bezier(0, 0, -6, 1);
+  }
+  & button::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: inherit;
+    background-color: #f9c4d2;
+    box-shadow: 0 0 0 2px #b18597;
+    transform: translate3d(0, 0.4em, -1em);
+    transition: 0.15s cubic-bezier(0, 0, -6, 1);
+  }
+  & button:hover {
+    background: #ffe9e9;
+    transform: translate(0, 0.25em);
+  }
+  & button:hover::before {
+    box-shadow: 0 0 0 2px #b18597;
+    transform: translate3d(0, 0.2em, -1em);
+  }
+  &button:active {
+    background: #ffe9e9;
+    transform: translate(0, 0.75em);
+  }
+  &button:active::before {
+    box-shadow: 0 0 0 2px #b18597;
+    transform: translate3d(0, 0, -1em);
+  }
 
-        &--Ltri {
-            margin: 5% 0% 5% 5%;
-            width: 0px;
-            height: 0px;
-            border-top: 30px solid #ffffff;
-            border-left: 15px solid transparent;
-            border-right: 0px solid transparent;
-          }
-
-        &--Rtri {
-            margin: 5% 5% 5% 0%;
-            width: 0px;
-            height: 0px;
-            border-top: 30px solid #ffffff;
-            border-left: 0px solid transparent;
-            border-right: 15px solid transparent;
-          }
-        
-        &--end{
-            background-color: white;
-            margin: 2% 0% 2% auto;
-            padding: 2% 3%;
-            border-radius: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: baseline;
-            width: fit-content;
-        }
-
-        &--end1{
-            font-family: 'GongGothicMedium';
-            font-size: 180%;
-            font-weight: bold;
-        }
-
-        &--end2{
-            font-family: 'GongGothicMedium';
-            font-size: 400%;
-            color: #E94560;
-        }
-    }
-
-    // &__button{
-    //     display: flex;
-    //     justify-content: center;
-    //     margin-top: 3rem;
-
-    //     &--detail {
-    //         font-family: 'GongGothicMedium';
-    //         width: 30%;
-    //         background-color: #E94560;
-    //         text-align: center;
-    //         color: white;
-    //         padding: 1%;
-    //         font-size: 36px;
-    //         box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.35);
-    //         border-radius: 50px;
-    //         border-width: 0;
-    //         text-decoration: none;
-    //         display: flex;
-    //         justify-content: center;
-
-            
-    //     }
-
-
-    // }
-
-    &__button {
-        display: flex;
-        justify-content: center;
-        margin-top: 3rem;
-    }
-    & button {
-        position: relative;
-        display: inline-block;
-        cursor: pointer;
-        outline: none;
-        border: 0;
-        vertical-align: middle;
-        text-decoration: none;
-        font-size: inherit;
-
-        padding: 0.5em 1.25em;
-        border: 2px solid #b18597;
-        border-radius: 50px;
-        font-weight: 700;
-        font-size: 25px;
-        background: #fff0f0;
-        transform-style: preserve-3d;
-        transition: .15s cubic-bezier(0, 0, -6, 1);
-    }
-    & button::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        border-radius: inherit;
-        background-color: #f9c4d2;
-        box-shadow: 0 0 0 2px #b18597, 0 .625em 0 0 #ffe3e2;
-        transform: translate3d(0, .4em, -1em);
-        transition: .15s cubic-bezier(0, 0, -6, 1);
-    }
-    & button:hover {
-        background: #ffe9e9;
-        transform: translate(0, .25em);
-    }
-    & button:hover::before {
-        box-shadow: 0 0 0 2px #b18597, 0 .5em 0 0 #ffe3e2;
-        transform: translate3d(0, .2em, -1em);
-    }
-    &button:active {
-        background: #ffe9e9;
-        transform: translate(0, .75em);
-    }
-    &button:active::before {
-        box-shadow: 0 0 0 2px #b18597, 0 .5em 0 0 #ffe3e2;
-        transform: translate3d(0, 0, -1em);
-    }
-
-    &__back{
-        width: 50%;
-        padding-top: 3%;
-        padding-bottom: 1%;
-    }
+  &__back {
+    width: 49%;
+    padding-top: 3%;
+    padding-bottom: 1%;
+  }
 }
 
+.detail {
+  width: 55%;
+  padding: 2em;
+
+  &__starttext {
+    padding: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    font-size: large;
+    font-family: "EsamanruLight";
+    margin: 3rem 0;
+
+    &--red {
+      color: #e94560;
+    }
+  }
+
+  & .MuiFab-root {
+    position: fixed;
+    bottom: 2.5rem;
+    right: 2.5rem;
+    color: $primary-color;
+    background: white;
+
+    &:hover {
+      background-color: $primary-color;
+      color: white;
+    }
+  }
+}
+
+.service {
+  font-family: "EsamanruLight";
+
+  &__top {
+    & span:first-child {
+      font-size: 300%;
+    }
+
+    & span:last-child {
+      font-size: 180%;
+    }
+  }
+
+  &__bottom {
+    font-size: 180%;
+  }
+}
+
+@-webkit-keyframes swing {
+  15% {
+    -webkit-transform: translateY(5px);
+    transform: translateY(5px);
+  }
+  30% {
+    -webkit-transform: translateY(-5px);
+    transform: translateY(-5px);
+  }
+  50% {
+    -webkit-transform: translateY(3px);
+    transform: translateY(3px);
+  }
+  65% {
+    -webkit-transform: translateY(-3px);
+    transform: translateY(-3px);
+  }
+  80% {
+    -webkit-transform: translateY(2px);
+    transform: translateY(2px);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+@keyframes swing {
+  15% {
+    -webkit-transform: translateY(5px);
+    transform: translateY(5px);
+  }
+  30% {
+    -webkit-transform: translateY(-5px);
+    transform: translateY(-5px);
+  }
+  50% {
+    -webkit-transform: translateY(3px);
+    transform: translateY(3px);
+  }
+  65% {
+    -webkit-transform: translateY(-3px);
+    transform: translateY(-3px);
+  }
+  80% {
+    -webkit-transform: translateY(2px);
+    transform: translateY(2px);
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+.service-box {
+  padding-top: 1.5em;
+  display: flex;
+  justify-content: space-between;
+  font-family: "EsamanruLight";
+
+  &__item {
+    width: 25%;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 3em 1em;
+    margin: 3% 0%;
+    border-radius: 30px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+
+    & img {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: auto;
+      margin-bottom: 1.5em;
+      width: 110px;
+      height: 110px;
+    }
+
+    &:hover {
+      -webkit-animation: swing 1s ease;
+      animation: swing 1s ease;
+      -webkit-animation-iteration-count: 1;
+      animation-iteration-count: 1;
+    }
+  }
+}
+
+.guide {
+  padding-top: 2em;
+  margin-top: 1rem;
+  font-family: "EsamanruLight";
+
+  &__top {
+    font-family: "EsamanruMedium";
+    font-size: 180%;
+  }
+
+  &__box {
+    display: flex;
+    padding: 1%;
+
+    &__text {
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    &__image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 240px;
+      height: 180px;
+      background-color: lightgray;
+      border-radius: 30px;
+    }
+  }
+}
+
+// 랜딩페이지 시작 버튼
 .start div {
-	animation-name: fade-in;
-	animation-fill-mode: both;
-	animation-duration: .5s;
+  animation-name: fade-in;
+  animation-fill-mode: both;
+  animation-duration: 0.5s;
 }
 
 $animationDelay: 1;
 @for $i from 1 through 15 {
-	.start > div:nth-of-type(#{$i}) {
-		animation-delay: #{0.3+($i)}s;
+  .start > div:nth-of-type(#{$i}) {
+    animation-delay: #{0.3+ ($i)}s;
   }
 }
 
 @keyframes fade-in {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
-
-
