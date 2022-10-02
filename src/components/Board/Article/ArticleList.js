@@ -61,6 +61,7 @@ function BasicTabs() {
 
   // 페이지네이션
   const [currentPage, setCurrentPage] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
 
   const onPageChange = (e, page) => {
     setCurrentPage(page);
@@ -68,7 +69,6 @@ function BasicTabs() {
 
   // 뉴스 데이터
   const [news, setNews] = useState([]);
-
   const [value, setValue] = useState(0);
 
   const handleChange = (e, newValue) => {
@@ -80,6 +80,7 @@ function BasicTabs() {
     console.log(currentPage);
     getBoard(newscategory[value], currentPage - 1, (res) => {
       setNews(res.data.newsList);
+      setTotalCount(res.data.totalCount);
     });
   }, [value, currentPage]);
 
@@ -122,7 +123,7 @@ function BasicTabs() {
             <Category news={news} />
           </TabPanel>
           <Pagination
-            count={10}
+            count={Math.ceil(totalCount / 8)}
             page={currentPage}
             onChange={onPageChange}
             color="secondary"
