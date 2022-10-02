@@ -174,32 +174,50 @@
   justify-content: center;
 
   &__wrapper {
-    width: 85vw;
+    width: 80vw;
 
     &__top {
-      margin-top: 1rem;
       font-family: "EsamanruLight";
 
-      & div {
+      &--title {
+        display: flex;
+        align-items: center;
         margin-bottom: 1rem;
 
-        &:first-child {
-          font-size: 1.6rem;
+        & button {
+          color: black;
+          margin-right: 0.5rem;
+        }
+
+        & div:last-child {
+          font-size: 1.5rem;
 
           & span {
-            color: $primary-color;
             font-family: "EsamanruMedium";
+            color: $primary-color;
           }
         }
+      }
+
+      &--count {
+        margin-left: 0.5rem;
       }
     }
 
     &__content {
+      &--no-data {
+        font-family: "EsamanruLight";
+        height: 50vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
       display: grid;
       justify-items: center;
       align-items: center;
       grid-template-columns: 25% 25% 25% 25%;
-      grid-template-rows: 270px 270px;
+      grid-template-rows: 260px 260px;
     }
   }
 }
