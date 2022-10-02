@@ -1,14 +1,12 @@
 import ArticleCard from "components/Board/Article/ArticleCard";
 
-function Category({news}) {
-
-  console.log(news);
+function Category({ news }) {
   return (
-      <div className="article-list">
-        {news.map((value, idx) => (
-          <ArticleCard key={idx} {...value} />
-        ))}
-      </div>
+    <div className="article-list">
+      {news.map((value, idx) => (
+        <ArticleCard key={idx} {...value} />
+      ))}
+    </div>
   );
 }
 
