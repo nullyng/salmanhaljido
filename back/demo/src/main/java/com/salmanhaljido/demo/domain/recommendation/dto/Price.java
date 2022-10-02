@@ -1,8 +1,11 @@
 package com.salmanhaljido.demo.domain.recommendation.dto;
 
-import java.util.Date;
+import lombok.Getter;
+import lombok.Setter;
 
+@Setter
+@Getter
 public class Price {
-    private Date date;
-    private int value;
+    private String date;
+    private String value;
 }
