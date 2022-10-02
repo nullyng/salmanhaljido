@@ -4,10 +4,10 @@ import "styles/Landing/Landing.scss";
 
 function LandingPage() {
   return (
-    <div className='Landing'>
-      <Start/>
+    <div className="Landing">
+      <Start />
       <div className="start__back"></div>
-      <Detail/>
+      <Detail />
     </div>
   );
 }

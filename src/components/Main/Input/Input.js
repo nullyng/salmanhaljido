@@ -2,17 +2,18 @@ import { Divider, Drawer, IconButton } from "@mui/material";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 import "styles/Main/Input.scss";
 import UserLocation from "components/Main/Input/UserLocation";
-import UserInfo from "components/Main/Input/UserInfo";
+import UserInfo from "components/Main/Input/UserInfo/UserInfo";
 import Price from "components/Main/Input/Price";
 import ResetButton from "components/Main/Input/ResetButton";
 import SubmitButton from "components/Main/Input/SubmitButton";
-import MyCategory from "components/Main/Input/MyCategory";
-import Category from "components/Main/Input/Category";
+import MyCategory from "components/Main/Input/Category/MyCategory";
+import Category from "components/Main/Input/Category/Category";
 
-function Input({ currMap, onSetMapData, markers, onSetMarkers }) {
+function Input() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   const handleDrawerOpen = () => {
@@ -54,12 +55,7 @@ function Input({ currMap, onSetMapData, markers, onSetMarkers }) {
         </div>
         <div className="left-drawer__inner__bottom">
           <ResetButton />
-          <SubmitButton
-            currMap={currMap}
-            markers={markers}
-            onSetMarkers={onSetMarkers}
-            onSetMapData={onSetMapData}
-          />
+          <SubmitButton />
         </div>
       </Drawer>
     </div>

@@ -1,18 +1,30 @@
-import * as React from "react";
-import Chip from "@mui/material/Chip";
-import Stack from "@mui/material/Stack";
+import { Button, Rating, ThemeProvider } from "@mui/material";
+import StarIcon from "@mui/icons-material/Star";
 
-import "styles/Main/Output.scss"
+import "styles/Main/Output.scss";
+import theme from "components/common/theme";
 
-function RcmdChip() {
-  const handleClick = () => {
-    console.info("You clicked the Chip.");
-  };
-
+function RcmdChip({ index, name, code, score, handleClick }) {
   return (
-    <Stack direction="row" spacing={1} className="chip">
-      <Chip label="대구광역시 북구" variant="outlined" onClick={handleClick} className="chip__content"/>
-    </Stack>
+    <ThemeProvider theme={theme}>
+      <Button className={`chip ${code}`} onClick={handleClick}>
+        <div className="chip__content">
+          <div className="chip__content__data">
+            <span className="chip__content__data__ranking">{index + 1}</span>
+            <span className="chip__content__data__region">{name}</span>
+          </div>
+          <div className="chip__content__rating">
+            <Rating
+              name="read-only"
+              defaultValue={score}
+              precision={0.1}
+              icon={<StarIcon />}
+              readOnly
+            />
+          </div>
+        </div>
+      </Button>
+    </ThemeProvider>
   );
 }
 

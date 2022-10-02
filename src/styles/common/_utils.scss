@@ -1,9 +1,11 @@
 $primary-color: #e94560;
 $secondary-color: #0f3460;
+$my-blue: #4d89c6;
 
 @mixin input-title {
   &__title {
     display: flex;
+    font-family: "EsamanruLight";
 
     &__tooltip {
       display: flex;
@@ -16,4 +18,43 @@ $secondary-color: #0f3460;
       }
     }
   }
+}
+
+@mixin custom-scroll {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  &::-webkit-scrollbar {
+    width: 15px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(77, 137, 198, 0.205);
+    border-radius: 10px;
+    border: 4px solid transparent;
+    background-clip: padding-box;
+  }
+}
+
+@font-face {
+  font-family: "EsamanruMedium";
+  src: url("../../assets/fonts/esamanru-Medium.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "EsamanruLight";
+  src: url("../../assets/fonts/esamanru-Light.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "EsamanruBold";
+  src: url("../../assets/fonts/esamanru-Bold.ttf");
+  font-weight: normal;
+  font-style: normal;
 }
