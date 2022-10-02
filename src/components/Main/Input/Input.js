@@ -30,6 +30,8 @@ function Input() {
 >>>>>>> 0aa6af3 ([merge] : front-develop ← S07P22D110-76/feature/main/map)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
+  const myCategoryList = useSelector((state) => state.category.myCategoryList);
+
   const handleDrawerOpen = () => {
     setIsDrawerOpen(true);
   };

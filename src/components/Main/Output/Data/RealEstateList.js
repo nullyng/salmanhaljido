@@ -9,7 +9,7 @@ function RealEstateList() {
   return (
     <div className="real-estate-ldist">
       {Object.keys(currRegion).length === 0 ? (
-        <div className="real-estate-list--no-ata">
+        <div className="real-estate-list--no-data">
           <p>추천 지역을 선택해주세요.</p>
         </div>
       ) : (

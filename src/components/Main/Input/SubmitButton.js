@@ -1,8 +1,9 @@
-import { Button, Slide, Snackbar } from "@mui/material";
-import { setMapData, setMarkers } from "modules/map";
-import { setSurvey } from "modules/survey";
+import { Button, Snackbar } from "@mui/material";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+
+import { setMapData, setMarkers } from "modules/map";
+import { setSurvey } from "modules/survey";
 
 function SubmitButton() {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
