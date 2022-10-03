@@ -52,7 +52,6 @@ function SubmitButton() {
           ? res.data.regions.slice(0, 10)
           : res.data.regions
       );
-      console.log(res.data.regions);
       onSetLoading(false);
 
       // 데이터 출력 창에 추천 버튼 출력

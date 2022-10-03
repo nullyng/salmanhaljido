@@ -146,9 +146,11 @@
   }
 }
 
+/* 통계 탭 */
 .chart-data {
   display: flex;
   justify-content: center;
+  padding: 0 0.5rem;
 
   &--no-data {
     text-align: center;
@@ -220,9 +222,11 @@
   }
 }
 
+/* 부동산 탭*/
 .real-estate-list {
   display: flex;
   justify-content: center;
+  padding: 0 0.5rem;
 
   &--no-data {
     text-align: center;
@@ -230,6 +234,112 @@
     padding-bottom: 20%;
     color: #b6b6b6;
     font-family: "EsamanruLight";
+
+    & div {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: $secondary-color;
+      animation: point 1s infinite alternate;
+
+      & svg {
+        margin-right: 0.5rem;
+      }
+
+      &:hover {
+        animation: none;
+        transform: scale(1.2);
+      }
+    }
+  }
+}
+
+.real-estate-card {
+  display: flex;
+  margin-bottom: 1rem;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  border-radius: 10px;
+  cursor: pointer;
+  height: 100px;
+  transition: transform 0.45s ease;
+
+  & .overlay {
+    transition: 0.3s all;
+    opacity: 0;
+    color: black;
+    position: absolute;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+
+    &__title {
+      margin-left: 7%;
+      display: flex;
+      align-items: center;
+      margin-top: 1.6rem;
+
+      & svg {
+        margin-right: 0.5rem;
+      }
+
+      & h3 {
+        margin: 0;
+        color: $secondary-color;
+      }
+    }
+
+    & p {
+      margin: 0.5rem;
+      margin-left: 5%;
+      font-size: 0.9rem;
+      color: #676767;
+    }
+  }
+
+  &__image {
+    padding: 0.3rem;
+    & img {
+      width: 120px;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+  }
+
+  &__content {
+    width: 100%;
+    padding: 1rem 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  &:hover {
+    transform: scale(1.05);
+
+    & .overlay {
+      opacity: 0.9;
+
+      &__title {
+        opacity: 1;
+        animation: point 1s infinite alternate;
+      }
+    }
+
+    & .real-estate-card__image,
+    & .real-estate-card__content {
+      -webkit-filter: blur(2px);
+      filter: blur(2px);
+    }
+  }
+}
+
+@keyframes point {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(0.2rem);
   }
 }
 
