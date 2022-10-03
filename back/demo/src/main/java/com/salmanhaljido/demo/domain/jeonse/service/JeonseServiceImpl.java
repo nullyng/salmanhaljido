@@ -81,6 +81,14 @@ public class JeonseServiceImpl implements JeonseService {
                 }else{
                     s+=sidoMap.get(tokens[0]) + " " + tokens[1] + " " + tokens[2];
                 }
+                if(json.getJSONArray("data").getJSONObject(i).get("2021-02").toString().equals("null") ||
+                        json.getJSONArray("data").getJSONObject(i).get("2021-03").toString().equals("null")||
+                 json.getJSONArray("data").getJSONObject(i).get("2021-04").toString().equals("null")||
+                 json.getJSONArray("data").getJSONObject(i).get("2021-05").toString().equals("null")||
+                 json.getJSONArray("data").getJSONObject(i).get("2021-06").toString().equals("null") ||
+                        json.getJSONArray("data").getJSONObject(i).get("2021-07").toString().equals("null")) continue;
+
+
                 s = s + " " + json.getJSONArray("data").getJSONObject(i).get("2021-02").toString();
                 s+="," + json.getJSONArray("data").getJSONObject(i).get("2021-03").toString();
                 s+="," + json.getJSONArray("data").getJSONObject(i).get("2021-04").toString();
@@ -90,18 +98,16 @@ public class JeonseServiceImpl implements JeonseService {
                 fileOutputStream.write(s.getBytes(StandardCharsets.UTF_8));
                 fileOutputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
 
-
-                rd.close();
-                conn.disconnect();
-
             }
+            rd.close();
+            conn.disconnect();
         } catch (Exception e) {
             e.printStackTrace();
         }
         SparkSession session = SparkSession.builder()
                 .master("local")
                 .appName("jeonse")
-                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.jeonse")
+                .config("spark.mongodb.write.connection.uri", "mongodb://admin:salmand110@j7d110.p.ssafy.io/openapi.jeonse?authSource=admin")
                 .getOrCreate();
         Dataset<Row> df = session.read().text(dataPath + "jeonse.data");
         JavaRDD<Row> rdd = df.toJavaRDD();

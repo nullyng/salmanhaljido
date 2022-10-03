@@ -99,7 +99,7 @@ public class KinderGardenServiceImpl implements KinderGardenService{
         SparkSession session = SparkSession.builder()
                 .master("local")
                 .appName("kindergarden")
-                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.kindergarden")
+                .config("spark.mongodb.write.connection.uri", "mongodb://admin:salmand110@j7d110.p.ssafy.io/openapi.kindergarden?authSource=admin")
                 .getOrCreate();
 
         Dataset<Row> dff = session.read().format("json").load(dataPath + "kindergarden_result.json");

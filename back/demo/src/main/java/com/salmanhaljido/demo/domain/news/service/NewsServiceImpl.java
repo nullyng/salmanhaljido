@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -78,7 +79,7 @@ public class NewsServiceImpl implements NewsService{
     @Scheduled(cron = "0 0 * * * ?")
     public void crawlingParentingAndEducation() {
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.HOUR, -1);
+        calendar.add(Calendar.HOUR, -500);
         Date time = calendar.getTime();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:SS");
         int pageNo = 1;
@@ -121,7 +122,7 @@ public class NewsServiceImpl implements NewsService{
     @Scheduled(cron = "0 0 * * * ?")
     public void crawlingSocialAndPolicy() {
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.HOUR, -1);
+        calendar.add(Calendar.HOUR, -500);
         Date time = calendar.getTime();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:SS");
         int pageNo = 1;
@@ -164,7 +165,7 @@ public class NewsServiceImpl implements NewsService{
     @Scheduled(cron = "0 0 * * * ?")
     public void crawlingPregnantAndDelivery() {
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.HOUR, -1);
+        calendar.add(Calendar.HOUR, -500);
         Date time = calendar.getTime();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:SS");
         int pageNo = 1;
@@ -207,7 +208,7 @@ public class NewsServiceImpl implements NewsService{
     @Scheduled(cron = "0 0 * * * ?")
     public void crawlingLifeAndHealth() {
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.HOUR, -1);
+        calendar.add(Calendar.HOUR, -500);
         Date time = calendar.getTime();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:SS");
         int pageNo = 1;
@@ -250,7 +251,7 @@ public class NewsServiceImpl implements NewsService{
     @Scheduled(cron = "0 0 * * * ?")
     public void crawlingRealEstate() {
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.HOUR, -1);
+        calendar.add(Calendar.HOUR, -500);
         Date now = new Date();
         Date createdAt = calendar.getTime();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");

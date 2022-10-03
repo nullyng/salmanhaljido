@@ -57,7 +57,7 @@ public class CarAccidentServiceImpl implements CarAccidentService {
         SparkSession session = SparkSession.builder()
                 .master("local")
                 .appName("caraccident")
-                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.caraccident")
+                .config("spark.mongodb.write.connection.uri", "mongodb://admin:salmand110@j7d110.p.ssafy.io/openapi.caraccident?authSource=admin")
                 .getOrCreate();
 
         Dataset<Row> df = session.read().text(dataPath + "caraccident.data");

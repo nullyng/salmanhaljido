@@ -82,7 +82,7 @@ public class TheaterServiceImpl implements TheaterService {
         SparkSession session = SparkSession.builder()
                 .master("local")
                 .appName("theater")
-                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.theater")
+                .config("spark.mongodb.write.connection.uri", "mongodb://admin:salmand110@j7d110.p.ssafy.io/openapi.theater?authSource=admin")
                 .getOrCreate();
 
         Dataset<Row> df = session.read().text(dataPath + "theater.data");
