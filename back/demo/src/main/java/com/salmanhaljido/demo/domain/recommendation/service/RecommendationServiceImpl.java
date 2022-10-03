@@ -209,7 +209,7 @@ public class RecommendationServiceImpl implements RecommendationService{
 
 
                     regionMap.get(sd).getCategory().getEducation().put("academy", count);
-                }else if(serviceKey.equals("animalhospital")){
+                }else if(serviceKey.equals("animalHospital")){
                     List<AnimalHospitalDoc> animalHospitalDocList = animalHospitalDocRepository.findAllBySdOrderByCount(sd);
                     Long count = 0L;
                     for(int idx = 0; idx < animalHospitalDocList.size(); idx++){
@@ -218,9 +218,9 @@ public class RecommendationServiceImpl implements RecommendationService{
                     totalCount.put(sd, count);
 
 
-                    regionMap.get(sd).getCategory().getPet().put("animalhospital", count);
+                    regionMap.get(sd).getCategory().getPet().put("animalHospital", count);
 
-                }else if(serviceKey.equals("animalsalon")){
+                }else if(serviceKey.equals("animalBeauty")){
                     List<AnimalSalonDoc> animalSalonDocList = animalSalonDocRepository.findAllBySdOrderByCount(sd);
                     Long count = 0L;
                     for(int idx = 0; idx < animalSalonDocList.size(); idx++){
@@ -229,9 +229,9 @@ public class RecommendationServiceImpl implements RecommendationService{
                     totalCount.put(sd, count);
 
 
-                    regionMap.get(sd).getCategory().getPet().put("animalsalon", count);
+                    regionMap.get(sd).getCategory().getPet().put("animalBeauty", count);
 
-                }else if(serviceKey.equals("caraccident")){
+                }else if(serviceKey.equals("carAccident")){
                     List<CarAccidentDoc> carAccidentDocsList = carAccidentDocRepository.findAllBySdOrderByCount(sd);
                     Long count = 0L;
                     for(int idx = 0; idx < carAccidentDocsList.size(); idx++){
@@ -240,9 +240,9 @@ public class RecommendationServiceImpl implements RecommendationService{
                     totalCount.put(sd, count);
 
 
-                        regionMap.get(sd).getCategory().getSafety().put("caraccident", count);
+                        regionMap.get(sd).getCategory().getSafety().put("carAccident", count);
 
-                }else if(serviceKey.equals("childsafety")){
+                }else if(serviceKey.equals("childSafety")){
                     // start
                     List<ChildSafetyDoc> childSafetyDocList = childSafetyDocRepository.findAllBySdOrderByCount(sd);
                     Long count = 0L;
@@ -252,10 +252,10 @@ public class RecommendationServiceImpl implements RecommendationService{
                     totalCount.put(sd, count);
 
 
-                        regionMap.get(sd).getCategory().getSafety().put("childsafety",count);
+                        regionMap.get(sd).getCategory().getSafety().put("childSafety",count);
 
                     // end
-                }else if(serviceKey.equals("concerthall")){
+                }else if(serviceKey.equals("concertHall")){
                     // start
                     List<ConcertHallDoc> concertHallDocList = concertHallDocRepository.findAllBySdOrderByCount(sd);
                     Long count = 0L;
@@ -265,7 +265,7 @@ public class RecommendationServiceImpl implements RecommendationService{
                     totalCount.put(sd, count);
 
 
-                        regionMap.get(sd).getCategory().getCulture().put("concerthall", count);
+                        regionMap.get(sd).getCategory().getCulture().put("concertHall", count);
 
                     // end
                 }else if(serviceKey.equals("crime")){
@@ -281,7 +281,7 @@ public class RecommendationServiceImpl implements RecommendationService{
                         regionMap.get(sd).getCategory().getSafety().put(serviceKey, count);
 
                     // end
-                }else if(serviceKey.equals("drugstore")){
+                }else if(serviceKey.equals("drugStore")){
                     // start
                     List<DrugStoreDoc> list = drugStoreDocRepository.findAllBySdOrderByCount(sd);
                     Long count = 0L;
@@ -294,7 +294,7 @@ public class RecommendationServiceImpl implements RecommendationService{
                         regionMap.get(sd).getCategory().getMedical().put(serviceKey, count);
 
                     // end
-                }else if(serviceKey.equals("electricvehiclecharging")){
+                }else if(serviceKey.equals("electricVehicleCharging")){
                     // start
                     List<ElectricVehicleChargingDoc> list = electricVehicleChargingDocRepository.findAllBySdOrderByCount(sd);
                     Long count = 0L;
@@ -320,7 +320,7 @@ public class RecommendationServiceImpl implements RecommendationService{
                         regionMap.get(sd).getCategory().getCulture().put(serviceKey, count);
 
                     // end
-                }else if(serviceKey.equals("facilitiesforthedisabled")){
+                }else if(serviceKey.equals("facilitiesForTheDisabled")){
                     // start
                     List<FFDDoc> list = ffdDocRepository.findAllBySdOrderByCount(sd);
                     Long count = 0L;
@@ -333,7 +333,7 @@ public class RecommendationServiceImpl implements RecommendationService{
                         regionMap.get(sd).getCategory().getLife().put(serviceKey, count);
 
                     // end
-                }else if(serviceKey.equals("femalesafety")){
+                }else if(serviceKey.equals("femaleSafety")){
                     // start
                     List<FemaleSafetyDoc> list = femaleSafetyDocRepository.findAllBySdOrderByCount(sd);
                     Long count = 0L;
@@ -363,19 +363,6 @@ public class RecommendationServiceImpl implements RecommendationService{
                 /*
                 ToDo Jeonse
                  */
-                }else if(serviceKey.equals("kindergarden")){
-                    // start
-                    List<KinderGardenDoc> list = kinderGardenDocRepository.findAllBySdOrderByCount(sd);
-                    Long count = 0L;
-                    for(int idx = 0; idx < list.size(); idx++){
-                        count+=list.get(idx).getCount();
-                    }
-                    totalCount.put(sd, count);
-
-
-                        regionMap.get(sd).getCategory().getEducation().put(serviceKey, totalCount.get(sd));
-
-                    // end
                 }else if(serviceKey.equals("library")){
                     // start
                     List<LibraryDoc> list = libraryDocRepository.findAllBySdOrderByCount(sd);
@@ -441,7 +428,7 @@ public class RecommendationServiceImpl implements RecommendationService{
                         regionMap.get(sd).getCategory().getCalamity().put(serviceKey, totalCount.get(sd));
 
                     // end
-                }else if(serviceKey.equals("sportsfacilities")){
+                }else if(serviceKey.equals("sportsFacilities")){
                     // start
                     List<SportsFacilitiesDoc> list = sportsFacilitiesDocRepository.findAllBySdOrderByCount(sd);
                     Long count = 0L;
@@ -492,33 +479,32 @@ public class RecommendationServiceImpl implements RecommendationService{
             Region region = regionMap.get(entry.getKey());
             region.setRanking(ranking);
             region.setScore(entry.getValue());
-//            int tempIdx = region.getAddr().indexOf(' ');
-//            String sd = region.getAddr().substring(0, tempIdx);
-//            String sgg = region.getAddr().substring(tempIdx + 1);
-//
-//            TradingDoc tradingDoc = tradingDocRepository.findBySdAndSgg(sd, sgg);
-//            JeonseDoc jeonseDoc = jeonseDocRepository.findBySdAndSgg(sd, sgg);
-//
-//            if(tradingDoc != null) {
-//                String[] tradingPrice = tradingDoc.getPrice().split(",");
-//                String[] tradingDate = tradingDoc.getDate().split(",");
-//                for(int i = 0; i < tradingDate.length; i++){
-//                    Trading trading = new Trading();
-//                    trading.setDate(tradingDate[i]);
-//                    trading.setPrice(tradingPrice[i]);
-//                    region.getTradings().add(trading);
-//                }
-//            }
-//            if(jeonseDoc != null) {
-//                String[] jeonsePrice = jeonseDoc.getPrice().split(",");
-//                String[] jeonseDate = jeonseDoc.getDate().split(",");
-//                for(int i = 0; i < jeonseDate.length; i++){
-//                    Price price = new Price();
-//                    price.setDate(jeonseDate[i]);
-//                    price.setValue(jeonsePrice[i]);
-//                    region.getPrices().add(price);
-//                }
-//            }
+            String sd = region.getAddr();
+            String sgg = "";
+
+            TradingDoc tradingDoc = tradingDocRepository.findBySdAndSgg(sd, sgg);
+            JeonseDoc jeonseDoc = jeonseDocRepository.findBySdAndSgg(sd, sgg);
+
+            if(tradingDoc != null) {
+                String[] tradingPrice = tradingDoc.getPrice().split(",");
+                String[] tradingDate = tradingDoc.getDate().split(",");
+                for(int i = 0; i < tradingDate.length; i++){
+                    Trading trading = new Trading();
+                    trading.setDate(tradingDate[i]);
+                    trading.setPrice(tradingPrice[i]);
+                    region.getTradings().add(trading);
+                }
+            }
+            if(jeonseDoc != null) {
+                String[] jeonsePrice = jeonseDoc.getPrice().split(",");
+                String[] jeonseDate = jeonseDoc.getDate().split(",");
+                for(int i = 0; i < jeonseDate.length; i++){
+                    Price price = new Price();
+                    price.setDate(jeonseDate[i]);
+                    price.setValue(jeonsePrice[i]);
+                    region.getPrices().add(price);
+                }
+            }
             recommendationResponse.getRegions().add(region);
         }
         return recommendationResponse;
