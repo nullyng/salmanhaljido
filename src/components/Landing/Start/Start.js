@@ -34,12 +34,11 @@ function Start() {
         <div className="start__bubble--Rtri"></div>
       </div>
       <div className="start__button">
-        <button onClick={main}>시작하기</button>
+        <button onClick={main}>
+          <span>시작하기</span>
+          <span className="ok"></span>
+        </button>
       </div>
-
-      {/* <div className="start__button">
-                <NavLink to="/map" className="start__button--detail">시작하기</NavLink>
-            </div> */}
     </div>
   );
 }

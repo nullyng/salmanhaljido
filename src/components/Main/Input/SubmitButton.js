@@ -20,7 +20,6 @@ function SubmitButton() {
   const dispatch = useDispatch();
   const onSetSurvey = (survey) => dispatch(setSurvey(survey));
   const onSetMarkers = (markers) => dispatch(setMarkers(markers));
-  const onSetMapData = (mapData) => dispatch(setMapData(mapData));
 
   const onSetLoading = (loading) => dispatch(setLoading(loading));
 
