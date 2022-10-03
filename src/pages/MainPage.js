@@ -18,8 +18,6 @@ function MainPage() {
   const onSetMapData = (mapData) => dispatch(setMapData(mapData));
   const onSetMarkers = (markers) => dispatch(setMarkers(markers));
 
-  const loading = useSelector((state) => state.loading.loading);
-
   return (
     <div>
       {loading && <Loading />}
