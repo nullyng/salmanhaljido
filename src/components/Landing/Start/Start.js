@@ -29,17 +29,16 @@ function Start() {
       <div className="start__bubble">
         <div className="start__bubble--end">
           <div className="start__bubble--end1">여기...&nbsp;</div>
-          <div className="start__bubble--end2">살만할지도..?</div>
+          <div className="start__bubble--end2 typing">살만할지도..?</div>
         </div>
         <div className="start__bubble--Rtri"></div>
       </div>
       <div className="start__button">
-        <button onClick={main}>시작하기</button>
+        <button onClick={main}>
+          <span>시작하기</span>
+          <span className="ok"></span>
+        </button>
       </div>
-
-      {/* <div className="start__button">
-                <NavLink to="/map" className="start__button--detail">시작하기</NavLink>
-            </div> */}
     </div>
   );
 }

@@ -13,6 +13,7 @@ const MyTooltip = styled(({ className, ...props }) => (
     backgroundColor: "#16213E",
     fontSize: "0.9em",
     margin: "1rem",
+    fontFamily: "Pretendard-Regular",
   },
 }));
 

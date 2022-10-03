@@ -18,7 +18,9 @@ function CustomMap() {
   const [zoom, setZoom] = useState(6.2);
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
-  const mapData = useSelector((state) => state.map.mapData);
+  const region = useSelector((state) => state.input.region);
+  const rcmdData = useSelector((state) => state.region.rcmdData);
+
   const dispatch = useDispatch();
   const onSetCurrMap = (currMap) => dispatch(setCurrMap(currMap));
   const onSetMarkers = (markers) => dispatch(setMarkers(markers));
@@ -43,24 +45,18 @@ function CustomMap() {
     const markerList = [];
 
     // 마커 생성
-    mapData.map((data, index) => {
+    rcmdData.map((data, index) => {
       const el = document.createElement("div");
       el.className = "marker";
 
       const div = document.createElement("div");
       div.className = "text-wrapper";
 
-      const sido = document.createElement("span");
-      sido.textContent = data.sido;
-      sido.className = "sido";
+      const addr = document.createElement("span");
+      addr.textContent = data.addr;
+      addr.className = "addr";
 
-      const gugun = document.createElement("span");
-      gugun.textContent = data.gugun;
-      gugun.className = "gugun";
-
-      div.appendChild(sido);
-      div.appendChild(document.createElement("br"));
-      div.appendChild(gugun);
+      div.appendChild(addr);
 
       el.appendChild(div);
 
@@ -68,7 +64,7 @@ function CustomMap() {
       const marker = new mapboxgl.Marker(el, {
         anchor: "bottom",
       })
-        .setLngLat([data.longitude, data.latitude])
+        .setLngLat([data.lng, data.lat])
         .addTo(map.current);
 
       // 클릭 이벤트 등록
@@ -76,10 +72,10 @@ function CustomMap() {
         setCurrRegion(data);
 
         map.current.flyTo({
-          center: [data.longitude, data.latitude],
+          center: [data.lng, data.lat],
           duration: 600,
           essential: true,
-          zoom: 10,
+          zoom: 12,
         });
       });
 
@@ -87,7 +83,7 @@ function CustomMap() {
 
       // 폴리곤 출력
       const item = TL_SCCO_SIG.features.filter(
-        (feature) => feature.properties.SIG_CD === data.SIG_CD
+        (feature) => feature.properties.SIG_CD === data.code.substr(0, 5)
       );
 
       const geoJsonData = {
@@ -123,7 +119,17 @@ function CustomMap() {
     });
 
     onSetMarkers(markerList);
-  }, [mapData]);
+
+    // 만약 선택한 지역이 있다면 그 지역으로 확대
+    if (rcmdData.length > 0 && region.length > 0) {
+      map.current.flyTo({
+        center: [rcmdData[0].lng, rcmdData[0].lat],
+        duration: 600,
+        essential: true,
+        zoom: 10,
+      });
+    }
+  }, [rcmdData]);
 
   return (
     <div className="custom-map">
