@@ -80,7 +80,7 @@ public class NewsServiceImpl implements NewsService{
     @Scheduled(cron = "0 0 * * * ?")
     public void crawlingParentingAndEducation() {
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.HOUR, -500);
+        calendar.add(Calendar.HOUR, -1);
         Date time = calendar.getTime();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:SS");
         int pageNo = 1;
@@ -124,7 +124,7 @@ public class NewsServiceImpl implements NewsService{
     @Scheduled(cron = "0 0 * * * ?")
     public void crawlingSocialAndPolicy() {
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.HOUR, -500);
+        calendar.add(Calendar.HOUR, -1);
         Date time = calendar.getTime();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:SS");
         int pageNo = 1;
@@ -168,7 +168,7 @@ public class NewsServiceImpl implements NewsService{
     @Scheduled(cron = "0 0 * * * ?")
     public void crawlingPregnantAndDelivery() {
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.HOUR, -500);
+        calendar.add(Calendar.HOUR, -1);
         Date time = calendar.getTime();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:SS");
         int pageNo = 1;
@@ -212,7 +212,7 @@ public class NewsServiceImpl implements NewsService{
     @Scheduled(cron = "0 0 * * * ?")
     public void crawlingLifeAndHealth() {
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.HOUR, -500);
+        calendar.add(Calendar.HOUR, -1);
         Date time = calendar.getTime();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:SS");
         int pageNo = 1;
