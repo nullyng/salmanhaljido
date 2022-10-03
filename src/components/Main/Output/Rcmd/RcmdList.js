@@ -1,22 +1,19 @@
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import CustomTooltip from "components/common/CustomTooltip";
-import RcmdChip from "components/Main/Output/Rcmd/RcmdChip.js";
+import RcmdItem from "components/Main/Output/Rcmd/RcmdItem.js";
 import "styles/Main/Output.scss";
-import { setCurrRegion, setRealEstate, setStatistics } from "modules/region";
 
-function RcmdList({}) {
+function RcmdList() {
   const tooltipMessage =
     "추천 지역 검색을 통해 추천 지역을 확인할 수 있어요.\n추천 지역은 순위가 높은 순으로 표시됩니다.\n해당 지역의 자세한 정보를 보고 싶다면, 원하는 지역을 클릭해 보세요!";
 
+  const region = useSelector((state) => state.input.region);
   const rcmdData = useSelector((state) => state.region.rcmdData);
   const currRegion = useSelector((state) => state.region.currRegion);
 
-  const dispatch = useDispatch();
-  const onSetCurrRegion = (currRegion) => dispatch(setCurrRegion(currRegion));
-  const onSetStatistics = (statistics) => dispatch(setStatistics(statistics));
-  const onSetRealEstate = (realEstate) => dispatch(setRealEstate(realEstate));
+  const currMap = useSelector((state) => state.map.currMap);
 
   useEffect(() => {
     let el;
@@ -28,17 +25,18 @@ function RcmdList({}) {
     elClassName = el.className;
     el.className += " selected";
 
+    // 아이템 클릭 시 지도에서 해당 위치로 이동 & 확대
+    currMap.flyTo({
+      center: [currRegion.lng, currRegion.lat],
+      duration: 600,
+      essential: true,
+      zoom: 12,
+    });
+
     return () => {
       el.className = elClassName;
     };
   }, [currRegion]);
-
-  const handleClick = (data) => {
-    // 현재 선택한 지역, 해당 지역의 통계 및 부동산 정보 저장
-    onSetCurrRegion(data);
-    onSetStatistics(data.stat);
-    onSetRealEstate(data.re);
-  };
 
   return (
     <div className="region">
@@ -52,35 +50,10 @@ function RcmdList({}) {
         {rcmdData.length === 0 ? (
           <p className="region__cntr--no-data">추천 지역을 검색해주세요.</p>
         ) : (
-          <div className="region__cntr--data">
+          <div className="region__cntr—-data">
             <div>
-              <h3>선택한 지역 내</h3>
               {rcmdData.map((data, index) => {
-                return (
-                  <RcmdChip
-                    key={index}
-                    index={index}
-                    name={data.name}
-                    code={data.code}
-                    score={data.score}
-                    handleClick={() => handleClick(data)}
-                  />
-                );
-              })}
-            </div>
-            <div>
-              <h3>선택한 지역 외</h3>
-              {rcmdData.map((data, index) => {
-                return (
-                  <RcmdChip
-                    key={index}
-                    index={index}
-                    name={data.name}
-                    code={data.code}
-                    score={data.score}
-                    handleClick={() => handleClick(data)}
-                  />
-                );
+                return <RcmdItem key={index} index={index} data={data} />;
               })}
             </div>
           </div>

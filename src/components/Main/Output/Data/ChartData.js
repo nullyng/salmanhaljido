@@ -10,6 +10,17 @@ import { useSelector } from "react-redux";
 
 import DetailData from "components/Main/Output/Data/DetailData";
 
+const categoryName = [
+  "traffic",
+  "calamity",
+  "safety",
+  "medical",
+  "pet",
+  "education",
+  "culture",
+  "life",
+];
+
 function ChartData() {
   const data = [
     {
@@ -98,7 +109,10 @@ function ChartData() {
               fillOpacity={0.6}
             />
           </RadarChart>
-          <DetailData category={currCategory} />
+          <DetailData
+            category={currCategory}
+            detail={currRegion.category[categoryName[currCategory]]}
+          />
         </div>
       )}
     </div>

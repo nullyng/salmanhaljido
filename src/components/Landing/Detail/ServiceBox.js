@@ -24,9 +24,9 @@ function ServiceBox() {
       <div className="service-box__item">
         <img src={law} alt="law" />
         <p>
-          지역에 따른
+          임신, 육아, 부동산 등
           <br />
-          정책들 모아보기
+          유용한 정보 모아보기
         </p>
       </div>
     </div>

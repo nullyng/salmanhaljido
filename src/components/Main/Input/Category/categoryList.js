@@ -1,7 +1,7 @@
 const categoryList = {
   교통: [
-    { publicTransportationUtilizationRate: "대중교통 이용률" },
-    { station: "대중교통 정류장" },
+    // { publicTransportationUtilizationRate: "대중교통 이용률" },
+    // { station: "대중교통 정류장" },
     { electricVehicleCharging: "전기차 충전소" },
     { parkinglot: "공용, 민영주차장" },
   ],
@@ -15,7 +15,7 @@ const categoryList = {
   의료: [{ hospital: "의료기관" }, { drugStore: "약국" }],
   반려동물: [{ animalHospital: "동물병원" }, { animalBeauty: "동물미용" }],
   교육: [
-    { kindergarden: "유치원" },
+    // { kindergarden: "유치원" },
     { school: "초, 중, 고등학교" },
     { academy: "학원 및 교습소" },
   ],
@@ -27,7 +27,7 @@ const categoryList = {
     { sportsFacilities: "스포츠시설" },
   ],
   생활: [
-    { restaurant: "음식점" },
+    // { restaurant: "음식점" },
     { park: "공원" },
     { mart: "마트, 시장" },
     { facilitiesForTheDisabled: "장애인 편의시설" },
@@ -35,8 +35,8 @@ const categoryList = {
 };
 
 const categoryDetail = {
-  publicTransportationUtilizationRate: "대중교통 이용률",
-  station: "대중교통 정류장",
+  // publicTransportationUtilizationRate: "대중교통 이용률",
+  // station: "대중교통 정류장",
   electricVehicleCharging: "전기차 충전소",
   parkinglot: "공용, 민영주차장",
   shelter: "민방위 대피소",
@@ -48,7 +48,7 @@ const categoryDetail = {
   drugStore: "약국",
   animalHospital: "동물병원",
   animalBeauty: "동물미용",
-  kindergarden: "유치원",
+  // kindergarden: "유치원",
   school: "초, 중, 고등학교",
   academy: "학원 및 교습소",
   entertainment: "미술관, 박물관",
@@ -56,7 +56,7 @@ const categoryDetail = {
   library: "도서관",
   concertHall: "공연장",
   sportsFacilities: "스포츠시설",
-  restaurant: "음식점",
+  // restaurant: "음식점",
   park: "공원",
   mart: "마트, 시장",
   facilitiesForTheDisabled: "장애인 편의시설",

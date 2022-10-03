@@ -54,7 +54,6 @@ function CategoryRcmdButton({ isMarried, hasCar, hasPets, hasChildren, open }) {
     getCategoryRcmd(apiData, (res) => {
       onSetLoading(false);
       setRcmdList(makePriorityList(res.data.categoriesList));
-      console.log(res.data.categoriesList);
 
       // 평점 기준의 추천 Alert 출력
       setRatingOpen(true);

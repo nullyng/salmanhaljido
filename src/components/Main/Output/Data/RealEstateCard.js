@@ -1,37 +1,26 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-import CardMedia from "@mui/material/CardMedia";
-import Typography from "@mui/material/Typography";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 import defImg from "assets/images/Main/default.png";
 
-function RealEstateCard({ title, url }) {
+function RealEstateCard({ title, imageURL, url }) {
   const handleClick = () => {
     window.open(url);
   };
 
   return (
-    <Card sx={{ display: "flex" }} onClick={handleClick}>
-      <CardMedia
-        component="img"
-        sx={{ width: 151 }}
-        image={defImg}
-        alt="Live from space album cover"
-      />
-      <Box sx={{ display: "flex", flexDirection: "column" }}>
-        <CardContent sx={{ flex: "1 0 auto" }}>
-          <Typography
-            variant="subtitle1"
-            color="text.secondary"
-            component="div"
-          >
-            {title}
-          </Typography>
-        </CardContent>
-      </Box>
-    </Card>
+    <div className="real-estate-card" onClick={handleClick}>
+      <div className="real-estate-card__image">
+        <img src={imageURL || defImg} alt="부동산 뉴스" />
+      </div>
+      <div className="real-estate-card__content">{title}</div>
+      <div className="overlay">
+        <div className="overlay__title">
+          <ArrowForwardIcon />
+          <h3>자세히 보기</h3>
+        </div>
+        <p>뉴스를 읽으려면 클릭하세요.</p>
+      </div>
+    </div>
   );
 }
 

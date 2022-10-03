@@ -1,17 +1,22 @@
+@use "../common/utils" as *;
+
 .marker {
   background-image: url("../../assets/images/Main/Map/pin-fullcolor.png");
   background-size: contain;
   background-repeat: no-repeat;
-  width: 70px;
-  height: 93px;
+  width: 87px;
+  height: 113px;
   cursor: pointer;
 
   & .text-wrapper {
+    font-family: "EsamanruLight";
     text-align: center;
-    padding-top: 15px;
+    padding-top: 1.5rem;
     font-size: 0.9rem;
     font-weight: 800;
     color: white;
+    display: flex;
+    flex-direction: column;
   }
 
   &:hover {

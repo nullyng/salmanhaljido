@@ -31,7 +31,8 @@
       justify-content: center;
       align-items: center;
       width: fit-content;
-      font-size: xx-large;
+      font-size: 1.8rem;
+      box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 10px -6px;
     }
 
     &--right {
@@ -44,7 +45,8 @@
       justify-content: center;
       align-items: center;
       width: fit-content;
-      font-size: xx-large;
+      font-size: 1.8rem;
+      box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 10px -6px;
     }
 
     &--Ltri {
@@ -74,75 +76,115 @@
       justify-content: center;
       align-items: baseline;
       width: fit-content;
+      box-shadow: rgba(0, 0, 0, 0.1) -4px 9px 10px -6px;
     }
 
     &--end1 {
+      font-size: 1.8rem;
       font-family: "EsamanruMedium";
-      font-size: 180%;
       font-weight: bold;
     }
 
     &--end2 {
-      font-family: "EsamanruMedium";
+      font-family: "EsamanruBold";
       font-size: 400%;
-      color: #e94560;
+      color: $primary-color;
     }
   }
 
+  // 랜딩페이지 시작 버튼
   &__button {
     display: flex;
     justify-content: center;
-    margin-top: 3rem;
-  }
-  & button {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-    outline: none;
-    border: 0;
-    vertical-align: middle;
-    text-decoration: none;
-    font-size: inherit;
+    margin-top: 7rem;
+    margin-bottom: 2rem;
 
-    padding: 0.5em 1.25em;
-    border: 2px solid #b18597;
-    border-radius: 50px;
-    font-weight: 700;
-    font-size: 25px;
-    background: #fff0f0;
-    transform-style: preserve-3d;
-    transition: 0.15s cubic-bezier(0, 0, -6, 1);
-  }
-  & button::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: inherit;
-    background-color: #f9c4d2;
-    box-shadow: 0 0 0 2px #b18597;
-    transform: translate3d(0, 0.4em, -1em);
-    transition: 0.15s cubic-bezier(0, 0, -6, 1);
-  }
-  & button:hover {
-    background: #ffe9e9;
-    transform: translate(0, 0.25em);
-  }
-  & button:hover::before {
-    box-shadow: 0 0 0 2px #b18597;
-    transform: translate3d(0, 0.2em, -1em);
-  }
-  &button:active {
-    background: #ffe9e9;
-    transform: translate(0, 0.75em);
-  }
-  &button:active::before {
-    box-shadow: 0 0 0 2px #b18597;
-    transform: translate3d(0, 0, -1em);
+    & span {
+      z-index: 6;
+      font-family: "EsamanruLight";
+      text-decoration: none;
+      position: absolute;
+      transform: translate(-50%, -50%) scale(0.8);
+      font-size: 3rem;
+      color: #fff;
+      pointer-events: none;
+    }
+
+    & button {
+      text-decoration: none;
+      position: absolute;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0.8);
+      font-size: 3rem;
+      color: #fff;
+      background-color: $primary-color;
+      border: 0;
+      border-radius: 10rem;
+      padding: 3rem 10rem 3rem;
+      box-shadow: rgba(0, 0, 0, 0.3) 0px 18px 50px -10px;
+      cursor: pointer;
+
+      transform-style: preserve-3d;
+      transition: all 0.6s ease;
+
+      & span {
+        z-index: 6;
+        font-family: "EsamanruMedium";
+        transform: translate(-50%, -50%) scale(0.8);
+        font-size: 2.6rem;
+        color: #fff;
+        pointer-events: none;
+
+        &:hover {
+          border-radius: 6rem;
+          transform: translate(-50%, -50%) scale(1.4);
+        }
+      }
+
+      &:after {
+        content: "";
+        background: linear-gradient(56deg, #e94560af 0%, #8a77b7 100%);
+        width: 80%;
+        height: 20%;
+        position: absolute;
+        bottom: -4px;
+        left: 10%;
+        opacity: 0;
+        filter: blur(15px);
+        border-radius: 6rem;
+        transform: translateZ(-1px);
+        transition: opacity 0.6s ease;
+      }
+
+      &:before {
+        content: "";
+        background: linear-gradient(56deg, #e94560af 0%, #8a77b7 100%);
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        border-radius: 6rem;
+        transition: opacity 0.4s ease;
+      }
+
+      &:hover {
+        transition: all 0.6s ease;
+        transform: translate(-50%, -50%) scale(1);
+        transform-origin: center;
+
+        &:after {
+          opacity: 1;
+          transition: opacity 0.6s ease;
+        }
+
+        &:before {
+          opacity: 1;
+          transition: opacity 0.6s linear;
+        }
+      }
+    }
   }
 
   &__back {
@@ -164,7 +206,7 @@
     font-weight: bold;
     font-size: large;
     font-family: "EsamanruLight";
-    margin: 3rem 0;
+    margin: 5rem 0;
 
     &--red {
       color: #e94560;
@@ -261,7 +303,7 @@
   padding-top: 1.5em;
   display: flex;
   justify-content: space-between;
-  font-family: "EsamanruLight";
+  font-family: "Pretendard-Regular";
 
   &__item {
     width: 25%;
@@ -295,7 +337,7 @@
 .guide {
   padding-top: 2em;
   margin-top: 1rem;
-  font-family: "EsamanruLight";
+  font-family: "Pretendard-Regular";
 
   &__top {
     font-family: "EsamanruMedium";
@@ -303,8 +345,25 @@
   }
 
   &__box {
-    display: flex;
+    display: grid;
     padding: 1%;
+    margin-top: 2rem;
+
+    &.one {
+      grid-template-columns: 1.4fr 1fr;
+    }
+    &.two {
+      grid-template-columns: 1fr 1.4fr;
+    }
+    &.three {
+      grid-template-columns: 1.4fr 1fr;
+    }
+    &.four {
+      grid-template-columns: 1.1fr 1fr;
+    }
+    &.five {
+      grid-template-columns: 1fr 1.5fr;
+    }
 
     &__text {
       margin: auto;
@@ -313,23 +372,30 @@
       align-items: center;
       font-weight: bold;
       font-size: 18px;
+      text-align: center;
     }
 
     &__image {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 240px;
-      height: 180px;
-      background-color: lightgray;
-      border-radius: 30px;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+      & img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: auto;
+        background-color: lightgray;
+        border-radius: 10px;
+      }
     }
   }
 }
 
 // 랜딩페이지 시작 버튼
 .start div {
-  animation-name: fade-in;
+  animation-name: fadeInUp;
   animation-fill-mode: both;
   animation-duration: 0.5s;
 }
@@ -337,15 +403,28 @@
 $animationDelay: 1;
 @for $i from 1 through 15 {
   .start > div:nth-of-type(#{$i}) {
-    animation-delay: #{0.3+ ($i)}s;
+    @if ($i < 4) {
+      animation-delay: #{0.3+ ($i)}s;
+    } @else if ($i < 5) {
+      animation-delay: #{0.6 + ($i)}s;
+    } @else if ($i < 6) {
+      animation-delay: #{0.9 + ($i)}s;
+    } @else {
+      animation-delay: #{1.2 + ($i)}s;
+    }
   }
 }
 
-@keyframes fade-in {
-  0% {
+@keyframes fadeInUp {
+  from {
     opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
   }
-  100% {
+
+  to {
     opacity: 1;
+    -webkit-transform: none;
+    transform: none;
   }
 }

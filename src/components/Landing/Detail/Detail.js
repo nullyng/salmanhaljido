@@ -1,8 +1,8 @@
 import { Fab } from "@mui/material";
 import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
 
-import Service from "components/Landing/Detail/Service";
 import Guide from "components/Landing/Detail/Guide";
+import Service from "components/Landing/Detail/Service";
 
 function Detail() {
   const scrollToTop = () => {
