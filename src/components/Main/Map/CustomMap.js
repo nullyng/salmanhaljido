@@ -52,11 +52,13 @@ function CustomMap() {
       const div = document.createElement("div");
       div.className = "text-wrapper";
 
-      const addr = document.createElement("span");
-      addr.textContent = data.addr;
-      addr.className = "addr";
-
-      div.appendChild(addr);
+      const addrList = data.addr.split(" ");
+      addrList.map((addr) => {
+        const addrEl = document.createElement("span");
+        addrEl.textContent = addr;
+        addrEl.className = "addr";
+        div.appendChild(addrEl);
+      });
 
       el.appendChild(div);
 
@@ -69,7 +71,7 @@ function CustomMap() {
 
       // 클릭 이벤트 등록
       marker.getElement().addEventListener("click", () => {
-        setCurrRegion(data);
+        onSetCurrRegion(data);
 
         map.current.flyTo({
           center: [data.lng, data.lat],
