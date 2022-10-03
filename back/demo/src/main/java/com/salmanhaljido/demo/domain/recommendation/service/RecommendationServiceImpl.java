@@ -154,25 +154,26 @@ public class RecommendationServiceImpl implements RecommendationService{
         Map<String, Region> regionMap = new HashMap<>();
 
         if(!map.containsKey("academy")) map.put("academy", "zero");
-        if(!map.containsKey("animalhospital")) map.put("animalhospital", "zero");
-        if(!map.containsKey("animalsalon")) map.put("animalsalon", "zero");
-        if(!map.containsKey("caraccident")) map.put("caraccident", "zero");
-        if(!map.containsKey("childsafety")) map.put("childsafety", "zero");
-        if(!map.containsKey("concerthall")) map.put("concerthall", "zero");
+        if(!map.containsKey("animalHospital")) map.put("animalHospital", "zero");
+        if(!map.containsKey("animalBeauty")) map.put("animalBeauty", "zero");
+        if(!map.containsKey("carAccident")) map.put("carAccident", "zero");
+        if(!map.containsKey("childSafety")) map.put("childSafety", "zero");
+        if(!map.containsKey("concertHall")) map.put("concertHall", "zero");
         if(!map.containsKey("crime")) map.put("crime", "zero");
-        if(!map.containsKey("drugstore")) map.put("drugstore", "zero");
-        if(!map.containsKey("electricvehiclecharging")) map.put("electricvehiclecharging", "zero");
+        if(!map.containsKey("drugStore")) map.put("drugStore", "zero");
+        if(!map.containsKey("electricVehicleCharging")) map.put("electricVehicleCharging", "zero");
         if(!map.containsKey("entertainment")) map.put("entertainment", "zero");
-        if(!map.containsKey("facilitiesforthedisabled")) map.put("facilitiesforthedisabled", "zero");
-        if(!map.containsKey("femalesafety")) map.put("femalesafety", "zero");
+        if(!map.containsKey("facilitiesForTheDisabled")) map.put("facilitiesForTheDisabled", "zero");
+        if(!map.containsKey("femaleSafety")) map.put("femaleSafety", "zero");
         if(!map.containsKey("hospital")) map.put("hospital", "zero");
         //if(map.containsKey("kindergarden")) map.put("kindergarden", "zero");
         if(!map.containsKey("library")) map.put("library", "zero");
         if(!map.containsKey("mart")) map.put("mart", "zero");
         if(!map.containsKey("park")) map.put("park", "zero");
+        if(!map.containsKey("parkinglot")) map.put("parkinglot", "zero");
         if(!map.containsKey("school")) map.put("school", "zero");
         if(!map.containsKey("shelter")) map.put("shelter", "zero");
-        if(!map.containsKey("sportsfacilities")) map.put("sportsfacilities", "zero");
+        if(!map.containsKey("sportsFacilities")) map.put("sportsFacilities", "zero");
         if(!map.containsKey("theater")) map.put("theater", "zero");
 
         List<SiDoCode> sidoList = siDoCodeRepository.findAll();
@@ -532,25 +533,26 @@ public class RecommendationServiceImpl implements RecommendationService{
         Map<String, Region> regionMap = new HashMap<>();
 
         if(!map.containsKey("academy")) map.put("academy", "zero");
-        if(!map.containsKey("animalhospital")) map.put("animalhospital", "zero");
-        if(!map.containsKey("animalsalon")) map.put("animalsalon", "zero");
-        if(!map.containsKey("caraccident")) map.put("caraccident", "zero");
-        if(!map.containsKey("childsafety")) map.put("childsafety", "zero");
-        if(!map.containsKey("concerthall")) map.put("concerthall", "zero");
+        if(!map.containsKey("animalHospital")) map.put("animalHospital", "zero");
+        if(!map.containsKey("animalBeauty")) map.put("animalBeauty", "zero");
+        if(!map.containsKey("carAccident")) map.put("carAccident", "zero");
+        if(!map.containsKey("childSafety")) map.put("childSafety", "zero");
+        if(!map.containsKey("concertHall")) map.put("concertHall", "zero");
         if(!map.containsKey("crime")) map.put("crime", "zero");
-        if(!map.containsKey("drugstore")) map.put("drugstore", "zero");
-        if(!map.containsKey("electricvehiclecharging")) map.put("electricvehiclecharging", "zero");
+        if(!map.containsKey("drugStore")) map.put("drugStore", "zero");
+        if(!map.containsKey("electricVehicleCharging")) map.put("electricVehicleCharging", "zero");
         if(!map.containsKey("entertainment")) map.put("entertainment", "zero");
-        if(!map.containsKey("facilitiesforthedisabled")) map.put("facilitiesforthedisabled", "zero");
-        if(!map.containsKey("femalesafety")) map.put("femalesafety", "zero");
+        if(!map.containsKey("facilitiesForTheDisabled")) map.put("facilitiesForTheDisabled", "zero");
+        if(!map.containsKey("femaleSafety")) map.put("femaleSafety", "zero");
         if(!map.containsKey("hospital")) map.put("hospital", "zero");
         //if(map.containsKey("kindergarden")) map.put("kindergarden", "zero");
         if(!map.containsKey("library")) map.put("library", "zero");
         if(!map.containsKey("mart")) map.put("mart", "zero");
         if(!map.containsKey("park")) map.put("park", "zero");
+        if(!map.containsKey("parkinglot")) map.put("parkinglot", "zero");
         if(!map.containsKey("school")) map.put("school", "zero");
         if(!map.containsKey("shelter")) map.put("shelter", "zero");
-        if(!map.containsKey("sportsfacilities")) map.put("sportsfacilities", "zero");
+        if(!map.containsKey("sportsFacilities")) map.put("sportsFacilities", "zero");
         if(!map.containsKey("theater")) map.put("theater", "zero");
 
         for(String serviceKey : map.keySet()){
@@ -579,7 +581,7 @@ public class RecommendationServiceImpl implements RecommendationService{
                 for(String recommendationKey : totalCount.keySet()){
                     regionMap.get(recommendationKey).getCategory().getEducation().put("academy", totalCount.get(recommendationKey));
                 }
-            }else if(serviceKey.equals("animalhospital")){
+            }else if(serviceKey.equals("animalHospital")){
                 List<AnimalHospitalDoc> animalHospitalDocList = animalHospitalDocRepository.findAllBySdOrderByCount(sd);
                 for(int idx = 0; idx < animalHospitalDocList.size(); idx++){
                     AnimalHospitalDoc animalHospitalDoc = animalHospitalDocList.get(idx);
@@ -599,9 +601,9 @@ public class RecommendationServiceImpl implements RecommendationService{
                     totalCount.put(recommendationKey, totalCount.get(recommendationKey) + animalHospitalDoc.getCount());
                 }
                 for(String recommendationKey : totalCount.keySet()){
-                    regionMap.get(recommendationKey).getCategory().getPet().put("animalhospital", totalCount.get(recommendationKey));
+                    regionMap.get(recommendationKey).getCategory().getPet().put("animalHospital", totalCount.get(recommendationKey));
                 }
-            }else if(serviceKey.equals("animalsalon")){
+            }else if(serviceKey.equals("animalBeauty")){
                 List<AnimalSalonDoc> animalSalonDocList = animalSalonDocRepository.findAllBySdOrderByCount(sd);
                 for(int idx = 0; idx < animalSalonDocList.size(); idx++){
                     AnimalSalonDoc animalSalonDoc = animalSalonDocList.get(idx);
@@ -621,9 +623,9 @@ public class RecommendationServiceImpl implements RecommendationService{
                     totalCount.put(recommendationKey, totalCount.get(recommendationKey) + animalSalonDoc.getCount());
                 }
                 for(String recommendationKey : totalCount.keySet()){
-                    regionMap.get(recommendationKey).getCategory().getPet().put("animalsalon", totalCount.get(recommendationKey));
+                    regionMap.get(recommendationKey).getCategory().getPet().put("animalBeauty", totalCount.get(recommendationKey));
                 }
-            }else if(serviceKey.equals("caraccident")){
+            }else if(serviceKey.equals("carAccident")){
                 List<CarAccidentDoc> carAccidentDocsList = carAccidentDocRepository.findAllBySdOrderByCount(sd);
                 for(int idx = 0; idx < carAccidentDocsList.size(); idx++){
                     CarAccidentDoc carAccidentDoc = carAccidentDocsList.get(idx);
@@ -643,9 +645,9 @@ public class RecommendationServiceImpl implements RecommendationService{
                     totalCount.put(recommendationKey, totalCount.get(recommendationKey) + carAccidentDoc.getCount());
                 }
                 for(String recommendationKey : totalCount.keySet()){
-                    regionMap.get(recommendationKey).getCategory().getSafety().put("caraccident", totalCount.get(recommendationKey));
+                    regionMap.get(recommendationKey).getCategory().getSafety().put("carAccident", totalCount.get(recommendationKey));
                 }
-            }else if(serviceKey.equals("childsafety")){
+            }else if(serviceKey.equals("childSafety")){
                 // start
                 List<ChildSafetyDoc> childSafetyDocList = childSafetyDocRepository.findAllBySdOrderByCount(sd);
                 for(int idx = 0; idx < childSafetyDocList.size(); idx++){
@@ -666,10 +668,10 @@ public class RecommendationServiceImpl implements RecommendationService{
                     totalCount.put(recommendationKey, totalCount.get(recommendationKey) + childSafetyDoc.getCount());
                 }
                 for(String recommendationKey : totalCount.keySet()){
-                    regionMap.get(recommendationKey).getCategory().getSafety().put("childsafety", totalCount.get(recommendationKey));
+                    regionMap.get(recommendationKey).getCategory().getSafety().put("childSafety", totalCount.get(recommendationKey));
                 }
                 // end
-            }else if(serviceKey.equals("concerthall")){
+            }else if(serviceKey.equals("concertHall")){
                 // start
                 List<ConcertHallDoc> concertHallDocList = concertHallDocRepository.findAllBySdOrderByCount(sd);
                 for(int idx = 0; idx < concertHallDocList.size(); idx++){
@@ -690,7 +692,7 @@ public class RecommendationServiceImpl implements RecommendationService{
                     totalCount.put(recommendationKey, totalCount.get(recommendationKey) + concertHallDoc.getCount());
                 }
                 for(String recommendationKey : totalCount.keySet()){
-                    regionMap.get(recommendationKey).getCategory().getCulture().put("concerthall", totalCount.get(recommendationKey));
+                    regionMap.get(recommendationKey).getCategory().getCulture().put("concertHall", totalCount.get(recommendationKey));
                 }
                 // end
             }else if(serviceKey.equals("crime")){
@@ -718,7 +720,7 @@ public class RecommendationServiceImpl implements RecommendationService{
                     regionMap.get(recommendationKey).getCategory().getSafety().put(serviceKey, totalCount.get(recommendationKey));
                 }
                 // end
-            }else if(serviceKey.equals("drugstore")){
+            }else if(serviceKey.equals("drugStore")){
                 // start
                 List<DrugStoreDoc> list = drugStoreDocRepository.findAllBySdOrderByCount(sd);
                 for(int idx = 0; idx < list.size(); idx++){
@@ -742,7 +744,7 @@ public class RecommendationServiceImpl implements RecommendationService{
                     regionMap.get(recommendationKey).getCategory().getMedical().put(serviceKey, totalCount.get(recommendationKey));
                 }
                 // end
-            }else if(serviceKey.equals("electricvehiclecharging")){
+            }else if(serviceKey.equals("electricVehicleCharging")){
                 // start
                 List<ElectricVehicleChargingDoc> list = electricVehicleChargingDocRepository.findAllBySdOrderByCount(sd);
                 for(int idx = 0; idx < list.size(); idx++){
@@ -790,7 +792,7 @@ public class RecommendationServiceImpl implements RecommendationService{
                     regionMap.get(recommendationKey).getCategory().getCulture().put(serviceKey, totalCount.get(recommendationKey));
                 }
                 // end
-            }else if(serviceKey.equals("facilitiesforthedisabled")){
+            }else if(serviceKey.equals("facilitiesForTheDisabled")){
                 // start
                 List<FFDDoc> list = ffdDocRepository.findAllBySdOrderByCount(sd);
                 for(int idx = 0; idx < list.size(); idx++){
@@ -814,7 +816,7 @@ public class RecommendationServiceImpl implements RecommendationService{
                     regionMap.get(recommendationKey).getCategory().getLife().put(serviceKey, totalCount.get(recommendationKey));
                 }
                 // end
-            }else if(serviceKey.equals("femalesafety")){
+            }else if(serviceKey.equals("femaleSafety")){
                 // start
                 List<FemaleSafetyDoc> list = femaleSafetyDocRepository.findAllBySdOrderByCount(sd);
                 for(int idx = 0; idx < list.size(); idx++){
@@ -1010,7 +1012,7 @@ public class RecommendationServiceImpl implements RecommendationService{
                     regionMap.get(recommendationKey).getCategory().getCalamity().put(serviceKey, totalCount.get(recommendationKey));
                 }
                 // end
-            }else if(serviceKey.equals("sportsfacilities")){
+            }else if(serviceKey.equals("sportsFacilities")){
                 // start
                 List<SportsFacilitiesDoc> list = sportsFacilitiesDocRepository.findAllBySdOrderByCount(sd);
                 for(int idx = 0; idx < list.size(); idx++){
