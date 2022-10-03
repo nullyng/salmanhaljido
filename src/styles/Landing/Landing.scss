@@ -206,7 +206,7 @@
     font-weight: bold;
     font-size: large;
     font-family: "EsamanruLight";
-    margin: 3rem 0;
+    margin: 5rem 0;
 
     &--red {
       color: #e94560;
@@ -303,7 +303,7 @@
   padding-top: 1.5em;
   display: flex;
   justify-content: space-between;
-  font-family: "EsamanruLight";
+  font-family: "Pretendard-Regular";
 
   &__item {
     width: 25%;
@@ -337,7 +337,7 @@
 .guide {
   padding-top: 2em;
   margin-top: 1rem;
-  font-family: "EsamanruLight";
+  font-family: "Pretendard-Regular";
 
   &__top {
     font-family: "EsamanruMedium";
@@ -347,6 +347,7 @@
   &__box {
     display: flex;
     padding: 1%;
+    margin-top: 2rem;
 
     &__text {
       margin: auto;
@@ -358,13 +359,19 @@
     }
 
     &__image {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 240px;
-      height: 180px;
-      background-color: lightgray;
-      border-radius: 30px;
+      padding: 1rem;
+      border-radius: 10px;
+      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+
+      & img {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 240px;
+        height: auto;
+        background-color: lightgray;
+        border-radius: 10px;
+      }
     }
   }
 }
@@ -391,7 +398,7 @@ $animationDelay: 1;
   }
 }
 
-@-webkit-keyframes fadeInUp {
+@keyframes fadeInUp {
   from {
     opacity: 0;
     -webkit-transform: translate3d(0, 100%, 0);
