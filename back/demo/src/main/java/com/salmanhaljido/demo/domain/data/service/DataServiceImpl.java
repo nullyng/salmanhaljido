@@ -28,6 +28,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 
+
 @Service
 @RequiredArgsConstructor
 public class DataServiceImpl implements DataService {
@@ -73,7 +74,7 @@ public class DataServiceImpl implements DataService {
             hospitalService.getData();
             femaleSafetyService.getData();
             jeonseService.getData();
-            kinderGardenService.getData();
+//            kinderGardenService.getData();
             libraryService.getData();
             martService.getData();
             parkService.getData();

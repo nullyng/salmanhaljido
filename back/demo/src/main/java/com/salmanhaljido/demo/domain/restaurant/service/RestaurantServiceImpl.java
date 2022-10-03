@@ -82,7 +82,7 @@ public class RestaurantServiceImpl implements RestaurantService {
         SparkSession session = SparkSession.builder()
                 .master("local")
                 .appName("restaurant")
-                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.restaurant")
+                .config("spark.mongodb.write.connection.uri", "mongodb://admin:salmand110@j7d110.p.ssafy.io/openapi.restaurant?authSource=admin")
                 .getOrCreate();
 
         Dataset<Row> df = session.read().text(dataPath + "restaurant.data");

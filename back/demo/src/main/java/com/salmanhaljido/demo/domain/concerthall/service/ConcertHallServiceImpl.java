@@ -82,7 +82,7 @@ public class ConcertHallServiceImpl implements ConcertHallService {
         SparkSession session = SparkSession.builder()
                 .master("local")
                 .appName("concerthall")
-                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.concerthall")
+                .config("spark.mongodb.write.connection.uri", "mongodb://admin:salmand110@j7d110.p.ssafy.io/openapi.concerthall?authSource=admin")
                 .getOrCreate();
 
         Dataset<Row> df = session.read().text(dataPath + "concerthall.data");

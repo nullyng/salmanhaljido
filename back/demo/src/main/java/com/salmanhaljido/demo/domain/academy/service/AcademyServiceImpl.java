@@ -1,5 +1,10 @@
 package com.salmanhaljido.demo.domain.academy.service;
 
+import com.salmanhaljido.demo.domain.academy.entity.AcademyDoc;
+import com.salmanhaljido.demo.domain.academy.repository.AcademyDocRepository;
+import com.salmanhaljido.demo.domain.code.entity.GuGunCode;
+import com.salmanhaljido.demo.domain.code.entity.SiDoCode;
+import lombok.RequiredArgsConstructor;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.sql.Dataset;
 import org.apache.spark.sql.Row;
@@ -22,9 +27,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.Map;
 
 @Service
+@RequiredArgsConstructor
 public class AcademyServiceImpl implements AcademyService {
 
     private String host = "open.neis.go.kr";
@@ -35,6 +42,8 @@ public class AcademyServiceImpl implements AcademyService {
     private String[] ATPT_OFCDC_SC_CODE_LIST = {"B10", "C10", "D10", "E10", "F10", "G10", "H10", "I10", "J10", "K10", "M10", "N10", "P10", "Q10", "R10", "S10", "T10"};
 
     private int pSize = 1000;
+
+    private final AcademyDocRepository academyDocRepository;
 
     private URL createURL(String ATPT_OFCDC_SC_CODE, int pIndex) throws MalformedURLException {
         UriComponents uriComponents = UriComponentsBuilder.newInstance().scheme("https")
@@ -91,7 +100,7 @@ public class AcademyServiceImpl implements AcademyService {
         SparkSession session = SparkSession.builder()
                 .master("local")
                 .appName("academy")
-                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.academy")
+                .config("spark.mongodb.write.connection.uri", "mongodb://admin:salmand110@j7d110.p.ssafy.io/openapi.academy?authSource=admin")
                 .getOrCreate();
 
         Dataset<Row> df = session.read().text(dataPath + "academy.data");
@@ -153,6 +162,16 @@ public class AcademyServiceImpl implements AcademyService {
         dff.write().format("mongodb").mode("overwrite").save();
         session.close();
         System.out.println("Academy : Finish");
+    }
 
+    @Override
+    public List<AcademyDoc> findAcademyDocsBySd(SiDoCode siDoCode) {
+        String sd = siDoCode.getAddr();
+        return academyDocRepository.findAllBySdOrderByCount(sd);
+    }
+
+    @Override
+    public List<AcademyDoc> findAcademyDocsBySgg(GuGunCode guGunCode) {
+        return null;
     }
 }

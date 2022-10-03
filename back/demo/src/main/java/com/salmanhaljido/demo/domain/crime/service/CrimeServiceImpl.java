@@ -94,7 +94,7 @@ public class CrimeServiceImpl implements CrimeService {
         SparkSession session = SparkSession.builder()
                 .master("local")
                 .appName("crime")
-                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.crime")
+                .config("spark.mongodb.write.connection.uri", "mongodb://admin:salmand110@j7d110.p.ssafy.io/openapi.crime?authSource=admin")
                 .getOrCreate();
 
         Dataset<Row> df = session.read().text(dataPath + "crime.data");

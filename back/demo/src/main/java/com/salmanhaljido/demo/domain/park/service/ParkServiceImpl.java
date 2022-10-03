@@ -75,7 +75,7 @@ public class ParkServiceImpl implements ParkService {
         SparkSession session = SparkSession.builder()
                 .master("local")
                 .appName("park")
-                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.park")
+                .config("spark.mongodb.write.connection.uri", "mongodb://admin:salmand110@j7d110.p.ssafy.io/openapi.park?authSource=admin")
                 .getOrCreate();
         Dataset<Row> df = session.read().text(dataPath + "park.data");
         JavaRDD<Row> rdd = df.toJavaRDD();

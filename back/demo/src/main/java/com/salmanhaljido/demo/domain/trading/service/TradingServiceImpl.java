@@ -80,6 +80,13 @@ public class TradingServiceImpl implements TradingService {
                 }else{
                     s+=sidoMap.get(tokens[0]) + " " + tokens[1] + " " + tokens[2];
                 }
+                if(json.getJSONArray("data").getJSONObject(i).get("2021-11").toString().equals("null") ||
+                        json.getJSONArray("data").getJSONObject(i).get("2021-12").toString().equals("null")||
+                        json.getJSONArray("data").getJSONObject(i).get("2021-01").toString().equals("null")||
+                        json.getJSONArray("data").getJSONObject(i).get("2021-02").toString().equals("null")||
+                        json.getJSONArray("data").getJSONObject(i).get("2021-03").toString().equals("null") ||
+                        json.getJSONArray("data").getJSONObject(i).get("2021-04").toString().equals("null")) continue;
+
                 s = s + " " + json.getJSONArray("data").getJSONObject(i).get("2021-11").toString();
                 s+="," + json.getJSONArray("data").getJSONObject(i).get("2021-12").toString();
                 s+="," + json.getJSONArray("data").getJSONObject(i).get("2022-01").toString();
@@ -100,7 +107,7 @@ public class TradingServiceImpl implements TradingService {
         SparkSession session = SparkSession.builder()
                 .master("local")
                 .appName("trading")
-                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.trading")
+                .config("spark.mongodb.write.connection.uri", "mongodb://admin:salmand110@j7d110.p.ssafy.io/openapi.trading?authSource=admin")
                 .getOrCreate();
         Dataset<Row> df = session.read().text(dataPath + "trading.data");
         JavaRDD<Row> rdd = df.toJavaRDD();
