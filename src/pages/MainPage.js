@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 import Input from "components/Main/Input/Input";
 import CustomMap from "components/Main/Map/CustomMap";
