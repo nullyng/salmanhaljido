@@ -75,7 +75,6 @@ function BasicTabs() {
     getBoard(newscategory[value], currentPage - 1, (res) => {
       setNews(res.data.newsList);
       setTotalCount(res.data.totalCount);
-      console.log(res.data);
     });
   }, [value, currentPage]);
 
