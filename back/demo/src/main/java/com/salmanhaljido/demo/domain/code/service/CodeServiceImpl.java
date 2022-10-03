@@ -101,8 +101,8 @@ public class CodeServiceImpl implements CodeService{
                         }
                         if(cellNum == 0) code = value;
                         if(cellNum == 2) addr = value;
-                        if(cellNum == 3) lat = value;
-                        if(cellNum == 4) lng = value;
+                        if(cellNum == 3) lng = value;
+                        if(cellNum == 4) lat = value;
                     }
                     code = code.split("\\.")[0] + "00000";
                     if(addr.endsWith("특별자치시")){
