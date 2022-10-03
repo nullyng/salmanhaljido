@@ -153,14 +153,50 @@ public class RecommendationServiceImpl implements RecommendationService{
 
         Map<String, Region> regionMap = new HashMap<>();
 
-        List<SiDoCode> sidoList = siDoCodeRepository.findAll();
+        if(!map.containsKey("academy")) map.put("academy", "zero");
+        if(!map.containsKey("animalhospital")) map.put("animalhospital", "zero");
+        if(!map.containsKey("animalsalon")) map.put("animalsalon", "zero");
+        if(!map.containsKey("caraccident")) map.put("caraccident", "zero");
+        if(!map.containsKey("childsafety")) map.put("childsafety", "zero");
+        if(!map.containsKey("concerthall")) map.put("concerthall", "zero");
+        if(!map.containsKey("crime")) map.put("crime", "zero");
+        if(!map.containsKey("drugstore")) map.put("drugstore", "zero");
+        if(!map.containsKey("electricvehiclecharging")) map.put("electricvehiclecharging", "zero");
+        if(!map.containsKey("entertainment")) map.put("entertainment", "zero");
+        if(!map.containsKey("facilitiesforthedisabled")) map.put("facilitiesforthedisabled", "zero");
+        if(!map.containsKey("femalesafety")) map.put("femalesafety", "zero");
+        if(!map.containsKey("hospital")) map.put("hospital", "zero");
+        //if(map.containsKey("kindergarden")) map.put("kindergarden", "zero");
+        if(!map.containsKey("library")) map.put("library", "zero");
+        if(!map.containsKey("mart")) map.put("mart", "zero");
+        if(!map.containsKey("park")) map.put("park", "zero");
+        if(!map.containsKey("school")) map.put("school", "zero");
+        if(!map.containsKey("shelter")) map.put("shelter", "zero");
+        if(!map.containsKey("sportsfacilities")) map.put("sportsfacilities", "zero");
+        if(!map.containsKey("theater")) map.put("theater", "zero");
 
-        for(SiDoCode s : sidoList){
+        List<SiDoCode> sidoList = siDoCodeRepository.findAll();
+        Map<String, Long> sidoCount = new HashMap<>();
+        for(SiDoCode s : sidoList) {
             String sd = s.getAddr();
+            Region region = new Region();
+            SiDoCode siDoCode = siDoCodeRepository.findSiDoCodeByAddr(sd);
+            region.setCode(siDoCode.getCode());
+            region.setAddr(siDoCode.getAddr());
+            region.setLat(1);
+            region.setLng(1);
+//                region.setLat(siDoCode.getLat());
+//                region.setLng(siDoCode.getLng());
+            regionMap.put(sd, region);
+        }
             for(String serviceKey : map.keySet()){
+
+                Map<String, Long> totalCount = new HashMap<>();
+                for(SiDoCode s : sidoList){
+                    String sd = s.getAddr();
+
                 // serviceKey = academy, animalhospital ...
                 //System.out.println();
-                Map<String, Long> totalCount = new HashMap<>();
                 if(serviceKey.equals("academy")){
                     List<AcademyDoc> academyDocList = academyDocRepository.findAllBySdOrderByCount(sd);
                     Long count = 0L;
@@ -169,16 +205,8 @@ public class RecommendationServiceImpl implements RecommendationService{
                     }
                     totalCount.put(sd, count);
 
-                    Region region = new Region();
-                    SiDoCode siDoCode = siDoCodeRepository.findSiDoCodeByAddr(sd);
-                    System.out.println(siDoCode.toString());
-                    region.setCode(siDoCode.getCode());
-                    region.setAddr(siDoCode.getAddr());
-                    region.setLat(1);
-                    region.setLng(1);
-//                region.setLat(siDoCode.getLat());
-//                region.setLng(siDoCode.getLng());
-                    regionMap.put(sd, region);
+
+
                     regionMap.get(sd).getCategory().getEducation().put("academy", count);
                 }else if(serviceKey.equals("animalhospital")){
                     List<AnimalHospitalDoc> animalHospitalDocList = animalHospitalDocRepository.findAllBySdOrderByCount(sd);
@@ -188,16 +216,7 @@ public class RecommendationServiceImpl implements RecommendationService{
                     }
                     totalCount.put(sd, count);
 
-                    Region region = new Region();
-                    SiDoCode siDoCode = siDoCodeRepository.findSiDoCodeByAddr(sd);
-                    System.out.println(siDoCode.toString());
-                    region.setCode(siDoCode.getCode());
-                    region.setAddr(siDoCode.getAddr());
-                    region.setLat(1);
-                    region.setLng(1);
-//                region.setLat(siDoCode.getLat());
-//                region.setLng(siDoCode.getLng());
-                    regionMap.put(sd, region);
+
                     regionMap.get(sd).getCategory().getPet().put("animalhospital", count);
 
                 }else if(serviceKey.equals("animalsalon")){
@@ -208,255 +227,136 @@ public class RecommendationServiceImpl implements RecommendationService{
                     }
                     totalCount.put(sd, count);
 
-                    Region region = new Region();
-                    SiDoCode siDoCode = siDoCodeRepository.findSiDoCodeByAddr(sd);
-                    System.out.println(siDoCode.toString());
-                    region.setCode(siDoCode.getCode());
-                    region.setAddr(siDoCode.getAddr());
-                    region.setLat(1);
-                    region.setLng(1);
-//                region.setLat(siDoCode.getLat());
-//                region.setLng(siDoCode.getLng());
-                    regionMap.put(sd, region);
+
                     regionMap.get(sd).getCategory().getPet().put("animalsalon", count);
 
                 }else if(serviceKey.equals("caraccident")){
                     List<CarAccidentDoc> carAccidentDocsList = carAccidentDocRepository.findAllBySdOrderByCount(sd);
+                    Long count = 0L;
                     for(int idx = 0; idx < carAccidentDocsList.size(); idx++){
-                        CarAccidentDoc carAccidentDoc = carAccidentDocsList.get(idx);
-                        String recommendationKey = carAccidentDoc.getSd() + " " +  carAccidentDoc.getSgg();
-                        if(!totalCount.containsKey(recommendationKey)){
-                            totalCount.put(recommendationKey, 0L);
-                        }
-                        if(!regionMap.containsKey(recommendationKey)){
-                            Region region = new Region();
-                            GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                            region.setCode(guGunCode.getCode());
-                            region.setAddr(guGunCode.getAddr());
-                            region.setLat(guGunCode.getLat());
-                            region.setLng(guGunCode.getLng());
-                            regionMap.put(recommendationKey, region);
-                        }
-                        totalCount.put(recommendationKey, totalCount.get(recommendationKey) + carAccidentDoc.getCount());
+                        count+=carAccidentDocsList.get(idx).getCount();
                     }
-                    for(String recommendationKey : totalCount.keySet()){
-                        regionMap.get(recommendationKey).getCategory().getSafety().put("caraccident", totalCount.get(recommendationKey));
-                    }
+                    totalCount.put(sd, count);
+
+
+                        regionMap.get(sd).getCategory().getSafety().put("caraccident", count);
+
                 }else if(serviceKey.equals("childsafety")){
                     // start
                     List<ChildSafetyDoc> childSafetyDocList = childSafetyDocRepository.findAllBySdOrderByCount(sd);
+                    Long count = 0L;
                     for(int idx = 0; idx < childSafetyDocList.size(); idx++){
-                        ChildSafetyDoc childSafetyDoc = childSafetyDocList.get(idx);
-                        String recommendationKey = childSafetyDoc.getSd() + " " +  childSafetyDoc.getSgg();
-                        if(!totalCount.containsKey(recommendationKey)){
-                            totalCount.put(recommendationKey, 0L);
-                        }
-                        if(!regionMap.containsKey(recommendationKey)){
-                            Region region = new Region();
-                            GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                            region.setCode(guGunCode.getCode());
-                            region.setAddr(guGunCode.getAddr());
-                            region.setLat(guGunCode.getLat());
-                            region.setLng(guGunCode.getLng());
-                            regionMap.put(recommendationKey, region);
-                        }
-                        totalCount.put(recommendationKey, totalCount.get(recommendationKey) + childSafetyDoc.getCount());
+                        count+=childSafetyDocList.get(idx).getCount();
                     }
-                    for(String recommendationKey : totalCount.keySet()){
-                        regionMap.get(recommendationKey).getCategory().getSafety().put("childsafety", totalCount.get(recommendationKey));
-                    }
+                    totalCount.put(sd, count);
+
+
+                        regionMap.get(sd).getCategory().getSafety().put("childsafety",count);
+
                     // end
                 }else if(serviceKey.equals("concerthall")){
                     // start
                     List<ConcertHallDoc> concertHallDocList = concertHallDocRepository.findAllBySdOrderByCount(sd);
+                    Long count = 0L;
                     for(int idx = 0; idx < concertHallDocList.size(); idx++){
-                        ConcertHallDoc concertHallDoc = concertHallDocList.get(idx);
-                        String recommendationKey = concertHallDoc.getSd() + " " +  concertHallDoc.getSgg();
-                        if(!totalCount.containsKey(recommendationKey)){
-                            totalCount.put(recommendationKey, 0L);
-                        }
-                        if(!regionMap.containsKey(recommendationKey)){
-                            Region region = new Region();
-                            GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                            region.setCode(guGunCode.getCode());
-                            region.setAddr(guGunCode.getAddr());
-                            region.setLat(guGunCode.getLat());
-                            region.setLng(guGunCode.getLng());
-                            regionMap.put(recommendationKey, region);
-                        }
-                        totalCount.put(recommendationKey, totalCount.get(recommendationKey) + concertHallDoc.getCount());
+                        count+=concertHallDocList.get(idx).getCount();
                     }
-                    for(String recommendationKey : totalCount.keySet()){
-                        regionMap.get(recommendationKey).getCategory().getCulture().put("concerthall", totalCount.get(recommendationKey));
-                    }
+                    totalCount.put(sd, count);
+
+
+                        regionMap.get(sd).getCategory().getCulture().put("concerthall", count);
+
                     // end
                 }else if(serviceKey.equals("crime")){
                     // start
-                    List<CrimeDoc> list = crimeDocRepository.findAllBySdOrderByCount(sd);
-                    for(int idx = 0; idx < list.size(); idx++){
-                        CrimeDoc crimeDoc = list.get(idx);
-                        String recommendationKey = crimeDoc.getSd() + " " +  crimeDoc.getSgg();
-                        if(!totalCount.containsKey(recommendationKey)){
-                            totalCount.put(recommendationKey, 0L);
-                        }
-                        if(!regionMap.containsKey(recommendationKey)){
-                            Region region = new Region();
-                            GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                            region.setCode(guGunCode.getCode());
-                            region.setAddr(guGunCode.getAddr());
-                            region.setLat(guGunCode.getLat());
-                            region.setLng(guGunCode.getLng());
-                            regionMap.put(recommendationKey, region);
-                        }
-                        totalCount.put(recommendationKey, totalCount.get(recommendationKey) + crimeDoc.getCount());
+                    List<CrimeDoc> crimeDocList = crimeDocRepository.findAllBySdOrderByCount(sd);
+                    Long count = 0L;
+                    for(int idx = 0; idx < crimeDocList.size(); idx++){
+                        count+=crimeDocList.get(idx).getCount();
                     }
-                    for(String recommendationKey : totalCount.keySet()){
-                        regionMap.get(recommendationKey).getCategory().getSafety().put(serviceKey, totalCount.get(recommendationKey));
-                    }
+                    totalCount.put(sd, count);
+
+
+                        regionMap.get(sd).getCategory().getSafety().put(serviceKey, count);
+
                     // end
                 }else if(serviceKey.equals("drugstore")){
                     // start
                     List<DrugStoreDoc> list = drugStoreDocRepository.findAllBySdOrderByCount(sd);
+                    Long count = 0L;
                     for(int idx = 0; idx < list.size(); idx++){
-                        DrugStoreDoc drugStoreDoc = list.get(idx);
-                        String recommendationKey = drugStoreDoc.getSd() + " " +  drugStoreDoc.getSgg();
-                        if(!totalCount.containsKey(recommendationKey)){
-                            totalCount.put(recommendationKey, 0L);
-                        }
-                        if(!regionMap.containsKey(recommendationKey)){
-                            Region region = new Region();
-                            GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                            region.setCode(guGunCode.getCode());
-                            region.setAddr(guGunCode.getAddr());
-                            region.setLat(guGunCode.getLat());
-                            region.setLng(guGunCode.getLng());
-                            regionMap.put(recommendationKey, region);
-                        }
-                        totalCount.put(recommendationKey, totalCount.get(recommendationKey) + drugStoreDoc.getCount());
+                        count+=list.get(idx).getCount();
                     }
-                    for(String recommendationKey : totalCount.keySet()){
-                        regionMap.get(recommendationKey).getCategory().getMedical().put(serviceKey, totalCount.get(recommendationKey));
-                    }
+                    totalCount.put(sd, count);
+
+
+                        regionMap.get(sd).getCategory().getMedical().put(serviceKey, count);
+
                     // end
                 }else if(serviceKey.equals("electricvehiclecharging")){
                     // start
                     List<ElectricVehicleChargingDoc> list = electricVehicleChargingDocRepository.findAllBySdOrderByCount(sd);
+                    Long count = 0L;
                     for(int idx = 0; idx < list.size(); idx++){
-                        ElectricVehicleChargingDoc electricVehicleChargingDoc = list.get(idx);
-                        String recommendationKey = electricVehicleChargingDoc.getSd() + " " +  electricVehicleChargingDoc.getSgg();
-                        if(!totalCount.containsKey(recommendationKey)){
-                            totalCount.put(recommendationKey, 0L);
-                        }
-                        if(!regionMap.containsKey(recommendationKey)){
-                            Region region = new Region();
-                            GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                            region.setCode(guGunCode.getCode());
-                            region.setAddr(guGunCode.getAddr());
-                            region.setLat(guGunCode.getLat());
-                            region.setLng(guGunCode.getLng());
-                            regionMap.put(recommendationKey, region);
-                        }
-                        totalCount.put(recommendationKey, totalCount.get(recommendationKey) + electricVehicleChargingDoc.getCount());
+                        count+=list.get(idx).getCount();
                     }
-                    for(String recommendationKey : totalCount.keySet()){
-                        regionMap.get(recommendationKey).getCategory().getTraffic().put(serviceKey, totalCount.get(recommendationKey));
-                    }
+                    totalCount.put(sd, count);
+
+
+                        regionMap.get(sd).getCategory().getTraffic().put(serviceKey, count);
+
                     // end
                 }else if(serviceKey.equals("entertainment")){
                     // start
                     List<EntertainmentDoc> list = entertainmentDocRepository.findAllBySdOrderByCount(sd);
+                    Long count = 0L;
                     for(int idx = 0; idx < list.size(); idx++){
-                        EntertainmentDoc doc = list.get(idx);
-                        String recommendationKey = doc.getSd() + " " +  doc.getSgg();
-                        if(!totalCount.containsKey(recommendationKey)){
-                            totalCount.put(recommendationKey, 0L);
-                        }
-                        if(!regionMap.containsKey(recommendationKey)){
-                            Region region = new Region();
-                            GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                            region.setCode(guGunCode.getCode());
-                            region.setAddr(guGunCode.getAddr());
-                            region.setLat(guGunCode.getLat());
-                            region.setLng(guGunCode.getLng());
-                            regionMap.put(recommendationKey, region);
-                        }
-                        totalCount.put(recommendationKey, totalCount.get(recommendationKey) + doc.getCount());
+                        count+=list.get(idx).getCount();
                     }
-                    for(String recommendationKey : totalCount.keySet()){
-                        regionMap.get(recommendationKey).getCategory().getCulture().put(serviceKey, totalCount.get(recommendationKey));
-                    }
+                    totalCount.put(sd, count);
+
+
+                        regionMap.get(sd).getCategory().getCulture().put(serviceKey, count);
+
                     // end
                 }else if(serviceKey.equals("facilitiesforthedisabled")){
                     // start
                     List<FFDDoc> list = ffdDocRepository.findAllBySdOrderByCount(sd);
+                    Long count = 0L;
                     for(int idx = 0; idx < list.size(); idx++){
-                        FFDDoc doc = list.get(idx);
-                        String recommendationKey = doc.getSd() + " " +  doc.getSgg();
-                        if(!totalCount.containsKey(recommendationKey)){
-                            totalCount.put(recommendationKey, 0L);
-                        }
-                        if(!regionMap.containsKey(recommendationKey)){
-                            Region region = new Region();
-                            GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                            region.setCode(guGunCode.getCode());
-                            region.setAddr(guGunCode.getAddr());
-                            region.setLat(guGunCode.getLat());
-                            region.setLng(guGunCode.getLng());
-                            regionMap.put(recommendationKey, region);
-                        }
-                        totalCount.put(recommendationKey, totalCount.get(recommendationKey) + doc.getCount());
+                        count+=list.get(idx).getCount();
                     }
-                    for(String recommendationKey : totalCount.keySet()){
-                        regionMap.get(recommendationKey).getCategory().getLife().put(serviceKey, totalCount.get(recommendationKey));
-                    }
+                    totalCount.put(sd, count);
+
+
+                        regionMap.get(sd).getCategory().getLife().put(serviceKey, count);
+
                     // end
                 }else if(serviceKey.equals("femalesafety")){
                     // start
                     List<FemaleSafetyDoc> list = femaleSafetyDocRepository.findAllBySdOrderByCount(sd);
+                    Long count = 0L;
                     for(int idx = 0; idx < list.size(); idx++){
-                        FemaleSafetyDoc doc = list.get(idx);
-                        String recommendationKey = doc.getSd() + " " +  doc.getSgg();
-                        if(!totalCount.containsKey(recommendationKey)){
-                            totalCount.put(recommendationKey, 0L);
-                        }
-                        if(!regionMap.containsKey(recommendationKey)){
-                            Region region = new Region();
-                            GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                            region.setCode(guGunCode.getCode());
-                            region.setAddr(guGunCode.getAddr());
-                            region.setLat(guGunCode.getLat());
-                            region.setLng(guGunCode.getLng());
-                            regionMap.put(recommendationKey, region);
-                        }
-                        totalCount.put(recommendationKey, totalCount.get(recommendationKey) + doc.getCount());
+                        count+=list.get(idx).getCount();
                     }
-                    for(String recommendationKey : totalCount.keySet()){
-                        regionMap.get(recommendationKey).getCategory().getSafety().put(serviceKey, totalCount.get(recommendationKey));
-                    }
+                    totalCount.put(sd, count);
+
+
+                        regionMap.get(sd).getCategory().getSafety().put(serviceKey, count);
+
                     // end
                 }else if(serviceKey.equals("hospital")){
                     // start
                     List<HospitalDoc> list = hospitalDocRepository.findAllBySdOrderByCount(sd);
+                    Long count = 0L;
                     for(int idx = 0; idx < list.size(); idx++){
-                        HospitalDoc doc = list.get(idx);
-                        String recommendationKey = doc.getSd() + " " +  doc.getSgg();
-                        if(!totalCount.containsKey(recommendationKey)){
-                            totalCount.put(recommendationKey, 0L);
-                        }
-                        if(!regionMap.containsKey(recommendationKey)){
-                            Region region = new Region();
-                            GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                            region.setCode(guGunCode.getCode());
-                            region.setAddr(guGunCode.getAddr());
-                            region.setLat(guGunCode.getLat());
-                            region.setLng(guGunCode.getLng());
-                            regionMap.put(recommendationKey, region);
-                        }
-                        totalCount.put(recommendationKey, totalCount.get(recommendationKey) + doc.getCount());
+                        count+=list.get(idx).getCount();
                     }
-                    for(String recommendationKey : totalCount.keySet()){
-                        regionMap.get(recommendationKey).getCategory().getMedical().put(serviceKey, totalCount.get(recommendationKey));
-                    }
+                    totalCount.put(sd, count);
+
+
+                        regionMap.get(sd).getCategory().getMedical().put(serviceKey, count);
+
                     // end
                 }else if(serviceKey.equals("jeonse")){
                 /*
@@ -465,211 +365,123 @@ public class RecommendationServiceImpl implements RecommendationService{
                 }else if(serviceKey.equals("kindergarden")){
                     // start
                     List<KinderGardenDoc> list = kinderGardenDocRepository.findAllBySdOrderByCount(sd);
+                    Long count = 0L;
                     for(int idx = 0; idx < list.size(); idx++){
-                        KinderGardenDoc doc = list.get(idx);
-                        String recommendationKey = doc.getSd() + " " +  doc.getSgg();
-                        if(!totalCount.containsKey(recommendationKey)){
-                            totalCount.put(recommendationKey, 0L);
-                        }
-                        if(!regionMap.containsKey(recommendationKey)){
-                            Region region = new Region();
-                            GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                            region.setCode(guGunCode.getCode());
-                            region.setAddr(guGunCode.getAddr());
-                            region.setLat(guGunCode.getLat());
-                            region.setLng(guGunCode.getLng());
-                            regionMap.put(recommendationKey, region);
-                        }
-                        totalCount.put(recommendationKey, totalCount.get(recommendationKey) + doc.getCount());
+                        count+=list.get(idx).getCount();
                     }
-                    for(String recommendationKey : totalCount.keySet()){
-                        regionMap.get(recommendationKey).getCategory().getEducation().put(serviceKey, totalCount.get(recommendationKey));
-                    }
+                    totalCount.put(sd, count);
+
+
+                        regionMap.get(sd).getCategory().getEducation().put(serviceKey, totalCount.get(sd));
+
                     // end
                 }else if(serviceKey.equals("library")){
                     // start
                     List<LibraryDoc> list = libraryDocRepository.findAllBySdOrderByCount(sd);
+                    Long count = 0L;
                     for(int idx = 0; idx < list.size(); idx++){
-                        LibraryDoc doc = list.get(idx);
-                        String recommendationKey = doc.getSd() + " " +  doc.getSgg();
-                        if(!totalCount.containsKey(recommendationKey)){
-                            totalCount.put(recommendationKey, 0L);
-                        }
-                        if(!regionMap.containsKey(recommendationKey)){
-                            Region region = new Region();
-                            GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                            region.setCode(guGunCode.getCode());
-                            region.setAddr(guGunCode.getAddr());
-                            region.setLat(guGunCode.getLat());
-                            region.setLng(guGunCode.getLng());
-                            regionMap.put(recommendationKey, region);
-                        }
-                        totalCount.put(recommendationKey, totalCount.get(recommendationKey) + doc.getCount());
+                        count+=list.get(idx).getCount();
                     }
-                    for(String recommendationKey : totalCount.keySet()){
-                        regionMap.get(recommendationKey).getCategory().getLife().put(serviceKey, totalCount.get(recommendationKey));
-                    }
+                    totalCount.put(sd, count);
+
+
+                        regionMap.get(sd).getCategory().getLife().put(serviceKey, totalCount.get(sd));
+
                     // end
                 }else if(serviceKey.equals("mart")){
                     // start
                     List<MartDoc> list = martDocRepository.findAllBySdOrderByCount(sd);
+                    Long count = 0L;
                     for(int idx = 0; idx < list.size(); idx++){
-                        MartDoc doc = list.get(idx);
-                        String recommendationKey = doc.getSd() + " " +  doc.getSgg();
-                        if(!totalCount.containsKey(recommendationKey)){
-                            totalCount.put(recommendationKey, 0L);
-                        }
-                        if(!regionMap.containsKey(recommendationKey)){
-                            Region region = new Region();
-                            GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                            region.setCode(guGunCode.getCode());
-                            region.setAddr(guGunCode.getAddr());
-                            region.setLat(guGunCode.getLat());
-                            region.setLng(guGunCode.getLng());
-                            regionMap.put(recommendationKey, region);
-                        }
-                        totalCount.put(recommendationKey, totalCount.get(recommendationKey) + doc.getCount());
+                        count+=list.get(idx).getCount();
                     }
-                    for(String recommendationKey : totalCount.keySet()){
-                        regionMap.get(recommendationKey).getCategory().getLife().put(serviceKey, totalCount.get(recommendationKey));
-                    }
+                    totalCount.put(sd, count);
+
+
+                        regionMap.get(sd).getCategory().getLife().put(serviceKey, totalCount.get(sd));
+
                     // end
                 }else if(serviceKey.equals("park")){
                     // start
                     List<ParkDoc> list = parkDocRepository.findAllBySdOrderByCount(sd);
+                    Long count = 0L;
                     for(int idx = 0; idx < list.size(); idx++){
-                        ParkDoc doc = list.get(idx);
-                        String recommendationKey = doc.getSd() + " " +  doc.getSgg();
-                        if(!totalCount.containsKey(recommendationKey)){
-                            totalCount.put(recommendationKey, 0L);
-                        }
-                        if(!regionMap.containsKey(recommendationKey)){
-                            Region region = new Region();
-                            GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                            region.setCode(guGunCode.getCode());
-                            region.setAddr(guGunCode.getAddr());
-                            region.setLat(guGunCode.getLat());
-                            region.setLng(guGunCode.getLng());
-                            regionMap.put(recommendationKey, region);
-                        }
-                        totalCount.put(recommendationKey, totalCount.get(recommendationKey) + doc.getCount());
+                        count+=list.get(idx).getCount();
                     }
-                    for(String recommendationKey : totalCount.keySet()){
-                        regionMap.get(recommendationKey).getCategory().getLife().put(serviceKey, totalCount.get(recommendationKey));
-                    }
+                    totalCount.put(sd, count);
+
+
+                        regionMap.get(sd).getCategory().getLife().put(serviceKey, totalCount.get(sd));
+
                     // end
                 }else if(serviceKey.equals("school")){
                     // start
                     List<SchoolDoc> list = schoolDocRepository.findAllBySdOrderByCount(sd);
+                    Long count = 0L;
                     for(int idx = 0; idx < list.size(); idx++){
-                        SchoolDoc doc = list.get(idx);
-                        String recommendationKey = doc.getSd() + " " +  doc.getSgg();
-                        if(!totalCount.containsKey(recommendationKey)){
-                            totalCount.put(recommendationKey, 0L);
-                        }
-                        if(!regionMap.containsKey(recommendationKey)){
-                            Region region = new Region();
-                            GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                            region.setCode(guGunCode.getCode());
-                            region.setAddr(guGunCode.getAddr());
-                            region.setLat(guGunCode.getLat());
-                            region.setLng(guGunCode.getLng());
-                            regionMap.put(recommendationKey, region);
-                        }
-                        totalCount.put(recommendationKey, totalCount.get(recommendationKey) + doc.getCount());
+                        count+=list.get(idx).getCount();
                     }
-                    for(String recommendationKey : totalCount.keySet()){
-                        regionMap.get(recommendationKey).getCategory().getEducation().put(serviceKey, totalCount.get(recommendationKey));
-                    }
+                    totalCount.put(sd, count);
+
+
+                        regionMap.get(sd).getCategory().getEducation().put(serviceKey, totalCount.get(sd));
+
                     // end
                 }else if(serviceKey.equals("shelter")){
                     // start
                     List<ShelterDoc> list = shelterDocRepository.findAllBySdOrderByCount(sd);
+                    Long count = 0L;
                     for(int idx = 0; idx < list.size(); idx++){
-                        ShelterDoc doc = list.get(idx);
-                        String recommendationKey = doc.getSd() + " " +  doc.getSgg();
-                        if(!totalCount.containsKey(recommendationKey)){
-                            totalCount.put(recommendationKey, 0L);
-                        }
-                        if(!regionMap.containsKey(recommendationKey)){
-                            Region region = new Region();
-                            GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                            region.setCode(guGunCode.getCode());
-                            region.setAddr(guGunCode.getAddr());
-                            region.setLat(guGunCode.getLat());
-                            region.setLng(guGunCode.getLng());
-                            regionMap.put(recommendationKey, region);
-                        }
-                        totalCount.put(recommendationKey, totalCount.get(recommendationKey) + doc.getCount());
+                        count+=list.get(idx).getCount();
                     }
-                    for(String recommendationKey : totalCount.keySet()){
-                        regionMap.get(recommendationKey).getCategory().getCalamity().put(serviceKey, totalCount.get(recommendationKey));
-                    }
+                    totalCount.put(sd, count);
+
+
+                        regionMap.get(sd).getCategory().getCalamity().put(serviceKey, totalCount.get(sd));
+
                     // end
                 }else if(serviceKey.equals("sportsfacilities")){
                     // start
                     List<SportsFacilitiesDoc> list = sportsFacilitiesDocRepository.findAllBySdOrderByCount(sd);
+                    Long count = 0L;
                     for(int idx = 0; idx < list.size(); idx++){
-                        SportsFacilitiesDoc doc = list.get(idx);
-                        String recommendationKey = doc.getSd() + " " +  doc.getSgg();
-                        if(!totalCount.containsKey(recommendationKey)){
-                            totalCount.put(recommendationKey, 0L);
-                        }
-                        if(!regionMap.containsKey(recommendationKey)){
-                            Region region = new Region();
-                            GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                            region.setCode(guGunCode.getCode());
-                            region.setAddr(guGunCode.getAddr());
-                            region.setLat(guGunCode.getLat());
-                            region.setLng(guGunCode.getLng());
-                            regionMap.put(recommendationKey, region);
-                        }
-                        totalCount.put(recommendationKey, totalCount.get(recommendationKey) + doc.getCount());
+                        count+=list.get(idx).getCount();
                     }
-                    for(String recommendationKey : totalCount.keySet()){
-                        regionMap.get(recommendationKey).getCategory().getCulture().put(serviceKey, totalCount.get(recommendationKey));
-                    }
+                    totalCount.put(sd, count);
+
+
+                        regionMap.get(sd).getCategory().getCulture().put(serviceKey, totalCount.get(sd));
+
                     // end
                 }else if(serviceKey.equals("theater")){
                     // start
                     List<TheaterDoc> list = theaterDocRepository.findAllBySdOrderByCount(sd);
+                    Long count = 0L;
                     for(int idx = 0; idx < list.size(); idx++){
-                        TheaterDoc doc = list.get(idx);
-                        String recommendationKey = doc.getSd() + " " +  doc.getSgg();
-                        if(!totalCount.containsKey(recommendationKey)){
-                            totalCount.put(recommendationKey, 0L);
-                        }
-                        if(!regionMap.containsKey(recommendationKey)){
-                            Region region = new Region();
-                            GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                            region.setCode(guGunCode.getCode());
-                            region.setAddr(guGunCode.getAddr());
-                            region.setLat(guGunCode.getLat());
-                            region.setLng(guGunCode.getLng());
-                            regionMap.put(recommendationKey, region);
-                        }
-                        totalCount.put(recommendationKey, totalCount.get(recommendationKey) + doc.getCount());
+                        count+=list.get(idx).getCount();
                     }
-                    for(String recommendationKey : totalCount.keySet()){
-                        regionMap.get(recommendationKey).getCategory().getCulture().put(serviceKey, totalCount.get(recommendationKey));
-                    }
+                    totalCount.put(sd, count);
+
+
+                    regionMap.get(sd).getCategory().getCulture().put(serviceKey, totalCount.get(sd));
+
                     // end
                 }else if(serviceKey.equals("trading")){
                 /*
                 ToDo trading
                  */
                 }
-                // make ranking of category
+
+                }
+                if(map.get(serviceKey).equals("zero")) continue;
+
                 List<Map.Entry<String, Long>> entryList = new LinkedList<>(totalCount.entrySet());
                 entryList.sort(Map.Entry.comparingByValue());
                 for(int ranking = entryList.size() - 1; ranking >= 0; ranking--){
                     Map.Entry<String, Long> entry = entryList.get(ranking);
                     getRecommendation(entry.getKey(), recommendations, map.get(serviceKey), (double) (entryList.size() - ranking) / weighValue);
                 }
-
-            }
         }
-
 
         // make region ranking, score
         List<Map.Entry<String, Double>> entryList = new LinkedList<>(recommendations.entrySet());
@@ -1252,8 +1064,8 @@ public class RecommendationServiceImpl implements RecommendationService{
                  */
             }
 
-
             if(map.get(serviceKey).equals("zero")) continue;
+
             // make ranking of category
             List<Map.Entry<String, Long>> entryList = new LinkedList<>(totalCount.entrySet());
             entryList.sort(Map.Entry.comparingByValue());
@@ -1311,7 +1123,7 @@ public class RecommendationServiceImpl implements RecommendationService{
             recommendations.put(recommendationKey,recommendations.get(recommendationKey) + recommendationValue);
         }else if(weight.equals("middle")){
             recommendations.put(recommendationKey, recommendations.get(recommendationKey) + (2 * recommendationValue));
-        }else{ // high
+        }else if(weight.equals("high")){ // high
             recommendations.put(recommendationKey, recommendations.get(recommendationKey) + (3 * recommendationValue));
         }
     }

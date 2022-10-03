@@ -21,6 +21,7 @@ import com.salmanhaljido.demo.domain.mart.service.MartService;
 import com.salmanhaljido.demo.domain.park.service.ParkService;
 import com.salmanhaljido.demo.domain.restaurant.service.RestaurantService;
 import com.salmanhaljido.demo.domain.school.service.SchoolService;
+import com.salmanhaljido.demo.domain.shelter.service.ShelterService;
 import com.salmanhaljido.demo.domain.sportsfacilities.service.SportsFacilitiesService;
 import com.salmanhaljido.demo.domain.theater.service.TheaterService;
 import com.salmanhaljido.demo.domain.trading.service.TradingService;
@@ -54,6 +55,7 @@ public class DataServiceImpl implements DataService {
     private final MartService martService;
     private final ParkService parkService;
     private final RestaurantService restaurantService;
+    private final ShelterService shelterService;
     private final SchoolService schoolService;
     private final SportsFacilitiesService sportsFacilitiesService;
     private final TheaterService theaterService;
@@ -83,6 +85,7 @@ public class DataServiceImpl implements DataService {
             parkService.getData();
 //            restaurantService.getData();
             schoolService.getData();
+            shelterService.getData();
             sportsFacilitiesService.getData();
             theaterService.getData();
             tradingService.getData();

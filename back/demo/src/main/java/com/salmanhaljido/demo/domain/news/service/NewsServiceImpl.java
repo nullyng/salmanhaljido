@@ -76,6 +76,7 @@ public class NewsServiceImpl implements NewsService{
 
     @Override
     @Transactional
+   //@PostConstruct
     @Scheduled(cron = "0 0 * * * ?")
     public void crawlingParentingAndEducation() {
         Calendar calendar = Calendar.getInstance();
@@ -119,6 +120,7 @@ public class NewsServiceImpl implements NewsService{
 
     @Override
     @Transactional
+    //@PostConstruct
     @Scheduled(cron = "0 0 * * * ?")
     public void crawlingSocialAndPolicy() {
         Calendar calendar = Calendar.getInstance();
@@ -162,6 +164,7 @@ public class NewsServiceImpl implements NewsService{
 
     @Override
     @Transactional
+   // @PostConstruct
     @Scheduled(cron = "0 0 * * * ?")
     public void crawlingPregnantAndDelivery() {
         Calendar calendar = Calendar.getInstance();
@@ -205,6 +208,7 @@ public class NewsServiceImpl implements NewsService{
 
     @Override
     @Transactional
+    //@PostConstruct
     @Scheduled(cron = "0 0 * * * ?")
     public void crawlingLifeAndHealth() {
         Calendar calendar = Calendar.getInstance();
@@ -249,16 +253,17 @@ public class NewsServiceImpl implements NewsService{
     @Override
     @Transactional
     @Scheduled(cron = "0 0 * * * ?")
+    //@PostConstruct
     public void crawlingRealEstate() {
         Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.HOUR, -500);
+        calendar.add(Calendar.HOUR, -1);
         Date now = new Date();
         Date createdAt = calendar.getTime();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
         int pageNo = 1;
         while(true) {
-            Connection connection = Jsoup.connect(REAL_ESTATE_URL + "&date" + simpleDateFormat.format(now) + "&page=" + pageNo);
-            System.out.println(REAL_ESTATE_URL + "&date" + simpleDateFormat.format(now) + "&page=" + pageNo);
+            Connection connection = Jsoup.connect(REAL_ESTATE_URL + "&date=" + simpleDateFormat.format(now) + "&page=" + pageNo);
+            System.out.println(REAL_ESTATE_URL + "&date=" + simpleDateFormat.format(now) + "&page=" + pageNo);
             try {
                 Document document = connection.get();
                 Elements list = document.getElementsByClass("type06_headline").select("li");
@@ -266,12 +271,11 @@ public class NewsServiceImpl implements NewsService{
                     String url = e.select("dt:last-of-type > a").attr("abs:href");
                     String title = e.select("dt:last-of-type > a").text();
                     String summary = e.select("dd").select(".lede").text();
-
                     Connection imagePathConnection = Jsoup.connect(url);
                     Document imagePathDocument = imagePathConnection.get();
                     String imagePath = imagePathDocument.head().select("meta[property=og:image]").attr("abs:content");
 
-                    if(!e.select("dd").select(".date").text().equals("1시간전")) return;
+                    if(e.select("dd").select(".date").text().equals("1시간전")) return;
 
                     News news = News.builder()
                             .title(title)
