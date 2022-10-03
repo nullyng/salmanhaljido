@@ -39,6 +39,7 @@ function CategoryRcmdButton({ isMarried, hasCar, hasPets, hasChildren, open }) {
       // api 통신이 끝나면 로딩 화면 출력 멈춤
       onSetLoading(false);
       setRcmdList(makePriorityList(res.data.categoriesList));
+      console.log(res.data.categoriesList);
 
       // 검색 횟수 기준의 추천 Alert 출력
       setCountOpen(true);
@@ -55,7 +56,6 @@ function CategoryRcmdButton({ isMarried, hasCar, hasPets, hasChildren, open }) {
     getCategoryRcmd(apiData, (res) => {
       onSetLoading(false);
       setRcmdList(makePriorityList(res.data.categoriesList));
-      console.log(res.data.categoriesList);
 
       // 평점 기준의 추천 Alert 출력
       setRatingOpen(true);

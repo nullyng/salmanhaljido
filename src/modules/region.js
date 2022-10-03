@@ -21,7 +21,7 @@ const initialState = {
   // 추천 지역 전체 정보
   rcmdData: [],
   currRegion: {}, // 추천 지역 중 선택된 지역 정보
-  statistics: [], // 추천 지역 중 선택된 지역의 통계 정보
+  statistics: {}, // 추천 지역 중 선택된 지역의 통계 정보
   realEstate: [], // 추천 지역 중 선택된 지역의 부동산 정보
 };
 

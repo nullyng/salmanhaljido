@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
 
+import guide1 from "assets/images/Landing/guide1.gif";
+import guide2 from "assets/images/Landing/guide1.gif";
+import guide3 from "assets/images/Landing/guide3.gif";
+import guide4 from "assets/images/Landing/guide1.gif";
+import guide5 from "assets/images/Landing/guide1.gif";
+
 function Guide() {
   // 화면 스크롤 코드
   const [position, setPosition] = useState(0);
@@ -21,19 +27,17 @@ function Guide() {
       <div className="guide__box" style={{ opacity: (position + 20) / 40 }}>
         <div className="guide__box__text">우리 부부의 현재 환경 설정하기</div>
         <div className="guide__box__image">
-          서비스
-          <br />
-          이미지
+          <img src={guide1} />
         </div>
       </div>
       <div className="guide__box" style={{ opacity: (position + 5) / 100 }}>
         <div className="guide__box__image">
-          서비스
-          <br />
-          이미지
+          <img src={guide2} />
         </div>
         <div className="guide__box__text">
-          비슷한 환경의 사람들이 선택한 카테고리를 확인하기
+          비슷한 환경의 사람들이
+          <br />
+          선택한 카테고리를 추천받기
         </div>
       </div>
       <div className="guide__box" style={{ opacity: (position - 200) / 140 }}>
@@ -41,25 +45,23 @@ function Guide() {
           카테고리 항목을 취향에 따라 커스텀하기
         </div>
         <div className="guide__box__image">
-          서비스
-          <br />
-          이미지
+          <img src={guide3} />
         </div>
       </div>
       <div className="guide__box" style={{ opacity: (position - 310) / 240 }}>
         <div className="guide__box__image">
-          서비스
-          <br />
-          이미지
+          <img src={guide4} />
         </div>
-        <div className="guide__box__text">추천된 지역별로 데이터 확인하기</div>
+        <div className="guide__box__text">
+          추천 지역을 검색하고
+          <br />
+          상세 정보 확인하기
+        </div>
       </div>
       <div className="guide__box" style={{ opacity: (position - 420) / 330 }}>
-        <div className="guide__box__text">주요 정책 확인하기</div>
+        <div className="guide__box__text">카테고리별 유용한 정보 확인하기</div>
         <div className="guide__box__image">
-          서비스
-          <br />
-          이미지
+          <img src={guide5} />
         </div>
       </div>
     </div>
