@@ -28,10 +28,17 @@ function SubmitButton() {
 
   const handleClickButton = () => {
     // api 통신
-    const apiData = {
-      code: region,
-      ...myCategoryList,
-    };
+    let apiData = {};
+    if (region.length === 0) {
+      apiData = {
+        ...myCategoryList,
+      };
+    } else {
+      apiData = {
+        code: region,
+        ...myCategoryList,
+      };
+    }
 
     onSetLoading(true);
 
@@ -73,7 +80,7 @@ function SubmitButton() {
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
         onClose={() => setSnackbarOpen(false)}
         message="마커를 클릭해서 추천 지역을 둘러보세요!"
-        autoHideDuration="2500"
+        autoHideDuration={2500}
       />
     </div>
   );
