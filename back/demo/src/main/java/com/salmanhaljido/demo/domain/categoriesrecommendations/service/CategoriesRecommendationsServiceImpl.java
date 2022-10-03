@@ -94,17 +94,12 @@ public class CategoriesRecommendationsServiceImpl implements CategoriesRecommend
             valueJSON.put("facilitiesForTheDisabled", 0);
             valueJSON.put("femaleSafety", 0);
             valueJSON.put("hospital", 0);
-            valueJSON.put("kindergarden", 0);
             valueJSON.put("library", 0);
             valueJSON.put("mart", 0);
             valueJSON.put("park", 0);
-            valueJSON.put("parkinglot", 0);
-            valueJSON.put("publicTransportationUtilizationRate", 0);
-            valueJSON.put("restaurant", 0);
             valueJSON.put("school", 0);
             valueJSON.put("shelter", 0);
             valueJSON.put("sportsFacilities", 0);
-            valueJSON.put("station", 0);
             valueJSON.put("theater", 0);
 
 
