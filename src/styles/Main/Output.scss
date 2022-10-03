@@ -74,9 +74,11 @@
   }
 }
 
-// 추천 지역 chip
-.chip {
+// 추천 지역 리스트
+.rcmd-item {
   font-family: "EsamanruLight";
+  width: 100%;
+  margin: 0.2rem 0 !important;
 
   &__content {
     display: flex;
@@ -85,19 +87,22 @@
     width: 100%;
 
     &__data {
-      display: flex;
-      align-items: center;
       width: 100%;
-
-      & span {
-        color: black !important;
-        font-family: "EsamanruLight";
-      }
+      display: grid;
+      align-items: center;
+      text-align: left;
+      grid-template-columns: 1fr 4fr;
 
       &__ranking {
-        margin-right: 1.5rem;
         font-size: 1.2rem;
-        font-weight: 700;
+        font-family: "EsamanruBold";
+        color: black !important;
+      }
+
+      &__region {
+        color: black !important;
+        font-family: "EsamanruLight";
+        font-size: 0.95rem;
       }
     }
 
@@ -171,8 +176,17 @@
   }
 
   &__content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+    &--no-data {
+      width: 100%;
+      text-align: center;
+      margin-top: 2rem;
+      color: #b6b6b6;
+    }
+
+    &--data {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
   }
 }
 
@@ -196,7 +210,7 @@
     & p {
       margin: 0;
       font-family: "EsamanruBold";
-      font-size: 2rem;
+      font-size: 1.7rem;
     }
 
     & span {

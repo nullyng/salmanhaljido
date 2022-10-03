@@ -6,7 +6,7 @@ import { setMarkers } from "modules/map";
 import { setSurvey } from "modules/survey";
 import { getRegionRcmd } from "api/rcmd";
 import { setLoading } from "modules/loading";
-import { setRcmdData, setStatistics } from "modules/region";
+import { setCurrRegion, setRcmdData } from "modules/region";
 
 function SubmitButton() {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -24,8 +24,12 @@ function SubmitButton() {
   const onSetLoading = (loading) => dispatch(setLoading(loading));
 
   const onSetRcmdData = (rcmdData) => dispatch(setRcmdData(rcmdData));
+  const onSetCurrRegion = (currRegion) => dispatch(setCurrRegion(currRegion));
 
   const handleClickButton = () => {
+    // 이전에 선택한 현재 지역 정보 삭제
+    onSetCurrRegion({});
+
     // api 통신
     let apiData = {};
     if (region.length === 0) {
@@ -48,6 +52,7 @@ function SubmitButton() {
           ? res.data.regions.slice(0, 10)
           : res.data.regions
       );
+      console.log(res.data.regions);
       onSetLoading(false);
 
       // 데이터 출력 창에 추천 버튼 출력

@@ -21,16 +21,20 @@ function RcmdItem({ index, data }) {
 
   return (
     <ThemeProvider theme={theme}>
-      <Button className={`chip ${data.code}`} onClick={handleClick}>
-        <div className="chip__content">
-          <div className="chip__content__data">
-            <span className="chip__content__data__ranking">{index + 1}</span>
-            <span className="chip__content__data__region">{data.addr}</span>
+      <Button className={`rcmd-item ${data.code}`} onClick={handleClick}>
+        <div className="rcmd-item__content">
+          <div className="rcmd-item__content__data">
+            <span className="rcmd-item__content__data__ranking">
+              {index + 1}
+            </span>
+            <span className="rcmd-item__content__data__region">
+              {data.addr}
+            </span>
           </div>
-          <div className="chip__content__rating">
+          <div className="rcmd-item__content__rating">
             <Rating
               name="read-only"
-              defaultValue={data.score}
+              defaultValue={data.score * 50}
               precision={0.1}
               icon={<StarIcon />}
               readOnly

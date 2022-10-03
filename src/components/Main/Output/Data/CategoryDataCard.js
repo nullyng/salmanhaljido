@@ -2,16 +2,16 @@ import { useEffect } from "react";
 
 import useScrollCount from "hooks/useScrollCount";
 
-function CategoryDataCard({ item, index }) {
+function CategoryDataCard({ name, count, index }) {
   // 컴포넌트에 스크롤이
-  const animatedItem = useScrollCount(15);
+  const animatedItem = useScrollCount(count);
 
   useEffect(() => {
     // 컴포넌트가 리렌더링 되었을 때도 카운트 애니메이션하도록 함
     const card = document.querySelector(
       `.category-data-card__content__cnt-${index}`
     );
-    counting(card, 15);
+    counting(card, count);
   });
 
   const counting = (card, end, start = 0, duration = 1000) => {
@@ -30,7 +30,7 @@ function CategoryDataCard({ item, index }) {
 
   return (
     <div className="category-data-card">
-      <div className="category-data-card__title">{Object.values(item)[0]}</div>
+      <div className="category-data-card__title">{name}</div>
       <div className="category-data-card__content">
         <div></div>
         <p

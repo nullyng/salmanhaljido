@@ -1,18 +1,26 @@
-import { useSelector } from "react-redux";
-
+import { categoryDetail } from "components/Main/Input/Category/categoryList";
 import CategoryDataCard from "components/Main/Output/Data/CategoryDataCard";
 
-function CategoryData({ categoryName, categories }) {
-  const statistics = useSelector((state) => state.region.statistics);
-
+function CategoryData({ categoryName, detail }) {
   return (
     <div className="category-data">
       <div className="category-data__title">{categoryName}</div>
-      <div className="category-data__content">
-        {categories.map((item, index) => (
-          <CategoryDataCard key={index} item={item} index={index} />
-        ))}
-      </div>
+      {Object.keys(detail).length === 0 ? (
+        <p className="category-data__content--no-data">
+          상세 데이터가 없습니다.
+        </p>
+      ) : (
+        <div className="category-data__content--data">
+          {Object.keys(detail).map((item, index) => (
+            <CategoryDataCard
+              key={index}
+              name={categoryDetail[item]}
+              count={detail[item]}
+              index={index}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
