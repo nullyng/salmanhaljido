@@ -345,9 +345,25 @@
   }
 
   &__box {
-    display: flex;
+    display: grid;
     padding: 1%;
     margin-top: 2rem;
+
+    &.one {
+      grid-template-columns: 1.4fr 1fr;
+    }
+    &.two {
+      grid-template-columns: 1fr 1.4fr;
+    }
+    &.three {
+      grid-template-columns: 1.4fr 1fr;
+    }
+    &.four {
+      grid-template-columns: 1.1fr 1fr;
+    }
+    &.five {
+      grid-template-columns: 1fr 1.5fr;
+    }
 
     &__text {
       margin: auto;
@@ -356,6 +372,7 @@
       align-items: center;
       font-weight: bold;
       font-size: 18px;
+      text-align: center;
     }
 
     &__image {
@@ -367,7 +384,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 240px;
+        width: 100%;
         height: auto;
         background-color: lightgray;
         border-radius: 10px;
