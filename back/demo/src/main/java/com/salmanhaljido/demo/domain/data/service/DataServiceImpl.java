@@ -25,7 +25,10 @@ import com.salmanhaljido.demo.domain.sportsfacilities.service.SportsFacilitiesSe
 import com.salmanhaljido.demo.domain.theater.service.TheaterService;
 import com.salmanhaljido.demo.domain.trading.service.TradingService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.PostConstruct;
 
 
 
@@ -58,6 +61,7 @@ public class DataServiceImpl implements DataService {
     private final TradingService tradingService;
 
     @Override
+    @Scheduled(cron = "0 0 5 1/1 * ? *")
     public void saveData(){
         try {
             academyService.getData();
