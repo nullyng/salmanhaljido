@@ -1,9 +1,12 @@
-import { Button, Snackbar } from "@mui/material";
+import { Button, ListItem, Snackbar } from "@mui/material";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import { setMapData, setMarkers } from "modules/map";
 import { setSurvey } from "modules/survey";
+import { getRegionRcmd } from "api/rcmd";
+import { setLoading } from "modules/loading";
+import { setRcmdData } from "modules/region";
 
 function SubmitButton() {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -11,59 +14,53 @@ function SubmitButton() {
   const currMap = useSelector((state) => state.map.currMap);
   const markers = useSelector((state) => state.map.markers);
 
+  const region = useSelector((state) => state.input.region);
+  const myCategoryList = useSelector((state) => state.category.myCategoryList);
+
   const dispatch = useDispatch();
   const onSetSurvey = (survey) => dispatch(setSurvey(survey));
   const onSetMarkers = (markers) => dispatch(setMarkers(markers));
   const onSetMapData = (mapData) => dispatch(setMapData(mapData));
 
+  const onSetLoading = (loading) => dispatch(setLoading(loading));
+
+  const onSetRcmdData = (rcmdData) => dispatch(setRcmdData(rcmdData));
+
   const handleClickButton = () => {
-    // 데이터 출력 창에 추천 버튼 출력
-    onSetSurvey(false);
-    // 스낵바 출력
-    setSnackbarOpen(true);
+    // api 통신
+    const apiData = {
+      code: region,
+      ...myCategoryList,
+    };
 
-    markers.map((marker, index) => {
-      // 마커 삭제
-      marker.remove();
+    onSetLoading(true);
 
-      // 폴리곤 삭제
-      currMap.removeLayer(`polygon${index}`);
-      currMap.removeLayer(`polygon${index}-outlined`);
-      currMap.removeSource(`polygon${index}`);
+    getRegionRcmd(apiData, (res) => {
+      // 데이터는 최대 8개까지 출력
+      onSetRcmdData(
+        res.data.regions.length > 10
+          ? res.data.regions.slice(0, 10)
+          : res.data.regions
+      );
+      onSetLoading(false);
+
+      // 데이터 출력 창에 추천 버튼 출력
+      onSetSurvey(false);
+      // 스낵바 출력
+      setSnackbarOpen(true);
+
+      markers.map((marker, index) => {
+        // 기존에 있던 마커 삭제
+        marker.remove();
+
+        // 기존에 있던 폴리곤 삭제
+        currMap.removeLayer(`polygon${index}`);
+        currMap.removeLayer(`polygon${index}-outlined`);
+        currMap.removeSource(`polygon${index}`);
+      });
+
+      onSetMarkers([]);
     });
-
-    onSetMarkers([]);
-
-    onSetMapData([
-      {
-        sido: "강원도",
-        gugun: "춘천시",
-        longitude: 127.739868443904,
-        latitude: 37.8897967866926,
-        SIG_CD: "42110",
-      },
-      {
-        sido: "대구",
-        gugun: "서구",
-        longitude: 128.549697600138,
-        latitude: 35.8750016701213,
-        SIG_CD: "27170",
-      },
-      {
-        sido: "대구",
-        gugun: "수성구",
-        longitude: 128.66127441262,
-        latitude: 35.8338488599246,
-        SIG_CD: "27260",
-      },
-      {
-        sido: "부산",
-        gugun: "해운대구",
-        longitude: 129.153589989585,
-        latitude: 35.193855123863,
-        SIG_CD: "26350",
-      },
-    ]);
   };
 
   return (
