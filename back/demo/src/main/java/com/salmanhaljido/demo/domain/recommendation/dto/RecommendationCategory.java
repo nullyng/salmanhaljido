@@ -31,7 +31,7 @@ public class RecommendationCategory {
         medical.put("hospital", 0L);
         pet = new HashMap<>();
         pet.put("animalHospital", 0L);
-        pet.put("animalSalon", 0L);
+        pet.put("animalBeauty", 0L);
         education = new HashMap<>();
         education.put("academy", 0L);
         education.put("school", 0L);
