@@ -121,7 +121,7 @@ function CustomMap() {
     onSetMarkers(markerList);
 
     // 만약 선택한 지역이 있다면 그 지역으로 확대
-    if (region.length !== 0) {
+    if (rcmdData.length > 0 && region.length > 0) {
       map.current.flyTo({
         center: [rcmdData[0].lng, rcmdData[0].lat],
         duration: 600,
