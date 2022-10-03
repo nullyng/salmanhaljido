@@ -697,8 +697,8 @@ public class RecommendationServiceImpl implements RecommendationService{
                 }
             }
             if(jeonseDoc != null) {
-                String[] jeonsePrice = jeonseDoc.getPrice().split(" ");
-                String[] jeonseDate = jeonseDoc.getDate().split(" ");
+                String[] jeonsePrice = jeonseDoc.getPrice().split(",");
+                String[] jeonseDate = jeonseDoc.getDate().split(",");
                 for(int i = 0; i < jeonseDate.length; i++){
                     Price price = new Price();
                     price.setDate(jeonseDate[i]);
