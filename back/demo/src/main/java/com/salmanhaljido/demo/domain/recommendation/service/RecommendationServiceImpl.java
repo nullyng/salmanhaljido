@@ -114,7 +114,7 @@ public class RecommendationServiceImpl implements RecommendationService{
         Map<String, Integer> valueMap = countValue(map);
         int weightValue = 0;
         weightValue += valueMap.get("high");
-        weightValue += (valueMap.get("mid") * 2);
+        weightValue += (valueMap.get("middle") * 2);
         weightValue += (valueMap.get("low") * 3);
 
         if(siDoCode == null) {
@@ -127,12 +127,12 @@ public class RecommendationServiceImpl implements RecommendationService{
     private Map<String, Integer> countValue(Map<String, String> map){
         Map<String, Integer> result = new HashMap<>();
         result.put("high", 0);
-        result.put("mid", 0);
+        result.put("middle", 0);
         result.put("low", 0);
 
         for(String key : map.keySet()){
             String value = map.get(key);
-            if(value.equals("high") || value.equals("mid") || value.equals("low"))
+            if(value.equals("high") || value.equals("middle") || value.equals("low"))
                 result.put(value, result.get(value) + 1);
         }
         return result;
@@ -715,7 +715,7 @@ public class RecommendationServiceImpl implements RecommendationService{
         if(!recommendations.containsKey(recommendationKey)) recommendations.put(recommendationKey, 0.0);
         if(weight.equals("low")){
             recommendations.put(recommendationKey,recommendations.get(recommendationKey) + recommendationValue);
-        }else if(weight.equals("mid")){
+        }else if(weight.equals("middle")){
             recommendations.put(recommendationKey, recommendations.get(recommendationKey) + (2 * recommendationValue));
         }else{ // high
             recommendations.put(recommendationKey, recommendations.get(recommendationKey) + (3 * recommendationValue));

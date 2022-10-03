@@ -32,7 +32,7 @@ import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
-public class ElectricVehicleChargingImpl implements ElectricVehicleChargingService {
+public class ElectricVehicleChargingServiceImpl implements ElectricVehicleChargingService {
     private String serviceKey = "SY0wwUOUgR+XvLXazywXmEeMbGvaGqsDrAIjvacheY12NY0tXxrGd/DONoLyIa2eV6y0SVI4zxfqZZRECk8wIw==";
     private int numOfRows = 9000;
     private String host = "apis.data.go.kr";
@@ -104,7 +104,7 @@ public class ElectricVehicleChargingImpl implements ElectricVehicleChargingServi
         SparkSession session = SparkSession.builder()
                         .master("local")
                         .appName("evc")
-                        .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.evc")
+                        .config("spark.mongodb.write.connection.uri", "mongodb://admin:salmand110@j7d110.p.ssafy.io/openapi.evc?authSource=admin")
                         .getOrCreate();
 
         Dataset<Row> df = session.read().text(dataPath + "evc.data");

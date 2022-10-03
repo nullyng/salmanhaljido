@@ -100,7 +100,7 @@ public class AcademyServiceImpl implements AcademyService {
         SparkSession session = SparkSession.builder()
                 .master("local")
                 .appName("academy")
-                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.academy")
+                .config("spark.mongodb.write.connection.uri", "mongodb://admin:salmand110@j7d110.p.ssafy.io/openapi.academy?authSource=admin")
                 .getOrCreate();
 
         Dataset<Row> df = session.read().text(dataPath + "academy.data");

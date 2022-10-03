@@ -82,7 +82,7 @@ public class ShelterServiceImpl implements ShelterService {
         SparkSession session = SparkSession.builder()
                 .master("local")
                 .appName("shelter")
-                .config("spark.mongodb.write.connection.uri", "mongodb://127.0.0.1/openapi.shelter")
+                .config("spark.mongodb.write.connection.uri", "mongodb://admin:salmand110@j7d110.p.ssafy.io/openapi.shelter?authSource=admin")
                 .getOrCreate();
 
         Dataset<Row> df = session.read().text(dataPath + "shelter.data");
