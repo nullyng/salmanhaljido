@@ -45,8 +45,6 @@ function RcmdModal({ open, setOpen }) {
       apiData[category] = myCategoryList[category];
     });
 
-    console.log(apiData);
-
     recommendCategory(apiData, (res) => {
       console.log(res);
     });
