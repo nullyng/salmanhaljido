@@ -6,6 +6,8 @@ function useScrollCount(end, start = 0, duration = 1000) {
 
   const handleScroll = useCallback(([entry]) => {
     const { current } = dom;
+    if (end === 0) return;
+    current.innerText = 0;
 
     if (entry.isIntersecting) {
       let currentNumber = start;

@@ -108,7 +108,7 @@ function Search() {
           onClose={() => setCategorySnackbar(false)}
           message="카테고리를 설정해주세요."
           key="category"
-          autoHideDuration="2000"
+          autoHideDuration={2000}
         />
         <Snackbar
           anchorOrigin={{ vertical: "top", horizontal: "right" }}
@@ -116,7 +116,7 @@ function Search() {
           onClose={() => setInputSnackbar(false)}
           message="검색어를 입력해주세요."
           key="input"
-          autoHideDuration="2000"
+          autoHideDuration={2000}
         />
       </ThemeProvider>
     </div>

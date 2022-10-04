@@ -22,52 +22,76 @@ const categoryName = [
 ];
 
 function ChartData() {
+  const [currCategory, setCurrCategory] = useState(0); // 초기에 보여주는 데이터는 교통으로 고정
+
+  const currRegion = useSelector((state) => state.region.currRegion);
+
   const data = [
     {
       subject: "교통",
-      A: 100,
+      A:
+        Object.keys(currRegion).length === 0
+          ? 100
+          : currRegion.category[categoryName[0] + "Score"],
       fullMark: 100,
     },
     {
       subject: "재난",
-      A: 75,
+      A:
+        Object.keys(currRegion).length === 0
+          ? 100
+          : currRegion.category[categoryName[1] + "Score"],
       fullMark: 100,
     },
     {
       subject: "안전",
-      A: 80,
+      A:
+        Object.keys(currRegion).length === 0
+          ? 100
+          : currRegion.category[categoryName[2] + "Score"],
       fullMark: 100,
     },
     {
       subject: "의료",
-      A: 50,
+      A:
+        Object.keys(currRegion).length === 0
+          ? 100
+          : currRegion.category[categoryName[3] + "Score"],
       fullMark: 100,
     },
     {
       subject: "반려동물",
-      A: 25,
+      A:
+        Object.keys(currRegion).length === 0
+          ? 100
+          : currRegion.category[categoryName[4] + "Score"],
       fullMark: 100,
     },
     {
       subject: "교육",
-      A: 65,
+      A:
+        Object.keys(currRegion).length === 0
+          ? 100
+          : currRegion.category[categoryName[5] + "Score"],
       fullMark: 100,
     },
     {
       subject: "문화",
-      A: 80,
+      A:
+        Object.keys(currRegion).length === 0
+          ? 100
+          : currRegion.category[categoryName[6] + "Score"],
       fullMark: 100,
     },
     {
       subject: "생활",
-      A: 20,
+      A:
+        Object.keys(currRegion).length === 0
+          ? 100
+          : currRegion.category[categoryName[7] + "Score"],
       fullMark: 100,
     },
   ];
-
-  const [currCategory, setCurrCategory] = useState(0); // 초기에 보여주는 데이터는 교통으로 고정
-
-  const currRegion = useSelector((state) => state.region.currRegion);
 
   useEffect(() => {
     const categories = document.getElementsByClassName(
