@@ -1,4 +1,4 @@
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import "styles/Board/BoardPage.scss";
 import ArticleList from "components/Board/Article/ArticleList";

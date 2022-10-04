@@ -1,5 +1,3 @@
-import { NavLink } from "react-router-dom";
-
 import "styles/Landing/Landing.scss";
 
 function Start() {
@@ -9,7 +7,7 @@ function Start() {
   return (
     <div className="start">
       <div className="start__bubble">
-        <div className="start__bubble--right">어디 사는게 좋을까?</div>
+        <div className="start__bubble--right">어디 사는 게 좋을까?</div>
         <div className="start__bubble--Rtri"></div>
       </div>
       <div className="start__bubble">
@@ -19,7 +17,7 @@ function Start() {
       <div className="start__bubble">
         <div className="start__bubble--Ltri"></div>
         <div className="start__bubble--left">
-          공원도 있어야 하고 지하철도 있어야해
+          공원도 있어야 하고 지하철도 있어야 해
         </div>
       </div>
       <div className="start__bubble">
