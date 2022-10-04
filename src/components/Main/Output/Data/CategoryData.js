@@ -1,4 +1,3 @@
-import { categoryDetail } from "components/Main/Input/Category/categoryList";
 import CategoryDataCard from "components/Main/Output/Data/CategoryDataCard";
 
 function CategoryData({ categoryName, detail }) {
@@ -14,7 +13,7 @@ function CategoryData({ categoryName, detail }) {
           {Object.keys(detail).map((item, index) => (
             <CategoryDataCard
               key={index}
-              name={categoryDetail[item]}
+              name={item}
               count={detail[item]}
               index={index}
             />
