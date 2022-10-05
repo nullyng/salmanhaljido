@@ -1084,6 +1084,10 @@ public class RecommendationServiceImpl implements RecommendationService{
 
         }
 
+        int jeonseLow = Integer.parseInt(map.get("jeonseLow"))*10;
+        int jeonseHigh = Integer.parseInt(map.get("jeonseHigh"))*10;
+        int tradingLow = Integer.parseInt(map.get("tradingLow"))*100000;
+        int tradingHigh = Integer.parseInt(map.get("tradingHigh"))*100000;
 
         // make region ranking, score
         List<Map.Entry<String, Double>> entryList = new LinkedList<>(recommendations.entrySet());
@@ -1103,6 +1107,11 @@ public class RecommendationServiceImpl implements RecommendationService{
             if(tradingDoc != null) {
                 String[] tradingPrice = tradingDoc.getPrice().split(",");
                 String[] tradingDate = tradingDoc.getDate().split(",");
+                if(Integer.parseInt(tradingPrice[0]) < tradingLow || Integer.parseInt(tradingPrice[0]) > tradingHigh){
+                    entryList.remove(ranking - 1);
+                    ranking--;
+                    continue;
+                }
                 for(int i = 0; i < tradingDate.length; i++){
                     Trading trading = new Trading();
                     trading.setDate(tradingDate[i]);
@@ -1113,6 +1122,11 @@ public class RecommendationServiceImpl implements RecommendationService{
             if(jeonseDoc != null) {
                 String[] jeonsePrice = jeonseDoc.getPrice().split(",");
                 String[] jeonseDate = jeonseDoc.getDate().split(",");
+                if(Integer.parseInt(jeonsePrice[0]) < jeonseLow || Integer.parseInt(jeonsePrice[0]) > jeonseHigh){
+                    entryList.remove(ranking - 1);
+                    ranking--;
+                    continue;
+                }
                 for(int i = 0; i < jeonseDate.length; i++){
                     Price price = new Price();
                     price.setDate(jeonseDate[i]);
