@@ -62,7 +62,7 @@ public class DataServiceImpl implements DataService {
     private final TradingService tradingService;
 
     @Override
-    @Scheduled(cron = "0 0 5 1/1 * ? *")
+    @Scheduled(cron = "0 0 5 1/1 * ?")
     public void saveData(){
         try {
             academyService.getData();

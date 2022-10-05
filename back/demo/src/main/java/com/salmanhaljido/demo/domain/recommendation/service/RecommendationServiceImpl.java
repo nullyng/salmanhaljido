@@ -166,11 +166,9 @@ public class RecommendationServiceImpl implements RecommendationService{
         if(!map.containsKey("facilitiesForTheDisabled")) map.put("facilitiesForTheDisabled", "zero");
         if(!map.containsKey("femaleSafety")) map.put("femaleSafety", "zero");
         if(!map.containsKey("hospital")) map.put("hospital", "zero");
-        //if(map.containsKey("kindergarden")) map.put("kindergarden", "zero");
         if(!map.containsKey("library")) map.put("library", "zero");
         if(!map.containsKey("mart")) map.put("mart", "zero");
         if(!map.containsKey("park")) map.put("park", "zero");
-        if(!map.containsKey("parkinglot")) map.put("parkinglot", "zero");
         if(!map.containsKey("school")) map.put("school", "zero");
         if(!map.containsKey("shelter")) map.put("shelter", "zero");
         if(!map.containsKey("sportsFacilities")) map.put("sportsFacilities", "zero");
@@ -532,11 +530,9 @@ public class RecommendationServiceImpl implements RecommendationService{
         if(!map.containsKey("facilitiesForTheDisabled")) map.put("facilitiesForTheDisabled", "zero");
         if(!map.containsKey("femaleSafety")) map.put("femaleSafety", "zero");
         if(!map.containsKey("hospital")) map.put("hospital", "zero");
-        //if(map.containsKey("kindergarden")) map.put("kindergarden", "zero");
         if(!map.containsKey("library")) map.put("library", "zero");
         if(!map.containsKey("mart")) map.put("mart", "zero");
         if(!map.containsKey("park")) map.put("park", "zero");
-        if(!map.containsKey("parkinglot")) map.put("parkinglot", "zero");
         if(!map.containsKey("school")) map.put("school", "zero");
         if(!map.containsKey("shelter")) map.put("shelter", "zero");
         if(!map.containsKey("sportsFacilities")) map.put("sportsFacilities", "zero");
@@ -551,12 +547,14 @@ public class RecommendationServiceImpl implements RecommendationService{
                 for(int idx = 0; idx < academyDocList.size(); idx++){
                     AcademyDoc doc = academyDocList.get(idx);
                     String recommendationKey = doc.getSd() + " " +  doc.getSgg();
+                    GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
+                    if(guGunCode==null || guGunCode.getLat()==null) continue;
                     if(!totalCount.containsKey(recommendationKey)){
                         totalCount.put(recommendationKey, 0L);
                     }
                     if(!regionMap.containsKey(recommendationKey)){
                         Region region = new Region();
-                        GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
+
                         region.setCode(guGunCode.getCode());
                         region.setAddr(guGunCode.getAddr());
                         region.setLat(guGunCode.getLat());
@@ -573,12 +571,14 @@ public class RecommendationServiceImpl implements RecommendationService{
                 for(int idx = 0; idx < animalHospitalDocList.size(); idx++){
                     AnimalHospitalDoc animalHospitalDoc = animalHospitalDocList.get(idx);
                     String recommendationKey = animalHospitalDoc.getSd() + " " +  animalHospitalDoc.getSgg();
+                    GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
+                    if(guGunCode==null || guGunCode.getLat()==null) continue;
                     if(!totalCount.containsKey(recommendationKey)) {
                         totalCount.put(recommendationKey, 0L);
                     }
                     if(!regionMap.containsKey(recommendationKey)){
                         Region region = new Region();
-                        GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
+
                         region.setCode(guGunCode.getCode());
                         region.setAddr(guGunCode.getAddr());
                         region.setLat(guGunCode.getLat());
@@ -595,12 +595,13 @@ public class RecommendationServiceImpl implements RecommendationService{
                 for(int idx = 0; idx < animalSalonDocList.size(); idx++){
                     AnimalSalonDoc animalSalonDoc = animalSalonDocList.get(idx);
                     String recommendationKey = animalSalonDoc.getSd() + " " +  animalSalonDoc.getSgg();
+                    GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
+                    if(guGunCode==null || guGunCode.getLat()==null) continue;
                     if(!totalCount.containsKey(recommendationKey)){
                         totalCount.put(recommendationKey, 0L);
                     }
                     if(!regionMap.containsKey(recommendationKey)){
                         Region region = new Region();
-                        GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
                         region.setCode(guGunCode.getCode());
                         region.setAddr(guGunCode.getAddr());
                         region.setLat(guGunCode.getLat());
@@ -617,12 +618,13 @@ public class RecommendationServiceImpl implements RecommendationService{
                 for(int idx = 0; idx < carAccidentDocsList.size(); idx++){
                     CarAccidentDoc carAccidentDoc = carAccidentDocsList.get(idx);
                     String recommendationKey = carAccidentDoc.getSd() + " " +  carAccidentDoc.getSgg();
+                    GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
+                    if(guGunCode==null || guGunCode.getLat()==null) continue;
                     if(!totalCount.containsKey(recommendationKey)){
                         totalCount.put(recommendationKey, 0L);
                     }
                     if(!regionMap.containsKey(recommendationKey)){
                         Region region = new Region();
-                        GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
                         region.setCode(guGunCode.getCode());
                         region.setAddr(guGunCode.getAddr());
                         region.setLat(guGunCode.getLat());
@@ -640,12 +642,13 @@ public class RecommendationServiceImpl implements RecommendationService{
                 for(int idx = 0; idx < childSafetyDocList.size(); idx++){
                     ChildSafetyDoc childSafetyDoc = childSafetyDocList.get(idx);
                     String recommendationKey = childSafetyDoc.getSd() + " " +  childSafetyDoc.getSgg();
+                    GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
+                    if(guGunCode==null || guGunCode.getLat()==null) continue;
                     if(!totalCount.containsKey(recommendationKey)){
                         totalCount.put(recommendationKey, 0L);
                     }
                     if(!regionMap.containsKey(recommendationKey)){
                         Region region = new Region();
-                        GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
                         region.setCode(guGunCode.getCode());
                         region.setAddr(guGunCode.getAddr());
                         region.setLat(guGunCode.getLat());
@@ -664,12 +667,13 @@ public class RecommendationServiceImpl implements RecommendationService{
                 for(int idx = 0; idx < concertHallDocList.size(); idx++){
                     ConcertHallDoc concertHallDoc = concertHallDocList.get(idx);
                     String recommendationKey = concertHallDoc.getSd() + " " +  concertHallDoc.getSgg();
+                    GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
+                    if(guGunCode==null || guGunCode.getLat()==null) continue;
                     if(!totalCount.containsKey(recommendationKey)){
                         totalCount.put(recommendationKey, 0L);
                     }
                     if(!regionMap.containsKey(recommendationKey)){
                         Region region = new Region();
-                        GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
                         region.setCode(guGunCode.getCode());
                         region.setAddr(guGunCode.getAddr());
                         region.setLat(guGunCode.getLat());
@@ -690,7 +694,7 @@ public class RecommendationServiceImpl implements RecommendationService{
                     if(crimeDoc.getSgg().equals("")) continue;
                     String recommendationKey = crimeDoc.getSd() + " " +  crimeDoc.getSgg();
                     GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                    if(guGunCode.getLat()==null) continue;
+                    if(guGunCode==null || guGunCode.getLat()==null) continue;
                     if(!totalCount.containsKey(recommendationKey)){
                         totalCount.put(recommendationKey, 0L);
                     }
@@ -714,12 +718,13 @@ public class RecommendationServiceImpl implements RecommendationService{
                 for(int idx = 0; idx < list.size(); idx++){
                     DrugStoreDoc drugStoreDoc = list.get(idx);
                     String recommendationKey = drugStoreDoc.getSd() + " " +  drugStoreDoc.getSgg();
+                    GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
+                    if(guGunCode==null || guGunCode.getLat()==null) continue;
                     if(!totalCount.containsKey(recommendationKey)){
                         totalCount.put(recommendationKey, 0L);
                     }
                     if(!regionMap.containsKey(recommendationKey)){
                         Region region = new Region();
-                        GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
                         region.setCode(guGunCode.getCode());
                         region.setAddr(guGunCode.getAddr());
                         region.setLat(guGunCode.getLat());
@@ -739,7 +744,7 @@ public class RecommendationServiceImpl implements RecommendationService{
                     ElectricVehicleChargingDoc electricVehicleChargingDoc = list.get(idx);
                     String recommendationKey = electricVehicleChargingDoc.getSd() + " " +  electricVehicleChargingDoc.getSgg();
                     GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                    if(guGunCode.getLat()==null) continue;
+                    if(guGunCode==null || guGunCode.getLat()==null) continue;
                     if(!totalCount.containsKey(recommendationKey)){
                         totalCount.put(recommendationKey, 0L);
                     }
@@ -763,12 +768,13 @@ public class RecommendationServiceImpl implements RecommendationService{
                 for(int idx = 0; idx < list.size(); idx++){
                     EntertainmentDoc doc = list.get(idx);
                     String recommendationKey = doc.getSd() + " " +  doc.getSgg();
+                    GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
+                    if(guGunCode==null || guGunCode.getLat()==null) continue;
                     if(!totalCount.containsKey(recommendationKey)){
                         totalCount.put(recommendationKey, 0L);
                     }
                     if(!regionMap.containsKey(recommendationKey)){
                         Region region = new Region();
-                        GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
                         region.setCode(guGunCode.getCode());
                         region.setAddr(guGunCode.getAddr());
                         region.setLat(guGunCode.getLat());
@@ -788,8 +794,7 @@ public class RecommendationServiceImpl implements RecommendationService{
                     FFDDoc doc = list.get(idx);
                     String recommendationKey = doc.getSd() + " " +  doc.getSgg();
                     GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                    if(guGunCode==null) continue;
-                    if(guGunCode.getCode()==null || guGunCode.getLat()==null) continue;
+                    if(guGunCode==null || guGunCode.getLat()==null) continue;
                     if(!totalCount.containsKey(recommendationKey)){
                         totalCount.put(recommendationKey, 0L);
                     }
@@ -814,7 +819,7 @@ public class RecommendationServiceImpl implements RecommendationService{
                     FemaleSafetyDoc doc = list.get(idx);
                     String recommendationKey = doc.getSd() + " " +  doc.getSgg();
                     GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                    if(guGunCode.getLat()==null) continue;
+                    if(guGunCode==null || guGunCode.getLat()==null) continue;
                     if(!totalCount.containsKey(recommendationKey)){
                         totalCount.put(recommendationKey, 0L);
                     }
@@ -839,7 +844,7 @@ public class RecommendationServiceImpl implements RecommendationService{
                     HospitalDoc doc = list.get(idx);
                     String recommendationKey = doc.getSd() + " " +  doc.getSgg();
                     GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                    if(guGunCode.getLat()==null) continue;
+                    if(guGunCode==null || guGunCode.getLat()==null) continue;
                     if(!totalCount.containsKey(recommendationKey)){
                         totalCount.put(recommendationKey, 0L);
                     }
@@ -868,7 +873,7 @@ public class RecommendationServiceImpl implements RecommendationService{
                     KinderGardenDoc doc = list.get(idx);
                     String recommendationKey = doc.getSd() + " " +  doc.getSgg();
                     GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                    if(guGunCode.getLat()==null) continue;
+                    if(guGunCode==null || guGunCode.getLat()==null) continue;
                     if(!totalCount.containsKey(recommendationKey)){
                         totalCount.put(recommendationKey, 0L);
                     }
@@ -893,7 +898,7 @@ public class RecommendationServiceImpl implements RecommendationService{
                     LibraryDoc doc = list.get(idx);
                     String recommendationKey = doc.getSd() + " " +  doc.getSgg();
                     GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                    if(guGunCode.getLat()==null) continue;
+                    if(guGunCode==null || guGunCode.getLat()==null) continue;
                     if(!totalCount.containsKey(recommendationKey)){
                         totalCount.put(recommendationKey, 0L);
                     }
@@ -918,7 +923,7 @@ public class RecommendationServiceImpl implements RecommendationService{
                     MartDoc doc = list.get(idx);
                     String recommendationKey = doc.getSd() + " " +  doc.getSgg();
                     GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                    if(guGunCode.getLat()==null) continue;
+                    if(guGunCode==null || guGunCode.getLat()==null) continue;
                     if(!totalCount.containsKey(recommendationKey)){
                         totalCount.put(recommendationKey, 0L);
                     }
@@ -943,7 +948,7 @@ public class RecommendationServiceImpl implements RecommendationService{
                     ParkDoc doc = list.get(idx);
                     String recommendationKey = doc.getSd() + " " +  doc.getSgg();
                     GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                    if(guGunCode.getLat()==null) continue;
+                    if(guGunCode==null || guGunCode.getLat()==null) continue;
                     if(!totalCount.containsKey(recommendationKey)){
                         totalCount.put(recommendationKey, 0L);
                     }
@@ -968,7 +973,7 @@ public class RecommendationServiceImpl implements RecommendationService{
                     SchoolDoc doc = list.get(idx);
                     String recommendationKey = doc.getSd() + " " +  doc.getSgg();
                     GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                    if(guGunCode.getLat()==null) continue;
+                    if(guGunCode==null || guGunCode.getLat()==null) continue;
                     if(!totalCount.containsKey(recommendationKey)){
                         totalCount.put(recommendationKey, 0L);
                     }
@@ -993,7 +998,7 @@ public class RecommendationServiceImpl implements RecommendationService{
                     ShelterDoc doc = list.get(idx);
                     String recommendationKey = doc.getSd() + " " +  doc.getSgg();
                     GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                    if(guGunCode.getLat()==null) continue;
+                    if(guGunCode==null || guGunCode.getLat()==null) continue;
                     if(!totalCount.containsKey(recommendationKey)){
                         totalCount.put(recommendationKey, 0L);
                     }
@@ -1018,7 +1023,7 @@ public class RecommendationServiceImpl implements RecommendationService{
                     SportsFacilitiesDoc doc = list.get(idx);
                     String recommendationKey = doc.getSd() + " " +  doc.getSgg();
                     GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                    if(guGunCode.getLat()==null) continue;
+                    if(guGunCode==null || guGunCode.getLat()==null) continue;
                     if(!totalCount.containsKey(recommendationKey)){
                         totalCount.put(recommendationKey, 0L);
                     }
@@ -1043,7 +1048,7 @@ public class RecommendationServiceImpl implements RecommendationService{
                     TheaterDoc doc = list.get(idx);
                     String recommendationKey = doc.getSd() + " " +  doc.getSgg();
                     GuGunCode guGunCode = guGunCodeRepository.findByAddr(recommendationKey);
-                    if(guGunCode.getLat()==null) continue;
+                    if(guGunCode==null || guGunCode.getLat()==null) continue;
                     if(!totalCount.containsKey(recommendationKey)){
                         totalCount.put(recommendationKey, 0L);
                     }
