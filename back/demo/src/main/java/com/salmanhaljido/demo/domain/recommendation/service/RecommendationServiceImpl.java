@@ -502,6 +502,10 @@ public class RecommendationServiceImpl implements RecommendationService{
             }
             recommendationResponse.getRegions().add(region);
         }
+        makeSafetyCategoryScore(recommendationResponse);
+        makePetCategoryScore(recommendationResponse);
+        makeEducationCategoryScore(recommendationResponse);
+        makeLifeCategoryScore(recommendationResponse);
         makeCultureCategoryScore(recommendationResponse);
         makeTrafficCategoryScore(recommendationResponse);
         makeCalamityCategoryScore(recommendationResponse);
@@ -1136,6 +1140,10 @@ public class RecommendationServiceImpl implements RecommendationService{
             }
             recommendationResponse.getRegions().add(region);
         }
+        makeSafetyCategoryScore(recommendationResponse);
+        makePetCategoryScore(recommendationResponse);
+        makeEducationCategoryScore(recommendationResponse);
+        makeLifeCategoryScore(recommendationResponse);
         makeCultureCategoryScore(recommendationResponse);
         makeTrafficCategoryScore(recommendationResponse);
         makeCalamityCategoryScore(recommendationResponse);
@@ -1247,11 +1255,215 @@ public class RecommendationServiceImpl implements RecommendationService{
             region.getCategory().setMedicalScore(medicalScoreMap.get(region.getAddr()));
         }
     }
+    
+    private void makePetCategoryScore(RecommendationResponse recommendationResponse){
+        Map<String, Long> animalHospitalMap = new HashMap<>();
+        Map<String, Long> animalBeautyMap = new HashMap<>();
 
-    private void makePetCategoryScore(RecommendationResponse recommendationResponse){}
-    private void makeEducationCategoryScore(RecommendationResponse recommendationResponse){}
-    private void makeSafetyCategoryScore(RecommendationResponse recommendationResponse){}
-    private void makeLifeCategoryScore(RecommendationResponse recommendationResponse){}
+        Map<String, Double> petScoreMap = new HashMap<>();
+
+        for(Region region : recommendationResponse.getRegions()){
+            animalHospitalMap.put(region.getAddr(), region.getCategory().getPet().getOrDefault("animalBeauty", 0L));
+            animalBeautyMap.put(region.getAddr(), region.getCategory().getPet().getOrDefault("animalHospital", 0L));
+        }
+
+        List<Map.Entry<String, Long>> animalHospitalList = new LinkedList<>(animalHospitalMap.entrySet());
+        animalHospitalList.sort(Map.Entry.comparingByValue());
+        List<Map.Entry<String, Long>> animalBeautyList = new LinkedList<>(animalBeautyMap.entrySet());
+        animalBeautyList.sort(Map.Entry.comparingByValue());
+        for(int ranking = animalHospitalList.size() - 1; ranking >= 0; ranking--){
+            Map.Entry<String, Long> animalHospital = animalHospitalList.get(ranking);
+            Map.Entry<String, Long> animalBeauty = animalBeautyList.get(ranking);
+
+            String addr = animalHospital.getKey();
+            double animalHospitalScore = (double) 100 / 2 * (ranking + 1) / animalHospitalList.size();
+            if(!petScoreMap.containsKey(addr)){
+                petScoreMap.put(addr, 0.0);
+            }
+            petScoreMap.put(addr, petScoreMap.get(addr) + animalHospitalScore);
+
+            addr = animalBeauty.getKey();
+            double animalBeautyScore = (double) 100 / 2 * (ranking + 1) / animalBeautyList.size();
+            if(!petScoreMap.containsKey(addr)){
+                petScoreMap.put(addr, 0.0);
+            }
+            petScoreMap.put(addr, petScoreMap.get(addr) + animalBeautyScore);
+        }
+        for(Region region : recommendationResponse.getRegions()){
+            region.getCategory().setPetScore(petScoreMap.get(region.getAddr()));
+        }
+    }
+    private void makeEducationCategoryScore(RecommendationResponse recommendationResponse){
+        Map<String, Long> schoolMap = new HashMap<>();
+        Map<String, Long> academyMap = new HashMap<>();
+
+        Map<String, Double> educationScoreMap = new HashMap<>();
+
+        for(Region region : recommendationResponse.getRegions()){
+            schoolMap.put(region.getAddr(), region.getCategory().getPet().getOrDefault("school", 0L));
+            academyMap.put(region.getAddr(), region.getCategory().getPet().getOrDefault("academy", 0L));
+        }
+
+        List<Map.Entry<String, Long>> schoolList = new LinkedList<>(schoolMap.entrySet());
+        schoolList.sort(Map.Entry.comparingByValue());
+        List<Map.Entry<String, Long>> academyList = new LinkedList<>(academyMap.entrySet());
+        academyList.sort(Map.Entry.comparingByValue());
+        for(int ranking = schoolList.size() - 1; ranking >= 0; ranking--){
+            Map.Entry<String, Long> school = schoolList.get(ranking);
+            Map.Entry<String, Long> academy = academyList.get(ranking);
+
+            String addr = school.getKey();
+            double schoolScore = (double) 100 / 2 * (ranking + 1) / schoolList.size();
+            if(!educationScoreMap.containsKey(addr)){
+                educationScoreMap.put(addr, 0.0);
+            }
+            educationScoreMap.put(addr, educationScoreMap.get(addr) + schoolScore);
+
+            addr = academy.getKey();
+            double animalBeautyScore = (double) 100 / 2 * (ranking + 1) / academyList.size();
+            if(!educationScoreMap.containsKey(addr)){
+                educationScoreMap.put(addr, 0.0);
+            }
+            educationScoreMap.put(addr, educationScoreMap.get(addr) + animalBeautyScore);
+        }
+        for(Region region : recommendationResponse.getRegions()){
+            region.getCategory().setEducationScore(educationScoreMap.get(region.getAddr()));
+        }
+    }
+    private void makeSafetyCategoryScore(RecommendationResponse recommendationResponse){
+        /*
+        childSafety	:	2719
+carAccident	:	93
+crime	:	409122
+femaleSafety	:	108
+         */
+        Map<String, Long> childSafetyMap = new HashMap<>();
+        Map<String, Long> carAccidentMap = new HashMap<>();
+        Map<String, Long> crimeMap = new HashMap<>();
+        Map<String, Long> femaleSafetyMap = new HashMap<>();
+
+        Map<String, Double> safetyScoreMap = new HashMap<>();
+
+        for(Region region : recommendationResponse.getRegions()){
+            childSafetyMap.put(region.getAddr(), region.getCategory().getCulture().getOrDefault("childSafety", 0L));
+            carAccidentMap.put(region.getAddr(), region.getCategory().getCulture().getOrDefault("carAccident", 0L));
+            crimeMap.put(region.getAddr(), region.getCategory().getCulture().getOrDefault("crime", 0L));
+            femaleSafetyMap.put(region.getAddr(), region.getCategory().getCulture().getOrDefault("femaleSafety", 0L));
+        }
+
+        List<Map.Entry<String, Long>> childSafetyList = new LinkedList<>(childSafetyMap.entrySet());
+        childSafetyList.sort(Map.Entry.comparingByValue());
+        List<Map.Entry<String, Long>> carAccidentList = new LinkedList<>(carAccidentMap.entrySet());
+        carAccidentList.sort(Map.Entry.comparingByValue());
+        List<Map.Entry<String, Long>> crimeList = new LinkedList<>(crimeMap.entrySet());
+        crimeList.sort(Map.Entry.comparingByValue());
+        List<Map.Entry<String, Long>> femaleSafetyList = new LinkedList<>(femaleSafetyMap.entrySet());
+        femaleSafetyList.sort(Map.Entry.comparingByValue());
+        for(int ranking = childSafetyList.size() - 1; ranking >= 0; ranking--){
+            Map.Entry<String, Long> childSafety = childSafetyList.get(ranking);
+            Map.Entry<String, Long> carAccident = carAccidentList.get(ranking);
+            Map.Entry<String, Long> crime = crimeList.get(ranking);
+            Map.Entry<String, Long> femaleSafety = femaleSafetyList.get(ranking);
+
+            String addr = childSafety.getKey();
+            double childSafetyScore = (double) 100 / 4 * (ranking + 1) / childSafetyList.size();
+            if(!safetyScoreMap.containsKey(addr)){
+                safetyScoreMap.put(addr, 0.0);
+            }
+            safetyScoreMap.put(addr, safetyScoreMap.get(addr) + childSafetyScore);
+
+            addr = carAccident.getKey();
+            double carAccidentScore = (double) 100 / 4 * (ranking + 1) / carAccidentList.size();
+            if(!safetyScoreMap.containsKey(addr)){
+                safetyScoreMap.put(addr, 0.0);
+            }
+            safetyScoreMap.put(addr, safetyScoreMap.get(addr) + carAccidentScore);
+
+            addr = crime.getKey();
+            double crimeScore = (double) 100 / 4 * (ranking + 1) / crimeList.size();
+            if(!safetyScoreMap.containsKey(addr)){
+                safetyScoreMap.put(addr, 0.0);
+            }
+            safetyScoreMap.put(addr, safetyScoreMap.get(addr) + crimeScore);
+
+            addr = femaleSafety.getKey();
+            double femaleSafetyScore = (double) 100 / 4 * (ranking + 1) / femaleSafetyList.size();
+            if(!safetyScoreMap.containsKey(addr)){
+                safetyScoreMap.put(addr, 0.0);
+            }
+            safetyScoreMap.put(addr, safetyScoreMap.get(addr) + femaleSafetyScore);
+        }
+        for(Region region : recommendationResponse.getRegions()){
+            region.getCategory().setSafetyScore(safetyScoreMap.get(region.getAddr()));
+        }
+    }
+    private void makeLifeCategoryScore(RecommendationResponse recommendationResponse){
+        /*
+        library	:	561
+        mart	:	365
+        facilitiesForTheDisabled	:	23455
+        park	:	4136
+         */
+        Map<String, Long> libraryMap = new HashMap<>();
+        Map<String, Long> martMap = new HashMap<>();
+        Map<String, Long> FFDDMap = new HashMap<>();
+        Map<String, Long> parkMap = new HashMap<>();
+
+        Map<String, Double> lifeScoreMap = new HashMap<>();
+
+        for(Region region : recommendationResponse.getRegions()){
+            libraryMap.put(region.getAddr(), region.getCategory().getCulture().getOrDefault("library", 0L));
+            martMap.put(region.getAddr(), region.getCategory().getCulture().getOrDefault("mart", 0L));
+            FFDDMap.put(region.getAddr(), region.getCategory().getCulture().getOrDefault("facilitiesForTheDisabled", 0L));
+            parkMap.put(region.getAddr(), region.getCategory().getCulture().getOrDefault("park", 0L));
+        }
+
+        List<Map.Entry<String, Long>> libraryList = new LinkedList<>(libraryMap.entrySet());
+        libraryList.sort(Map.Entry.comparingByValue());
+        List<Map.Entry<String, Long>> martList = new LinkedList<>(martMap.entrySet());
+        martList.sort(Map.Entry.comparingByValue());
+        List<Map.Entry<String, Long>> FFDDList = new LinkedList<>(FFDDMap.entrySet());
+        FFDDList.sort(Map.Entry.comparingByValue());
+        List<Map.Entry<String, Long>> parkList = new LinkedList<>(parkMap.entrySet());
+        parkList.sort(Map.Entry.comparingByValue());
+        for(int ranking = libraryList.size() - 1; ranking >= 0; ranking--){
+            Map.Entry<String, Long> library = libraryList.get(ranking);
+            Map.Entry<String, Long> mart = martList.get(ranking);
+            Map.Entry<String, Long> FFDD = FFDDList.get(ranking);
+            Map.Entry<String, Long> park = parkList.get(ranking);
+
+            String addr = library.getKey();
+            double libraryScore = (double) 100 / 4 * (ranking + 1) / libraryList.size();
+            if(!lifeScoreMap.containsKey(addr)){
+                lifeScoreMap.put(addr, 0.0);
+            }
+            lifeScoreMap.put(addr, lifeScoreMap.get(addr) + libraryScore);
+
+            addr = mart.getKey();
+            double martScore = (double) 100 / 4 * (ranking + 1) / martList.size();
+            if(!lifeScoreMap.containsKey(addr)){
+                lifeScoreMap.put(addr, 0.0);
+            }
+            lifeScoreMap.put(addr, lifeScoreMap.get(addr) + martScore);
+
+            addr = FFDD.getKey();
+            double FFDDScore = (double) 100 / 4 * (ranking + 1) / FFDDList.size();
+            if(!lifeScoreMap.containsKey(addr)){
+                lifeScoreMap.put(addr, 0.0);
+            }
+            lifeScoreMap.put(addr, lifeScoreMap.get(addr) + FFDDScore);
+
+            addr = park.getKey();
+            double parkScore = (double) 100 / 4 * (ranking + 1) / parkList.size();
+            if(!lifeScoreMap.containsKey(addr)){
+                lifeScoreMap.put(addr, 0.0);
+            }
+            lifeScoreMap.put(addr, lifeScoreMap.get(addr) + parkScore);
+        }
+        for(Region region : recommendationResponse.getRegions()){
+            region.getCategory().setLifeScore(lifeScoreMap.get(region.getAddr()));
+        }
+    }
 
     private void makeCultureCategoryScore(RecommendationResponse recommendationResponse){
         Map<String, Long> sportsFacilitiesMap = new HashMap<>();
