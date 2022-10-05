@@ -18,7 +18,6 @@ function CustomMap() {
   const [zoom, setZoom] = useState(6.2);
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
-  const region = useSelector((state) => state.input.region);
   const rcmdData = useSelector((state) => state.region.rcmdData);
 
   const dispatch = useDispatch();
@@ -121,16 +120,6 @@ function CustomMap() {
     });
 
     onSetMarkers(markerList);
-
-    // 만약 선택한 지역이 있다면 그 지역으로 확대
-    if (rcmdData.length > 0 && region.length > 0) {
-      map.current.flyTo({
-        center: [rcmdData[0].lng, rcmdData[0].lat],
-        duration: 600,
-        essential: true,
-        zoom: 10,
-      });
-    }
   }, [rcmdData]);
 
   return (

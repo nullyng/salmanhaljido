@@ -54,6 +54,17 @@ function SubmitButton() {
       );
       onSetLoading(false);
 
+
+      // 만약 선택한 지역이 있다면 그 지역으로 확대
+      if (region.length > 0) {
+        currMap.flyTo({
+          center: [res.data.regions[0].lng, res.data.regions[0].lat],
+          duration: 600,
+          essential: true,
+          zoom: 10,
+        });
+      }
+
       // 데이터 출력 창에 추천 버튼 출력
       onSetSurvey(false);
       // 스낵바 출력
