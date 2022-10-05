@@ -34,7 +34,7 @@ function RcmdItem({ index, data }) {
           <div className="rcmd-item__content__rating">
             <Rating
               name="read-only"
-              defaultValue={data.score * 50}
+              defaultValue={5 - 0.3 * index}
               precision={0.1}
               icon={<StarIcon />}
               readOnly
