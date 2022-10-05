@@ -81,7 +81,7 @@
   margin: 0.2rem 0 !important;
 
   &__content {
-    display: flex;
+    display: grid;
     align-items: center;
     justify-content: space-between;
     width: 100%;
@@ -102,7 +102,7 @@
       &__region {
         color: black !important;
         font-family: "EsamanruLight";
-        font-size: 0.95rem;
+        font-size: 0.9rem;
       }
     }
 
@@ -209,6 +209,7 @@
       height: auto;
       margin-right: 1rem;
     }
+
     & p {
       margin: 0;
       font-family: "EsamanruBold";
@@ -302,6 +303,7 @@
 
   &__image {
     padding: 0.3rem;
+
     & img {
       width: 120px;
       height: 100%;
@@ -340,6 +342,7 @@
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(0.2rem);
   }

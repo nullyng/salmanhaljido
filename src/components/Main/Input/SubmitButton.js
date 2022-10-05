@@ -7,7 +7,7 @@ import { setSurvey } from "modules/survey";
 import { getRegionRcmd } from "api/rcmd";
 import { setLoading } from "modules/loading";
 import { setCurrRegion, setRcmdData } from "modules/region";
-import { jeonseList, maemaeList } from "components/Main/Input/valueList";
+import { jeonseList, maemaeList } from "./valueList";
 
 function SubmitButton() {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -17,7 +17,6 @@ function SubmitButton() {
 
   const region = useSelector((state) => state.input.region);
   const myCategoryList = useSelector((state) => state.category.myCategoryList);
-
   const price = useSelector((state) => state.input.price);
 
   const dispatch = useDispatch();
@@ -62,6 +61,17 @@ function SubmitButton() {
           : res.data.regions
       );
       onSetLoading(false);
+
+
+      // 만약 선택한 지역이 있다면 그 지역으로 확대
+      if (region.length > 0) {
+        currMap.flyTo({
+          center: [res.data.regions[0].lng, res.data.regions[0].lat],
+          duration: 600,
+          essential: true,
+          zoom: 10,
+        });
+      }
 
       // 데이터 출력 창에 추천 버튼 출력
       onSetSurvey(false);
