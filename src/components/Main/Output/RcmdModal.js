@@ -46,7 +46,7 @@ function RcmdModal({ open, setOpen }) {
     });
 
     recommendCategory(apiData, (res) => {
-      console.log(res);
+      // 성공
     });
 
     setTimeout(() => {

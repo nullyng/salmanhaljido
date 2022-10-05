@@ -7,8 +7,7 @@ function getBoard(category, pageNumber, success) {
 }
 
 function getSearchBoard(category, pageNumber, search, success) {
-  api
-    .get(`boards/${category}?pageNo=${pageNumber}&search=${search}`)
+  api.get(`boards/${category}?pageNo=${pageNumber}&search=${search}`)
     .then(success);
 }
 

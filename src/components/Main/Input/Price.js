@@ -1,10 +1,10 @@
 import { createTheme, ThemeProvider } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 
 import CustomTooltip from "components/common/CustomTooltip";
 import CustomSlider from "components/Main/Input/CustomSlider";
-import valueList from "./valueList";
-import { useDispatch, useSelector } from "react-redux";
 import { setPrice } from "modules/input";
+import { jeonseList, maemaeList } from "components/Main/Input/valueList";
 
 const theme = createTheme({
   typography: {
@@ -61,7 +61,7 @@ function Price() {
       </div>
       <div className="price__content">
         <div className="price__content__jeonse">
-          <h3>평균 전세 가격</h3>
+          <h3>평균 전세 가격<span>(m<sup>2</sup> 기준)</span></h3>
           <div className="custom-slider">
             <ThemeProvider theme={theme}>
               <CustomSlider
@@ -70,12 +70,12 @@ function Price() {
                 valueLabelDisplay="on"
                 disableSwap
                 min={0}
-                max={28}
-                valueLabelFormat={(label) => valueList[label]}
+                max={19}
+                valueLabelFormat={(label) => jeonseList[label].label}
               />
             </ThemeProvider>
           </div>
-        </div>
+        </div >
         <div className="price__content__maemae">
           <h3>평균 매매 가격</h3>
           <div className="custom-slider">
@@ -86,14 +86,14 @@ function Price() {
                 valueLabelDisplay="on"
                 disableSwap
                 min={0}
-                max={28}
-                valueLabelFormat={(label) => valueList[label]}
+                max={24}
+                valueLabelFormat={(label) => maemaeList[label].label}
               />
             </ThemeProvider>
           </div>
         </div>
-      </div>
-    </div>
+      </div >
+    </div >
   );
 }
 

@@ -135,7 +135,11 @@ function ChartData() {
           </RadarChart>
           <DetailData
             category={currCategory}
-            detail={currRegion.category[categoryName[currCategory]]}
+            detail={
+              Object.keys(currRegion).length === 0
+                ? 100
+                : currRegion.category[categoryName[currCategory]]
+            }
           />
         </div>
       )}

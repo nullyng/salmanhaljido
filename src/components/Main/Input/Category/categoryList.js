@@ -7,8 +7,8 @@ const categoryList = {
   ],
   재난: [{ shelter: "민방위 대피소" }],
   안전: [
-    { carAccident: "교통사고" },
-    { crime: "범죄" },
+    { carAccident: "낮은 교통사고 빈도" },
+    { crime: "낮은 범죄율" },
     { childSafety: "어린이 보호구역" },
     { femaleSafety: "여성안심" },
   ],

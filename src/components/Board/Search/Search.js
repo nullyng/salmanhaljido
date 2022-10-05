@@ -63,7 +63,6 @@ function Search() {
       onSetInput(searchInput);
 
       getSearchBoard(searchCategory, 0, searchInput, (res) => {
-        console.log(res.data);
         onSetNews(res.data.newsList);
         onSetTotalCount(res.data.totalCount);
         onSetSearch(true);

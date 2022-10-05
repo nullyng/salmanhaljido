@@ -134,11 +134,9 @@
   }
 }
 
-@mixin transition(
-  $property: all,
+@mixin transition($property: all,
   $duration: 0.45s,
-  $ease: cubic-bezier(0.65, 0, 0.076, 1)
-) {
+  $ease: cubic-bezier(0.65, 0, 0.076, 1)) {
   transition: $property $duration $ease;
 }
 
@@ -155,6 +153,7 @@
     padding: 0;
     font-size: inherit;
     font-family: inherit;
+
     &.rcmd-btn {
       display: flex;
       flex-direction: row;
@@ -171,6 +170,7 @@
         height: 2.3rem;
         background: $secondary-color;
         border-radius: 1.625rem;
+
         .icon {
           @include transition(all, 0.45s, cubic-bezier(0.65, 0, 0.076, 1));
           position: absolute;
@@ -178,12 +178,14 @@
           background: white;
           bottom: 0;
           margin: auto;
+
           &.arrow {
             @include transition(all, 0.45s, cubic-bezier(0.65, 0, 0.076, 1));
             left: 0.625rem;
             width: 1.125rem;
             height: 0.125rem;
             background: none;
+
             &::before {
               position: absolute;
               content: "";
@@ -198,6 +200,7 @@
           }
         }
       }
+
       .button-text {
         @include transition(all, 0.45s, cubic-bezier(0.65, 0, 0.076, 1));
         position: absolute;
@@ -210,9 +213,11 @@
         text-transform: uppercase;
       }
     }
+
     &:hover {
       .circle {
         width: 100%;
+
         .icon {
           &.arrow {
             // background: white;
@@ -220,6 +225,7 @@
           }
         }
       }
+
       .button-text {
         color: white;
       }
@@ -285,6 +291,7 @@
 
   &__content {
     font-family: "EsamanruLight";
+
     & b {
       color: $primary-color;
     }
@@ -328,6 +335,7 @@
         color: #909090;
       }
     }
+
     &--data {
       display: flex;
       flex-wrap: wrap;
@@ -386,6 +394,10 @@
       font-family: "EsamanruLight";
       min-width: 25%;
     }
+
+    & .Mui-selected {
+      font-family: "EsamanruMedium";
+    }
   }
 }
 
@@ -423,7 +435,7 @@
   justify-content: space-around;
 
   &__name {
-    width: 90%;
+    width: 100%;
   }
 
   & .category-slider {
@@ -448,6 +460,12 @@
   &__content {
     & h3 {
       font-weight: 500;
+
+      & span {
+        color: #777777;
+        font-size: 0.8rem;
+        margin-left: 0.3rem;
+      }
     }
 
     &__jeonse {
@@ -458,7 +476,13 @@
   }
 
   & .custom-slider {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    margin-top: 2.5rem;
+
+    & .MuiSlider-valueLabel {
+      padding: 0.8rem;
+      font-size: 1rem;
+    }
   }
 }

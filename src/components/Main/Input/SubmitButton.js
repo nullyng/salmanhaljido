@@ -7,6 +7,7 @@ import { setSurvey } from "modules/survey";
 import { getRegionRcmd } from "api/rcmd";
 import { setLoading } from "modules/loading";
 import { setCurrRegion, setRcmdData } from "modules/region";
+import { jeonseList, maemaeList } from "components/Main/Input/valueList";
 
 function SubmitButton() {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
@@ -16,6 +17,8 @@ function SubmitButton() {
 
   const region = useSelector((state) => state.input.region);
   const myCategoryList = useSelector((state) => state.category.myCategoryList);
+
+  const price = useSelector((state) => state.input.price);
 
   const dispatch = useDispatch();
   const onSetSurvey = (survey) => dispatch(setSurvey(survey));
@@ -31,15 +34,21 @@ function SubmitButton() {
     onSetCurrRegion({});
 
     // api 통신
-    let apiData = {};
+    let apiData = {
+      jeonseLow: jeonseList[price["jeonse"][0]].value,
+      jeonseHigh: jeonseList[price["jeonse"][1]].value,
+      tradingLow: maemaeList[price["maemae"][0]].value,
+      tradingHigh: maemaeList[price["maemae"][1]].value,
+      ...myCategoryList
+    };
     if (region.length === 0) {
       apiData = {
-        ...myCategoryList,
+        ...apiData
       };
     } else {
       apiData = {
         code: region,
-        ...myCategoryList,
+        ...apiData,
       };
     }
 
@@ -48,8 +57,8 @@ function SubmitButton() {
     getRegionRcmd(apiData, (res) => {
       // 데이터는 최대 8개까지 출력
       onSetRcmdData(
-        res.data.regions.length > 10
-          ? res.data.regions.slice(0, 10)
+        res.data.regions.length > 8
+          ? res.data.regions.slice(0, 8)
           : res.data.regions
       );
       onSetLoading(false);

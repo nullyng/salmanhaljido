@@ -11,7 +11,6 @@ function Guide() {
   const [position, setPosition] = useState(0);
 
   function onScroll() {
-    console.log(window.scrollY);
     setPosition(window.scrollY);
   }
   useEffect(() => {

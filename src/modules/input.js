@@ -15,8 +15,8 @@ const initialState = {
     hasChildren: false,
   },
   price: {
-    jeonse: [0, 28],
-    maemae: [0, 28],
+    jeonse: [0, 19],
+    maemae: [0, 24],
   },
 };
 
