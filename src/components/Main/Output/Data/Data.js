@@ -40,7 +40,8 @@ function a11yProps(index) {
 function Data() {
   const [value, setValue] = useState(0);
 
-  const tooltipMessage = "선택한 지역의 카테고리별 정보를 확인해보세요.";
+  const tooltipMessage =
+    "선택한 지역의 통계와 부동산 뉴스를 확인하세요. 방사형 차트의 각 카테고리를 클릭하면 세부 정보를 확인할 수 있어요.";
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

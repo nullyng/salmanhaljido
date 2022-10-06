@@ -210,6 +210,14 @@
 
     &--red {
       color: #e94560;
+      cursor: pointer;
+
+      &:hover {
+        -webkit-animation: swing 1s ease;
+        animation: swing 1s ease;
+        -webkit-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+      }
     }
   }
 
