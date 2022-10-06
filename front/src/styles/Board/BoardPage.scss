@@ -1,0 +1,223 @@
+@use "../common/utils" as *;
+
+.top-wrapper {
+  display: flex;
+  margin: 2rem;
+  margin-left: 6%;
+
+  & .logo {
+    width: 50%;
+    padding-top: 0.2rem;
+  }
+}
+
+.board {
+  position: fixed;
+  top: 14%;
+  width: 85vw;
+  height: 80vh;
+  left: 50%;
+  transform: translateX(-50%);
+
+  & button {
+    font-size: 20px;
+  }
+
+  &__tabs {
+    & button {
+      font-family: "EsamanruLight";
+
+      &.Mui-selected {
+        font-weight: 800;
+      }
+    }
+  }
+}
+
+.article-list {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: 270px 270px;
+}
+
+.article-card {
+  margin: 10px 0;
+  width: 93%;
+  height: 90%;
+  perspective: 300px;
+
+  &:hover .article-card__content {
+    transform: translateY(0);
+  }
+
+  &:hover .article-card__content__header {
+    transform: translateY(-30%);
+    transition: 0.2s ease-in-out;
+  }
+
+  &__content {
+    cursor: pointer;
+    font-family: "EsamanruLight";
+    position: relative;
+    transition: 0.2s ease-in-out;
+    height: 100%;
+
+    &__header {
+      background-color: white;
+
+      &--title {
+        overflow: hidden;
+        white-space: normal;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        word-break: keep-all;
+        margin-bottom: 10px;
+      }
+
+      &--desc {
+        color: #575757;
+        font-size: 0.8rem;
+        margin-bottom: 50%;
+        overflow: hidden;
+        white-space: normal;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        word-break: keep-all;
+      }
+    }
+  }
+}
+
+/* 페이지네이션 */
+.pagenation {
+  display: flex;
+  justify-content: center;
+  margin-top: 2em;
+
+  & button {
+    font-size: 18px;
+    font-family: "EsamanruLight";
+  }
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  margin-left: 5%;
+  width: 100%;
+
+  &__category {
+    width: 15%;
+    margin-right: 0.5rem;
+    display: flex;
+
+    & .MuiSelect-select.MuiInputBase-input {
+      font-family: "EsamanruLight" !important;
+    }
+
+    & .MuiFormLabel-root {
+      font-family: "EsamanruLight" !important;
+    }
+  }
+
+  &__input {
+    display: flex;
+    align-items: center;
+    border: 1px solid #b4b4b4;
+    border-radius: 10px;
+    padding: 0.5rem;
+    width: 40%;
+    height: 50%;
+    margin-right: 0.5rem;
+
+    &--icon {
+      margin-right: 0.5rem;
+      margin-left: 0.2rem;
+      color: #b4b4b4;
+    }
+
+    & .MuiInputBase-root {
+      font-family: "EsamanruLight";
+      width: 100%;
+    }
+  }
+
+  &__button {
+    & button {
+      border-radius: 10px;
+      font-family: "EsamanruLight";
+
+      &:hover {
+        background-color: $primary-color;
+        color: white;
+      }
+    }
+  }
+
+  & .MuiSnackbar-root {
+    top: 30px;
+    & .MuiSnackbarContent-root {
+      font-family: "EsamanruLight";
+      min-width: 200px;
+    }
+  }
+}
+
+.search-result {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  &__wrapper {
+    width: 80vw;
+
+    &__top {
+      font-family: "EsamanruLight";
+
+      &--title {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+
+        & button {
+          color: black;
+          margin-right: 0.5rem;
+        }
+
+        & div:last-child {
+          font-size: 1.5rem;
+
+          & span {
+            font-family: "EsamanruMedium";
+            color: $primary-color;
+          }
+        }
+      }
+
+      &--count {
+        margin-left: 0.5rem;
+      }
+    }
+
+    &__content {
+      &--no-data {
+        font-family: "EsamanruLight";
+        height: 50vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      display: grid;
+      justify-items: center;
+      align-items: center;
+      grid-template-columns: 25% 25% 25% 25%;
+      grid-template-rows: 260px 260px;
+    }
+  }
+}
