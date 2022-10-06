@@ -261,36 +261,33 @@ public class NewsServiceImpl implements NewsService{
         Date createdAt = calendar.getTime();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
         int pageNo = 1;
-        while(true) {
-            Connection connection = Jsoup.connect(REAL_ESTATE_URL + "&date=" + simpleDateFormat.format(now) + "&page=" + pageNo);
-            System.out.println(REAL_ESTATE_URL + "&date=" + simpleDateFormat.format(now) + "&page=" + pageNo);
-            try {
-                Document document = connection.get();
-                Elements list = document.getElementsByClass("type06_headline").select("li");
-                for (Element e : list) {
-                    String url = e.select("dt:last-of-type > a").attr("abs:href");
-                    String title = e.select("dt:last-of-type > a").text();
-                    String summary = e.select("dd").select(".lede").text();
-                    Connection imagePathConnection = Jsoup.connect(url);
-                    Document imagePathDocument = imagePathConnection.get();
-                    String imagePath = imagePathDocument.head().select("meta[property=og:image]").attr("abs:content");
+        Connection connection = Jsoup.connect(REAL_ESTATE_URL + "&date=" + simpleDateFormat.format(now) + "&page=" + pageNo);
+        System.out.println(REAL_ESTATE_URL + "&date=" + simpleDateFormat.format(now) + "&page=" + pageNo);
+        try {
+            Document document = connection.get();
+            Elements list = document.getElementsByClass("type06_headline").select("li");
+            for (Element e : list) {
+                String url = e.select("dt:last-of-type > a").attr("abs:href");
+                String title = e.select("dt:last-of-type > a").text();
+                String summary = e.select("dd").select(".lede").text();
+                Connection imagePathConnection = Jsoup.connect(url);
+                Document imagePathDocument = imagePathConnection.get();
+                String imagePath = imagePathDocument.head().select("meta[property=og:image]").attr("abs:content");
 
-                    if(e.select("dd").select(".date").text().equals("1시간전")) return;
+                if(e.select("dd").select(".date").text().equals("1시간전")) return;
 
-                    News news = News.builder()
-                            .title(title)
-                            .summary(summary)
-                            .category(Category.REAL_ESTATE)
-                            .url(url)
-                            .createdAt(createdAt)
-                            .imagePath(imagePath)
-                            .build();
-                    newsRepository.save(news);
-                }
-                pageNo++;
-            } catch (Exception e) {
-                e.printStackTrace();
+                News news = News.builder()
+                        .title(title)
+                        .summary(summary)
+                        .category(Category.REAL_ESTATE)
+                        .url(url)
+                        .createdAt(createdAt)
+                        .imagePath(imagePath)
+                        .build();
+                newsRepository.save(news);
             }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 }
