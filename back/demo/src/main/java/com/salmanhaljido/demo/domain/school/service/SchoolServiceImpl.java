@@ -98,7 +98,6 @@ public class SchoolServiceImpl implements SchoolService{
                     fileOutputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
                 }
                 count += items.size();
-                System.out.println(count);
                 pageNo++;
             }while (count < totalCount);
 
@@ -132,7 +131,34 @@ public class SchoolServiceImpl implements SchoolService{
             Map<String, Long> map = rdds.countByValue();
             for(String str : map.keySet()){
                 JSONObject value = new JSONObject();
-                value.put(str, map.get(str));
+                if(str == null) continue;
+                if(str.charAt(str.length()-1)==' ') str = str.substring(0, str.length()-1);
+
+                String token[] = str.split(" ");
+                if(token.length==1) continue;
+                String sd = "";
+                String sgg = "";
+                if(token.length==2){
+                    sd = token[0];
+                    sgg = token[1];
+
+
+                }else if(token.length==3){
+                    if(token[2].endsWith("구")){
+                        sd = token[0];
+                        sgg=token[1] + " " + token[2];
+                    }else{
+                        sd = token[0];
+                        sgg = token[1];
+                    }
+                }else{
+                    sd = token[0];
+                    sgg=token[1] + " " + token[2];
+                }
+                value.put("sd", sd);
+                value.put("sgg", sgg);
+                if(map.get(str) ==null) value.put("count", 0);
+                else value.put("count", map.get(str));
                 fileOutputStream.write(value.toString().getBytes());
                 fileOutputStream.write("\r\n".getBytes(StandardCharsets.UTF_8));
             }
