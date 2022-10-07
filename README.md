@@ -5,7 +5,7 @@
 2. [주요 기능](https://lab.ssafy.com/s07-bigdata-dist-sub2/S07P22D110#2-%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5)
 3. [기술 스택](https://lab.ssafy.com/s07-bigdata-dist-sub2/S07P22D110#3-%EA%B8%B0%EC%88%A0-%EC%8A%A4%ED%83%9D)
 4. [시스템 구성도](https://lab.ssafy.com/s07-bigdata-dist-sub2/S07P22D110#4-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EA%B5%AC%EC%84%B1%EB%8F%84)
-5. [실행 방법]($#5.-실행-방법)
+5. [실행 방법]($#5-실행-방법)
 6. [팀원 소개](https://lab.ssafy.com/s07-bigdata-dist-sub2/S07P22D110#6-%ED%8C%80%EC%9B%90-%EC%86%8C%EA%B0%9C)
 
 
