@@ -69,6 +69,11 @@ docker logs
 ex ) docker logs --tail 300 salmanhaljido_server_bluedocker logs --tail 300 salmanhaljido_server_blue
 ```
 
+### 에러 대처 방법
+path 에러가 발생할 경우 로컬 path로 변경 후 실행
+
+src/main/resources/data -> local path
+
 
 # 6. 팀원 소개
 |김주영|박진경|이기종|이상민|이재영|
