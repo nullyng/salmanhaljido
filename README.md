@@ -74,6 +74,26 @@ path 에러가 발생할 경우 로컬 path로 변경 후 실행
 
 src/main/resources/data -> local path
 
+## frontend
+1. 레포지토리를 clone 받는다.
+```bash
+git clone https://lab.ssafy.com/s07-bigdata-dist-sub2/S07P22D110.git
+```
+2. `front` 폴더에서 `package.json`에 정의된 모듈을 설치한다.
+```shell
+npm install
+```
+3. 환경 변수를 설정한다.
+ - 이를 위해 [Mapbox API](https://www.mapbox.com)의 access token을 발급받아야 한다.
+ - `front` 폴더에서 `.env` 파일을 생성하고 아래 내용을 기입한다.
+ ```plain
+ REACT_APP_MAPBOX_ACCESS_TOKEN={발급받은 Mapbox API access token}
+ ```
+4. 프로그램을 실행시킨다.
+```shell
+npm start
+```
+
 
 # 6. 팀원 소개
 |김주영|박진경|이기종|이상민|이재영|
