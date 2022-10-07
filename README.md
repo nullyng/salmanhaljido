@@ -53,7 +53,23 @@
 
 ![시스템_구성도](/uploads/4fb67c3169e6c9fa70f703382b1779f1/시스템_구성도.png)
 
-# 5. 팀원 소개
+# 5. 실행 방법
+## backend
+### CI/CD  
+gitlab(back branch) push or merge -> jenkins webhook -> auto build  
+
+### MobaXterm
+![MobaXterm](/uploads/8f06a1193c71f59c3bd7e9f1c0ebbdd9/image.png)
+
+### docker logs
+![docker](/uploads/c9c5d41eb149d6a1b81b6ff24bf09bf6/image.png)
+```
+docker logs
+ex ) docker logs --tail 300 salmanhaljido_server_bluedocker logs --tail 300 salmanhaljido_server_blue
+```
+
+
+# 6. 팀원 소개
 |김주영|박진경|이기종|이상민|이재영|
 |:---:|:---:|:---:|:---:|:---:|
 |front(팀장)|front|back|back(팀장)|front|
