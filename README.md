@@ -1,5 +1,6 @@
 ![스크린샷_2022-10-06_오후_6.05.32](/uploads/7764f3f943325ff626ae3159f73a97f3/스크린샷_2022-10-06_오후_6.05.32.png)
 
+
 ## 목차
 1. [서비스 소개](https://lab.ssafy.com/s07-bigdata-dist-sub2/S07P22D110#1-%EC%84%9C%EB%B9%84%EC%8A%A4-%EC%86%8C%EA%B0%9C)
 2. [주요 기능](https://lab.ssafy.com/s07-bigdata-dist-sub2/S07P22D110#2-%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5)
