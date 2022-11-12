@@ -45,14 +45,8 @@ function MainPage() {
         currMap={currMap}
         onSetMapData={onSetMapData}
         markers={markers}
-        region={region}
         onSetMarkers={onSetMarkers}
-        onSetRegion={onSetRegion}
-        onSetUserInfo={onSetUserInfo}
-        onSetCategories={onSetCategories}
-        onSetPrice={onSetPrice}
       />
-
       <Output
         rcmdData={rcmdData}
         currRegion={currRegion}
