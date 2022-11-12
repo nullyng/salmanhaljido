@@ -8,9 +8,9 @@ import {
   ThemeProvider,
 } from "@mui/material";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
+import { useDispatch } from "react-redux";
 
 import CustomModal from "components/common/CustomModal";
-import { useDispatch } from "react-redux";
 import { categoryDetail } from "components/Main/Input/Category/categoryList";
 import { addCategory, initCategory } from "modules/category";
 
