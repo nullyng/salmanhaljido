@@ -35,7 +35,7 @@ const MyTooltip = styled(({ className, ...props }) => (
 }));
 
 function Output() {
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(true);
   const [rcmdOpen, setRcmdOpen] = useState(false);
 
   const survey = useSelector((state) => state.survey.survey);

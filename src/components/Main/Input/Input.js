@@ -13,22 +13,8 @@ import MyCategory from "components/Main/Input/MyCategory";
 import Category from "components/Main/Input/Category";
 import { useSelector } from "react-redux";
 
-<<<<<<< HEAD
-function Input({
-  currMap,
-  onSetMapData,
-  markers,
-  region,
-  onSetMarkers,
-  onSetRegion,
-  onSetUserInfo,
-  onSetCategories,
-  onSetPrice,
-}) {
-=======
 function Input() {
->>>>>>> 0aa6af3 ([merge] : front-develop ← S07P22D110-76/feature/main/map)
-  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(true);
 
   const myCategoryList = useSelector((state) => state.category.myCategoryList);
 
