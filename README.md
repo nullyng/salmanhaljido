@@ -1,4 +1,4 @@
-![스크린샷_2022-10-06_오후_6.05.32](/uploads/7764f3f943325ff626ae3159f73a97f3/스크린샷_2022-10-06_오후_6.05.32.png)
+<img width="1029" alt="스크린샷_2022-10-06_오후_6 05 32" src="https://user-images.githubusercontent.com/57346428/201485460-2d53fb85-37bc-450f-881c-5979020e4b7a.png">
 
 
 ## 목차
@@ -36,24 +36,24 @@
 ### local
 |intellij|jdk 11|spring boot|docker|
 |:---:|:---:|:---:|:---:|
-|<img src="/uploads/5264754477afa122f35fbc7d30306e92/pngegg.png" height="70px" />|<img src="/uploads/f464ee0fac9080b03a9aeab8e72ab87e/kisspng-java-runtime-environment-computer-icons-java-platf-java-5ade3063f31610.0948145615245108199957.png" height="70px" />|<img src="/uploads/7feea17f3e573e81b6043338653d856e/Untitled.png" height="70px" />|<img src="/uploads/c3b03b4af346b3c54f0b482681cf8da3/docker.png" height="70px" />|
+|<img src="https://user-images.githubusercontent.com/57346428/201485479-1afe6c3b-f4c6-445e-9571-dfa69fe05ed5.png" height="70px" />|<img src="https://user-images.githubusercontent.com/57346428/201485473-df4c3051-d002-4ebe-bb76-9f40877354a6.png" height="70px" />|<img src="https://user-images.githubusercontent.com/57346428/201485489-c736460b-4972-4a25-ae6d-3ffe1fc03364.png" height="70px" />|<img src="https://user-images.githubusercontent.com/57346428/201485465-fd9a1093-624f-4ec1-b90d-041b53db4abf.png" height="70px" />|
 ### server (ec2)
 |docker|jenkins|nginx|mariaDB|apache spark|apache hadoop|
 |:---:|:---:|:---:|:---:|:---:|:---:|
-|<img src="/uploads/c3b03b4af346b3c54f0b482681cf8da3/docker.png" height="70px" />|<img src="/uploads/80340d3581149ccee01b28f4ea111e7d/pngwing.com.png" height="70px" />|<img src="/uploads/8829eb1f5a9bb634daf2a53ae0c84479/nginx.png" height="70px" />|<img src="/uploads/df655512edbbb974a3115773db7c2e73/maria.png" height="70px" />|<img src="/uploads/205059c7ba8d5cab4d45613e6f5de9b2/spark.png" height="70px" />|<img src="/uploads/250b9abce267d902b2bf07c460a13263/kisspng-apache-hadoop-logo-big-data-data-analysis-hadoop-d-services-monitored-signalfx-5b62f0523cf851.4266811115332107062497.png" width="70px" />|
+|<img src="https://user-images.githubusercontent.com/57346428/201485465-fd9a1093-624f-4ec1-b90d-041b53db4abf.png" height="70px" />|<img src="https://user-images.githubusercontent.com/57346428/201485481-a64eef1c-5b2c-477b-928b-07167c7ceddb.png" height="70px" />|<img src="https://user-images.githubusercontent.com/57346428/201485478-c010bb71-e543-4d70-88f8-b54029e9db94.png" height="70px" />|<img src="https://user-images.githubusercontent.com/57346428/201485474-a6525625-bb89-4353-90e1-605d935941a4.png" height="70px" />|<img src="https://user-images.githubusercontent.com/57346428/201485488-fcec88de-ccc8-4c09-b94b-d65a828266fd.png" height="70px" />|<img src="https://user-images.githubusercontent.com/57346428/201485472-0dd9121e-2995-452e-bc48-0309cee0df4d.png" width="70px" />|
 
 ## frontend
 |HTML|CSS|JavaScript|
 |:---:|:---:|:---:|
-|<img src="/uploads/0c985158779d08b1f1d5f729af7bc30b/html5-original-wordmark.svg" height="70px" />|<img src="/uploads/84b4982f1eb2240c1c71934029d4104e/css3-original-wordmark.svg" height="70px" />|<img src="/uploads/4021cf836dfe3bfd866241b20ca9809b/javascript-original.svg" height="70px" />|
+|<img src="https://user-images.githubusercontent.com/57346428/201485466-acdca075-fda0-4270-a624-13f65b68eb73.svg" height="70px" />|<img src="https://user-images.githubusercontent.com/57346428/201485464-d9acf4e1-bc99-4c53-9ee1-e0ea5208151f.svg" height="70px" />|<img src="https://user-images.githubusercontent.com/57346428/201485471-b2af26e8-a01f-4fca-99df-ba55197e7221.svg" height="70px" />|
 
 |React|Redux|Sass|Mui|Mapbox|
 |:---:|:---:|:---:|:---:|:---:|
-|<img src="/uploads/ebe5513250f8eb169decc23f18dbb251/react-original-wordmark.svg" height="70px" />|<img src="/uploads/469db57f9e05e78f1b4f76d0001ce623/redux-original.svg" height="70px" />|<img src="/uploads/80026622b2db85b630368d1030122f51/sass-original.svg" height="70px" />|<img src="/uploads/d1a05ff49a4799818302c944290d0a7a/mui.png" height="70px" />|<img src="/uploads/108151bedeb2a533d2df744ddcb26337/1280px-Mapbox_logo_2019.svg.png" height="70px" />|
+|<img src="https://user-images.githubusercontent.com/57346428/201485482-4271f58e-eff9-4210-a501-226c37fe63cd.svg" height="70px" />|<img src="https://user-images.githubusercontent.com/57346428/201485485-39e73f7a-0b45-4745-9992-1a4b2cc20c22.svg" height="70px" />|<img src="https://user-images.githubusercontent.com/57346428/201485486-bc1ff015-0878-4b91-a669-26474ef15d46.svg" height="70px" />|<img src="https://user-images.githubusercontent.com/57346428/201485476-067081ef-b33d-4897-95f5-4698cae36c9d.png" height="70px" />|<img src="https://user-images.githubusercontent.com/57346428/201485459-05d15236-7c3b-495a-b1c6-a0b8232f8fc3.png" height="70px" />|
 
 # 4. 시스템 구성도
 
-![시스템_구성도](/uploads/4fb67c3169e6c9fa70f703382b1779f1/시스템_구성도.png)
+![시스템_구성도](https://user-images.githubusercontent.com/57346428/201485462-46483276-6adb-4e4b-996e-373ab7b70094.png)
 
 # 5. 실행 방법
 ## backend
@@ -61,10 +61,10 @@
 gitlab(back branch) push or merge -> jenkins webhook -> auto build  
 
 ### MobaXterm
-![MobaXterm](/uploads/8f06a1193c71f59c3bd7e9f1c0ebbdd9/image.png)
+![MobaXterm](https://user-images.githubusercontent.com/57346428/201485469-470bb75f-b8dc-45bb-80b4-d7b558282723.png)
 
 ### docker logs
-![docker](/uploads/c9c5d41eb149d6a1b81b6ff24bf09bf6/image.png)
+![docker](https://user-images.githubusercontent.com/57346428/201485468-7687b564-eb41-46c4-8092-89cd740635c1.png)
 ```
 docker logs
 ex ) docker logs --tail 300 salmanhaljido_server_bluedocker logs --tail 300 salmanhaljido_server_blue
