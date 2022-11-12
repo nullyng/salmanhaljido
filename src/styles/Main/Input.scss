@@ -31,27 +31,7 @@
 
     // 데이터 입력
     &__content {
-      width: 100%;
-      height: 100%;
-      overflow-y: auto;
-      overflow-x: hidden;
-
-      // 스크롤바 커스텀
-      // &::-webkit-scrollbar {
-      //   position: fixed;
-      //   width: 6px;
-      // }
-
-      // &::-webkit-scrollbar-thumb {
-      //   position: fixed;
-      //   background: $my-blue;
-      //   border-radius: 10px;
-      // }
-
-      // &::-webkit-scrollbar-track {
-      //   position: fixed;
-      //   background: white;
-      // }
+      @include custom-scroll();
     }
 
     // 하단 버튼 그룹

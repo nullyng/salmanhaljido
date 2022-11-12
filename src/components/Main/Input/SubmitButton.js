@@ -1,7 +1,15 @@
 import { Button } from "@mui/material";
+import { setSurvey } from "modules/survey";
+import { useDispatch } from "react-redux";
 
 function SubmitButton({ currMap, markers, onSetMarkers, onSetMapData }) {
+  const dispatch = useDispatch();
+  const onSetSurvey = (survey) => dispatch(setSurvey(survey));
+
   const handleClickButton = () => {
+    // 데이터 출력 창에 추천 버튼 출력
+    onSetSurvey(false);
+
     markers.map((marker, index) => {
       // 마커 삭제
       marker.remove();
