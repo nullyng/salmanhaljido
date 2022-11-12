@@ -2,12 +2,12 @@
 
 
 ## 목차
-1. [서비스 소개](https://lab.ssafy.com/s07-bigdata-dist-sub2/S07P22D110#1-%EC%84%9C%EB%B9%84%EC%8A%A4-%EC%86%8C%EA%B0%9C)
-2. [주요 기능](https://lab.ssafy.com/s07-bigdata-dist-sub2/S07P22D110#2-%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5)
-3. [기술 스택](https://lab.ssafy.com/s07-bigdata-dist-sub2/S07P22D110#3-%EA%B8%B0%EC%88%A0-%EC%8A%A4%ED%83%9D)
-4. [시스템 구성도](https://lab.ssafy.com/s07-bigdata-dist-sub2/S07P22D110#4-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EA%B5%AC%EC%84%B1%EB%8F%84)
-5. [실행 방법]($#5-실행-방법)
-6. [팀원 소개](https://lab.ssafy.com/s07-bigdata-dist-sub2/S07P22D110#6-%ED%8C%80%EC%9B%90-%EC%86%8C%EA%B0%9C)
+1. [서비스 소개](https://github.com/nullyng/salmanhaljido/tree/master#1-%EC%84%9C%EB%B9%84%EC%8A%A4-%EC%86%8C%EA%B0%9C)
+2. [주요 기능](https://github.com/nullyng/salmanhaljido/tree/master#2-%EC%A3%BC%EC%9A%94-%EA%B8%B0%EB%8A%A5)
+3. [기술 스택](https://github.com/nullyng/salmanhaljido/tree/master#3-%EA%B8%B0%EC%88%A0-%EC%8A%A4%ED%83%9D)
+4. [시스템 구성도](https://github.com/nullyng/salmanhaljido/tree/master#4-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EA%B5%AC%EC%84%B1%EB%8F%84)
+5. [실행 방법](https://github.com/nullyng/salmanhaljido/tree/master#5-%EC%8B%A4%ED%96%89-%EB%B0%A9%EB%B2%95)
+6. [팀원 소개](https://github.com/nullyng/salmanhaljido/tree/master#6-%ED%8C%80%EC%9B%90-%EC%86%8C%EA%B0%9C)
 
 
 # 1. 서비스 소개
