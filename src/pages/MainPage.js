@@ -7,7 +7,6 @@ import Loading from "components/common/Loading";
 
 function MainPage() {
   const loading = useSelector((state) => state.loading.loading);
-
   return (
     <div>
       {loading && <Loading />}

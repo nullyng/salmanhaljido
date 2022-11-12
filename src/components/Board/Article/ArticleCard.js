@@ -29,6 +29,11 @@ function ArticleCard({ title, imageURL, url, summary }) {
           </CardContent>
         </div>
       </div>
+      <div className="article-card__btn article-card__back">
+        <CardContent>
+          <Typography>{summary}</Typography>
+        </CardContent>
+      </div>
     </Card>
   );
 }
