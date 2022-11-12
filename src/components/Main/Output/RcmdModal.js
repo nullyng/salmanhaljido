@@ -2,7 +2,7 @@ import Backdrop from "@mui/material/Backdrop";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
-import { createTheme, Grid, Rating } from "@mui/material";
+import { Grid, Rating } from "@mui/material";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
