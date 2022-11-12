@@ -22,23 +22,10 @@ function MainPage() {
 
   return (
     <div>
-      <Input
-        currMap={currMap}
-        onSetMapData={onSetMapData}
-        markers={markers}
-        region={region}
-        onSetMarkers={onSetMarkers}
-        onSetRegion={onSetRegion}
-        onSetUserInfo={onSetUserInfo}
-        onSetCategories={onSetCategories}
-        onSetPrice={onSetPrice}
-      />
+      {loading && <Loading />}
+      <Input />
       <Output />
-      <CustomMap
-        onSetCurrMap={onSetCurrMap}
-        mapData={mapData}
-        onSetMarkers={onSetMarkers}
-      />
+      <CustomMap />
     </div>
   );
 }

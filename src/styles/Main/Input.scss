@@ -69,6 +69,10 @@
           width: 100%;
           background-color: $my-blue;
         }
+
+        & .MuiSnackbarContent-message {
+          font-family: "EsamanruLight";
+        }
       }
     }
   }
