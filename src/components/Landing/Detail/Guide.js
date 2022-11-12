@@ -21,7 +21,7 @@ function Guide() {
       <div className="service__font">이렇게 사용해요</div>
       <div
         className="service__guide--box"
-        style={{ opacity: (position+20) / 40 }}
+        style={{ opacity: (position + 20) / 40 }}
       >
         <div className="service__guide--text">
           우리 부부의 현재 환경 설정하기
@@ -34,7 +34,7 @@ function Guide() {
       </div>
       <div
         className="service__guide--box"
-        style={{ opacity: (position +5) / 100 }}
+        style={{ opacity: (position + 5) / 100 }}
       >
         <div className="service__guide--image">
           서비스
@@ -47,7 +47,7 @@ function Guide() {
       </div>
       <div
         className="service__guide--box"
-        style={{ opacity: (position-200) / 140 }}
+        style={{ opacity: (position - 200) / 140 }}
       >
         <div className="service__guide--text">
           카테고리 항목을 취향에 따라 커스텀하기

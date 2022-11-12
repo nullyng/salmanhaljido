@@ -10,7 +10,7 @@ import { addCategory } from "modules/category";
 function CategoryRcmdButton({ isMarried, hasCar, hasPets, hasChildren, open }) {
   const [countOpen, setCountOpen] = useState(false);
   const [ratingOpen, setRatingOpen] = useState(false);
-  const [rcmdList, setRcmdList] = useState([]);
+  const [rcmdList, setRcmdList] = useState({});
 
   const dispatch = useDispatch();
   const onSetLoading = (loading) => dispatch(setLoading(loading));
@@ -41,9 +41,7 @@ function CategoryRcmdButton({ isMarried, hasCar, hasPets, hasChildren, open }) {
     getCategoryRcmd(apiData, (res) => {
       // api 통신이 끝나면 로딩 화면 출력 멈춤
       onSetLoading(false);
-      console.log(res.data);
-
-      setRcmdList(res.data.categoriesList);
+      setRcmdList(makePriorityList(res.data.categoriesList));
 
       // 검색 횟수 기준의 추천 Alert 출력
       setCountOpen(true);
@@ -59,14 +57,30 @@ function CategoryRcmdButton({ isMarried, hasCar, hasPets, hasChildren, open }) {
 
     getCategoryRcmd(apiData, (res) => {
       onSetLoading(false);
-      console.log(res.data);
-
-      setRcmdList(res.data.categoriesList);
+      setRcmdList(makePriorityList(res.data.categoriesList));
+      console.log(res.data.categoriesList);
 
       // 평점 기준의 추천 Alert 출력
       setRatingOpen(true);
       setCountOpen(false);
     });
+  };
+
+  // 상, 중, 하로 카테고리 분류
+  const makePriorityList = (categoriesList) => {
+    let priorityList = { low: [], middle: [], high: [] };
+
+    categoriesList.map((item) => {
+      if (item.value === "low") {
+        priorityList["low"].push(item.category);
+      } else if (item.value === "middle") {
+        priorityList["middle"].push(item.category);
+      } else {
+        priorityList["high"].push(item.category);
+      }
+    });
+
+    return priorityList;
   };
 
   return (

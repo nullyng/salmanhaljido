@@ -33,7 +33,6 @@ function MainPage() {
         onSetCategories={onSetCategories}
         onSetPrice={onSetPrice}
       />
-
       <Output />
       <CustomMap
         onSetCurrMap={onSetCurrMap}
