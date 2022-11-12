@@ -13,6 +13,7 @@ import MyCategory from "components/Main/Input/MyCategory";
 import Category from "components/Main/Input/Category";
 import { useSelector } from "react-redux";
 
+<<<<<<< HEAD
 function Input({
   currMap,
   onSetMapData,
@@ -24,9 +25,10 @@ function Input({
   onSetCategories,
   onSetPrice,
 }) {
+=======
+function Input() {
+>>>>>>> 0aa6af3 ([merge] : front-develop ← S07P22D110-76/feature/main/map)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-
-  const myCategoryList = useSelector((state) => state.category.myCategoryList);
 
   const handleDrawerOpen = () => {
     setIsDrawerOpen(true);
@@ -55,24 +57,19 @@ function Input({
           </IconButton>
         </div>
         <div className="left-drawer__inner__content">
-          <UserLocation region={region} onSetRegion={onSetRegion} />
+          <UserLocation />
           <Divider />
-          <UserInfo onSetUserInfo={onSetUserInfo} />
+          <UserInfo />
           <Divider />
-          <MyCategory myCategoryList={myCategoryList} />
+          <MyCategory />
           <Divider />
           <Category />
           <Divider />
-          <Price onSetPrice={onSetPrice} />
+          <Price />
         </div>
         <div className="left-drawer__inner__bottom">
           <ResetButton />
-          <SubmitButton
-            currMap={currMap}
-            markers={markers}
-            onSetMarkers={onSetMarkers}
-            onSetMapData={onSetMapData}
-          />
+          <SubmitButton />
         </div>
       </Drawer>
     </div>

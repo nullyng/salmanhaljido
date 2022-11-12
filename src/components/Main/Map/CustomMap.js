@@ -1,5 +1,4 @@
 import mapboxgl from "mapbox-gl";
-import MapboxLanguage from "@mapbox/mapbox-gl-language";
 import { useEffect, useRef, useState } from "react";
 import "mapbox-gl/dist/mapbox-gl.css";
 
@@ -7,14 +6,23 @@ import "styles/Main/Map.scss";
 import "styles/Main/Marker.scss";
 import Logo from "components/common/Logo";
 import TL_SCCO_SIG from "components/Main/Map/TL_SCCO_SIG";
+import { useDispatch, useSelector } from "react-redux";
+import { setCurrMap, setMarkers } from "modules/map";
+import { setCurrRegion } from "modules/region";
 
-function Map({ onSetCurrMap, mapData, onSetMarkers }) {
+function CustomMap() {
   const mapContainer = useRef(null);
   const map = useRef(null);
   const [lng, setLng] = useState(127.75);
   const [lat, setLat] = useState(35.9);
   const [zoom, setZoom] = useState(6.2);
   mapboxgl.accessToken = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
+
+  const mapData = useSelector((state) => state.map.mapData);
+  const dispatch = useDispatch();
+  const onSetCurrMap = (currMap) => dispatch(setCurrMap(currMap));
+  const onSetMarkers = (markers) => dispatch(setMarkers(markers));
+  const onSetCurrRegion = (currRegion) => dispatch(setCurrRegion(currRegion));
 
   useEffect(() => {
     if (map.current) return; // 지도는 처음 한 번만 초기화
@@ -65,6 +73,8 @@ function Map({ onSetCurrMap, mapData, onSetMarkers }) {
 
       // 클릭 이벤트 등록
       marker.getElement().addEventListener("click", () => {
+        setCurrRegion(data);
+
         map.current.flyTo({
           center: [data.longitude, data.latitude],
           duration: 600,
@@ -123,4 +133,4 @@ function Map({ onSetCurrMap, mapData, onSetMarkers }) {
   );
 }
 
-export default Map;
+export default CustomMap;
