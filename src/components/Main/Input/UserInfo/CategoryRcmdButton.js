@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import CategoryRcmd from "components/Main/Input/UserInfo/CategoryRcmd";
 import { getCategoryRcmd } from "api/category";
 import { setLoading } from "modules/loading";
-import { addCategory } from "modules/category";
 
 function CategoryRcmdButton({ isMarried, hasCar, hasPets, hasChildren, open }) {
   const [countOpen, setCountOpen] = useState(false);

@@ -2,21 +2,19 @@ import { Divider, Drawer, IconButton } from "@mui/material";
 import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 
 import "styles/Main/Input.scss";
 import UserLocation from "components/Main/Input/UserLocation";
-import UserInfo from "components/Main/Input/UserInfo";
+import UserInfo from "components/Main/Input/UserInfo/UserInfo";
 import Price from "components/Main/Input/Price";
 import ResetButton from "components/Main/Input/ResetButton";
 import SubmitButton from "components/Main/Input/SubmitButton";
-import MyCategory from "components/Main/Input/MyCategory";
-import Category from "components/Main/Input/Category";
-import { useSelector } from "react-redux";
+import MyCategory from "components/Main/Input/Category/MyCategory";
+import Category from "components/Main/Input/Category/Category";
 
 function Input() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(true);
-
-  const myCategoryList = useSelector((state) => state.category.myCategoryList);
 
   const handleDrawerOpen = () => {
     setIsDrawerOpen(true);

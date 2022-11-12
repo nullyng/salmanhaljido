@@ -7,18 +7,21 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
 import CustomTooltip from "components/common/CustomTooltip";
 import theme from "components/common/theme.js";
+import { setRegion } from "modules/input";
 
-function UserLocation({ region, onSetRegion }) {
+function UserLocation() {
   const [sidoList, setSidoList] = useState([]);
 
   const tooltipMessage =
     "현재 살고 있거나 추천 받고 싶은 지역을 선택해 보세요. 해당 지역 위주로 추천 받을 수 있어요.";
 
-  const tooltipMessage =
-    "현재 살고 있거나 추천 받고 싶은 지역을 선택해 보세요. 해당 지역 위주로 추천 받을 수 있어요.";
+  const dispatch = useDispatch();
+  const region = useSelector((state) => state.input.region);
+  const onSetRegion = (region) => dispatch(setRegion(region));
 
   useEffect(() => {
     // 초기 한 번만 시/도 목록을 받아온다.

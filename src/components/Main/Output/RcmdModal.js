@@ -46,7 +46,7 @@ function RcmdModal({ open, setOpen }) {
     });
 
     recommendCategory(apiData, (res) => {
-      console.log(res);
+      // 성공
     });
 
     setTimeout(() => {
@@ -78,7 +78,7 @@ function RcmdModal({ open, setOpen }) {
             >
               <Grid className="rcmd-modal__title" item>
                 <h2>검색 결과에 만족하시나요?</h2>
-                <p>응답 결과는 다른 이용자들의 주거지 추천에 사용됩니다.</p>
+                <p>응답 결과는 다른 이용자들의 카테고리 추천에 사용됩니다.</p>
               </Grid>
               <Grid className="rcmd-modal__content" item>
                 {value !== null && (

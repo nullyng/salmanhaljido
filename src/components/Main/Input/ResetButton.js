@@ -7,6 +7,9 @@ import CustomModal from "components/common/CustomModal";
 import { setPrice, setRegion, setUserInfo } from "modules/input";
 import { initCategory } from "modules/category";
 
+import { setCurrRegion, setRcmdData } from "modules/region";
+import { setSurvey } from "modules/survey";
+
 function ResetButton() {
   const [open, setOpen] = useState(false);
 
@@ -16,6 +19,10 @@ function ResetButton() {
   const onSetPrice = (price) => dispatch(setPrice(price));
   const onInitCategory = () => dispatch(initCategory());
 
+  const onSetRcmdData = (rcmdData) => dispatch(setRcmdData(rcmdData));
+  const onSetCurrRegion = (currRegion) => dispatch(setCurrRegion(currRegion));
+  const onSetSurvey = (survey) => dispatch(setSurvey(survey));
+
   const handleClickButton = () => {
     onSetRegion("");
     onSetUserInfo({
@@ -24,8 +31,12 @@ function ResetButton() {
       hasPets: false,
       hasChildren: false,
     });
-    onSetPrice({ jeonse: [0, 28], maemae: [0, 28] });
+    onSetPrice({ jeonse: [0, 19], maemae: [0, 24] });
     onInitCategory();
+
+    onSetRcmdData([]);
+    onSetCurrRegion({});
+    onSetSurvey(true);
   };
 
   return (

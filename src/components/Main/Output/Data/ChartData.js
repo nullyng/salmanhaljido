@@ -98,12 +98,26 @@ function ChartData() {
       "recharts-polar-angle-axis-tick"
     );
 
+    const categoriesText = document.getElementsByClassName(
+      "recharts-polar-angle-axis-tick-value"
+    );
+    if (categoriesText.length > 0) {
+      categoriesText[currCategory].style.fontFamily = "EsamanruBold";
+    }
+
     for (let i = 0; i < categories.length; i++) {
       // 각 카테고리를 클릭하면 currCategory를 현재 카테고리 인덱스로 설정
       categories[i].addEventListener("click", () => {
         setCurrCategory(i);
       });
     }
+
+    return () => {
+      for (let i = 0; i < categoriesText.length; i++) {
+        categoriesText[i].style.fontSize = "1rem";
+        categoriesText[i].style.fontFamily = "EsamanruLight";
+      }
+    };
   }, [currCategory, currRegion]);
 
   return (

@@ -1,19 +1,17 @@
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 import RealEstateCard from "components/Main/Output/Data/RealEstateCard";
 import { getRealEstate } from "api/rcmd";
 
 function RealEstateList() {
-  const navigate = useNavigate();
   const [realEstate, setRealEstate] = useState([]);
 
   const currRegion = useSelector((state) => state.region.currRegion);
 
   const handleClick = () => {
-    navigate("/board");
+    window.open(`/board`, "_blank");
   };
 
   useEffect(() => {

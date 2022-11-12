@@ -5,6 +5,7 @@ $my-blue: #4d89c6;
 @mixin input-title {
   &__title {
     display: flex;
+    font-family: "EsamanruLight";
 
     &__tooltip {
       display: flex;

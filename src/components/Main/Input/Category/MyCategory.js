@@ -1,10 +1,10 @@
 import { useSelector } from "react-redux";
 
 import CustomTooltip from "components/common/CustomTooltip";
-import CategoryChip from "components/Main/Input/CategoryChip";
+import CategoryChip from "components/Main/Input/Category/CategoryChip";
 
 function MyCategory() {
-  const tooltipMessage = "내가 현재 선택한 카테고리를 볼 수 있어요.";
+  const tooltipMessage = "내가 선택한 카테고리를 볼 수 있어요.";
 
   const myCategoryList = useSelector((state) => state.category.myCategoryList);
 
@@ -18,14 +18,16 @@ function MyCategory() {
       </div>
       <div className="my-category__chips">
         {Object.keys(myCategoryList).length === 0 ? (
-          <p>아직 선택된 카테고리가 없어요</p>
+          <div className="my-category__chips--no-data">
+            <p>카테고리를 선택해보세요.</p>
+          </div>
         ) : (
           <div className="my-category__chips--data">
             {Object.keys(myCategoryList).map((category, index) => (
               <CategoryChip
                 key={index}
-                CategoryName={category}
-                CategoryLevel={myCategoryList[category]}
+                categoryValue={category}
+                categoryLevel={myCategoryList[category]}
               />
             ))}
           </div>

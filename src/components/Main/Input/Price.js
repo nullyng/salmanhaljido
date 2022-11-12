@@ -1,36 +1,54 @@
-import { useState } from "react";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
 
 import CustomTooltip from "components/common/CustomTooltip";
 import CustomSlider from "components/Main/Input/CustomSlider";
-import valueList from "./valueList";
+import { setPrice } from "modules/input";
+import { jeonseList, maemaeList } from "components/Main/Input/valueList";
+
+const theme = createTheme({
+  typography: {
+    fontFamily: "EsamanruLight",
+  },
+});
 
 function Price() {
-  const [jeonse, setJeonse] = useState([0, 28]);
-  const [maemae, setMaemae] = useState([0, 28]);
   const minDistance = 1;
 
   const tooltipMessage = "가격대를 설정해보세요.";
 
+  const dispatch = useDispatch();
+  const price = useSelector((state) => state.input.price);
+  const onSetPrice = (price) => dispatch(setPrice(price));
+
   const handleChangeJeonse = (event, newValue, activeThumb) => {
+    const jeonse = price["jeonse"];
+    let newJeonse = [];
+
     if (!Array.isArray(newValue)) {
       return;
     }
     if (activeThumb === 0) {
-      setJeonse([Math.min(newValue[0], jeonse[1] - minDistance), jeonse[1]]);
+      newJeonse = [Math.min(newValue[0], jeonse[1] - minDistance), jeonse[1]];
     } else {
-      setJeonse([jeonse[0], Math.max(newValue[1], jeonse[0] + minDistance)]);
+      newJeonse = [jeonse[0], Math.max(newValue[1], jeonse[0] + minDistance)];
     }
+    onSetPrice({ ...price, jeonse: newJeonse });
   };
 
   const handleChangeMaemae = (event, newValue, activeThumb) => {
+    const maemae = price["maemae"];
+    let newMaemae = [];
+
     if (!Array.isArray(newValue)) {
       return;
     }
     if (activeThumb === 0) {
-      setMaemae([Math.min(newValue[0], maemae[1] - minDistance), maemae[1]]);
+      newMaemae = [Math.min(newValue[0], maemae[1] - minDistance), maemae[1]];
     } else {
-      setMaemae([maemae[0], Math.max(newValue[1], maemae[0] + minDistance)]);
+      newMaemae = [maemae[0], Math.max(newValue[1], maemae[0] + minDistance)];
     }
+    onSetPrice({ ...price, maemae: newMaemae });
   };
 
   return (
@@ -43,45 +61,41 @@ function Price() {
       </div>
       <div className="price__content">
         <div className="price__content__jeonse">
-          <h3>평균 전세 가격</h3>
+          <h3>
+            평균 전세 가격
+            <span>
+              (m<sup>2</sup> 기준)
+            </span>
+          </h3>
           <div className="custom-slider">
-            <CustomSlider
-              value={jeonse}
-              onChange={handleChangeJeonse}
-              valueLabelDisplay="on"
-              disableSwap
-              min={0}
-              max={28}
-              valueLabelFormat={(label) => valueList[label]}
-            />
+            <ThemeProvider theme={theme}>
+              <CustomSlider
+                value={price["jeonse"]}
+                onChange={handleChangeJeonse}
+                valueLabelDisplay="on"
+                disableSwap
+                min={0}
+                max={19}
+                valueLabelFormat={(label) => jeonseList[label].label}
+              />
+            </ThemeProvider>
           </div>
         </div>
         <div className="price__content__maemae">
           <h3>평균 매매 가격</h3>
-
           <div className="custom-slider">
-            <CustomSlider
-              value={maemae}
-              onChange={handleChangeMaemae}
-              valueLabelDisplay="on"
-              disableSwap
-              min={0}
-              max={28}
-              valueLabelFormat={(label) => valueList[label]}
-            />
+            <ThemeProvider theme={theme}>
+              <CustomSlider
+                value={price["maemae"]}
+                onChange={handleChangeMaemae}
+                valueLabelDisplay="on"
+                disableSwap
+                min={0}
+                max={24}
+                valueLabelFormat={(label) => maemaeList[label].label}
+              />
+            </ThemeProvider>
           </div>
-        </div>
-        <div className="price__content__maemae">
-          <h3>평균 매매 가격</h3>
-          <CustomSlider
-            value={maemae}
-            onChange={handleChangeMaemae}
-            valueLabelDisplay="on"
-            disableSwap
-            min={0}
-            max={28}
-            valueLabelFormat={(label) => valueList[label]}
-          />
         </div>
       </div>
     </div>

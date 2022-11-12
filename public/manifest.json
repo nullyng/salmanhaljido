@@ -1,6 +1,11 @@
 {
+<<<<<<< HEAD
   "short_name": "React App",
   "name": "Create React App Sample",
+=======
+  "short_name": "살만할지도",
+  "name": "신혼부부를 위한 주거지 추천 서비스, 살만할지도",
+>>>>>>> 7249d806d468046e5faa64bd30c97007b8d186e3
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,12 +13,20 @@
       "type": "image/x-icon"
     },
     {
+<<<<<<< HEAD
       "src": "logo192.png",
+=======
+      "src": "logo.png",
+>>>>>>> 7249d806d468046e5faa64bd30c97007b8d186e3
       "type": "image/png",
       "sizes": "192x192"
     },
     {
+<<<<<<< HEAD
       "src": "logo512.png",
+=======
+      "src": "logo.png",
+>>>>>>> 7249d806d468046e5faa64bd30c97007b8d186e3
       "type": "image/png",
       "sizes": "512x512"
     }

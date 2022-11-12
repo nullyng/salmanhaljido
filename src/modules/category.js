@@ -4,15 +4,14 @@ const DEL_CATEGORY = "category/DEL_CATEGORY";
 const INIT_CATEGORY = "category/INIT_CATEGORY";
 
 /* 액션 생성 함수 */
-export const addCategory = (name, level) => ({
+export const addCategory = (value, level) => ({
   type: ADD_CATEGORY,
-  name,
+  value,
   level,
 });
-export const delCategory = (name, level) => ({
+export const delCategory = (value) => ({
   type: DEL_CATEGORY,
-  name,
-  level,
+  value,
 });
 export const initCategory = () => ({
   type: INIT_CATEGORY,
@@ -30,7 +29,7 @@ function category(state = initialState, action) {
       for (let key in state.myCategoryList) {
         clone1[key] = state.myCategoryList[key];
       }
-      clone1[action.name] = action.level;
+      clone1[action.value] = action.level;
       return {
         ...state,
         myCategoryList: clone1,
@@ -40,7 +39,7 @@ function category(state = initialState, action) {
       for (let key in state.myCategoryList) {
         clone2[key] = state.myCategoryList[key];
       }
-      delete clone2[action.name];
+      delete clone2[action.value];
       return {
         ...state,
         myCategoryList: clone2,
